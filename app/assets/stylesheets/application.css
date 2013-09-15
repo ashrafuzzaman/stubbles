@@ -1,13 +1,238 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require normalize
  *= require_self
- *= require_tree .
- */
+ *= require jquery-ui
+ *= require_tree . 
+*/
+
+*{
+    /* Universal reset: */
+    margin:0;
+    padding:0;
+}
+
+header,footer,
+block,section,
+hgroup,nav,
+figure{
+    /* Giving a display value to the HTML5 rendered elements: */
+    display:block;
+}
+
+body{
+    /* Setting the default text color, size, page background and a font stack: */
+    font-size:0.725em;
+    color:#fcfcfc;
+    background-color:#355664;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Hyperlink Styles: */
+
+a, a:visited {
+    text-decoration:none;
+    outline:none;
+}
+
+a, a:visited {
+    color:#FF9900;
+}
+
+a img{
+    border:none;
+}
+
+/* Headings: */
+
+h1,h2,h3{
+    font-family:"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+    text-shadow:0 1px 1px black;
+}
+
+h1{
+    /* The logo text */
+    font-size:2.5em;
+    margin: 0.5em 0 0;
+}
+
+h3{
+    /* The slogan text */
+    font-family:forte,"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+    font-size:1.5em;
+    font-weight:normal;
+    margin:0 0 1em;
+}
+
+
+h2{
+    font-size:1.8em;
+    font-weight:normal;
+    letter-spacing:0.01em;
+    margin: 0px;
+}
+
+p{
+    line-height:1.5em;
+    padding-bottom:1em;
+}
+
+.line, .story .line{
+    /* The dividing line: */
+    height:1px;
+    background-color:#24404c;
+    border-bottom:1px solid #416371;
+    margin:1em 0;
+    overflow:hidden;
+}
+
+.story .line{
+    margin: 5px;
+}
+
+block .line{
+    /* The dividing line inside of the article is darker: */
+    background-color:#15242a;
+    border-bottom-color:#204656;
+    margin:1.3em 0;
+}
+
+footer .line{
+    margin:2em 0;
+}
+
+nav{
+    background: #f8f8f8;
+    padding:0 5px;
+    position:absolute;
+    right:0;
+    top:3em;
+    border:1px solid #FCFCFC;
+    -moz-box-shadow:0 1px 1px #333333;
+    -webkit-box-shadow:0 1px 1px #333333;
+    box-shadow:0 1px 1px #333333;
+}
+
+/* The clearfix hack to clear the floats: */
+
+.clear:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* The navigation styling: */
+
+nav ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+nav ul li{
+    display:inline;
+}
+
+nav ul li a,
+nav ul li a:visited{
+    color:#565656;
+    display:block;
+    float:left;
+    font-size:1em;
+    font-weight:bold;
+    margin:5px 2px;
+    padding:2px 8px 2px;
+    text-shadow:0 1px 1px white;
+    text-transform:uppercase;
+}
+
+nav ul li a:hover{
+    text-decoration:none;
+    background-color:#d0d0d0;
+}
+
+nav, block, nav ul li a,figure {
+    /* Applying CSS3 rounded corners: */
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+}
+
+/* Article styles: */
+
+#page{
+    width:960px;
+    margin:0 auto;
+    position:relative;
+}
+
+block{
+    background-color:#213E4A;
+    margin:3em 0;
+    padding:20px;    
+}
+
+figure{
+    border:3px solid #142830;
+    float:right;
+    height:300px;
+    margin-left:15px;
+    overflow:hidden;
+    width:500px;
+}
+
+figure:hover{
+    -moz-box-shadow:0 0 2px #4D7788;
+    -webkit-box-shadow:0 0 2px #4D7788;
+    box-shadow:0 0 2px #4D7788;
+}
+
+figure img{
+    margin-left:-60px;
+}
+
+.articleBody {
+	min-height: 250px;
+}
+
+/* Footer styling: */
+
+footer{
+    margin-bottom:30px;
+    text-align:center;
+    font-size:0.825em;
+}
+
+
+footer p{
+    margin-bottom:-2.5em;
+    position:relative;
+}
+
+footer a,footer a:visited{
+    color:#cccccc;
+    background-color:#213e4a;
+    display:block;
+    padding:2px 4px;
+    z-index:100;
+    position:relative;
+}
+
+footer a:hover{
+    text-decoration:none;
+    background-color:#142830;
+}
+
+footer a.by{
+    float:left;
+
+}
+
+footer a.up{
+    float:right;
+}
+
+.selectUser { width: 150px;}

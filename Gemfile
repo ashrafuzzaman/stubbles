@@ -39,11 +39,13 @@ gem 'jquery-rails'
 
 gem 'bootstrap-sass'
 gem 'cancan'
-gem 'devise'
+gem 'devise', '~> 2.2.3'
 gem 'figaro'
 gem 'pg'
 gem 'rolify'
 gem 'sendgrid'
+gem 'workflow'
+gem 'acts-as-taggable-on', '~> 2.2.2'
 
 group :assets do
   gem 'therubyracer', :platform=>:ruby
@@ -59,6 +61,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'letter_opener' #to test email in development env. Usually stored in tmp/letter_opener
 end
 
 group :development, :test do
@@ -71,4 +74,3 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end
-
