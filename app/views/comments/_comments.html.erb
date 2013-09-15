@@ -1,0 +1,15 @@
+<% comments_container do %>
+	<% comments_header do %>
+		Comments
+		<span class="comment_count ui-corner-all ui-widget-content"><%= resource.comments.count %></span>
+	<% end %>
+	<% comments_content do %>
+		<div class="line"></div>
+		<ol id="<%= container_id_of_comments_for(resource) %>">
+		<% resource.comments.each do |comment| %>
+			<%= render :partial => 'comments/view', :locals => {:comment => comment} %>
+		<% end %>
+		</ol>
+		<%= new_comments_for(resource) %>
+	<% end %>
+<% end %>

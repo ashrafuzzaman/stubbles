@@ -1,0 +1,202 @@
+ul.noty_container {
+	position: fixed;
+	z-index: 9999999;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	width: 400px;
+	top: 20px;
+}
+ul.noty_container li {
+	position: relative;
+	float: left;
+	clear: both;
+	list-style: none;
+	padding: 0px;
+	margin: 10px 0 0 0;
+}
+ul.noty_container.topLeft {
+	left: 20px;
+}
+ul.noty_container.topRight {
+	right: 40px;
+}
+ul.noty_container.topRight li {
+	float: right;
+}
+/* Fix for: http://bugs.jquery.com/ticket/2278 */
+ul.noty_container.topLeft li, ul.noty_container.topRight li {
+	width: 400px;
+}
+div.noty_modal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	z-index: 10000;
+	opacity: 0.6;
+	display: none;
+}
+.noty_bar {
+	position: fixed;
+	display: none;
+	z-index: 9999999;
+	background: #fff;
+}
+.noty_bar.top {
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+}
+
+.noty_bar.bottom {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	border-top: 1px solid #eee;
+}
+.noty_bar.center {
+	top: 40%;
+	left: 19.5%;
+	width: 60%;
+	padding: 4px;
+	border: 1px solid #eee;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.noty_bar.topLeft, .noty_bar.topRight {
+	width: 100%;
+	clear:both;
+	position: relative;
+	padding: 4px;
+	border: 1px solid #eee;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.noty_bar .noty_message {
+	padding: 10px 30px 10px 10px;
+	font-size: 16px;
+	font-weight: bold;
+	width: 96%;
+}
+.noty_bar .noty_message .noty_buttons {
+	float: right;
+	font-size: 13px;
+	margin-top: -6px;
+	margin-left: -25px;
+}
+.noty_bar.topLeft .noty_message .noty_buttons, .noty_bar.topRight .noty_message .noty_buttons {
+	float: none;
+	font-size: 13px;
+	border-top: 1px solid #CCCCCC;
+  margin-left: 0;
+  margin-top: 10px;
+  float: none;
+  padding-top: 10px;
+  text-align: right;
+}
+.noty_bar .noty_message .noty_buttons button {
+	margin-left: 5px;
+}
+.noty_bar .noty_close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-image: url("notification/closelabel.png");
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+.noty_bar.alert {
+	color: #00529B;
+	border-color: #00529B;
+	background: #BDE5F8 url('notification/info.png') no-repeat 13px center;
+	box-shadow: 0 0 5px #BDE5F8;
+  -webkit-box-shadow: 0 0 5px #BDE5F8; 
+  -moz-box-shadow: 0 0 5px #BDE5F8;
+}
+.noty_bar.error {
+	color: #D8000C;
+	border-color: #D8000C;
+	background: #FFBABA url('notification/error.png') no-repeat 13px center;
+	box-shadow: 0 0 5px #FFBABA;
+  -webkit-box-shadow: 0 0 5px #FFBABA; 
+  -moz-box-shadow: 0 0 5px #FFBABA;
+}
+.noty_bar.success {
+	color: #4F8A10;
+	border-color: #4F8A10;
+	background:  #DFF2BF url("notification/success.png") no-repeat 13px center;
+	box-shadow: 0 0 5px #DFF2BF;
+  -webkit-box-shadow: 0 0 5px #DFF2BF; 
+  -moz-box-shadow: 0 0 5px #DFF2BF;
+}
+
+/* Layout: Top Center */
+.noty_bar.topCenter {
+	background: none;
+	background-color: transparent;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+.noty_bar.topCenter.alert {
+	background-color: none;
+}
+.noty_bar.topCenter .noty_message {
+	padding: 10px 15px;
+	display: inline-block;
+	font-size: 13px;
+	width: auto;
+	margin: 0;
+	position: relative;
+	top: 8px;
+	font-weight: normal;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.noty_bar.topCenter .noty_close {
+	top: 50%;
+	margin-top: -10px;
+	border-radius: 10px;
+	right: -10px;
+}
+.noty_bar.topCenter.alert .noty_message {
+	background-color: #F9EDBE;
+	border: 1px solid #F0C36D;	
+}
+.noty_bar.topCenter.alert .noty_close {
+	border: 1px solid #F0C36D;
+}
+.noty_bar.topCenter.error .noty_message {
+	background-color: #FA5914;
+	border: 1px solid #E64906;	
+}
+.noty_bar.topCenter.error .noty_close {
+	border: 1px solid #E64906;
+}
+.noty_bar.topCenter.success .noty_message {
+	background-color: #8FEC8F;
+	border: 1px solid #50C24E;	
+}
+.noty_bar.topCenter.success .noty_close {
+	border: 1px solid #50C24E;
+}
+.noty_bar.topCenter .noty_message .noty_buttons {
+	margin-left: 15px;
+	margin-top: 0px
+}
+
+.noty_bar.topCenter .noty_message .noty_buttons button {
+	font: bold 12px/12px HelveticaNeue, Arial;
+  padding: 3px 4px;
+  color: #555;
+  background: none; 
+  border: none;
+}

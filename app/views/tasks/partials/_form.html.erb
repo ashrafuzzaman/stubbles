@@ -1,0 +1,15 @@
+<% story = task.story %>
+<li id="<%= container_id_of(task) %>">
+<%= form_for([story, task], :remote=>true) do |f| %>
+	<div class="field task_header">
+		<%= f.text_field :title, :required => true, :size => '45' %>
+		<%= f.label :est %>
+		<%= hours_estimated_tag(f, task) %>
+	</div>
+	<%= select_users(f, story) %>
+	<div class="actions" style="display: inline-block">
+		<%= f.submit(:'data-disable-with' => "Saving...", :class => 'button') %>
+		<%= ajax_cancel_link(task, :li) %>
+	</div>
+<% end %>
+</li>

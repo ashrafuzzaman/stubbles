@@ -1,0 +1,5 @@
+<% execute_js_if(@task.destroyed?) do %>
+	$('#<%= container_id_of(@task) %>').slideUp("fast", function() {
+		$('#<%= container_id_of(@task.story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @task.story}) %>');
+	});	
+<% end %>

@@ -1,0 +1,10 @@
+<div class="date">
+	<div class="ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+		<div class="ui-widget-header ui-helper-clearfix ui-corner-all">
+			<%= date.strftime("%b") %> ´<%= date.strftime("%y") %>
+		</div>
+		<div class="day"><%= date.strftime("%d") %><sup>th</sup></div>
+		<hr/>
+		<div class="time"><%= date.strftime("%I:M %p") %></div>
+	</div>
+</div>

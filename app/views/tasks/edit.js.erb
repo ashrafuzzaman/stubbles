@@ -1,0 +1,1 @@
+$('#<%= container_id_of(@task) %>').replaceWith('<%= escape_javascript(render :partial => 'tasks/partials/form', :locals => {:task => @task}) %>');

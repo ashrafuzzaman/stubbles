@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  <h2 style="float: left;">Dashboard</h2>
+	<div style="float: right;">
+		<div style="float: left;margin: 0px 5px;"><%= user_filter('involved_with') %></div>
+		<a id="toggleCollapse" class="button large" href="#">Toggle collapse</a>
+		<%= link_to 'New story', new_project_story_path(@project), 
+			:remote=>true, :class => 'button large', :'data-disable-with' => "Loading..." %>
+	</div>
+	<div class="clear"></div>
+<% end %>
+
+<%= render :partial => 'dashboard/story_column', :locals => {:title => 'Current',
+															:scope => Scope::CURRENT,
+															:stories => @current_stories} %>
+
+<%= render :partial => 'dashboard/story_column', :locals => {:title => 'Backlog',
+															:scope => Scope::BACKLOG,
+															:stories => @backlog_stories} %>
+<div style="clear: both;"></div>
+<%= javascript_include_tag "dashboard" %>

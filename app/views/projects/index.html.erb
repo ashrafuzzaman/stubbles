@@ -1,0 +1,32 @@
+<% content_for :title do %>
+  <h2 style="float: left;">Listing projects</h2>
+  <%= link_to 'New Project', new_project_path, :class=>'button large', :style => 'float: right;' %>
+  <div class="clear"></div>
+<% end %>
+
+<div class="centered" style="margin: 20px 0px 20px 0px;">
+  <table class="default">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Started on</th>
+      <th></th>
+    </tr>
+
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.name, dashboard_path_for(project, current_user) %></td>
+      <td><%= raw project.description %></td>
+      <td><%= l project.started_on, :format => :long %></td>
+
+      <td>
+        <%= link_to('Members', project_project_memberships_path(project), 
+              :class => 'button') if project.permitted_to_manage_members_by?(current_user) %>
+        <%= link_to 'Edit', edit_project_path(project), :class => 'button' if project.permitted_to_manage_by?(current_user) %>
+        <%= link_to 'Destroy', project, :confirm => 'Are you sure?',
+      					:method => :delete, :class => 'button' if project.permitted_to_manage_by?(current_user) %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

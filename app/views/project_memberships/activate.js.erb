@@ -1,0 +1,4 @@
+$('#<%= container_id_of(@project_membership) %>').replaceWith(
+			'<%= escape_javascript(render :partial => 'row', 
+			:locals => {:membership => @project_membership, :project => @project}) %>');
+$('#<%= container_id_of(@project_membership) %>').effect('highlight', {}, 3000);

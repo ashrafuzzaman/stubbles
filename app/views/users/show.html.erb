@@ -1,0 +1,8 @@
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<%= render 'projects/add_member', :locals => {:user => @user, :project } %>
+
+<%= link_to 'Back', new_user_search_path() %>

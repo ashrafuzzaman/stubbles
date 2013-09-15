@@ -1,0 +1,5 @@
+<% execute_js_if(@story.destroyed?) do %>
+	$('#<%= container_id_of(@story) %>').slideUp("fast", function() {
+			$('#<%= container_id_of(@story) %>').remove();
+	});
+<% end %>

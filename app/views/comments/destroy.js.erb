@@ -1,0 +1,5 @@
+<% execute_js_if(@comment.destroyed?) do %>
+	$('#<%= container_id_of(@comment) %>').slideUp("fast");
+	$('#<%= container_id_of_comments_for(@comment.commentable) %>').closest('.comments').find('.comment_count')
+		.html("<%= @comment.commentable.comments.count %>");
+<% end %>

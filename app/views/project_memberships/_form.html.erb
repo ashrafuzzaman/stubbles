@@ -1,0 +1,8 @@
+<%= form_for([@project, @project_membership], :remote => true) do |f| %>
+<div style="margin-bottom: 10px;">
+	<%= f.label :search %>
+	<%= text_field_tag :email, '', :required => true %>
+	<%= f.select(:role, Role::all) %>
+	<%= f.submit 'Add user', :'data-disable-with' => 'Adding...', :class => 'button' %>
+</div>
+<% end %>

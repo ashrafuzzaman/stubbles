@@ -1,0 +1,49 @@
+<% content_for :title do %>
+  <h2 style="float: left;">Time entry for <%= @project.name %></h2>
+	<div style="float: right;">
+		<%= time_entry_filter(@project) %>
+	</div>
+	<div class="clear"></div>
+<% end %>
+
+<div>
+	<div class="centered" style="margin: 20px 0px 20px 0px;">
+		<div style = "display: inline-block; width: 780px; margin-bottom: 10px;">
+			<%= prev_week_link %>
+			<%= next_week_link %>
+		</div>
+	<table class="shaded" style="width: 780px;">
+		<thead>
+			<tr>
+				<th></th>
+				<% @week.beginning_of_week.upto(@week.end_of_week) do |day| %>
+					<th>
+						<%= day.strftime("%A") %><br/>
+						<span><%= l day, :format => :short %></span>
+					</th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<% @stories.each do |story| %>
+				<tr>
+					<th><%= story.title %></th>
+					<% 7.times do %><th></th><% end %>
+				</tr>
+				<% story.tasks.assigned_to(@user).each do |task| %>
+					<tr>
+						<td style="text-align: right;"><%= task.title %></td>
+						<% @week.beginning_of_week.upto(@week.end_of_week) do |day| %>
+							<td>
+								<%= time_entry_slot_for(task, day) %>
+							</td>
+						<% end %>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+<%= javascript_include_tag "time_entry" %>

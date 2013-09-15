@@ -1,0 +1,3 @@
+<% execute_js_if(@project_membership.destroyed?) do %>
+	$('#<%= @project_membership.id %>').fadeOut();
+<% end %>

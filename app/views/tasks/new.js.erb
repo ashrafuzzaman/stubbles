@@ -1,0 +1,1 @@
+$('#<%= container_id_of_tasks_for(@task.story) %> .tasks').append('<%= escape_javascript(render :partial => 'tasks/partials/form', :locals => {:task => @task}) %>');

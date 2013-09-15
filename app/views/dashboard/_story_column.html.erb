@@ -1,0 +1,9 @@
+<section style="float: left;">
+	<h3><%= title %></h3>
+	<div class="story_column" data-scope="<%= scope %>" data-order="">
+		<% stories.each do |story| %>
+			<%= render :partial => 'stories/partials/view', 
+						:locals => {:story => story} %>
+		<% end %>
+	</div>
+</section>

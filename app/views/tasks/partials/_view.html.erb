@@ -1,0 +1,18 @@
+<li id='<%= container_id_of(task) %>' class="task <%= task.status %>">
+	<div class="task_header">
+		<span><%= task.title %></span>
+		<div style="display: inline-block; float: right; margin-top: -3px;">
+			<%= action_links_for_task(task) %>
+			<%= task_edit_link(task) %>
+			<%= task_delete_link(task) %>
+		</div>
+	</div>
+	<div class="task_container">
+		<span><%= assigned_person_for(task) %></span>
+		<div style="float: right;">
+			<%= render :partial => 'shared/estimated_and_spent_hours', 
+				:locals => {:estimated => task.hours_estimated, 
+							:spent => task.hours_spent} %>
+		</div>
+	</div>
+</li>

@@ -1,0 +1,6 @@
+<% execute_js_if(@comment.valid?) do %>
+	$('#<%= container_id_of_comments_for(@comment.commentable) %> .new-comment')
+		.replaceWith("<%= escape_javascript(render :partial => 'comments/view', :locals => {:comment => @comment}) %>");
+	$('#<%= container_id_of_comments_for(@comment.commentable) %>').closest('.comments').find('.comment_count')
+		.html("<%= @comment.commentable.comments.count %>");
+<% end %>

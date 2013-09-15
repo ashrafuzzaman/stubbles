@@ -1,0 +1,105 @@
+/* Table 2 Style */
+table.shaded{
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: -1px;
+    line-height: 1.2em;
+    border-collapse:collapse;
+    text-align:center;
+}
+.shaded thead th, .shaded tfoot td{
+    padding:10px 10px 10px 10px;
+    color:#fff;
+    font-size: 18px;
+    background-color:#222;
+    font-weight:normal;
+    border-right:1px dotted #666;
+    border-top:3px solid #666;
+    -moz-box-shadow:0px -1px 4px #000;
+    -webkit-box-shadow:0px -1px 4px #000;
+    box-shadow:0px -1px 4px #000;
+    text-shadow:1px 1px 1px #000;
+    text-align: center;
+}
+.shaded thead th span {
+    font-size: 12px;
+}
+
+.shaded tfoot th{
+    padding:10px;
+    font-size:18px;
+    color:#888;
+}
+.shaded tfoot td{
+    font-size:36px;
+    color:#EF870E;
+    border-top:none;
+    border-bottom:3px solid #666;
+    -moz-box-shadow:0px 1px 4px #000;
+    -webkit-box-shadow:0px 1px 4px #000;
+    box-shadow:0px 1px 4px #000;
+}
+.shaded thead th:empty{
+    background:transparent;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+}
+.shaded thead :nth-last-child(1){
+    border-right:none;
+}
+.shaded thead :first-child {
+    border:none;
+}
+.shaded tbody th{
+    text-align:left;
+    padding:10px;
+    color:#333;
+    text-shadow:1px 1px 1px #ccc;
+    background-color:#f9f9f9;
+}
+.shaded tbody td{
+    padding:10px;
+    background-color:#f0f0f0;
+    border:1px dotted #999;
+    text-shadow:-1px 1px 1px #fff;
+    text-align: center;
+    color:#333;
+}
+
+.shaded tbody tr:nth-child(odd)  { background-color:#f0f0f0; }
+.shaded tbody tr:nth-child(even) { background-color:#a0a0a0; }
+
+div.centered {
+    text-align: center;
+}
+div.centered table {
+    margin: 0 auto; 
+    text-align: left;
+}
+
+
+
+table.default {
+    border:1px ridge #416371;
+}
+
+table.default th {
+    font: bold 13px;
+    color: #4f6b72;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    background: #CAE8EA;
+}
+
+table.default td {
+    background: #fff;
+    padding: 6px 6px 6px 12px;
+    color: #4f6b72;
+}
+
+table.default th, table.default td {
+    border:1px solid #416371;
+ }

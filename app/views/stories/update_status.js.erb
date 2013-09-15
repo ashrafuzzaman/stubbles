@@ -1,0 +1,5 @@
+<% if @story.accepted? %>
+	$('#<%= container_id_of(@story) %>').slideUp();
+<% else %>
+	$('#<%= container_id_of(@story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @story}) %>');
+<% end %>

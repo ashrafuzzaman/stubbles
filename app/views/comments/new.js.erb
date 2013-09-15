@@ -1,0 +1,4 @@
+var newComment = $('#<%= container_id_of_comments_for(@comment.commentable) %>')
+									.append('<%= escape_javascript(render :partial => 'comments/form', :locals => {:comment => @comment}) %>');
+newComment.hide();
+newComment.slideDown();

@@ -1,0 +1,5 @@
+$('span[data-resource="Task"]' + 
+	'[data-date="<%= params[:date] %>"]' + 
+	'[data-resource-id="<%= params[:'resourceId'] %>"]').closest('td')
+	.effect("highlight", {}, 2000);
+showSuccessMessage("Time updated");

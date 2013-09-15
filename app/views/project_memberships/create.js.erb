@@ -1,0 +1,5 @@
+<% execute_js_if(@project_membership.valid?) do %>
+	$('#users').append('<%= escape_javascript(render :partial => 'row', :locals => {:membership => @project_membership, :project => @project}) %>');
+	$('form').get(0).reset();
+	$('tr:last').effect('highlight', {}, 3000);
+<% end %>

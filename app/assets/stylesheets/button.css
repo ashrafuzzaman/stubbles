@@ -1,0 +1,26 @@
+.ui-button {
+	overflow: visible; !important;
+	font-size: .9em !important;
+	padding: 2px 5px !important;
+}
+
+.ui-button span {
+	padding: 0px !important;
+}
+
+.large.ui-button {
+	overflow: visible; !important;
+	font-size: 1em !important;
+	padding: 5px 7px !important;
+}
+
+.accept.ui-button			{ background: #91bd09 !important; border: 1px solid #384216 !important;}
+.accept.ui-button:hover	{ background: #749a02 !important; border: 1px solid #384216 !important;}
+.reject.ui-button			{ background: #DC3737 !important; border: 1px solid #6C1C1C !important;}
+.reject.ui-button:hover	{ background: #cf2525 !important; border: 1px solid #6C1C1C !important;}
+.finish.ui-button			{ background: #336996 !important; border: 1px solid #1D415F !important;}
+.finish.ui-button:hover	{ background: #2575cf !important; border: 1px solid #1D415F !important;}
+.start.ui-button			{ background: #e8a344 !important; border: 1px solid #5F431D !important;}
+.start.ui-button:hover	{ color: #FFFFFF !important; background: #fc9200 !important; border: 1px solid #5F431D !important;}
+.reopen.ui-button			{ background: #91bd09 !important; border: 1px solid #384216 !important;}
+.reopen.ui-button:hover	{ background: #749a02 !important; border: 1px solid #384216 !important;}

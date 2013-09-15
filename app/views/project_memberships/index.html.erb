@@ -1,0 +1,16 @@
+<% content_for :title do %>
+	<h2><%= @project.name %></h2>
+<% end %>
+
+<%= render 'form' %>
+
+<table id='users' class="default">
+  <tr>
+    <th>Name</th>
+    <th>email</th>
+    <th>role</th>
+    <th></th>
+  </tr>
+
+	<%= render :partial => 'row', :collection => @project_memberships, :as => :membership %>
+</table>

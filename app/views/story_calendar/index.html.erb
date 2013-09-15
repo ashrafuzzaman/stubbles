@@ -1,0 +1,25 @@
+<% content_for :title do %>
+  <h2 style="float: left;">Calendar</h2>
+	<div style="float: right;">
+		<%= select_tag('user_id',options_for_select(@users.collect {|user| 
+								[ user.email, user.id ] }, 
+								:selected => params[:user_id]),
+								:prompt => '') %>
+	</div>
+	<div class="clear"></div>
+<% end %>
+
+<div id='calendar'></div>
+
+<%= javascript_include_tag "calendar" %>
+<script type='text/javascript'>
+	var projectId = <%= @project.id %>
+	var userId = <%= params[:user_id] %>
+	
+	$(document).ready(function() {
+		loadCalendar(projectId, userId);
+		$('#user_id').change(function() {
+		  loadCalendar(projectId, $(this).val());
+		});
+	});
+</script>
