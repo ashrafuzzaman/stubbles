@@ -4,3 +4,4 @@ newStory.remove();
 backlogStories.prepend('<%= escape_javascript(render :partial => 'stories/partials/form', :locals => {:story => @story, :project => @project}) %>');
 newStory.hide();
 newStory.slideDown("fast");
+$('#<%= container_id_of(@story) %> .story-header .collapsable').click();

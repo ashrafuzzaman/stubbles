@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :story_type
+  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :story_type, :priority
 
   include StoryPermission
   include Workflow

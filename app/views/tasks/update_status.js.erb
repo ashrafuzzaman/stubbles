@@ -1,1 +1,2 @@
 $('#<%= container_id_of(@task.story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @task.story}) %>');
+$('#<%= container_id_of(@task.story) %> .story-header .collapsable').click();

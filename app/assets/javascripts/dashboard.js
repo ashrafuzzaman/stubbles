@@ -7,7 +7,7 @@ $(function () {
     $(SORTABLE_COLUMN_SELECTOR).sortable({
         connectWith: SORTABLE_COLUMN_SELECTOR,
         forcePlaceholderSize: true,
-        handle: '.portlet-header',
+        handle: '.story-header',
         stop: function (event, ui) {
             var scope = ui.item.closest(SORTABLE_COLUMN_SELECTOR).attr('data-scope');
             var storyElem = ui.item;
