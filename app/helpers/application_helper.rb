@@ -26,9 +26,9 @@ module ApplicationHelper
   def execute_js_if(success)
     if success
       yield
-      concat "showSuccessMessage('#{escape_javascript(flash[:notice])}');"
+      concat raw "showSuccessMessage('#{escape_javascript(flash[:notice])}');"
     else
-      concat "showErrorMessage('#{escape_javascript(error_message)}');"
+      concat raw "showErrorMessage('#{escape_javascript(error_message)}');"
     end
   end
 

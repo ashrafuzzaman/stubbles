@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  attr_accessible :title, :hours_estimated, :assigned_to_id
+
 	include TaskPermission
   include Workflow
 

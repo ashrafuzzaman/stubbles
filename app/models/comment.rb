@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  attr_accessible :text
+
 	include CommentPermission
 
   belongs_to :user
