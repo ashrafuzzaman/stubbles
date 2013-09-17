@@ -1,3 +1,5 @@
+//= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require notification
 //= require ajax_loader

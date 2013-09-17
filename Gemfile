@@ -37,7 +37,6 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-gem 'bootstrap-sass'
 gem 'cancan'
 gem 'devise', '~> 2.2.3'
 gem 'figaro'
