@@ -1,30 +1,38 @@
-<% story_container(story) do %>
-	<% story_header do %>
-		<span><%= story.title %></span>
-		<div class="actions clear">
-			<div style="float: left;">
-				<%= story_time_estimations(story) %>
-			</div>
-			<%= story_edit_link(story) %>
-			<%= story_delete_link(story) %>
-		</div>
-	<% end %>
-	<% story_content do %>
-		<span><%= assigned_person_for(story) %></span>
-		<div class="actions"><%= action_links_for_story(story) %></div>
-		<span class="status"><%= story.status.humanize %></span>
-		<div class="ui-helper-clearfix"></div>
-		<div class="line"></div>
-		<p class="description"><%=raw story.description %></p>
-		<div><%= tags_for(story.tag_list) %></div>
-		<div>
-			<div id='<%= container_id_of_tasks_for(story) %>'>
-				<%= render :partial => 'tasks/partials/tasks', 
-									 :locals => {:story => story, :tasks => story.tasks} %>
-			</div>
-		</div>
-		<div>
-			<%= render_comments_for(story) %>
-		</div>
-	<% end %>
-<% end %>
+<div id='<%= container_id_of(story) %>' class="story <%= story.status %> panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <%= story.title %>
+      </a>
+    </h4>
+    <span class="pull-right">
+      <%= story_time_estimations(story) %>
+      <%= story_edit_link(story) %>
+      <%= story_delete_link(story) %>
+    </span>
+
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+    <div class="panel-body">
+      <span><%= assigned_person_for(story) %></span>
+
+      <div class="actions"><%= action_links_for_story(story) %></div>
+      <span class="status"><%= story.status.humanize %></span>
+
+      <div class="ui-helper-clearfix"></div>
+      <div class="line"></div>
+      <p class="description"><%= raw story.description %></p>
+
+      <div><%= tags_for(story.tag_list) %></div>
+      <div>
+        <div id='<%= container_id_of_tasks_for(story) %>'>
+          <%= render :partial => 'tasks/partials/tasks',
+                     :locals => {:story => story, :tasks => story.tasks} %>
+        </div>
+      </div>
+      <div>
+        <%= render_comments_for(story) %>
+      </div>
+    </div>
+  </div>
+</div>

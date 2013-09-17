@@ -2,46 +2,44 @@
 <html>
 <head>
   <title>Stubbles</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <!-- Internet Explorer HTML5 enabling code: -->
   <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <style type="text/css">
-    .clear {
-      zoom: 1;
-      display: block;
-    }
-  </style>
   <![endif]-->
 </head>
 <body>
-  <section id="page"> <!-- Defining the #page section with the section tag -->
-    <header> <!-- Defining the header section of the page-->
-        <hgroup>
-            <h1><%= @project ? @project.name : 'Stubbles' %></h1>
-            <h3>Plan your project</h3>
-        </hgroup>
-        <%= render :partial => 'layouts/menu' %>
-    </header>
-    
-    <section>
-        <div class="line"></div>
-        <block>
-            <div><%= yield :title %></div>
-            <div class="line"></div>
-            <div class="articleBody clear">
-              <%= yield %>
-            </div>
-        </block>
-    </section>
 
-    <div id="dialog" title="Dialog" style="display: none;"></div>
-    <div id="loading" title="Please wait" style="display: none;">
-      <%= image_tag('/images/ajax-loader.gif') %>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><%= @project ? @project.name : 'Stubbles' %></a>
     </div>
-    <%= render :partial => 'layouts/footer' %>
-  </section> <!-- Closing the #page section -->
+    <div class="navbar-collapse collapse">
+      <%= render :partial => 'layouts/menu' %>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Main component for a primary marketing message or call to action -->
+  <!--<div><%#= yield :title %></div>-->
+
+
+  <%= yield %>
+
+
+</div>
+<!-- /container -->
+
 </body>
 </html>

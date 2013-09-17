@@ -1,6 +1,5 @@
 <% if user_signed_in? %>
-<nav class="clear">
-  <ul>
+  <ul class="nav navbar-nav">
       <li><%= link_to 'Projects', projects_path %></li>
       <% if @project && !@project.new_record? %>
         <li><%= link_to 'Dashboard', project_dashboard_path(@project.id) %></li>
@@ -10,10 +9,9 @@
       <% end %>
       <li><%= link_to 'Profile', edit_user_registration_path %></li>
   </ul>
-</nav>
 <% end %>
 
-<div style="float :right;">
+<div class="pull-right">
   <% if user_signed_in? %>
     Signed in as <%= current_user.name %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>

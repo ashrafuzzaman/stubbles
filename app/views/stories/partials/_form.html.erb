@@ -1,22 +1,29 @@
 <% project = story.project %>
 
-<% story_container(story) do %>
-	<%= form_for([project, story], :remote=>true) do |f| %>
-		<% story_header do %>
-			<%= f.text_field :title, :required => true, :size => "50" %>
-		<% end %>
-		<% story_content do %>
-			<div class="row"><%= story.status %></div>
-			<span>
+<div id='<%= container_id_of(story) %>' class="story <%= story.status %> panel panel-default">
+  <%= form_for([project, story], class: '', :remote => true,  role: "form") do |f| %>
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            +
+          </a>
+          <%= f.text_field :title, :required => true, :size => "50" %>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+        <div class="panel-body">
+          <div class="row"><%= story.status %></div>
+            <span>
 				<div class="row"><%= select_users(f, story) %></div>
 				<div class="row"><%= select_story_type(f) %></div>
 			</span>
-			<p><%= f.text_area :description, :size => "45x5", :class => 'richtext' %></p>
-				<%= f.tag :tag_list, :available_tags => Story.all_tag_counts %><br/>
-			<div style="margin: 0px 0px 10px 0px;">
-				<%= f.submit(:'data-disable-with' => "Saving...", :class => 'button') %>
-				<%= ajax_cancel_link(story, '.story') %>
-			</div>
-		<% end %>
-	<% end %>
-<% end %>
+          <p><%= f.text_area :description, :size => "45x5", :class => 'richtext' %></p>
+          <%= f.tag :tag_list, :available_tags => Story.all_tag_counts %><br/>
+          <div style="margin: 0px 0px 10px 0px;">
+            <%= f.submit(:'data-disable-with' => "Saving...", :class => 'button') %>
+            <%= ajax_cancel_link(story, '.story') %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

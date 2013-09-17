@@ -5,6 +5,7 @@
 //= require ajax_loader
 //= require lib/jquery.cleditor.js
 //= require lib/jquery.ui.selectmenu
+//= require bootstrap
 
 $(function() {
 	addSubmitalbeElemntInForm();
