@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   HOURS_PER_DAY = 8
 
   has_many :stories
+  has_many :milestones
   has_many :memberships, :class_name => 'ProjectMembership'
   has_many :users, :through => :memberships, :source => :user
   belongs_to :creator, :class_name => 'User', :readonly => :true

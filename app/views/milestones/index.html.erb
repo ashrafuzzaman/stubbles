@@ -1,0 +1,35 @@
+<h1>Listing milestones</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Start at</th>
+    <th>End at</th>
+    <th>Delivered at</th>
+    <th>Duration</th>
+    <th>milestone_type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @milestones.each do |milestone| %>
+  <tr>
+    <td><%= milestone.title %></td>
+    <td><%= milestone.description %></td>
+    <td><%= milestone.start_at %></td>
+    <td><%= milestone.end_at %></td>
+    <td><%= milestone.delivered_at %></td>
+    <td><%= milestone.duration %></td>
+    <td><%= milestone.milestone_type %></td>
+    <td><%= link_to 'Show', project_milestone_path(@project, milestone) %></td>
+    <td><%= link_to 'Edit', edit_project_milestone_path(@project, milestone) %></td>
+    <td><%= link_to 'Destroy', project_milestone_path(@project, milestone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Milestone', new_project_milestone_path(@project) %>

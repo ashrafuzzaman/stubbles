@@ -4,6 +4,8 @@ Stubbles::Application.routes.draw do
   devise_for :users
 
   resources :projects do
+    resources :milestones
+
     resources :stories do #, :only => [:index, :show]
       member do
         put 'update_status'

@@ -4,6 +4,7 @@
       <li><%= link_to 'Projects', projects_path %></li>
       <% if @project && !@project.new_record? %>
         <li><%= link_to 'Dashboard', project_dashboard_path(@project.id) %></li>
+        <li><%= link_to 'Milestones', project_milestones_path(@project.id) %></li>
         <li><%= link_to 'Time entry', time_entry_project_path(@project.id) %></li>
         <li><%= link_to 'Planner', story_calendar_path(@project.id) %></li>
       <% end %>
