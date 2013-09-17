@@ -1,98 +1,122 @@
-.comments {margin:0px 0px 5px 0px;}
-.comments ol {margin:5px 0px 5px 0px; padding:0px;}
-.comments .portlet-header { min-height:20px !important; padding-top: 2px; }
-.comments .portlet-content { padding: 0px 0px 5px 0px; }
+.comments {
+    margin: 0px 0px 5px 0px;
+}
+
+.comments ol {
+    margin: 5px 0px 5px 0px;
+    padding: 0px;
+}
+
+.comments .portlet-header {
+    min-height: 20px !important;
+    padding-top: 2px;
+}
+
+.comments .portlet-content {
+    padding: 0px 0px 5px 0px;
+}
+
 .comments ol li {
-	margin:0px;
-	padding: 2px;
-	list-style: none;
-	background-color: #4C7383;
-	border-bottom: 1px solid #24404c;
+    margin: 0px;
+    padding: 2px;
+    list-style: none;
+    background-color: #4C7383;
+    border-bottom: 1px solid #24404c;
 }
 
 .comments ol li p {
-	margin:0px;
-	padding: 2px;
+    margin: 0px;
+    padding: 2px;
 }
 
 .comments .portlet-content .new {
-	float: right;
-	margin: 0px 5px 5px 0px;
+    float: right;
+    margin: 0px 5px 5px 0px;
 }
 
-.comments .portlet-content {margin:0px !important; padding:0px !important;}
-.comments .portlet-content .line {margin:0px; padding:0px;}
+.comments .portlet-content {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.comments .portlet-content .line {
+    margin: 0px;
+    padding: 0px;
+}
 
 .comments .comment_count {
-	float: right;
-	margin-right: 5px;
-	background-color: #4C7383;
-	padding: 1px 7px 1px 7px;
+    float: right;
+    margin-right: 5px;
+    background-color: #4C7383;
+    padding: 1px 7px 1px 7px;
 }
 
 .comments .comment-title {
-	background-color: #32515D;
-	padding: 2px 5px 2px 5px;
-	height: 22px;
+    background-color: #32515D;
+    padding: 2px 5px 2px 5px;
+    height: 22px;
 }
 
 .comments .action {
-	float: right;
+    float: right;
 }
 
 .comments .comment_by {
-	float: left;
+    float: left;
 }
 
 .comments .comment_by .name {
-	display: inline;
+    display: inline;
 }
 
 .comments .comment-text {
-	min-height: 30px;
+    min-height: 30px;
 }
 
 .comments .date {
-	float: right;
+    float: right;
 }
 
 .date {
-	width: 55px;
-	text-align:center;
-	font-family: cursive;
+    width: 55px;
+    text-align: center;
+    font-family: cursive;
 }
 
 .date .ui-widget-header {
-	padding: 2px 5px 2px 5px;
-	font-size: .9em !important;
+    padding: 2px 5px 2px 5px;
+    font-size: .9em !important;
 }
 
 .day {
-	font-size: 1em !important;
-	font-weight: bolder;
+    font-size: 1em !important;
+    font-weight: bolder;
 }
 
 .time {
-	font-size: .8em !important;
+    font-size: .8em !important;
 }
 
 .date .day, .comment_count {
-	color: #F90;
+    color: #F90;
 }
 
 .date hr {
-	margin: 0px;
-	border: 0;
-	height: 1px;
-	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(31,52,60,0.75), rgba(0,0,0,0)); 
-	background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(31,52,60,0.75), rgba(0,0,0,0)); 
-	background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(31,52,60,0.75), rgba(0,0,0,0)); 
-	background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(31,52,60,0.75), rgba(0,0,0,0));
+    margin: 0px;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
 }
 
 sup, sub {
-	vertical-align: baseline;
-	position: relative;
-	top: -0.4em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
 }
-sub { top: 0.4em; }
+
+sub {
+    top: 0.4em;
+}
