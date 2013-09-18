@@ -1,19 +1,3 @@
-//= require lib/jquery.noty
-
-$(function() {
-	$("#notice").on('click', function() {
-		hideSlidingMessage();
-	});
-
-	// press ESCAPE key to hide the message
-	$(document).keydown(function(e) {
-    if (e.keyCode == 27) { 
-      hideSlidingMessage();
-    }
-	});
-
-});
-
 function showMessage(message){
 	$("#dialog").html(message).dialog();
 }

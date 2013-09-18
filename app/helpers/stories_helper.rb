@@ -38,13 +38,13 @@ module StoriesHelper
 
   def story_edit_link(story)
   	link_to('Edit', edit_project_story_path(story.project, story),
-				:remote=>true, :class => 'ui-icon ui-icon-pencil', :style => 'float: left;',
+				:remote=>true, :class => 'glyphicon glyphicon-edit', :style => 'float: left;',
 				:'data-disable-with' => "Loading...") if story.permitted_to_edit_by?(current_user)
   end
 
   def story_delete_link(story)
 	  link_to('Destroy', project_story_path(story.project, story), 
-				:confirm => 'Are you sure?', :class => 'ui-icon ui-icon-trash',
+				:confirm => 'Are you sure?', :class => '.glyphicon .glyphicon-trash',
 				:method => :delete, :remote=>true, :style => 'float: left;',
 				:'data-disable-with' => "Deleting...") if story.permitted_to_delete_by?(current_user)
   end

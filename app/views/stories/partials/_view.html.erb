@@ -3,14 +3,14 @@
     <h4 class="panel-title">
       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
         <%= story.title %>
+        <%= story_time_estimations(story) %>
       </a>
-    </h4>
-    <span class="pull-right">
-      <%= story_time_estimations(story) %>
-      <%= story_edit_link(story) %>
-      <%= story_delete_link(story) %>
-    </span>
 
+      <div class="pull-right">
+        <%= story_edit_link(story) %>
+        <%= story_delete_link(story) %>
+      </div>
+    </h4>
   </div>
   <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
     <div class="panel-body">
