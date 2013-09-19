@@ -1,29 +1,22 @@
 <% project = story.project %>
 
-<div id='<%= container_id_of(story) %>' class="story <%= story.status %> panel panel-default">
-  <%= form_for([project, story], class: '', :remote => true, role: "form") do |f| %>
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-            +
-          </a>
-          <%= f.text_field :title, :required => true, :size => "50" %>
-        </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
-        <div class="panel-body">
-          <%= story.status %>
-          <%= select_users(f, story) %>
-          <%= select_story_type(f) %>
-          <br/>
-          <%= f.text_area :description, size: '80x10', :class => 'richtext' %>
-          <%= f.tag :tag_list, :available_tags => Story.all_tag_counts %>
-          <br/>
-          <div style="margin: 0px 0px 10px 0px;">
-            <%= f.submit(:'data-disable-with' => "Saving...", :class => 'button') %>
-            <%= ajax_cancel_link(story, '.story') %>
-          </div>
-        </div>
-      </div>
-  <% end %>
-</div>
+<%= story_widget(story) do |sw| %>
+    <%= form_for([project, story], :remote => true, role: 'form') do |f| %>
+        <%= sw.header do %>
+            <%= f.text_field :title, class: 'form-control', :required => true, :size => '50' %>
+        <% end %>
+        <%= sw.content(collapse: false) do %>
+            <%= story.status %>
+            <%= select_users(f, story) %>
+            <%= select_story_type(f) %>
+            <br/>
+            <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
+            <%= f.tag :tag_list, :available_tags => Story.all_tag_counts %>
+            <br/>
+            <div style="margin: 0px 0px 10px 0px;">
+              <%= f.submit :'data-disable-with' => "Saving...", :class => 'btn btn-primary' %>
+              <%= ajax_cancel_link(story, '.story') %>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
