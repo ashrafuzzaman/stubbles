@@ -56,11 +56,16 @@ module StoriesHelper
   end
 
   def story_widget(story, &block)
-    w = StoryWidget.new(story, self)
-    widget_content = capture(w, &block)
-
     content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-default" do
-      widget_content
+      capture(StoryWidget.new(story, self), &block)
+    end
+  end
+
+  def story_form_widget(story, &block)
+    form_for([story.project, story], :remote => true, role: 'form', html: {id: container_id_of(story)}) do |f|
+      content_tag :div, class: "story #{story.status} panel panel-default" do
+        capture(f, StoryWidget.new(story, self), &block)
+      end
     end
   end
 end
@@ -106,6 +111,12 @@ class StoryWidget
       @template.content_tag :div, class: "container" do
         @template.capture(&block)
       end
+    end
+  end
+
+  def footer(&block)
+    @template.content_tag :div, class: "panel-footer" do
+      @template.capture(&block)
     end
   end
 end
