@@ -22,31 +22,23 @@ module StoriesHelper
 
   def select_users(form, story)
     form.select(:assigned_to_id, story.assignable_users.collect { |u| [u.name, u.id] },
-                :include_blank => true, class: "form-control")
+                {:include_blank => true}, class: "form-control")
   end
 
   def select_story_type(form)
-    form.select(:assigned_to_id, StoryType.all, :include_blank => true, class: "form-control")
-
-    #content_tag :div, :class => 'story_type' do
-    #StoryType.all.each do |story_type|
-    #		concat(form.radio_button(:story_type, story_type))
-    #		concat(form.label("story_type_#{story_type}", story_type))
-    #	end
-    #end
+    form.select(:story_type, StoryType.all, {}, class: "form-control")
   end
 
   def story_edit_link(story)
-    link_to('Edit', edit_project_story_path(story.project, story),
-            :remote => true, :class => 'glyphicon glyphicon-edit', :style => 'float: left;',
+    link_to('', edit_project_story_path(story.project, story),
+            :remote => true, :class => 'glyphicon glyphicon-edit',
             :'data-disable-with' => "Loading...") if story.permitted_to_edit_by?(current_user)
   end
 
   def story_delete_link(story)
-    link_to('Destroy', project_story_path(story.project, story),
-            :confirm => 'Are you sure?', :class => '.glyphicon .glyphicon-trash',
-            :method => :delete, :remote => true, :style => 'float: left;',
-            :'data-disable-with' => "Deleting...") if story.permitted_to_delete_by?(current_user)
+    link_to('', project_story_path(story.project, story),
+            :remote => true, :class => 'glyphicon glyphicon-trash', :method => :delete,
+            :confirm => 'Are you sure?', :'data-disable-with' => "Loading...") if story.permitted_to_delete_by?(current_user)
   end
 
   def story_time_estimations(story)

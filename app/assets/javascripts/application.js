@@ -6,6 +6,7 @@
 //= require lib/jquery.ui.selectmenu
 //= require bootstrap
 //= require bootstrap-wysihtml5/b3
+//= require bootstrap-tagsinput
 
 $(function () {
     addSubmitalbeElemntInForm();
@@ -25,6 +26,8 @@ $(function () {
 function initializeDom() {
     addRichText();
     addUIButton();
+    //binding tags
+    $('input[data-role="tagsinput"]').tagsinput();
 }
 
 function addUIButton() {

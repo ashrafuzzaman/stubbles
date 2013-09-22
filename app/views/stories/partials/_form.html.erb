@@ -3,13 +3,26 @@
         <%= f.text_field :title, class: 'form-control', :required => true, :size => '50' %>
     <% end %>
     <%= sw.content(collapse: false) do %>
-        <%= story.status %>
-        <%= select_users(f, story) %>
-        <%= select_story_type(f) %>
-        <br/>
-        <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
-        <%= f.tag :tag_list, :available_tags => Story.all_tag_counts %>
-        <br/>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-1">
+              <%= story.status %>
+            </div>
+            <div class="col-md-2">
+              <%= select_users(f, story) %>
+            </div>
+            <div class="col-md-3">
+              <%= select_story_type(f) %>
+            </div>
+          </div>
+
+          <br/>
+          <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
+          <%#= f.tag :tag_list, :available_tags => Story.all_tag_counts %>
+          <br>
+          <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
+          <br/>
+        </div>
     <% end %>
     <%= sw.header do %>
         <%= f.submit :'data-disable-with' => "Saving...", :class => 'btn btn-primary' %>

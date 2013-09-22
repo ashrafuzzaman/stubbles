@@ -1,3 +1,3 @@
 <% execute_js_if(@story.valid?) do %>
-	$('.story_column[data-scope="<%= Scope::BACKLOG %>"] #new.story').replaceWith("<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @story}) %>");
+	$('.story_column[data-scope="<%= Scope::BACKLOG %>"] #new.new_story').replaceWith("<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @story}) %>");
 <% end %>

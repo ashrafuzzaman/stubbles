@@ -1,8 +1,9 @@
-<ol class="tasks">
+<div class="tasks">
 	<% tasks.each do |task| %>
 		<%= render :partial => 'tasks/partials/view', :locals => {:task => task} %>
 	<% end %>
-</ol>
-<%= link_to('New Task', new_story_task_path(story), :class => 'button', 
+</div>
+<br>
+<%= link_to('New Task', new_story_task_path(story), :class => 'btn btn-primary',
 	:remote => true, :'data-disable-with' => "Loading...",
 	:style => 'margin: 0px 0px 10px 0px;') unless story.sealed_for_tasks? %>

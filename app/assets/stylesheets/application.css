@@ -2,5 +2,6 @@
  *= require bootstrap
  *= require bootstrap-theme
  *= require bootstrap-wysihtml5/b3
+ *= require bootstrap-tagsinput
  *= require_self
 */

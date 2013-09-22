@@ -20,11 +20,9 @@
         <p class="description"><%= raw story.description %></p>
 
         <div><%= tags_for(story.tag_list) %></div>
-        <div>
-          <div id='<%= container_id_of_tasks_for(story) %>'>
-            <%= render :partial => 'tasks/partials/tasks',
-                       :locals => {:story => story, :tasks => story.tasks} %>
-          </div>
+        <div id='<%= container_id_of_tasks_for(story) %>'>
+          <%= render :partial => 'tasks/partials/tasks',
+                     :locals => {:story => story, :tasks => story.tasks} %>
         </div>
         <div>
           <%= render_comments_for(story) %>

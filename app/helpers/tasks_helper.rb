@@ -26,6 +26,6 @@ module TasksHelper
   end
 
   def hours_estimated_tag(form, task)
-		form.text_field :hours_estimated, :size => '1', :disabled => !task.permitted_to_estimate_by?(current_user)
+		form.text_field :hours_estimated, :disabled => !task.permitted_to_estimate_by?(current_user), class: 'form-control', placeholder: 'Est'
   end
 end

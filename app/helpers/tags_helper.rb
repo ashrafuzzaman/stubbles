@@ -16,9 +16,9 @@ module TagsHelper
 
 	def tags_for(tag_list)
 		if tag_list.size > 0
-			content_tag(:ul, :class => "tagit ui-widget ui-widget-content ui-corner-all") do
+			content_tag(:div, :class => "bootstrap-tagsinput") do
 				tag_list.each do |tag|
-					concat(content_tag(:li, :class => "tag ui-widget-content ui-state-default ui-corner-all") do
+					concat(content_tag(:span, :class => "tag label label-info") do
 						tag
 					end)
 				end
