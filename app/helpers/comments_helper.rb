@@ -9,7 +9,7 @@ module CommentsHelper
 
   def new_comments_for(resource)
   	path = "new_#{resource.class.name.downcase}_comment_path"
-  	link_to 'New Comment', self.send(path, resource), :remote => true, :'disable-with' => 'Loading', :class => 'button new'
+  	link_to 'New Comment', self.send(path, resource), :remote => true, :'disable-with' => 'Loading', :class => 'btn btn-primary btn-xs'
   end
 
   def container_id_of_comments_for(resource)
@@ -19,8 +19,8 @@ module CommentsHelper
   def link_to_delete_comment(comment)
   	if comment.permitted_to_delete_by?(current_user)
 	  	path = "#{comment.commentable.class.name.downcase}_comment_path"
-	  	link_to('Destroy', self.send(path, comment.commentable, comment), 
-					:confirm => 'Are you sure?', :class => 'ui-icon ui-icon-trash',
+	  	link_to('', self.send(path, comment.commentable, comment),
+					:confirm => 'Are you sure?', :class => 'glyphicon glyphicon-trash',
 					:method => :delete, :remote=>true, :style => 'float: left;',
 					:'data-disable-with' => "Deleting...")
   	end

@@ -3,11 +3,11 @@ module ApplicationHelper
     model.new_record? ? 'new' : "#{model.class.name.downcase}-#{model.id}"
   end
   
-  def ajax_cancel_link(model, removeElement = 'form')
+  def ajax_cancel_link(model, removeElement = 'form', options = {})
     if(!model.new_record?)
-      link_to "cancel", {:action => "show"}, :remote => true, :'data-disable-with' => "canceling...", :class => 'btn btn-default'
+      link_to "cancel", {:action => "show"}, :remote => true, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
     else
-      link_to "cancel", '#', :'data-cancel' => removeElement, :'data-disable-with' => "canceling...", :class => 'btn btn-default'
+      link_to "cancel", '#', :'data-cancel' => removeElement, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
     end
   end
 

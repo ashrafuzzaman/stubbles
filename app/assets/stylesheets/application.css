@@ -3,5 +3,8 @@
  *= require bootstrap-theme
  *= require bootstrap-wysihtml5/b3
  *= require bootstrap-tagsinput
+ *= require button
+ *= require task
+ *= require comments
  *= require_self
 */

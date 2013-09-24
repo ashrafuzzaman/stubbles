@@ -1,23 +1,24 @@
 <li class="new-comment">
-	<%= form_for([@commentable, @comment], :remote => true) do |f| %>
-	  <% if @comment.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-	      <ul>
-	      <% @comment.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
+  <%= form_for([@commentable, @comment], :remote => true) do |f| %>
+      <% if @comment.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+            <ul>
+              <% @comment.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
 
-	  <div class="field">
-	    <%= f.text_area :text, :class => 'richtext' %>
-	  </div>
-	  <div>
-	    <%= f.submit :disable_with => "Wait...", :class => 'button' %>
-			<%= ajax_cancel_link(@comment, :li) %>
-	  </div>
-	<% end %>
-	</div>
+      <div class="field">
+        <%= f.text_area :text, :class => 'richtext' %>
+      </div>
+      <br/>
+      <div>
+        <%= f.submit :disable_with => "Wait...", :class => 'btn btn-primary btn-xs' %>
+        <%= ajax_cancel_link(@comment, :li, class: 'btn-xs') %>
+      </div>
+  <% end %>
+  </div>
 </li>

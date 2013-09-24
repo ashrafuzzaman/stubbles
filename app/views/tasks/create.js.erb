@@ -1,4 +1,3 @@
 <% execute_js_if(@task.valid?) do %>
-	$('#<%= container_id_of(@task.story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @task.story}) %>');
-    $('#<%= container_id_of(@task.story) %> .story-header .collapsable').click();
+<%= render :partial => "stories/partials/reload_story", locals: {story: @task.story, collapse: false} %>
 <% end %>

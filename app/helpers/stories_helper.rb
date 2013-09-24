@@ -75,7 +75,7 @@ class StoryWidget
   end
 
   def header(&block)
-    @template.content_tag :div, class: "panel-heading" do
+    @template.content_tag :div, class: "panel-heading story-header" do
       @template.content_tag :h2, class: "panel-title" do
         @template.capture(&block)
       end

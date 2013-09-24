@@ -20,8 +20,8 @@
     margin: 0px;
     padding: 2px;
     list-style: none;
-    background-color: #4C7383;
-    border-bottom: 1px solid #24404c;
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .comments ol li p {
@@ -47,12 +47,12 @@
 .comments .comment_count {
     float: right;
     margin-right: 5px;
-    background-color: #4C7383;
+    background-color: #DDDDDD;
     padding: 1px 7px 1px 7px;
 }
 
 .comments .comment-title {
-    background-color: #32515D;
+    background-color: #DDDDDD;
     padding: 2px 5px 2px 5px;
     height: 22px;
 }
@@ -70,7 +70,7 @@
 }
 
 .comments .comment-text {
-    min-height: 30px;
+    min-height: 45px;
 }
 
 .comments .date {
@@ -78,9 +78,12 @@
 }
 
 .date {
-    width: 55px;
+    width: 65px;
     text-align: center;
     font-family: cursive;
+    background-color: #CCCDCC;
+    padding: 2px;
+    border-radius: 3px;
 }
 
 .date .ui-widget-header {

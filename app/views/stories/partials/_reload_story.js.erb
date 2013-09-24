@@ -1,0 +1,6 @@
+$('#<%= container_id_of(story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => story}) %>');
+<% if collapse %>
+$('#<%= container_id_of(story) %> .panel-collapse').removeClass('in').addClass('collapse');
+<% else %>
+$('#<%= container_id_of(story) %> .panel-collapse').removeClass('collapse').addClass('in');
+<% end %>
