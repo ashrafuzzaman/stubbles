@@ -1,57 +1,12 @@
-<%= form_for([@project, @milestone]) do |f| %>
-    <% if @milestone.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@milestone.errors.count, "error") %> prohibited this milestone from being saved:</h2>
+<%= simple_form_for([@project, @milestone]) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :start_at, as: :text %>
+    <%= f.input :end_at, as: :text %>
+    <%= f.input :delivered_at, as: :text %>
+    <%= f.input :duration %>
+    <%= f.input :milestone_type, collection: ['Sprint'], :include_blank => true %>
+    <%= f.input :parent_milestone_id, collection: @long_milestones, :include_blank => true %>
 
-          <ul>
-            <% @milestone.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :title %>
-      <br/>
-      <%= f.text_field :title %>
-    </div>
-    <div class="field">
-      <%= f.label :description %>
-      <br/>
-      <%= f.text_area :description %>
-    </div>
-    <div class="field">
-      <%= f.label :start_at %>
-      <br/>
-      <%= f.datetime_select :start_at %>
-    </div>
-    <div class="field">
-      <%= f.label :end_at %>
-      <br/>
-      <%= f.datetime_select :end_at %>
-    </div>
-    <div class="field">
-      <%= f.label :delivered_at %>
-      <br/>
-      <%= f.datetime_select :delivered_at %>
-    </div>
-    <div class="field">
-      <%= f.label :duration %>
-      <br/>
-      <%= f.number_field :duration %>
-    </div>
-    <div class="field">
-      <%= f.label :milestone_type %>
-      <br/>
-      <%= f.select :milestone_type, ['Sprint'], :include_blank => true %>
-    </div>
-    <div class="field">
-      <%= f.label :parent_milestone_id %>
-      <br/>
-      <%= f.select :parent_milestone_id, @long_milestones.collect {|m| [m.title, m.id]}, :include_blank => true %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <%= f.button :submit %>
 <% end %>

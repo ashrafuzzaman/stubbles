@@ -1,15 +1,9 @@
-<% content_for :title do %>
-    <h2 style="float: left;">Dashboard</h2>
-    <div style="float: right;">
-      <div style="float: left;margin: 0px 5px;"><%= user_filter('involved_with') %></div>
-      <a id="toggleCollapse" class="button large" href="#">Toggle collapse</a>
-      <%= link_to 'New story', new_project_story_path(@project),
-                  :remote => true, :class => 'button large', :'data-disable-with' => "Loading..." %>
-    </div>
-    <div class="clear"></div>
-<% end %>
-<%= link_to 'New story', new_project_story_path(@project),
-            :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
+<div class="roe">
+  <div class="col-md-6"><%= user_filter('involved_with') %></div>
+  <div class="col-md-6"><%= link_to 'New story', new_project_story_path(@project),
+                                    :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-6">
