@@ -1,3 +1,6 @@
+class @Dashboard
+  @PROJECT_ID = window.location.pathname.split('/')[2]; #expecting the pathname as /projects/1/dashboard
+
 class DashboardStoryMove
   @startMoving: =>
     $('*[show-on-story-move]').show()
@@ -6,8 +9,16 @@ class DashboardStoryMove
     $('*[show-on-story-move]').hide()
     $('*[hide-on-story-move]').show()
   @move: (milestoneId) =>
-    serializedStoryIds = $('input[story-move-chk]').serialize()
-    console.log(milestoneId, serializedStoryIds);
+    storyIds = []
+    $('input[story-move-chk]:checked').each ->
+      storyIds.push($(this).val());
+
+    console.log(milestoneId, storyIds);
+    $.ajax "/projects/#{Dashboard.PROJECT_ID}/milestones/move_stories",
+      type: "PUT"
+      data: { milestone_id: milestoneId, story_ids: storyIds }
+      dataType: 'script'
+
     @cancelMoving()
 
 $ ->

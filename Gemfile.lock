@@ -32,6 +32,7 @@ GEM
       rails (~> 3.0)
     addressable (2.3.5)
     arel (3.0.2)
+    awesome_print (1.1.0)
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -205,6 +206,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 2.2.2)
+  awesome_print
   better_errors
   binding_of_caller
   bootstrap-wysihtml5-rails (~> 0.3.1.23)

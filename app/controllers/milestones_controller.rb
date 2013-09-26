@@ -1,5 +1,6 @@
 class MilestonesController < ApplicationController
-  before_filter :load_project, :authenticate_user!
+  before_filter :load_project
+  before_filter :authenticate_user!
 
   def index
     @milestones = @project.milestones
@@ -70,6 +71,13 @@ class MilestonesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to milestones_url }
       format.json { head :no_content }
+    end
+  end
+
+  def move_stories
+    @stories = @project.move_stories_to_milestone(params[:milestone_id], params[:story_ids])
+    respond_to do |format|
+      format.js
     end
   end
 

@@ -10,7 +10,7 @@ $(function () {
         forcePlaceholderSize: true,
         handle: SORTABLE_HANDLER_SELECTOR,
         stop: function (event, ui) {
-            var scope = ui.item.closest(SORTABLE_COLUMN_SELECTOR).attr('data-scope');
+            var scope = ui.item.closest(SORTABLE_COLUMN_SELECTOR).attr('sortable-stories');
             var storyElem = ui.item;
             var storyId = storyElem.attr("id").replace('story-', '');
             var nextStoryElem = storyElem.next(".story");
@@ -30,7 +30,7 @@ $(function () {
 });
 
 function updateChanges(changes) {
-    if (!did_order_changed_for(changes["scope"])) return;
+    if (!did_order_changed_for) return;
 
     startLoading();
     $.post("/projects/" + PROJECT_ID + "/stories/update_scope_and_priority",
@@ -40,8 +40,8 @@ function updateChanges(changes) {
         });
 }
 
-function did_order_changed_for(scope) {
-    sortableCol = $('div[data-scope="' + scope + '"]').first();
+function did_order_changed_for() {
+    sortableCol = $('.story_column').first();
     if (sortableCol.sortable('toArray').join() == sortableCol.data("order")) {
         return false;
     } else {

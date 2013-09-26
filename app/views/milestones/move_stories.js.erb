@@ -1,0 +1,3 @@
+<% @stories.each do |story| %>
+$('#<%= container_id_of(story) %>').remove();
+<% end %>

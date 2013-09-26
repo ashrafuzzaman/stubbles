@@ -4,7 +4,11 @@ Stubbles::Application.routes.draw do
   devise_for :users
 
   resources :projects do
-    resources :milestones
+    resources :milestones do
+      collection do
+        put 'move_stories'
+      end
+    end
 
     resources :stories do #, :only => [:index, :show]
       member do

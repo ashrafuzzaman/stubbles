@@ -23,7 +23,7 @@ class Story < ActiveRecord::Base
   scope :assigned_to_task_for, lambda { |user| includes('tasks').where("tasks.assigned_to_id" => user.id) }
   scope :involved_with, lambda { |user_id| includes('tasks').where(["tasks.assigned_to_id = ? " + 
                                          "OR stories.assigned_to_id = ?", user_id, user_id]) }
-  scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id) }
+  scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
   before_create :autogenerate_priority
   before_create :assign_default_scope

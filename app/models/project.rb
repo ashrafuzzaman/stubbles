@@ -21,6 +21,14 @@ class Project < ActiveRecord::Base
     self.memberships.active.where(:user_id => user).first
   end
 
+  def move_stories_to_milestone(milestone_id, story_ids)
+    stories = self.stories.find(story_ids)
+    stories.each do |story|
+      story.update_attribute(:milestone_id, milestone_id)
+    end
+    stories
+  end
+
   private
 
   def add_creator_as_project_admin
