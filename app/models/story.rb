@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
-  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :story_type, :priority
+  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list,
+                  :story_type, :priority, :milestone_id
 
   include StoryPermission
   include Workflow
@@ -9,6 +10,7 @@ class Story < ActiveRecord::Base
   validates :story_type, :presence => true
 
   belongs_to :project
+  belongs_to :milestone
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :tasks, order: 'created_at ASC'
   has_many :comments, :as => :commentable
@@ -21,6 +23,7 @@ class Story < ActiveRecord::Base
   scope :assigned_to_task_for, lambda { |user| includes('tasks').where("tasks.assigned_to_id" => user.id) }
   scope :involved_with, lambda { |user_id| includes('tasks').where(["tasks.assigned_to_id = ? " + 
                                          "OR stories.assigned_to_id = ?", user_id, user_id]) }
+  scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id) }
 
   before_create :autogenerate_priority
   before_create :assign_default_scope

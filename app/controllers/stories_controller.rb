@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @story = @project.stories.new
+    @story = @project.stories.new(milestone_id: params[:milestone_id])
   end
 
   def edit

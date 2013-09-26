@@ -21,6 +21,7 @@
           <%#= f.tag :tag_list, :available_tags => Story.all_tag_counts %>
           <br>
           <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
+          <%= f.hidden_field :milestone_id %>
           <br/>
         </div>
     <% end %>

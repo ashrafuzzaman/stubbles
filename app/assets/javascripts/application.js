@@ -8,14 +8,12 @@
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-tagsinput
 //= require dashboard
+//= require datepicker
+//= require dashboard-story
 
 $(function () {
     addSubmitalbeElemntInForm();
     attachCancelSupport();
-
-    $('body').on('ready', 'input.date', function () {
-        $(this).datepicker();
-    });
 
     initializeDom();
     $("body").ajaxStop(function () {

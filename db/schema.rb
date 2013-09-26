@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917033751) do
+ActiveRecord::Schema.define(:version => 20130925135020) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20130917033751) do
   create_table "milestones", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "start_at"
-    t.datetime "end_at"
+    t.date     "start_on"
+    t.date     "end_on"
     t.datetime "delivered_at"
     t.integer  "duration"
     t.string   "milestone_type"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20130917033751) do
     t.date     "deadline"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.integer  "milestone_id"
   end
 
   add_index "stories", ["assigned_to_id"], :name => "index_stories_on_assigned_to_id"

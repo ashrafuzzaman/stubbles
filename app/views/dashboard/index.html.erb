@@ -1,21 +1,29 @@
 <div class="roe">
-  <div class="col-md-6"><%= user_filter('involved_with') %></div>
-  <div class="col-md-6"><%= link_to 'New story', new_project_story_path(@project),
-                                    :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
+  <div class="col-md-4"><%= user_filter('involved_with') %></div>
+  <div class="col-md-3">
+    <div hide-on-story-move="true">
+      <%= milestone_filter(@project) %>
+    </div>
+    <div show-on-story-move="true">
+      <%= move_milestone_list(@project) %>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <%= link_to 'New story', new_project_story_path(@project, milestone_id: params[:milestone_id]),
+                :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
+  </div>
+  <div class="col-md-3">
+    <%= link_to 'Move story', '#', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
+    <%= link_to 'Done move', '#', id: 'done-move-story', class: 'btn btn-primary', :'show-on-story-move' => "true" %>
+    <%= link_to 'Cancel move', '#', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true" %>
   </div>
 </div>
-
+<br/>
 <div class="row">
-  <div class="col-md-6">
-    <%= render :partial => 'dashboard/story_column', :locals => {:title => 'Current',
-                                                                 :scope => Scope::CURRENT,
-                                                                 :stories => @current_stories} %>
-  </div>
-  <div class="col-md-6">
-
+  <div class="col-md-12">
     <%= render :partial => 'dashboard/story_column', :locals => {:title => 'Backlog',
                                                                  :scope => Scope::BACKLOG,
-                                                                 :stories => @backlog_stories} %>
+                                                                 :stories => @stories} %>
   </div>
 </div>
 <%= javascript_include_tag "dashboard" %>
