@@ -3,7 +3,7 @@
     <%= f.input :description %>
     <%= f.input :start_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :end_on, as: :string, input_html: {class: 'datepicker'} %>
-    <%= f.input :delivered_at, as: :string, input_html: {class: 'datetimepicker'} %>
+    <%= f.input :delivered_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :duration %>
     <%= f.input :milestone_type, collection: ['Sprint'], :include_blank => true %>
     <%= f.input :parent_milestone_id, collection: @long_milestones, :include_blank => true %>

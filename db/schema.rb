@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20130925135020) do
     t.text     "description"
     t.date     "start_on"
     t.date     "end_on"
-    t.datetime "delivered_at"
+    t.date     "delivered_on"
     t.integer  "duration"
     t.string   "milestone_type"
     t.integer  "project_id"

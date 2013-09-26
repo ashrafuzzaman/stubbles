@@ -1,5 +1,5 @@
 class Milestone < ActiveRecord::Base
-  attr_accessible :delivered_at, :description, :duration, :end_on, :start_on, :title, :milestone_type, :parent_milestone_id
+  attr_accessible :delivered_on, :description, :duration, :end_on, :start_on, :title, :milestone_type, :parent_milestone_id
 
   scope :sprints, -> { where(milestone_type: 'Sprint') }
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }

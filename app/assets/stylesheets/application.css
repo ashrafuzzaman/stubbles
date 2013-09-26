@@ -6,6 +6,6 @@
  *= require button
  *= require task
  *= require comments
- *= require datetimepicker
+ *= require bootstrap-datepicker
  *= require_self
 */
