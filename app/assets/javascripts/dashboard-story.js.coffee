@@ -26,6 +26,8 @@ class DashboardStoryMove
       type: "PUT"
       data: { milestone_id: milestoneId, story_ids: storyIds }
       dataType: 'script'
+      success: ->
+        $("select#move_milestone_id").val($("select#move_milestone_id").data('selected'));
 
     @cancelMoving()
 

@@ -13,6 +13,6 @@ module MilestonesHelper
   def move_milestone_list(project)
     select_tag(:move_milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
                                                       :selected => params[:milestone_id]),
-               {:class => 'form-control', :prompt => 'Assign milestone'})
+               {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => params[:milestone_id]})
   end
 end
