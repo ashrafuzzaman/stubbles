@@ -1,6 +1,6 @@
 <%= story_widget(story) do |sw| %>
     <%= sw.header do %>
-        <%= check_box_tag 'story-move-chk', story.id, false, :'show-on-story-move' => true %>
+        <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true %>
         <%= sw.collapse_link do %>
             <%= story.title %>
             <%= story_time_estimations(story) %>

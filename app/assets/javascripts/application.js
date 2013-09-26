@@ -7,9 +7,7 @@
 //= require bootstrap
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-tagsinput
-//= require dashboard
 //= require datepicker
-//= require dashboard-story
 
 $(function () {
     addSubmitalbeElemntInForm();
