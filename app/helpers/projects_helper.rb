@@ -1,10 +1,10 @@
 module ProjectsHelper
-  def user_filter(param_name)
+  def user_filter(param_name, relay_params = [:milestone_id])
     form_tag("", :method => :get) do |f|
       concat select_tag(param_name, options_for_select(@project.collaborators.collect { |user| [user.name, user.id] },
                                                        :selected => params[param_name]),
                         {:class => 'submittable form-control', :prompt => 'For all user'})
-      [:milestone_id].each do |param|
+      relay_params.each do |param|
         concat hidden_field_tag param, params[param]
       end
     end

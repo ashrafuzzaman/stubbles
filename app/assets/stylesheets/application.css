@@ -7,5 +7,6 @@
  *= require task
  *= require comments
  *= require bootstrap-datepicker
+ *= require time-entry
  *= require_self
 */
