@@ -23,7 +23,7 @@
     <%= render :partial => 'dashboard/story_column', :locals => {:title => @milestone.try(:title) || 'Backlog',
                                                                  :stories => @stories} %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3" id="dashboard_resources">
     <%= render :partial => 'dashboard/resources', :locals => { milestone: @milestone, resources: @resources } %>
   </div>
 </div>
