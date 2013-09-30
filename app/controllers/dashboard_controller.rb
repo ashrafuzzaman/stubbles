@@ -19,6 +19,7 @@ private
     stories = @project.stories.yet_to_be_accepted
     stories = stories.involved_with(params[:involved_with]) if params[:involved_with].to_i > 0
     @milestone = Milestone.find params[:milestone_id] rescue nil
+    @resources = @milestone.try(:resources) || []
     stories.attached_to_milestone(params[:milestone_id])
   end
 end

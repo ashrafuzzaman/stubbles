@@ -21,7 +21,8 @@ module StoriesHelper
   end
 
   def select_users(form, story)
-    form.select(:assigned_to_id, story.assignable_users.collect { |u| [u.name, u.id] },
+    users = story.milestone ? story.milestone.resources : story.assignable_users
+    form.select(:assigned_to_id, users.collect { |u| [u.name, u.id] },
                 {:include_blank => true}, class: "form-control")
   end
 

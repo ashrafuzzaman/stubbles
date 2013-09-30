@@ -1,6 +1,6 @@
 <%= simple_nested_form_for([@project, @milestone]) do |f| %>
     <%= f.input :title %>
-    <%= f.input :description %>
+    <%= f.input :description, :input_html => { :rows => 5 } %>
     <%= f.input :start_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :end_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :delivered_on, as: :string, input_html: {class: 'datepicker'} %>
@@ -12,7 +12,7 @@
       <%= f.fields_for :milestone_resources do |r| %>
           <div class="row">
             <div class="col-md-8"><%= r.input :resource_id, collection: @available_resources, label: false %></div>
-            <div class="col-md-2"><%= r.input :available_hours_per_day, label: false %></div>
+            <div class="col-md-2"><%= r.input :available_hours_per_day, label: false, placeholder: 'Available hours' %></div>
             <div class="col-md-2"><%= r.link_to_remove "Remove", class: 'btn btn-danger' %></div>
           </div>
       <% end %>

@@ -1,0 +1,18 @@
+<br>
+<br>
+<br>
+<div class="panel-group story_column" sortable-stories="true">
+  <div class="story not_started panel panel-default">
+    <div class="panel-heading story-header">
+      <h2 class="panel-title">Reources</h2>
+    </div>
+    <div class="panel-collapse in">
+      <div class="container">
+        <% resources.each do |resource| %>
+            <span><%= resource.name %></span>
+            <span><%= milestone.hours_available_for(resource) %> / <%= milestone.hours_assigned_to(resource) %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,6 @@
 //= require jquery_ujs
 //= require notification
 //= require ajax_loader
-//= require lib/jquery.ui.selectmenu
 //= require bootstrap
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-tagsinput
