@@ -7,6 +7,7 @@ class Milestone < ActiveRecord::Base
 
   belongs_to :project
   has_many :stories
+  TYPES = ['Release', 'Sprint']
 
   def sprint?
     self.milestone_type == 'Sprint'

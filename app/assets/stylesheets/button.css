@@ -1,51 +1,51 @@
-.accept.btn {
+.task-accept.btn {
     background: #91bd09 !important;
     border: 1px solid #384216 !important;
 }
 
-.accept.btn:hover {
+.task-accept.btn:hover {
     background: #749a02 !important;
     border: 1px solid #384216 !important;
 }
 
-.reject.btn {
+.task-reject.btn {
     background: #DC3737 !important;
     border: 1px solid #6C1C1C !important;
 }
 
-.reject.btn:hover {
+.task-reject.btn:hover {
     background: #cf2525 !important;
     border: 1px solid #6C1C1C !important;
 }
 
-.finish.btn {
+.task-finish.btn {
     color: #FFFFFF;
     background: #336996 !important;
     border: 1px solid #1D415F !important;
 }
 
-.finish.btn:hover {
+.task-finish.btn:hover {
     background: #2575cf !important;
     border: 1px solid #1D415F !important;
 }
 
-.start.btn {
+.task-start.btn {
     background: #e8a344 !important;
     border: 1px solid #5F431D !important;
 }
 
-.start.btn:hover {
+.task-start.btn:hover {
     color: #FFFFFF !important;
     background: #fc9200 !important;
     border: 1px solid #5F431D !important;
 }
 
-.reopen.btn {
+.task-reopen.btn {
     background: #91bd09 !important;
     border: 1px solid #384216 !important;
 }
 
-.reopen.btn:hover {
+.task-reopen.btn:hover {
     background: #749a02 !important;
     border: 1px solid #384216 !important;
 }

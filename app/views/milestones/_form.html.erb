@@ -5,8 +5,9 @@
     <%= f.input :end_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :delivered_on, as: :string, input_html: {class: 'datepicker'} %>
     <%= f.input :duration %>
-    <%= f.input :milestone_type, collection: ['Sprint'], :include_blank => true %>
+    <%= f.input :milestone_type, collection: Milestone::TYPES %>
     <%= f.input :parent_milestone_id, collection: @long_milestones, :include_blank => true %>
 
     <%= f.button :submit %>
+    <%= link_to 'Back', project_milestones_path(@project), class: 'btn btn-default' %>
 <% end %>
