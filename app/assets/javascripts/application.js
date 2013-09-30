@@ -1,3 +1,4 @@
+//= require jquery
 //= require jquery-ui
 //= require jquery_ujs
 //= require notification
@@ -7,6 +8,7 @@
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-tagsinput
 //= require datepicker
+//= require jquery_nested_form
 
 $(function () {
     addSubmitalbeElemntInForm();

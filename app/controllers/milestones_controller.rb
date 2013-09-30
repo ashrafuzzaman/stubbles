@@ -1,5 +1,6 @@
 class MilestonesController < ApplicationController
   before_filter :load_project
+  before_filter :load_form_dependencies, only: [:new, :edit, :create, :update]
   before_filter :authenticate_user!
 
   def index
@@ -22,7 +23,7 @@ class MilestonesController < ApplicationController
 
   def new
     @milestone = @project.milestones.new
-    @long_milestones = @project.milestones.long
+    @milestone.milestone_resources.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,12 +33,10 @@ class MilestonesController < ApplicationController
 
   def edit
     @milestone = @project.milestones.find(params[:id])
-    @long_milestones = @project.milestones.long.without(@milestone.id)
   end
 
   def create
     @milestone = @project.milestones.new(params[:milestone])
-    @long_milestones = @project.milestones.long
 
     respond_to do |format|
       if @milestone.save
@@ -85,5 +84,10 @@ class MilestonesController < ApplicationController
 
   def load_project
     @project = Project.find(params[:project_id])
+  end
+
+  def load_form_dependencies
+    @long_milestones = @project.milestones.long
+    @available_resources = @project.collaborators
   end
 end

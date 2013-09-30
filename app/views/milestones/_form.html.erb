@@ -1,4 +1,4 @@
-<%= simple_form_for([@project, @milestone]) do |f| %>
+<%= simple_nested_form_for([@project, @milestone]) do |f| %>
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :start_on, as: :string, input_html: {class: 'datepicker'} %>
@@ -8,6 +8,23 @@
     <%= f.input :milestone_type, collection: Milestone::TYPES %>
     <%= f.input :parent_milestone_id, collection: @long_milestones, :include_blank => true %>
 
-    <%= f.button :submit %>
-    <%= link_to 'Back', project_milestones_path(@project), class: 'btn btn-default' %>
+    <div id="milestone_resources">
+      <%= f.fields_for :milestone_resources do |r| %>
+          <div class="row">
+            <div class="col-md-8"><%= r.input :resource_id, collection: @available_resources, label: false %></div>
+            <div class="col-md-2"><%= r.input :available_hours_per_day, label: false %></div>
+            <div class="col-md-2"><%= r.link_to_remove "Remove", class: 'btn btn-danger' %></div>
+          </div>
+      <% end %>
+    </div>
+    <div>
+      <%= f.link_to_add "Add a resource", :milestone_resources, :data => {:target => "#milestone_resources"}, class: 'btn btn-primary' %>
+      <br/>
+      <br/>
+    </div>
+
+    <div>
+      <%= f.button :submit %>
+      <%= link_to 'Back', project_milestones_path(@project), class: 'btn btn-default' %>
+    </div>
 <% end %>

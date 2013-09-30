@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925135020) do
+ActiveRecord::Schema.define(:version => 20130930041702) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20130925135020) do
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "milestone_resources", :force => true do |t|
+    t.integer  "milestone_id"
+    t.integer  "resource_id"
+    t.float    "available_hours_per_day"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "milestone_resources", ["milestone_id"], :name => "index_milestone_resources_on_milestone_id"
+  add_index "milestone_resources", ["resource_id"], :name => "index_milestone_resources_on_resource_id"
 
   create_table "milestones", :force => true do |t|
     t.string   "title"

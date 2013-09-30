@@ -41,6 +41,7 @@ gem 'acts-as-taggable-on', '~> 2.2.2'
 gem "bootstrap-wysihtml5-rails", "~> 0.3.1.23"
 gem 'simple_form'
 gem 'awesome_print'
+gem 'nested_form'
 
 group :assets do
   gem 'therubyracer', :platform=>:ruby
