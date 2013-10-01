@@ -10,7 +10,7 @@
       <div class="container">
         <% resources.each do |resource| %>
             <span><%= resource.name %></span>
-            <span><%= milestone.hours_available_for(resource) %> / <%= milestone.hours_assigned_to(resource) %></span>
+            <span><%= milestone.hours_assigned_to(resource) %> / <%= milestone.hours_available_for(resource) %></span>
         <% end %>
       </div>
     </div>

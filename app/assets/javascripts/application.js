@@ -17,7 +17,6 @@ $(function () {
     $("body").ajaxStop(function () {
         initializeDom();
     });
-    $('select.selectUser').selectmenu({style: 'popup', width: 200});
 });
 
 function initializeDom() {
