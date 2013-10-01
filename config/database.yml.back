@@ -1,0 +1,28 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: stubbles_development
+  pool:     5
+  username: postgres
+  password: postgres
+
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: stubbles_test
+  pool:     5
+  username: stubbles
+  username: postgres
+  password: postgres
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: stubbles_development
+  pool:     5
+  username: stubbles
+  username: postgres
+  password: postgres
