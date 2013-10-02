@@ -2,7 +2,7 @@
   <div class="col-md-4"><%= user_filter('involved_with') %></div>
   <div class="col-md-3">
     <div hide-on-story-move="true">
-      <%= milestone_filter(@project) %>
+      <%= milestone_filter(@project, @milestone) %>
     </div>
     <div show-on-story-move="true" hidden>
       <%= move_milestone_list(@project) %>

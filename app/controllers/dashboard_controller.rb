@@ -4,22 +4,21 @@ class DashboardController < ApplicationController
 
   def index
     @stories = filtered_stories
+    @resources = @milestone.try(:resources) || []
     respond_with(@stories)
   end
 
-  def new_index
-    @current_stories = filtered_stories.current
-    @backlog_stories = filtered_stories.backlog
-    respond_with(@stories)
-  end
-
-private
+  private
   def filtered_stories
     @project = Project.find(params[:project_id])
-    stories = @project.stories.yet_to_be_accepted
+    @milestone = fetch_milestone(@project)
+    stories = @milestone.try(:stories) || @project.stories
     stories = stories.involved_with(params[:involved_with]) if params[:involved_with].to_i > 0
-    @milestone = Milestone.find params[:milestone_id] rescue nil
-    @resources = @milestone.try(:resources) || []
-    stories.attached_to_milestone(params[:milestone_id])
+    stories
+  end
+
+  def fetch_milestone(project)
+    milestone = Milestone.find params[:milestone_id] rescue nil
+    milestone || project.current_sprint
   end
 end

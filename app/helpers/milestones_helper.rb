@@ -1,8 +1,8 @@
 module MilestonesHelper
-  def milestone_filter(project)
+  def milestone_filter(project, milestone)
     form_tag("", :method => :get) do |f|
       concat select_tag(:milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
-                                                          :selected => params[:milestone_id]),
+                                                          :selected => milestone.try(:id)),
                         {:class => 'submittable form-control', :prompt => 'Backlog'})
       [:involved_with].each do |param|
         concat hidden_field_tag param, params[param]
