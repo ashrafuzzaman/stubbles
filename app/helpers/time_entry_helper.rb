@@ -10,14 +10,20 @@ module TimeEntryHelper
 		end
 	end
 
-	def next_week_link
-		link_to 'Next', time_entry_project_path(@project.id, :week => @week.next,
+  def link_to_time_entry_popup(task)
+    link_to('', edit_story_task_path(task.story, task),
+            :remote => true, :class => 'glyphicon glyphicon-calendar',
+            :'data-disable-with' => "Loading...") if task.permitted_to_edit_by?(current_user)
+  end
+
+  def next_week_link
+		link_to 'Next', weekly_time_entry_path(@project.id, :week => @week.next,
 						:user_id => params[:user_id]),
 						:class=>"button pull-right"
 	end
 
 	def prev_week_link
-		link_to 'Previous', time_entry_project_path(@project.id, :week => @week.previous,
+		link_to 'Previous', weekly_time_entry_path(@project.id, :week => @week.previous,
 						:user_id => params[:user_id]),
 						:class=>"button pull-left"
 	end

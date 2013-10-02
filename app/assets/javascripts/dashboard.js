@@ -1,4 +1,5 @@
 //= require dashboard-story
+//= require time_entry
 
 var SORTABLE_COLUMN_SELECTOR = ".story_column";
 var SORTABLE_HANDLER_SELECTOR = ".story-header";
