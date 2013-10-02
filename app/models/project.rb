@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :name, :creator, :description, :started_on
+  attr_accessible :name, :creator, :description, :started_on, :sprint_length
 
   include ProjectPermission
   HOURS_PER_DAY = 8
