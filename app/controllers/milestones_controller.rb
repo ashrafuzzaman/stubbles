@@ -1,6 +1,6 @@
 class MilestonesController < ApplicationController
   before_filter :load_project
-  before_filter :load_form_dependencies, only: [:new, :edit, :create, :update]
+  before_filter :load_form_dependencies, only: [:new, :edit, :create, :update, :clone]
   before_filter :authenticate_user!
 
   def index
@@ -29,6 +29,21 @@ class MilestonesController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @milestone }
     end
+  end
+
+  def clone
+    @milestone_to_clone = @project.milestones.find(params[:id])
+    @milestone = @milestone_to_clone.dup
+    @milestone.milestone_resources << @milestone_to_clone.milestone_resources.collect(&:dup)
+
+    @milestone.title = @milestone.title.gsub(/(\d+)/) do |n|
+      n.to_i + 1
+    end
+    @milestone.end_on       = Date.current + (@milestone_to_clone.end_on - @milestone_to_clone.start_on).to_i.days
+    @milestone.delivered_on = @milestone.end_on
+    @milestone.start_on     = Date.current
+    ap @milestone
+    render :new
   end
 
   def edit

@@ -5,6 +5,9 @@ Stubbles::Application.routes.draw do
 
   resources :projects do
     resources :milestones do
+      member do
+        get 'clone'
+      end
       collection do
         put 'move_stories'
       end
