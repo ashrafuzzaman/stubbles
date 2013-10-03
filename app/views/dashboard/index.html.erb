@@ -29,4 +29,22 @@
     <% end %>
   </div>
 </div>
+
+<script id="time_entry_popup_template" type="html/template">
+  <form data-remote="true" accept-charset="UTF-8" action="<%= update_time_entry_path(@project) %>"
+        class="form-inline" method="post">
+    <input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+    <input name="date" type="hidden" value="{{date}}">
+    <input name="project_id" type="hidden" value="{{project_id}}">
+    <input name="task_id" type="hidden" value="{{task_id}}">
+
+    <input name="value" type="text" value="{{value}}">
+    <br>
+    <br>
+    <input class="btn btn-primary" name="commit" type="submit" value="Submit"/>
+    <a close-pophover href="#" class="btn btn-danger">Cancel</a>
+  </form>
+</script>
+
 <%= javascript_include_tag "dashboard" %>

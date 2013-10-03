@@ -3,7 +3,6 @@
     <span><%= task.title %></span>
     <div class="pull-right">
       <%= action_links_for_task(task) %>
-      <%#= time_entry_slot_for(task, Date.current) %>
       <%= link_to_time_entry_popup(task) %>
       <%= task_edit_link(task) %>
       <%= task_delete_link(task) %>

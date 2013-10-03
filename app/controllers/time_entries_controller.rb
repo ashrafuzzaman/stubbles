@@ -10,7 +10,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def update_time_entry
-    @time_entry = Task.find(params[:'resourceId']).time_entries.spent_on(params[:date]).by(current_user).first_or_create
+    @time_entry = Task.find(params[:'task_id']).time_entries.spent_on(params[:date]).by(current_user).first_or_create
     @time_entry.hours_spent = params[:value]
     @time_entry.save
   end

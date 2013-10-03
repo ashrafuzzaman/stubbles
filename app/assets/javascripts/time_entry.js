@@ -24,15 +24,13 @@ function makeEditable(element) {
 }
 
 function postValue(element, value) {
-	element.data("value", value);
-	var data = element.data();
 	var projectId = element.data("project-id");
 	var url = "/projects/" + projectId + "/update_time_entry";
-
+    var sendData = {task_id: element.data('task-id'), date: element.data('date'), value: value};
 	$.ajax({
 	  type: 'POST',
 	  url: url,
-	  data: data,
+	  data: sendData,
 	  dataType: "script"
 	});
 	doneEditing(element, value);
