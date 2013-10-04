@@ -1,4 +1,4 @@
-//= require jquery.pnotify
+//= require jquery.bootstrap-growl
 
 function showMessage(message) {
     $("#dialog").html(message).dialog();
@@ -9,8 +9,11 @@ function hideSlidingMessage() {
 }
 
 function showSlidingMessage(message, type) {
-//	noty({text: message, type: type, layout: 'topRight'});
-    $.pnotify({text: message, type: type, layout: 'topRight'});
+    $.bootstrapGrowl(message, {
+        type: type, // (null, 'info', 'error', 'success')
+        allow_dismiss: true,
+        stackup_spacing: 10 // spacing between consecutively stacked growls.
+    });
 }
 
 function showSuccessMessage(message) {
