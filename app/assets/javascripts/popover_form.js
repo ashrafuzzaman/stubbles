@@ -41,7 +41,6 @@ var PopOverForm = {
         }
         var template_selector = "#" + elem.closest('[popup-template]').attr('popup-template');
         var html = Template.render($(template_selector).html(), template_values);
-        console.log(template_selector, html);
         return html;
     }
 

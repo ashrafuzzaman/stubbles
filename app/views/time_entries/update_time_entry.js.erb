@@ -1,4 +1,4 @@
 $('span[data-date="<%= params[:date] %>"][data-task-id="<%= params[:'task_id'] %>"]').closest('td')
 	.effect("highlight", {}, 2000);
 PopOverForm.destroyAllPopupHover();
-showSuccessMessage("Time updated");
+Message.successMessage("Time updated");
