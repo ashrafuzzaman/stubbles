@@ -12,6 +12,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @milestones.each do |milestone| %>
@@ -25,6 +26,7 @@
     <td><%= milestone.milestone_type %></td>
     <td><%= link_to 'Show', project_milestone_path(@project, milestone) %></td>
     <td><%= link_to 'Edit', edit_project_milestone_path(@project, milestone) %></td>
+    <td><%= link_to 'Clone', clone_project_milestone_path(@project, milestone) %></td>
     <td><%= link_to 'Destroy', project_milestone_path(@project, milestone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

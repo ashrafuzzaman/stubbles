@@ -3,6 +3,7 @@ class Milestone < ActiveRecord::Base
                   :parent_milestone_id, :milestone_resources_attributes
 
   scope :sprints, -> { where(milestone_type: 'Sprint') }
+  scope :current_sprints, -> { sprints.where('start_on <= :date AND end_on >= :date', date: Date.current).order('end_on ASC') }
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }
   scope :without, ->(id) { where('milestones.id != ?', id) }
 

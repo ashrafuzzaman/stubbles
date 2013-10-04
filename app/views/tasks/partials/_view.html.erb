@@ -3,6 +3,7 @@
     <span><%= task.title %></span>
     <div class="pull-right">
       <%= action_links_for_task(task) %>
+      <%= link_to_time_entry_popup(task) %>
       <%= task_edit_link(task) %>
       <%= task_delete_link(task) %>
     </div>

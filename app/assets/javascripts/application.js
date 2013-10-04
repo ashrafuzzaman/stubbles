@@ -8,6 +8,8 @@
 //= require bootstrap-tagsinput
 //= require datepicker
 //= require jquery_nested_form
+//= require template
+//= require popover_form
 
 $(function () {
     addSubmitalbeElemntInForm();

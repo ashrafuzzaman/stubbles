@@ -29,6 +29,10 @@ class Project < ActiveRecord::Base
     stories
   end
 
+  def current_sprint
+    self.milestones.current_sprints.first
+  end
+
   private
 
   def add_creator_as_project_admin

@@ -8,5 +8,6 @@
  *= require comments
  *= require bootstrap-datepicker
  *= require time-entry
+ *= require jquery.pnotify.default
  *= require_self
 */

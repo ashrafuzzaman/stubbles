@@ -12,11 +12,7 @@
     <% end %>
     <%= sw.content do %>
         <span><%= assigned_person_for(story) %></span>
-
-        <div class="actions"><%= action_links_for_story(story) %></div>
         <span class="status"><%= story.status.humanize %></span>
-
-        <div class="ui-helper-clearfix"></div>
         <div class="line"></div>
         <p class="description"><%= raw story.description %></p>
 
