@@ -1,4 +1,12 @@
 $('span[data-date="<%= params[:date] %>"][data-task-id="<%= params[:'task_id'] %>"]').closest('td')
-	.effect("highlight", {}, 2000);
+        .effect("highlight", {}, 2000);
 PopOverForm.destroyAllPopupHover();
 Message.successMessage("Time updated");
+
+//Done for the popover form to be updated
+var elem = $('a[date="<%= params[:date] %>"][task_id="<%= params[:'task_id'] %>"]');
+elem.attr('hours_spent', <%= @time_entry.hours_spent %>);
+<% if params[:'percent_completed'] %>
+elem.attr('percent_completed', <%= @time_entry.trackable.percent_completed %>);
+<% end %>
+PopOverForm.initializePopoverFor(elem);

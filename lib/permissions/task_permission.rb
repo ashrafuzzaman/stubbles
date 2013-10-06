@@ -3,6 +3,10 @@ module TaskPermission
 		user.admin_for?(story.project) || self.new?
 	end
 
+	def permitted_to_enter_time_by?(user)
+		self.assigned_to == user
+	end
+
 	def permitted_to_edit_by?(user)
 		user.admin_for?(story.project) || self.assigned_to == user || self.new?
 	end

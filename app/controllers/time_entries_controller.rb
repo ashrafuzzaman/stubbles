@@ -10,9 +10,8 @@ class TimeEntriesController < ApplicationController
   end
 
   def update_time_entry
-    @time_entry = Task.find(params[:'task_id']).time_entries.spent_on(params[:date]).by(current_user).first_or_create
-    @time_entry.hours_spent = params[:value]
-    @time_entry.save
+    task = Task.find(params[:'task_id'])
+    @time_entry = task.enter_time(current_user, params[:date], params[:hours_spent], params[:percent_completed])
   end
 
   private

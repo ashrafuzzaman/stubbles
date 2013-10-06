@@ -7,6 +7,8 @@ var PopOverForm = {
 
     destroyAllPopupHover: function () {
         $(popover_form_selector).popover('hide'); //for now hide all
+//        $(popover_form_selector).popover('destroy'); //for now hide all
+//        PopOverForm.initializePopover();
     },
 
     initializePopoverFor: function ($this) {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930041702) do
+ActiveRecord::Schema.define(:version => 20131006032517) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -127,8 +127,9 @@ ActiveRecord::Schema.define(:version => 20130930041702) do
     t.integer  "assigned_to_id"
     t.float    "hours_estimated"
     t.float    "hours_spent"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "percent_completed"
   end
 
   add_index "tasks", ["story_id"], :name => "index_tasks_on_story_id"
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20130930041702) do
     t.string   "trackable_type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "milestone_id"
   end
 
   create_table "users", :force => true do |t|

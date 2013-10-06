@@ -18,8 +18,9 @@ module TimeEntryHelper
             :'date' => Date.current,
             :'project_id' => task.story.project_id,
             :'task_id' => task.id,
-            :'value' => task.total_hours_spent_on(Date.current)
-    ) if task.permitted_to_edit_by?(current_user)
+            :'hours_spent' => task.total_hours_spent_on(Date.current),
+            :'percent_completed' => task.percent_completed
+    ) if task.permitted_to_enter_time_by?(current_user)
   end
 
   def next_week_link

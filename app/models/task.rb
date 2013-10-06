@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  attr_accessible :title, :hours_estimated, :assigned_to_id
+  attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
 
   include TaskPermission
   include Workflow
@@ -42,6 +42,15 @@ class Task < ActiveRecord::Base
 
   def total_hours_spent_on(date)
     time_entries.spent_on(date).by(assigned_to).sum('hours_spent')
+  end
+
+  def enter_time(user, date, hours_spent, percent_completed)
+    time_entry = self.time_entries.spent_on(date).by(user).first_or_create
+    time_entry.hours_spent = hours_spent
+    time_entry.milestone_id = self.story.milestone_id
+    self.update_attribute :percent_completed, percent_completed if percent_completed
+    time_entry.save
+    time_entry
   end
 
   private
