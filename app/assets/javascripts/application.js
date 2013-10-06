@@ -10,6 +10,7 @@
 //= require jquery_nested_form
 //= require template
 //= require popover_form
+//= require Chart
 
 $(function () {
     addSubmitalbeElemntInForm();
