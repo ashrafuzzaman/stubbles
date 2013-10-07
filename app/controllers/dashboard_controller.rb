@@ -19,6 +19,6 @@ class DashboardController < ApplicationController
 
   def fetch_milestone(project)
     milestone = Milestone.find params[:milestone_id] rescue nil
-    milestone || project.current_sprint
+    milestone || (params.has_key?(:milestone_id) ? nil : project.current_sprint)
   end
 end
