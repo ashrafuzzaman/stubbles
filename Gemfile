@@ -42,6 +42,7 @@ gem "bootstrap-wysihtml5-rails", "~> 0.3.1.23"
 gem 'simple_form'
 gem 'awesome_print'
 gem 'nested_form'
+gem 'google_visualr', '~> 2.1.9'
 
 group :assets do
   gem 'therubyracer', :platform=>:ruby

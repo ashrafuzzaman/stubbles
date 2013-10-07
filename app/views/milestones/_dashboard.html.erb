@@ -1,0 +1,29 @@
+<br>
+<br>
+<br>
+<% if milestone %>
+    <div class="panel-group story_column" sortable-stories="true">
+      <div class="story not_started panel panel-default">
+        <div class="panel-heading story-header">
+          <h2 class="panel-title"><%= milestone.title %></h2>
+        </div>
+        <div class="panel-collapse in">
+          <div class="container">
+            <label>Start on</label> <%= milestone.start_on %><br/>
+            <label>End on</label> <%= milestone.end_on %><br/>
+            <label>Deliver on</label> <%= milestone.delivered_on %><br/>
+            <label>Duration</label> <%= milestone.duration %> days<br/>
+            <h4>Resources</h4>
+            <hr style="margin: 10px 0px 10px 0px;"/>
+            <% if milestone.try(:resources).present? %>
+                <% milestone.resources.each do |resource| %>
+                    <span><%= resource.name %></span>
+                <span><%= milestone.hours_assigned_to(resource) %>
+                  / <%= milestone.hours_available_for(resource) %></span>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
