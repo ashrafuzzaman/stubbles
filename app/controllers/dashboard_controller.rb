@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
 
   def index
     @stories = filtered_stories
+    @project.memberships.of(current_user).first.update_column(:last_accessed_at, Time.zone.now)
     @resources = @milestone.try(:resources) || []
     respond_with(@stories)
   end

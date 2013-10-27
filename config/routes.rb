@@ -1,5 +1,5 @@
 Stubbles::Application.routes.draw do
-  root :to => 'projects#index'
+  root :to => 'projects#redirect_to_recent_project'
 
   devise_for :users
 

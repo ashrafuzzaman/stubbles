@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def default_project
-  	projects.order("created_at DESC").try(:first)
+  def last_accessed_project
+  	projects.order("last_accessed_at DESC").try(:first)
   end
 
   def admin_for?(project)

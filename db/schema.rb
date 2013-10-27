@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131006032517) do
+ActiveRecord::Schema.define(:version => 20131027124307) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -54,10 +54,11 @@ ActiveRecord::Schema.define(:version => 20131006032517) do
   add_index "milestones", ["project_id"], :name => "index_milestones_on_project_id"
 
   create_table "project_memberships", :force => true do |t|
-    t.integer "project_id",                   :null => false
-    t.integer "user_id",                      :null => false
-    t.string  "role",                         :null => false
-    t.boolean "active",     :default => true
+    t.integer  "project_id",                         :null => false
+    t.integer  "user_id",                            :null => false
+    t.string   "role",                               :null => false
+    t.boolean  "active",           :default => true
+    t.datetime "last_accessed_at"
   end
 
   add_index "project_memberships", ["project_id"], :name => "index_project_memberships_on_project_id"

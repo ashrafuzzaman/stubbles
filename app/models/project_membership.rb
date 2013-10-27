@@ -6,7 +6,7 @@ class ProjectMembership < ActiveRecord::Base
 
   validates :role, :inclusion => { :in => Role::all, :message => "%{value} is not a valid role" }
   validate :ensure_one_membership_in_projects
-  scope :of, lambda { |user| where(:user_id => user.id) }
+  scope :of, lambda { |user| where(:user_id => user) }
 
   scope :active, where(:active => true)
 

@@ -1,9 +1,14 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_project, :except => [:new, :index, :create]
+  before_filter :load_project, :except => [:new, :index, :create, :redirect_to_recent_project]
+
+  def redirect_to_recent_project
+    project = current_user.projects.order("last_accessed_at DESC").first
+    redirect_to project ? project_dashboard_path(project) : projects_path
+  end
 
   def index
-    @projects = current_user.projects
+    @projects = current_user.projects.order("last_accessed_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

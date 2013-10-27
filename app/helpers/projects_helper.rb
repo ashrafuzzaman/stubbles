@@ -17,4 +17,8 @@ module ProjectsHelper
       project_dashboard_path(project.id, :involved_with => user.id)
     end
   end
+
+  def link_to_new_project
+    link_to('New project', new_project_path, class: 'btn btn-default')
+  end
 end
