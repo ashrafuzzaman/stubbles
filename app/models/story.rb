@@ -9,7 +9,7 @@ class Story < ActiveRecord::Base
   validates :title, :presence => true
   validates :story_type, :presence => true
 
-  belongs_to :project
+  belongs_to :project, :touch => true
   belongs_to :milestone, :touch => true
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :tasks, order: 'created_at ASC'

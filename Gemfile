@@ -4,7 +4,7 @@ ruby '1.9.3'
 gem 'rails', '3.2.13'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -45,19 +45,19 @@ gem 'nested_form'
 gem 'google_visualr', '~> 2.1.9'
 
 group :assets do
-  gem 'therubyracer', :platform=>:ruby
+  gem 'therubyracer', :platform => :ruby
 end
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller', :platforms => [:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'quiet_assets'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-inotify', :require => false
   gem 'letter_opener' #to test email in development env. Usually stored in tmp/letter_opener
 end
 
@@ -74,4 +74,9 @@ group :test do
   gem 'email_spec'
 end
 
-gem "cache_digests", "~> 0.3.1"
+group :production do
+  gem 'memcachier'
+  gem 'dalli'
+end
+
+gem "cache_digests"

@@ -63,6 +63,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    dalli (2.6.4)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
     devise (2.2.3)
@@ -116,6 +117,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     mime-types (1.25)
     mini_portile (0.5.1)
     multi_json (1.8.0)
@@ -224,10 +226,11 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-wysihtml5-rails (~> 0.3.1.23)
   bullet
-  cache_digests (~> 0.3.1)
+  cache_digests
   cancan
   capybara
   coffee-rails (~> 3.2.1)
+  dalli
   database_cleaner (= 1.0.1)
   devise (~> 2.2.3)
   email_spec
@@ -239,6 +242,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   letter_opener
+  memcachier
   nested_form
   pg
   quiet_assets
