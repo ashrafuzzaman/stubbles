@@ -2,7 +2,7 @@
 
 <div class="panel-group story_column" sortable-stories="true">
   <% stories.each do |story| %>
-      <% cache story do %>
+      <% cache [:dashboard, story] do %>
           <%= render :partial => 'stories/partials/view', :locals => {:story => story} %>
       <% end %>
   <% end %>
