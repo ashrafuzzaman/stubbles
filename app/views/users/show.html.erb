@@ -1,8 +1,6 @@
 <p>
-  <b>Email:</b>
+  <%= image_tag @user.gravatar_url %>
   <%= @user.email %>
 </p>
 
-<%= render 'projects/add_member', :locals => {:user => @user, :project } %>
-
-<%= link_to 'Back', new_user_search_path() %>
+<%#= link_to 'Back', new_user_search_path() %>

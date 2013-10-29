@@ -1,22 +1,28 @@
 <% if user_signed_in? %>
-  <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav">
       <li><%= link_to 'Projects', projects_path %></li>
       <% if @project && !@project.new_record? %>
-        <li><%= link_to 'Dashboard', project_dashboard_path(@project.id) %></li>
-        <li><%= link_to 'Milestones', project_milestones_path(@project.id) %></li>
-        <li><%= link_to 'Time entry', weekly_time_entry_path(@project.id) %></li>
-        <li><%= link_to 'Planner', story_calendar_path(@project.id) %></li>
+          <li><%= link_to 'Dashboard', project_dashboard_path(@project.id) %></li>
+          <li><%= link_to 'Milestones', project_milestones_path(@project.id) %></li>
+          <li><%= link_to 'Time entry', weekly_time_entry_path(@project.id) %></li>
+          <li><%= link_to 'Planner', story_calendar_path(@project.id) %></li>
       <% end %>
       <li><%= link_to 'Profile', edit_user_registration_path %></li>
-  </ul>
-<% end %>
 
-<div class="pull-right">
-  <% if user_signed_in? %>
-    Signed in as <%= current_user.name %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-  <% end %>
-</div>
-<div class="clear"></div>
+    </ul>
+
+    <ul class="nav navbar-nav pull-right">
+      <% if user_signed_in? %>
+          <li>
+            <%= link_to_user current_user %>
+          </li>
+          <li>
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          </li>
+      <% else %>
+          <li class="pull-right">
+            <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+          </li>
+      <% end %>
+    </ul>
+<% end %>

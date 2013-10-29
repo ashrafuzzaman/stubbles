@@ -9,5 +9,6 @@
  *= require bootstrap-datepicker
  *= require time-entry
  *= require jquery.pnotify.default
+ *= require dashboard
  *= require_self
 */
