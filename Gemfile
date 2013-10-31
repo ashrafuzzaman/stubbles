@@ -76,7 +76,8 @@ end
 
 group :production do
   gem 'memcachier'
-  gem 'dalli'
+  gem 'dalli', '~>1.0.5'
 end
 
 gem "cache_digests"
+gem 'unicorn'
