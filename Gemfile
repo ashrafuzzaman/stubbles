@@ -74,10 +74,10 @@ group :test do
   gem 'email_spec'
 end
 
-#group :production do
-#  gem 'memcachier'
-#  gem 'dalli', '~>1.0.5'
-#end
+group :production do
+  gem 'memcachier'
+  gem 'dalli', '~>1.0.5'
+end
 
 gem "cache_digests"
 gem 'unicorn'
