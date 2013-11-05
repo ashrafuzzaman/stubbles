@@ -5,7 +5,7 @@ module TasksHelper
         form_tag(update_status_story_task_path(task.story, task),
                  :method => :put, :remote => true) do
           task.current_state.events.keys.each do |event|
-            concat(submit_tag(event, :name => 'event', :value => event,
+            concat(submit_tag(event, :name => 'event', :value => event.to_s.camelize,
                               :class => "task-#{event} btn btn-xs",
                               :'data-disable-with' => 'wait'))
           end

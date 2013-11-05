@@ -55,7 +55,7 @@ class TasksController < ApplicationController
 
   def update_status
     @task = @story.tasks.find(params[:id])
-    @task.send("#{params[:event]}!")
+    @task.send("#{params[:event].to_s.underscore}!")
   end
 
   private
