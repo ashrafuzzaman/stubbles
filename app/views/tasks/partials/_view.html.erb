@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="task_container">
-    <span><%= assigned_person_for(task) %></span>
+    <span><%= link_to_user_with_avatar(task.assigned_to) %></span>
 
     <div class="pull-right">
       <%= render :partial => 'shared/estimated_and_spent_hours',

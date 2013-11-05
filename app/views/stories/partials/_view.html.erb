@@ -11,9 +11,8 @@
         <% end %>
     <% end %>
     <%= sw.content do %>
-        <span><%= assigned_person_for(story) %></span>
-        <span class="status"><%= story.status.humanize %></span>
-        <div class="line"></div>
+        <span><%= link_to_user_with_avatar(story.assigned_to) %></span>
+        <hr/>
         <p class="description"><%= raw story.description %></p>
 
         <div><%= tags_for(story.tag_list) %></div>
@@ -21,6 +20,7 @@
           <%= render :partial => 'tasks/partials/tasks',
                      :locals => {:story => story, :tasks => story.tasks} %>
         </div>
+        <hr/>
         <div>
           <%= render_comments_for(story) %>
         </div>

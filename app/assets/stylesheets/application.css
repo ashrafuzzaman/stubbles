@@ -1,14 +1,15 @@
 /*
- *= require bootstrap
- *= require bootstrap-theme
+ *= require custom_bootstrap/custom_bootstrap
  *= require bootstrap-wysihtml5/b3
  *= require bootstrap-tagsinput
  *= require button
+ *= require story
  *= require task
  *= require comments
  *= require bootstrap-datepicker
  *= require time-entry
  *= require jquery.pnotify.default
  *= require dashboard
+ *= require layout
  *= require_self
 */

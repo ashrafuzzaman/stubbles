@@ -101,7 +101,7 @@ class StoryWidget
     collapse = true if collapse.nil?
     collapse_class = collapse ? 'collapse' : 'in'
     @template.content_tag :div, id: "#{container_id}_content", class: "panel-collapse #{collapse_class}" do
-      @template.content_tag :div, class: "container" do
+      @template.content_tag :div, class: "story-container" do
         @template.capture(&block)
       end
     end

@@ -1,12 +1,24 @@
 <% if user_signed_in? %>
     <ul class="nav navbar-nav">
-      <li><%= link_to 'Projects', projects_path %></li>
+      <%= link_to_nav 'Projects', projects_path %>
       <% if @project && !@project.new_record? %>
-          <li><%= link_to 'Dashboard', project_dashboard_path(@project.id) %></li>
-          <li><%= link_to 'Milestones', project_milestones_path(@project.id) %></li>
-          <li><%= link_to 'Time entry', weekly_time_entry_path(@project.id) %></li>
-          <li><%= link_to 'Planner', story_calendar_path(@project.id) %></li>
+          <%= link_to_nav 'Dashboard', project_dashboard_path(@project.id) %>
+          <%= link_to_nav 'Milestones', project_milestones_path(@project.id) %>
+          <%= link_to_nav 'Time entry', weekly_time_entry_path(@project.id) %>
+          <%= link_to_nav 'Planner', story_calendar_path(@project.id) %>
       <% end %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-header">Nav header</li>
+          <li><a href="#">Separated link</a></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
     </ul>
 
     <ul class="nav navbar-nav pull-right">
@@ -18,7 +30,7 @@
             <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
           </li>
       <% else %>
-          <li class="pull-right">
+          <li>
             <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
           </li>
       <% end %>
