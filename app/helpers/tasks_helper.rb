@@ -1,6 +1,6 @@
 module TasksHelper
   def action_links_for_task(task)
-    content_tag :div, :style => 'float: left;' do
+    content_tag :div, :style => 'float: left;', class: 'task-actions' do
       if task.current_state.events.size > 0
         form_tag(update_status_story_task_path(task.story, task),
                  :method => :put, :remote => true) do
