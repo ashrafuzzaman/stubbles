@@ -1,5 +1,6 @@
 /*
  *= require custom_bootstrap/custom_bootstrap
+ *= require layout
  *= require bootstrap-wysihtml5/b3
  *= require bootstrap-tagsinput
  *= require button
@@ -10,6 +11,5 @@
  *= require time-entry
  *= require jquery.pnotify.default
  *= require dashboard
- *= require layout
  *= require_self
 */

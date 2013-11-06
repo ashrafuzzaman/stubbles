@@ -1,10 +1,10 @@
 <% comments_container do %>
 	<% comments_header do %>
 		Comments
-		<span class="comment_count ui-corner-all ui-widget-content"><%= resource.comments.count %></span>
+		<span class="comment_count badge pull-right"><%= resource.comments.count %></span>
 	<% end %>
 	<% comments_content do %>
-		<div class="line"></div>
+		<hr/>
 		<ol id="<%= container_id_of_comments_for(resource) %>">
 		<% resource.comments.each do |comment| %>
 			<%= render :partial => 'comments/view', :locals => {:comment => comment} %>

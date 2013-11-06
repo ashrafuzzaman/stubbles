@@ -1,0 +1,111 @@
+@import "custom_bootstrap/custom_bootstrap.less";
+
+.comments {
+  margin: 0px 0px 5px 0px;
+}
+
+.comments ol {
+  margin: 5px 0px 5px 0px;
+  padding: 0px;
+}
+
+.comments .portlet-header {
+  min-height: 20px !important;
+  padding-top: 2px;
+}
+
+.comments .portlet-content {
+  padding: 0px 0px 5px 0px;
+}
+
+.comments ol li {
+  margin: 0px;
+  padding: 2px;
+  list-style: none;
+  background-color: @table-bg-accent;
+  border-bottom: 1px solid @table-border-color;
+}
+
+.comments ol li p {
+  margin: 0px;
+  padding: 2px;
+}
+
+.comments .portlet-content .new {
+  float: right;
+  margin: 0px 5px 5px 0px;
+}
+
+.comments .portlet-content {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.comments .portlet-content .line {
+  margin: 0px;
+  padding: 0px;
+}
+
+.comments .comment-title {
+  background-color: @table-bg-active;
+  padding: 2px 5px 2px 5px;
+  height: 22px;
+}
+
+.comments .action {
+  float: right;
+}
+
+.comments .comment_by {
+  float: left;
+}
+
+.comments .comment_by .name {
+  display: inline;
+}
+
+.comments .comment-text {
+  min-height: 45px;
+}
+
+.comments .date {
+  .badge();
+  .pull-right();
+}
+
+.date {
+  text-align: center;
+  font-family: cursive;
+  padding: 2px;
+  border-radius: 3px;
+}
+
+.day {
+  margin-top: 2px;
+  font-size: .8em !important;
+  font-weight: bolder;
+}
+
+.time {
+  font-size: .8em !important;
+}
+
+.date hr {
+  margin: 3px 0px 3px 0px;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(31, 52, 60, 0.75), rgba(0, 0, 0, 0));
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+
+sub {
+  top: 0.4em;
+}
