@@ -132,13 +132,13 @@ class Story < ActiveRecord::Base
 
   def propagate_percent_completed
     weighted_percent_completed = self.tasks.inject(0) do |sum, task|
-      sum + (task.hours_estimated.to_f == 0 ? 0 : (task.percent_completed.to_f / task.hours_estimated.to_f))
+      sum + (task.percent_completed.to_f * task.hours_estimated.to_f)
     end
-
-    ap self.hours_estimated
-    ap weighted_percent_completed
-
-    self.update_column(:percent_completed, weighted_percent_completed * self.hours_estimated.to_f)
+    #ap self.hours_estimated
+    #ap self.tasks.sum(:hours_estimated)
+    #ap weighted_percent_completed
+    #
+    self.update_column(:percent_completed, weighted_percent_completed / [self.hours_estimated.to_f, 1].max)
     self.touch
 
     #milestone.propagate_percent_completed if milestone

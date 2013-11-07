@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
 
   scope :assigned_to, lambda { |user| where(:assigned_to_id => user.id) }
 
-  after_save :update_story_status
+  after_save :update_story_status, :propagate_values_to_story
 
   workflow_column :status
   workflow do
@@ -68,6 +68,12 @@ class Task < ActiveRecord::Base
   private
   def update_story_status
     story.update_status
+  end
+
+  def propagate_values_to_story
+    propagate_hours_spent
+    propagate_hours_estimated
+    propagate_percent_completed
   end
 
 end
