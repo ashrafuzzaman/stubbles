@@ -11,7 +11,6 @@
 //= require template
 //= require popover_form
 //= require Chart
-//= require bootstrap-slider
 
 $(function () {
     addSubmitalbeElemntInForm();
