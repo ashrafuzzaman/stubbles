@@ -3,9 +3,9 @@
         <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
         <%= sw.collapse_link do %>
             <%= story.title %>
-            <%= story_time_estimations(story) %>
         <% end %>
         <%= sw.actions do %>
+            <%= story_time_estimations(story) %>
             <%= story_edit_link(story) %>
             <%= story_delete_link(story) %>
         <% end %>

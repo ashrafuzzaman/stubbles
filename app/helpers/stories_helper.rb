@@ -49,14 +49,24 @@ module StoriesHelper
   end
 
   def story_widget(story, &block)
-    content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-default" do
+    panel_type = case story.story_type
+                   when StoryType::BUG then 'danger'
+                   when StoryType::ROUTINE then 'info'
+                   else 'default'
+                 end
+    content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-#{panel_type}" do
       capture(StoryWidget.new(story, self), &block)
     end
   end
 
   def story_form_widget(story, &block)
+    panel_type = case story.story_type
+                   when StoryType::BUG then 'danger'
+                   when StoryType::ROUTINE then 'info'
+                   else 'default'
+                 end
     form_for([story.project, story], :remote => true, role: 'form', html: {id: container_id_of(story)}) do |f|
-      content_tag :div, class: "story #{story.status} panel panel-default" do
+      content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do
         capture(f, StoryWidget.new(story, self), &block)
       end
     end
