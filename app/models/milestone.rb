@@ -48,7 +48,8 @@ class Milestone < ActiveRecord::Base
     burn_down_data = []
     total_spent = 0
     estimated_hours_remain = total_estimate
-    start_on.upto(Date.current) do |date|
+    end_date = [self.end_on, Date.current].min
+    start_on.upto(end_date) do |date|
       hours_spent = self.time_entries.spent_on(date).sum(:hours_spent)
       total_spent += hours_spent
       hours_remain = total_estimate - total_spent

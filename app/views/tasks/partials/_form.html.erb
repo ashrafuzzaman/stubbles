@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-8"><%= f.text_field :title, :required => true, class: 'form-control' %></div>
         <div class="col-md-1"><%= hours_estimated_tag(f, task) %></div>
-        <div class="col-md-3"><%= select_users(f, story) %></div>
+        <div class="col-md-3"><%= select_users(f, story, false) %></div>
       </div>
     </div>
     <div class="task_container">

@@ -11,7 +11,7 @@ module TimeEntryHelper
   end
 
   def link_to_time_entry_popup(task)
-    link_to('', '#', :class => 'glyphicon glyphicon-calendar',
+    link_to('', 'javascript:void(0)', :class => 'glyphicon glyphicon-calendar',
             :'popup-form' => true,
             :'popup-template' => 'time_entry_popup_template',
             :"popup-title" => 'Enter time for today',

@@ -20,10 +20,18 @@ module StoriesHelper
     end
   end
 
-  def select_users(form, story)
+  def select_users(form, story, icon = true)
     users = story.milestone ? story.milestone.resources : story.assignable_users
-    form.select(:assigned_to_id, users.collect { |u| [u.name, u.id] },
-                {:include_blank => true}, class: "form-control")
+    user_select_tag = form.select(:assigned_to_id, users.collect { |u| [u.name, u.id] },
+                                  {:include_blank => true}, class: "form-control")
+    if icon
+      content_tag :div, class: 'input-group input-group' do
+        concat content_tag(:span, content_tag(:span, '', class: 'glyphicon glyphicon-user'), class: 'input-group-addon')
+        concat user_select_tag
+      end
+    else
+      user_select_tag
+    end
   end
 
   def select_story_type(form)
@@ -50,9 +58,12 @@ module StoriesHelper
 
   def story_widget(story, &block)
     panel_type = case story.story_type
-                   when StoryType::BUG then 'danger'
-                   when StoryType::ROUTINE then 'info'
-                   else 'default'
+                   when StoryType::BUG then
+                     'danger'
+                   when StoryType::ROUTINE then
+                     'info'
+                   else
+                     'default'
                  end
     content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-#{panel_type}" do
       capture(StoryWidget.new(story, self), &block)
@@ -61,9 +72,12 @@ module StoriesHelper
 
   def story_form_widget(story, &block)
     panel_type = case story.story_type
-                   when StoryType::BUG then 'danger'
-                   when StoryType::ROUTINE then 'info'
-                   else 'default'
+                   when StoryType::BUG then
+                     'danger'
+                   when StoryType::ROUTINE then
+                     'info'
+                   else
+                     'default'
                  end
     form_for([story.project, story], :remote => true, role: 'form', html: {id: container_id_of(story)}) do |f|
       content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do

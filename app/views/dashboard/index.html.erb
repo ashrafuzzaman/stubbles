@@ -13,8 +13,8 @@
                 :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
   </div>
   <div class="col-md-3">
-    <%= link_to 'Move story', '#', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
-    <%= link_to 'Cancel move', '#', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true" %>
+    <%= link_to 'Move story', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
+    <%= link_to 'Cancel move', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true" %>
   </div>
 </div>
 <br/>
@@ -56,7 +56,7 @@
     <br>
     <br>
     <input class="btn btn-primary" name="commit" type="submit" value="Submit"/>
-    <a close-pophover href="#" class="btn btn-danger">Cancel</a>
+    <a close-pophover href="javascript:void(0)" class="btn btn-danger">Cancel</a>
   </form>
 </script>
 

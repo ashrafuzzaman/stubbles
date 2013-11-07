@@ -1,14 +1,15 @@
 <% cache [:form, story] do %>
     <%= story_form_widget(story) do |f, sw| %>
         <%= sw.header do %>
-            <%= f.text_field :title, class: 'form-control', :required => true, :size => '50' %>
+            <div class="input-group input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+              <%= f.text_field :title, class: 'form-control', :required => true, :size => '50', placeholder: "Task title" %>
+            </div>
+
         <% end %>
         <%= sw.content(collapse: false) do %>
             <div class="form-group">
               <div class="row">
-                <!--<div class="col-md-1">-->
-                  <!--<#%= story.status %>-->
-                <!--</div>-->
                 <div class="col-md-5">
                   <%= select_users(f, story) %>
                 </div>
