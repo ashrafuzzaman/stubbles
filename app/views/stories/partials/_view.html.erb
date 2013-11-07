@@ -16,7 +16,8 @@
         <div class="clearfix"></div>
         <hr class="clearfix"/>
         <p class="description"><%= raw story.description %></p>
-        <div id='<%= container_id_of_tasks_for(story) %>'>
+        <div id='<%= container_id_of_tasks_for(story) %>' class="tasks-wrapper">
+          <h2 class="header">Tasks</h2>
           <%= render :partial => 'tasks/partials/tasks',
                      :locals => {:story => story, :tasks => story.tasks} %>
         </div>

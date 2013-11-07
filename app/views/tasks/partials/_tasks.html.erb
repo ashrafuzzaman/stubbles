@@ -5,5 +5,4 @@
 </div>
 <br>
 <%= link_to('New Task', new_story_task_path(story), :class => 'btn btn-primary btn-xs',
-	:remote => true, :'data-disable-with' => "Loading...",
-	:style => 'margin: 0px 0px 10px 0px;') unless story.sealed_for_tasks? %>
+	:remote => true, :'data-disable-with' => "Loading...") unless story.sealed_for_tasks? %>
