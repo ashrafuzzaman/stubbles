@@ -19,6 +19,7 @@ var PopOverForm = {
         $this.attr('data-content', contentHtml.html());
         $this.popover({trigger: 'manual',
             html: true,
+            content: contentHtml.html(),
             placement: function (pop, dom_el) {
                 var width = window.innerWidth;
                 var left_pos = $(dom_el).offset().left;

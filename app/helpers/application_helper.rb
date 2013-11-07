@@ -2,9 +2,9 @@ module ApplicationHelper
   def container_id_of(model)
     model.new_record? ? 'new' : "#{model.class.name.downcase}-#{model.id}"
   end
-  
+
   def ajax_cancel_link(model, removeElement = 'form', options = {})
-    if(!model.new_record?)
+    if (!model.new_record?)
       link_to "cancel", {:action => "show"}, :remote => true, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
     else
       link_to "cancel", '#', :'data-cancel' => removeElement, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
@@ -13,8 +13,8 @@ module ApplicationHelper
 
   def deactivate_link(model, activate_path, deactivate_path)
     text = model.active? ? 'Deactivate' : 'Activate'
-    path = model.active? ? deactivate_path :  activate_path
-    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote=>true
+    path = model.active? ? deactivate_path : activate_path
+    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true
   end
 
   def error_message
@@ -32,5 +32,13 @@ module ApplicationHelper
 
   def avatar(user, size = 20)
     image_tag(user.gravatar_url(size), :size => "#{size}x#{size}", :alt => "Avatar")
+  end
+
+  def progress_bar_for(model)
+    content_tag(:div, class: 'progress') do
+      content_tag(:div, '', class: 'progress-bar', role: 'progressbar',
+                         :'aria-valuenow' => "60", :'aria-valuemin' => "0",
+                         :'aria-valuemax' => "100", style: "width: #{model.percent_completed}%;")
+    end
   end
 end

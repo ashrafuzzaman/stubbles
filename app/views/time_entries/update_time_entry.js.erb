@@ -10,3 +10,4 @@ elem.attr('hours_spent', <%= @time_entry.hours_spent %>);
 elem.attr('percent_completed', <%= @time_entry.trackable.percent_completed %>);
 <% end %>
 PopOverForm.initializePopoverFor(elem);
+<%= render :partial => "stories/partials/reload_story", locals: {story: @time_entry.trackable.story, collapse: false} %>
