@@ -116,6 +116,34 @@ class Story < ActiveRecord::Base
 
   ######################### Priority ##########################
 
+  def propagate_hours_spent
+    self.update_column(:hours_spent, self.tasks.sum(:hours_spent))
+    self.touch
+
+    milestone.propagate_hours_spent if milestone
+  end
+
+  def propagate_hours_estimated
+    self.update_column(:hours_estimated, self.tasks.sum(:hours_estimated))
+    self.touch
+
+    milestone.propagate_hours_estimated if milestone
+  end
+
+  def propagate_percent_completed
+    weighted_percent_completed = self.tasks.inject(0) do |sum, task|
+      sum + (task.hours_estimated.to_f == 0 ? 0 : (task.percent_completed.to_f / task.hours_estimated.to_f))
+    end
+
+    ap self.hours_estimated
+    ap weighted_percent_completed
+
+    self.update_column(:percent_completed, weighted_percent_completed * self.hours_estimated.to_f)
+    self.touch
+
+    #milestone.propagate_percent_completed if milestone
+  end
+
   private
   def autogenerate_priority
     lowest_priority_of_backlog = Story.lowest_priority_by_scope(project, Scope::BACKLOG)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027124307) do
+ActiveRecord::Schema.define(:version => 20131107082705) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(:version => 20131027124307) do
     t.integer  "parent_milestone_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.float    "hours_spent"
+    t.float    "hours_estimated"
+    t.integer  "percent_completed"
   end
 
   add_index "milestones", ["parent_milestone_id"], :name => "index_milestones_on_parent_milestone_id"
@@ -87,8 +90,8 @@ ActiveRecord::Schema.define(:version => 20131027124307) do
   create_table "stories", :force => true do |t|
     t.string   "title"
     t.string   "status"
-    t.string   "story_type",     :default => "backlog"
-    t.string   "scope",          :default => "backlog"
+    t.string   "story_type",        :default => "backlog"
+    t.string   "scope",             :default => "backlog"
     t.text     "description"
     t.integer  "project_id"
     t.integer  "assigned_to_id"
@@ -96,9 +99,12 @@ ActiveRecord::Schema.define(:version => 20131027124307) do
     t.date     "start_at"
     t.date     "complete_at"
     t.date     "deadline"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "milestone_id"
+    t.float    "hours_spent"
+    t.float    "hours_estimated"
+    t.integer  "percent_completed"
   end
 
   add_index "stories", ["assigned_to_id"], :name => "index_stories_on_assigned_to_id"

@@ -53,14 +53,24 @@ class Milestone < ActiveRecord::Base
       hours_spent = self.time_entries.spent_on(date).sum(:hours_spent)
       total_spent += hours_spent
       hours_remain = total_estimate - total_spent
-      burn_down_data << { date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
+      burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
 
     1.days.from_now.to_date.upto(end_on) do |date|
-      burn_down_data << { date: date, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
+      burn_down_data << {date: date, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
     burn_down_data
+  end
+
+  def propagate_hours_spent
+    self.update_column(:hours_spent, self.stories.sum(:hours_spent))
+    self.touch
+  end
+
+  def propagate_hours_estimated
+    self.update_column(:hours_estimated, self.stories.sum(:hours_estimated))
+    self.touch
   end
 end

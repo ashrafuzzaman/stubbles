@@ -5,9 +5,12 @@
             <%= story.title %>
         <% end %>
         <%= sw.actions do %>
-            <%= story_time_estimations(story) %>
-            <%= story_edit_link(story) %>
-            <%= story_delete_link(story) %>
+            <div class="pull-left"><%= progress_bar_for(story) %></div>
+            <div class="pull-right">
+              <%= story_time_estimations(story) %>
+              <%= story_edit_link(story) %>
+              <%= story_delete_link(story) %>
+            </div>
         <% end %>
     <% end %>
     <%= sw.content do %>

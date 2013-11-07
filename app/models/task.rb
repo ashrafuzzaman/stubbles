@@ -53,8 +53,21 @@ class Task < ActiveRecord::Base
     time_entry
   end
 
+  def propagate_hours_spent
+    story.propagate_hours_spent if self.hours_spent_changed?
+  end
+
+  def propagate_hours_estimated
+    story.propagate_hours_estimated if self.hours_estimated_changed?
+  end
+
+  def propagate_percent_completed
+    story.propagate_percent_completed if self.percent_completed_changed?
+  end
+
   private
   def update_story_status
     story.update_status
   end
+
 end

@@ -115,7 +115,7 @@ class StoryWidget
   end
 
   def actions(&block)
-    @template.content_tag :div, class: "pull-right" do
+    @template.content_tag :div, class: "pull-right story-actions" do
       @template.capture(&block)
     end
   end
