@@ -3,30 +3,44 @@
 <br>
 <% if milestone %>
     <% cache [:milestone_details, milestone] do %>
-        <div class="panel-group story_column" sortable-stories="true">
-          <div class="story not_started panel panel-default">
-            <div class="panel-heading story-header">
+        <div class="panel-group milestone-dashboard">
+          <div class="panel panel-default">
+            <div class="panel-heading">
               <h2 class="panel-title"><%= milestone.title %></h2>
             </div>
             <div class="panel-collapse in">
-              <div class="container">
-                <label>Start on</label> <%= milestone.start_on %>
-                <br/>
-                <label>End on</label> <%= milestone.end_on %>
-                <br/>
-                <label>Deliver on</label> <%= milestone.delivered_on %>
-                <br/>
-                <label>Duration</label> <%= milestone.duration %> days<br/>
-                <h4>Resources</h4>
-                <hr style="margin: 10px 0px 10px 0px;"/>
-                <% if milestone.try(:resources).present? %>
+              <label>Start on</label> <%= milestone.start_on %>
+              <br/>
+              <label>End on</label> <%= milestone.end_on %>
+              <br/>
+              <label>Deliver on</label> <%= milestone.delivered_on %>
+              <br/>
+              <label>Duration</label> <%= milestone.duration %> days<br/>
+              <% if milestone.try(:resources).present? %>
+                  <table class="table">
+                    <thead>
+                    <th>Resource</th>
+                    <th>Spent</th>
+                    <th>Est.</th>
+                    </thead>
+                    <tbody>
                     <% milestone.resources.each do |resource| %>
-                        <span><%= resource.name %></span>
-                <span><%= milestone.hours_assigned_to(resource) %>
-                  / <%= milestone.hours_available_for(resource) %></span>
+                        <tr>
+                          <td><%= link_to_user_with_avatar resource %></td>
+                          <td><%= milestone.hours_assigned_to(resource) %></td>
+                          <td><%= milestone.hours_available_for(resource) %></td>
+                        </tr>
                     <% end %>
-                <% end %>
-              </div>
+                    </tbody>
+                    <!--<tfoot>-->
+                    <!--<tr>-->
+                      <!--<td></td>-->
+                      <!--<td><%#= milestone.hours_assigned %></td>-->
+                      <!--<td><%#= milestone.hours_available_for(resource) %></td>-->
+                    <!--</tr>-->
+                    <!--</tfoot>-->
+                  </table>
+              <% end %>
             </div>
           </div>
         </div>

@@ -29,6 +29,14 @@ class Milestone < ActiveRecord::Base
     tasks_assigned_to(user).sum(:hours_estimated)
   end
 
+  #def hours_assigned
+  #  self.stories.sum(:hours_estimated)
+  #end
+  #
+  #def hours_spent
+  #  self.stories.sum(:hours_spent)
+  #end
+
   def hours_available_for(user)
     milestone_resource = milestone_resources.where(resource_id: user).first
     self.duration * milestone_resource.try(:available_hours_per_day).to_f

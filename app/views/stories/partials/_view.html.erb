@@ -11,11 +11,11 @@
         <% end %>
     <% end %>
     <%= sw.content do %>
-        <span><%= link_to_user_with_avatar(story.assigned_to) %></span>
-        <hr/>
+        <span class="pull-left"><%= link_to_user_with_avatar(story.assigned_to) %></span>
+        <div class="pull-right"><%= tags_for(story.tag_list) %></div>
+        <div class="clearfix"></div>
+        <hr class="clearfix"/>
         <p class="description"><%= raw story.description %></p>
-
-        <div><%= tags_for(story.tag_list) %></div>
         <div id='<%= container_id_of_tasks_for(story) %>'>
           <%= render :partial => 'tasks/partials/tasks',
                      :locals => {:story => story, :tasks => story.tasks} %>

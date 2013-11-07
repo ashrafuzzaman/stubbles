@@ -49,10 +49,8 @@ var PopOverForm = {
 }
 
 $(document).ready(function () {
-//    Form.interceptForAjax();
-    PopOverForm.initializePopover();
-
-    $(popover_form_selector).on('click', function () {
+    $(document).on('click', popover_form_selector, function () {
+        PopOverForm.initializePopoverFor($(this));
         $(this).popover('toggle');
         $("input[auto-focus]").focus();
     });

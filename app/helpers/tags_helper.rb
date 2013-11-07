@@ -16,7 +16,7 @@ module TagsHelper
 
 	def tags_for(tag_list)
 		if tag_list.size > 0
-			content_tag(:div, :class => "bootstrap-tagsinput") do
+			content_tag(:div, :class => "tags") do
 				tag_list.each do |tag|
 					concat(content_tag(:span, :class => "tag label label-info") do
 						tag
