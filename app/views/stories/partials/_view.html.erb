@@ -1,32 +1,34 @@
-<%= story_widget(story) do |sw| %>
-    <%= sw.header do %>
-        <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
-        <%= sw.collapse_link do %>
-            <%= story.title %>
+<% cache [:dashboard, story] do %>
+    <%= story_widget(story) do |sw| %>
+        <%= sw.header do %>
+            <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
+            <%= sw.collapse_link do %>
+                <%= story.title %>
+            <% end %>
+            <%= sw.actions do %>
+                <div class="pull-left"><%= progress_bar_for(story) %></div>
+                <div class="pull-right">
+                  <%= story_time_estimations(story) %>
+                  <%= story_edit_link(story) %>
+                  <%= story_delete_link(story) %>
+                </div>
+            <% end %>
         <% end %>
-        <%= sw.actions do %>
-            <div class="pull-left"><%= progress_bar_for(story) %></div>
-            <div class="pull-right">
-              <%= story_time_estimations(story) %>
-              <%= story_edit_link(story) %>
-              <%= story_delete_link(story) %>
+        <%= sw.content do %>
+            <span class="pull-left"><%= link_to_user_with_avatar(story.assigned_to) %></span>
+            <div class="pull-right"><%= tags_for(story.tag_list) %></div>
+            <div class="clearfix"></div>
+            <hr class="clearfix"/>
+            <p class="description"><%= raw story.description %></p>
+            <div id='<%= container_id_of_tasks_for(story) %>' class="tasks-wrapper">
+              <h2 class="header">Tasks</h2>
+              <%= render :partial => 'tasks/partials/tasks',
+                         :locals => {:story => story, :tasks => story.tasks} %>
+            </div>
+            <hr/>
+            <div>
+              <%= render_comments_for(story) %>
             </div>
         <% end %>
-    <% end %>
-    <%= sw.content do %>
-        <span class="pull-left"><%= link_to_user_with_avatar(story.assigned_to) %></span>
-        <div class="pull-right"><%= tags_for(story.tag_list) %></div>
-        <div class="clearfix"></div>
-        <hr class="clearfix"/>
-        <p class="description"><%= raw story.description %></p>
-        <div id='<%= container_id_of_tasks_for(story) %>' class="tasks-wrapper">
-          <h2 class="header">Tasks</h2>
-          <%= render :partial => 'tasks/partials/tasks',
-                     :locals => {:story => story, :tasks => story.tasks} %>
-        </div>
-        <hr/>
-        <div>
-          <%= render_comments_for(story) %>
-        </div>
     <% end %>
 <% end %>

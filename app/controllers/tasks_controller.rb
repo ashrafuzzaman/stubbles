@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   # GET /tasks/new.json
   def new
-    @task = @story.tasks.new
+    @task = @story.tasks.new(assigned_to_id: @story.assigned_to_id)
   end
 
   # GET /tasks/1/edit

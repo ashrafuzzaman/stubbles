@@ -62,7 +62,8 @@ class Task < ActiveRecord::Base
   end
 
   def propagate_percent_completed
-    story.propagate_percent_completed if self.percent_completed_changed?
+    # fire if only the percent_completed changed
+    story.propagate_percent_completed if self.percent_completed_changed? and !self.hours_estimated_changed?
   end
 
   private
