@@ -101,7 +101,7 @@ class StoryWidget
 
   def header(&block)
     @template.content_tag :div, class: "panel-heading story-header" do
-      @template.content_tag :h2, class: "panel-title" do
+      @template.content_tag :h2, class: "panel-title row" do
         @template.capture(&block)
       end
     end
@@ -115,7 +115,7 @@ class StoryWidget
   end
 
   def actions(&block)
-    @template.content_tag :div, class: "pull-right story-actions" do
+    @template.content_tag :div, class: "story-actions col-md-3" do
       @template.capture(&block)
     end
   end

@@ -14,7 +14,9 @@ class Milestone < ActiveRecord::Base
   has_many :resources, through: :milestone_resources
   accepts_nested_attributes_for :milestone_resources, allow_destroy: true
 
-  TYPES = ['Release', 'Sprint']
+  RELEASE_TYPE = 'Release'
+  SPRINT_TYPE  = 'Sprint'
+  TYPES = [RELEASE_TYPE, SPRINT_TYPE]
 
   def sprint?
     self.milestone_type == 'Sprint'

@@ -1,12 +1,16 @@
 <% cache [:dashboard, story] do %>
     <%= story_widget(story) do |sw| %>
         <%= sw.header do %>
-            <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
-            <%= sw.collapse_link do %>
-                <%= story.title %>
-            <% end %>
+            <div class="col-md-7">
+              <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
+              <%= sw.collapse_link do %>
+                  <%= story.title %>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <%= progress_bar_for(story) %>
+            </div>
             <%= sw.actions do %>
-                <div class="pull-left"><%= progress_bar_for(story) %></div>
                 <div class="pull-right">
                   <%= story_time_estimations(story) %>
                   <%= story_edit_link(story) %>
@@ -18,7 +22,7 @@
             <span class="pull-left"><%= link_to_user_with_avatar(story.assigned_to) %></span>
             <div class="pull-right"><%= tags_for(story.tag_list) %></div>
             <div class="clearfix"></div>
-            <hr class="clearfix"/>
+            <hr/>
             <p class="description"><%= raw story.description %></p>
             <div id='<%= container_id_of_tasks_for(story) %>' class="tasks-wrapper">
               <h2 class="header">Tasks</h2>

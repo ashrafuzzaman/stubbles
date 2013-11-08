@@ -1,13 +1,11 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :milestone do
-    title "MyString"
+    sequence(:title) { |n| "Sprint ##{n}" }
     description "MyText"
-    start_on "2013-09-17 09:37:51"
-    end_on "2013-09-17 09:37:51"
-    delivered_on "2013-09-17 09:37:51"
-    duration 1
-    type ""
+    start_on { Time.zone.now }
+    end_on   { 7.days.from_now }
+    delivered_on { 7.days.from_now }
+    duration 5
+    type Milestone::SPRINT_TYPE
   end
 end
