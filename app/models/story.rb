@@ -9,10 +9,10 @@ class Story < ActiveRecord::Base
   validates :title, :presence => true
   validates :story_type, :presence => true
 
-  belongs_to :project, :touch => true
+  belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
-  has_many :tasks, order: 'created_at ASC'
+  has_many :tasks, inverse_of: :story, order: 'created_at ASC'
   has_many :comments, :as => :commentable
 
   default_scope :order => 'priority'
@@ -134,7 +134,11 @@ class Story < ActiveRecord::Base
     weighted_percent_completed = self.tasks.inject(0) do |sum, task|
       sum + (task.percent_completed.to_f * task.hours_estimated.to_f)
     end
-    self.update_column(:percent_completed, weighted_percent_completed / [self.hours_estimated.to_f, 1].max)
+
+    #ap weighted_percent_completed
+    percent_completed = weighted_percent_completed / [self.hours_estimated.to_f, 1].max
+    #ap percent_completed
+    self.update_column(:percent_completed, percent_completed)
     self.touch
     milestone.propagate_percent_completed if milestone and propagate_to_milestone
   end

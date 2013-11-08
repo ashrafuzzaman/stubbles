@@ -7,8 +7,8 @@ class Milestone < ActiveRecord::Base
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }
   scope :without, ->(id) { where('milestones.id != ?', id) }
 
-  belongs_to :project
-  has_many :stories
+  belongs_to :project, inverse_of: :milestones
+  has_many :stories, inverse_of: :milestone
   has_many :milestone_resources
   has_many :time_entries
   has_many :resources, through: :milestone_resources
@@ -67,19 +67,22 @@ class Milestone < ActiveRecord::Base
   end
 
   def propagate_hours_spent
+    ap self.stories
     self.update_column(:hours_spent, self.stories.sum(:hours_spent))
     self.touch
   end
 
   def propagate_hours_estimated
     self.update_column(:hours_estimated, self.stories.sum(:hours_estimated))
+    propagate_percent_completed
   end
 
   def propagate_percent_completed
     weighted_percent_completed = self.stories.inject(0) do |sum, story|
       sum + (story.percent_completed.to_f * story.hours_estimated.to_f)
     end
-    self.update_column(:percent_completed, weighted_percent_completed / [self.hours_estimated.to_f, 1].max)
+    percent_completed = weighted_percent_completed / [self.hours_estimated.to_f, 1].max
+    self.update_column(:percent_completed, percent_completed)
     self.touch
   end
 

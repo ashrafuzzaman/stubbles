@@ -4,13 +4,14 @@ class Task < ActiveRecord::Base
   include TaskPermission
   include Workflow
 
-  belongs_to :story, :touch => true
+  belongs_to :story, :touch => true, inverse_of: :tasks
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :time_entries, :as => :trackable
 
   scope :assigned_to, lambda { |user| where(:assigned_to_id => user.id) }
 
   after_save :update_story_status, :propagate_values_to_story
+  after_destroy :update_story_status, :propagate_values_to_story
 
   workflow_column :status
   workflow do
