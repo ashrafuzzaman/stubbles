@@ -9,17 +9,21 @@
               <h2 class="panel-title"><%= milestone.title %></h2>
             </div>
             <div class="panel-collapse in">
-              <label>Start on</label> <%= milestone.start_on %>
-              <br/>
-              <label>End on</label> <%= milestone.end_on %>
-              <br/>
-              <label>Deliver on</label> <%= milestone.delivered_on %>
-              <br/>
-              <label>Duration</label> <%= milestone.duration %> days<br/>
+              <dl class="dl-horizontal">
+                <dt>Start on</dt>
+                <dd><%= milestone.start_on %></dd>
+                <dt>End on</dt>
+                <dd><%= milestone.end_on %></dd>
+                <dt>Deliver on</dt>
+                <dd><%= milestone.delivered_on %></dd>
+                <dt>Duration</dt>
+                <dd><%= milestone.duration %> days</dd>
+              </dl>
+              <%= progress_bar_for(milestone) %>
               <% if milestone.try(:resources).present? %>
                   <table class="table">
                     <thead>
-                    <th>Resource</th>
+                    <th></th>
                     <th>Spent</th>
                     <th>Est.</th>
                     </thead>
@@ -34,9 +38,9 @@
                     </tbody>
                     <!--<tfoot>-->
                     <!--<tr>-->
-                      <!--<td></td>-->
-                      <!--<td><%#= milestone.hours_assigned %></td>-->
-                      <!--<td><%#= milestone.hours_available_for(resource) %></td>-->
+                    <!--<td></td>-->
+                    <!--<td><%#= milestone.hours_assigned %></td>-->
+                    <!--<td><%#= milestone.hours_available_for(resource) %></td>-->
                     <!--</tr>-->
                     <!--</tfoot>-->
                   </table>
