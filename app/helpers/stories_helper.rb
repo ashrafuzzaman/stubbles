@@ -115,7 +115,7 @@ class StoryWidget
   end
 
   def actions(&block)
-    @template.content_tag :div, class: "story-actions col-md-3" do
+    @template.content_tag :div, class: "story-actions col-md-3 text-right" do
       @template.capture(&block)
     end
   end

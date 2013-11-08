@@ -1,26 +1,22 @@
 <div id='<%= container_id_of(task) %>' class="task task-<%= task.status %>">
   <div class="task_header row">
-    <span class="col-md-9"><%= task.title %></span>
+    <span class="col-md-8"><%= task.title %></span>
 
-    <div class="col-md-3">
-      <div class="pull-right">
-        <%= action_links_for_task(task) %>
-        <%= link_to_time_entry_popup(task) %>
-        <%= task_edit_link(task) %>
-        <%= task_delete_link(task) %>
-      </div>
+    <div class="col-md-4 text-right">
+      <%= action_links_for_task(task) %>
+      <%= link_to_time_entry_popup(task) %>
+      <%= task_edit_link(task) %>
+      <%= task_delete_link(task) %>
     </div>
   </div>
   <div class="task_container row">
     <span class="col-md-8"><%= link_to_user_with_avatar(task.assigned_to) %></span>
 
-    <div class="col-md-2"><%= progress_bar_for(task) %></div>
-    <div class="col-md-2">
-      <div class="pull-right">
-        <%= render :partial => 'shared/estimated_and_spent_hours',
-                   :locals => {:estimated => task.hours_estimated,
-                               :spent => task.hours_spent} %>
-      </div>
+    <div class="col-md-4 text-right">
+      <%= progress_bar_for(task) %>
+      <%= render :partial => 'shared/estimated_and_spent_hours',
+                 :locals => {:estimated => task.hours_estimated,
+                             :spent => task.hours_spent} %>
     </div>
   </div>
 </div>
