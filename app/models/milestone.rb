@@ -59,7 +59,7 @@ class Milestone < ActiveRecord::Base
       estimated_hours_remain -= estimated_hours_done_each_day
     end
 
-    1.days.from_now.to_date.upto(end_on) do |date|
+    end_date.upto(end_on) do |date|
       burn_down_data << {date: date, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
@@ -77,12 +77,17 @@ class Milestone < ActiveRecord::Base
   end
 
   def propagate_percent_completed
-    weighted_percent_completed = self.stories.inject(0) do |sum, story|
+    weighted_percent_completed = self.stories(true).inject(0) do |sum, story|
       sum + (story.percent_completed.to_f * story.hours_estimated.to_f)
     end
     percent_completed = weighted_percent_completed / [self.hours_estimated.to_f, 1].max
     self.update_column(:percent_completed, percent_completed)
     self.touch
+  end
+
+  def update_hour_calculations
+    propagate_hours_spent
+    propagate_hours_estimated
   end
 
 end

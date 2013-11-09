@@ -26,7 +26,7 @@ describe Task do
 
       before do
         FactoryGirl.create(:task, story: story, hours_estimated: 10, hours_spent: 2, percent_completed: 100)
-        FactoryGirl.create(:task, story: story.reload, hours_estimated: 20, hours_spent: 4, percent_completed: 50)
+        FactoryGirl.create(:task, story: story, hours_estimated: 20, hours_spent: 4, percent_completed: 50)
       end
 
       it 'should propagate to story and mile stone' do

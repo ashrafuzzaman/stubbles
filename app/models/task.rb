@@ -46,11 +46,11 @@ class Task < ActiveRecord::Base
   end
 
   def enter_time(user, date, hours_spent, percent_completed)
-    time_entry = self.time_entries.spent_on(date).by(user).first_or_create
+    time_entry = self.time_entries.spent_on(date).by(user).first_or_initialize
     time_entry.hours_spent = hours_spent
+    time_entry.percent_completed = percent_completed
     time_entry.milestone_id = self.story.milestone_id
-    self.update_attribute :percent_completed, percent_completed if percent_completed
-    time_entry.save
+    time_entry.save!
     time_entry
   end
 
@@ -68,6 +68,8 @@ class Task < ActiveRecord::Base
   end
 
   private
+
+  #not yet implemented
   def update_story_status
     story.update_status
   end

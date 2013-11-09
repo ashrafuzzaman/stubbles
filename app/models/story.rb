@@ -24,8 +24,8 @@ class Story < ActiveRecord::Base
                                                                         "OR stories.assigned_to_id = ?", user_id, user_id]) }
   scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
-  before_create :autogenerate_priority
-  before_create :assign_default_scope
+  before_create :auto_generate_priority, :assign_default_scope
+  after_save :update_milestone
 
   workflow_column :status
   workflow do
@@ -131,7 +131,7 @@ class Story < ActiveRecord::Base
   end
 
   def propagate_percent_completed(propagate_to_milestone = true)
-    weighted_percent_completed = self.tasks.inject(0) do |sum, task|
+    weighted_percent_completed = self.tasks(true).inject(0) do |sum, task|
       sum + (task.percent_completed.to_f * task.hours_estimated.to_f)
     end
 
@@ -142,7 +142,7 @@ class Story < ActiveRecord::Base
   end
 
   private
-  def autogenerate_priority
+  def auto_generate_priority
     lowest_priority_of_backlog = Story.lowest_priority_by_scope(project, Scope::BACKLOG)
     highest_priority_of_current = Story.highest_priority_by_scope(project, Scope::CURRENT)
     min_priority_in_scope = lowest_priority_of_backlog || (highest_priority_of_current || 0 + 1)
@@ -152,6 +152,13 @@ class Story < ActiveRecord::Base
 
   def assign_default_scope
     self.scope = Scope::BACKLOG
+  end
+
+  def update_milestone
+    if self.milestone_id_changed?
+      self.milestone.update_hour_calculations if self.milestone
+      Milestone.find(self.milestone_id_was).update_hour_calculations if self.milestone_id_was.to_i > 0
+    end
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107082705) do
+ActiveRecord::Schema.define(:version => 20131109083846) do
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -147,9 +147,11 @@ ActiveRecord::Schema.define(:version => 20131107082705) do
     t.integer  "user_id"
     t.integer  "trackable_id"
     t.string   "trackable_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "milestone_id"
+    t.integer  "percent_completed"
+    t.integer  "percent_completed_on_date"
   end
 
   create_table "users", :force => true do |t|
