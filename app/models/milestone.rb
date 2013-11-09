@@ -67,7 +67,6 @@ class Milestone < ActiveRecord::Base
   end
 
   def propagate_hours_spent
-    ap self.stories
     self.update_column(:hours_spent, self.stories.sum(:hours_spent))
     self.touch
   end
