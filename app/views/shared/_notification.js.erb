@@ -1,0 +1,15 @@
+<% if flash[:error].present? %>
+    <% if flash[:error].kind_of?(Array) %>
+        Message.errorMessage('<ul><%= raw (flash[:error].collect { |msg| "<li>#{msg}</li>"}).join('') %></ul>');
+    <% else %>
+        Message.errorMessage('<%= raw flash[:error] %>');
+    <% end %>
+<% end %>
+
+<% if flash[:notice].present? %>
+    <% if flash[:notice].kind_of?(Array) %>
+        Message.successMessage('<ul><%= raw (flash[:notice].collect { |msg| "<li>#{msg}</li>"}).join('') %></ul>');
+    <% else %>
+        Message.successMessage('<%= raw flash[:notice] %>');
+    <% end %>
+<% end %>

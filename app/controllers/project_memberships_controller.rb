@@ -15,14 +15,14 @@ class ProjectMembershipsController < ApplicationController
 
   def create
     @project = current_user.projects.find(params[:project_id])
-    @project_membership = @project.memberships.new({:user => @user}.merge(params[:project_membership]))
+    @project_membership = @project.memberships.new({:user_id => @user.try(:id)}.merge(params[:project_membership]))
 
     respond_to do |format|
       if @project_membership.save
         flash[:notice] = 'User is successfully added.'
         format.js
       else
-        flash[:error] = @project_membership.errors
+        flash[:error] = @project_membership.errors.full_messages
         format.js
       end
     end
