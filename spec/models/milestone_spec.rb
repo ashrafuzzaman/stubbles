@@ -68,4 +68,26 @@ describe Task do
       end
     end
   end
+
+  describe '#burn_down_chart_data', focus: true do
+    context 'switching from sprints' do
+      before do
+        @milestone = FactoryGirl.create(:milestone, start_on: Date.current, end_on: 1.week.from_now.to_date)
+        story = FactoryGirl.create(:story, milestone: @milestone)
+        @t1 = FactoryGirl.create(:task, story: story, hours_estimated: 10)
+        @t2 = FactoryGirl.create(:task, story: story, hours_estimated: 20)
+
+        start = Date.current
+        @t1.enter_time(@t1.assigned_to, start, 6, 50)
+        @t1.enter_time(@t1.assigned_to, start + 1.day, 6, 50)
+
+        @t2.enter_time(@t2.assigned_to, start, 5, 20)
+        @t2.enter_time(@t2.assigned_to, start + 1.day, 6, 50)
+      end
+
+      it 'generates burn down chart' do
+        ap @milestone.burn_down_chart_data
+      end
+    end
+  end
 end

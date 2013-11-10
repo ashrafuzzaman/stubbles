@@ -15,7 +15,7 @@ class Milestone < ActiveRecord::Base
   accepts_nested_attributes_for :milestone_resources, allow_destroy: true
 
   RELEASE_TYPE = 'Release'
-  SPRINT_TYPE  = 'Sprint'
+  SPRINT_TYPE = 'Sprint'
   TYPES = [RELEASE_TYPE, SPRINT_TYPE]
 
   def sprint?
@@ -41,7 +41,7 @@ class Milestone < ActiveRecord::Base
 
   def hours_available_for(user)
     milestone_resource = milestone_resources.where(resource_id: user).first
-    self.duration * milestone_resource.try(:available_hours_per_day).to_f
+    self.duration.to_f * milestone_resource.try(:available_hours_per_day).to_f
   end
 
   def burn_down_chart_data
@@ -52,7 +52,12 @@ class Milestone < ActiveRecord::Base
     estimated_hours_remain = total_estimate
     end_date = [self.end_on, Date.current].min
     start_on.upto(end_date) do |date|
-      hours_spent = self.time_entries.spent_on(date).sum(:hours_spent)
+      hours_spent = 0
+      self.time_entries.spent_on(date).order('created_at DESC').each do |time_entry|
+        hours_est = time_entry.trackable.hours_estimated
+        hours_spent += (hours_est * time_entry.percent_completed_on_date.to_f)/100
+      end
+      #hours_spent = self.time_entries.spent_on(date).sum(:hours_spent)
       total_spent += hours_spent
       hours_remain = total_estimate - total_spent
       burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}

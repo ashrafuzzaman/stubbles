@@ -1,5 +1,5 @@
 class ProjectMembership < ActiveRecord::Base
-  attr_accessible :user, :role
+  attr_accessible :user_id, :role
 
   belongs_to :project
   belongs_to :user

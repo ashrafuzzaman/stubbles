@@ -10,6 +10,8 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :memberships, :source => :user
   belongs_to :creator, :class_name => 'User', :readonly => :true
 
+  validates :creator_id, presence: true
+
   after_create :add_creator_as_project_admin
 
   def collaborators
@@ -36,7 +38,7 @@ class Project < ActiveRecord::Base
   private
 
   def add_creator_as_project_admin
-    self.memberships.create(:user => creator, :role => Role::ADMIN)
+    self.memberships.create(:user_id => creator.id, :role => Role::ADMIN)
   end
 
 end
