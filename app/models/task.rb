@@ -35,6 +35,10 @@ class Task < ActiveRecord::Base
       event :close, :transitions_to => :closed
     end
     state :closed
+
+    on_transition do |from, to, triggering_event, *event_args|
+      self.touch
+    end
   end
 
   def total_hours_spent

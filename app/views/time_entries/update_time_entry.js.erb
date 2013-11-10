@@ -11,3 +11,4 @@ elem.attr('percent_completed', <%= @time_entry.trackable.percent_completed %>);
 <% end %>
 PopOverForm.initializePopoverFor(elem);
 <%= render :partial => "stories/partials/reload_story", locals: {story: @time_entry.trackable.story, collapse: false} %>
+<%= render :partial => 'milestones/reload_burndown', :locals => { milestone: @time_entry.trackable.story.milestone } %>

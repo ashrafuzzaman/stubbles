@@ -1,0 +1,3 @@
+<% if milestone %>
+$('#burndown_chart_wrapper').replaceWith("<%= escape_javascript(render :partial => 'milestones/burndown', :locals => {:milestone => milestone}) %>");
+<% end %>

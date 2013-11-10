@@ -1,39 +1,41 @@
-<% if milestone %>
-    <% cache [:burndown_chart, milestone] do %>
-        <% data = milestone.burn_down_chart_data
-           labels = data.collect { |d| d[:date] }
-           hours_remain = data.collect { |d| d[:hours_remain] }
-           estimated_hours_remain = data.collect { |d| d[:estimated_hours_remain] }
-        %>
-        <br>
-        <br>
+<div id="burndown_chart_wrapper">
+  <% if milestone %>
+      <% cache [:burndown_chart, milestone] do %>
+          <% data = milestone.burn_down_chart_data
+             labels = data.collect { |d| d[:date] }
+             hours_remain = data.collect { |d| d[:hours_remain] }
+             estimated_hours_remain = data.collect { |d| d[:estimated_hours_remain] }
+          %>
+          <br>
+          <br>
 
-        <canvas id="burndown_chart" height="300" width="900"></canvas>
+          <canvas id="burndown_chart" height="300" width="900"></canvas>
 
-        <script>
-            var lineChartData = {
-                labels: <%= raw labels.to_json %>,
-                datasets: [
-                    {
-                        fillColor: "rgba(220,220,220,0.5)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        data: <%= raw estimated_hours_remain.to_json %>
-                    },
-                    {
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        data: <%= raw hours_remain.to_json %>
-                    }
-                ]
+          <script>
+              var lineChartData = {
+                  labels: <%= raw labels.to_json %>,
+                  datasets: [
+                      {
+                          fillColor: "rgba(220,220,220,0.5)",
+                          strokeColor: "rgba(220,220,220,1)",
+                          pointColor: "rgba(220,220,220,1)",
+                          pointStrokeColor: "#fff",
+                          data: <%= raw estimated_hours_remain.to_json %>
+                      },
+                      {
+                          fillColor: "rgba(151,187,205,0.5)",
+                          strokeColor: "rgba(151,187,205,1)",
+                          pointColor: "rgba(151,187,205,1)",
+                          pointStrokeColor: "#fff",
+                          data: <%= raw hours_remain.to_json %>
+                      }
+                  ]
 
-            }
+              }
 
-            var myLine = new Chart(document.getElementById("burndown_chart").getContext("2d")).Line(lineChartData, {bezierCurve: false});
+              var myLine = new Chart(document.getElementById("burndown_chart").getContext("2d")).Line(lineChartData, {bezierCurve: false});
 
-        </script>
-    <% end %>
-<% end %>
+          </script>
+      <% end %>
+  <% end %>
+</div>
