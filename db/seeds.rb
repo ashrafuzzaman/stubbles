@@ -14,8 +14,18 @@ sprint = stubbles.milestones.create(title: 'Sprint #1', start_on: Date.current,
 sprint.milestone_resources.create(available_hours_per_day: 6, milestone_id: sprint.id, resource_id: jitu.id)
 sprint.milestone_resources.create(available_hours_per_day: 6, milestone_id: sprint.id, resource_id: jhalak.id)
 
-stubbles.stories.create(:title => 'Story 1', :assigned_to => jitu, milestone_id: sprint.id)
-stubbles.stories.create(:title => 'Story 2', :assigned_to => jitu, milestone_id: sprint.id)
-stubbles.stories.create(:title => 'Story 3', :assigned_to => jhalak, milestone_id: sprint.id)
-stubbles.stories.create(:title => 'Story 4', :assigned_to => jhalak)
+s1 = stubbles.stories.create(:title => 'Story 1', :assigned_to => jitu, milestone_id: sprint.id)
+s1.tasks.create(title: "Task 1", hours_estimated: 10, assigned_to_id: jitu.id)
+s1.tasks.create(title: "Task 2", hours_estimated: 20, assigned_to_id: jitu.id)
 
+s2 = stubbles.stories.create(:title => 'Story 2', :assigned_to => jitu, milestone_id: sprint.id)
+s2.tasks.create(title: "Task 3", hours_estimated: 5, assigned_to_id: jitu.id)
+s2.tasks.create(title: "Task 4", hours_estimated: 10, assigned_to_id: jitu.id)
+
+s3 = stubbles.stories.create(:title => 'Story 3', :assigned_to => jhalak, milestone_id: sprint.id)
+s3.tasks.create(title: "Task 5", hours_estimated: 5, assigned_to_id: jhalak.id)
+s3.tasks.create(title: "Task 6", hours_estimated: 10, assigned_to_id: jhalak.id)
+
+s4 = stubbles.stories.create(:title => 'Story 4', :assigned_to => jhalak)
+s4.tasks.create(title: "Task 7", hours_estimated: 10, assigned_to_id: jhalak.id)
+s4.tasks.create(title: "Task 8", hours_estimated: 12, assigned_to_id: jhalak.id)

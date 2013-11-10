@@ -46,26 +46,30 @@ class Milestone < ActiveRecord::Base
 
   def burn_down_chart_data
     total_estimate = Task.where(story_id: self.story_ids).sum(:hours_estimated)
-    estimated_hours_done_each_day = total_estimate / [(end_on - start_on).to_i, 1].max
+    estimated_hours_done_each_day = total_estimate / [(end_on - start_on).to_i + 1, 1].max
     burn_down_data = []
     total_spent = 0
-    estimated_hours_remain = total_estimate
+    estimated_hours_remain = total_estimate.to_i
     end_date = [self.end_on, Date.current].min
+
+    burn_down_data << {date: (start_on - 1.day), hours_remain: estimated_hours_remain, estimated_hours_remain: estimated_hours_remain}
+    estimated_hours_remain -= estimated_hours_done_each_day
+
     start_on.upto(end_date) do |date|
       hours_spent = 0
       self.time_entries.spent_on(date).order('created_at DESC').each do |time_entry|
         hours_est = time_entry.trackable.hours_estimated
         hours_spent += (hours_est * time_entry.percent_completed_on_date.to_f)/100
       end
-      #hours_spent = self.time_entries.spent_on(date).sum(:hours_spent)
+
       total_spent += hours_spent
       hours_remain = total_estimate - total_spent
-      burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
+      burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
 
     end_date.upto(end_on) do |date|
-      burn_down_data << {date: date, estimated_hours_remain: [estimated_hours_remain.to_i, 0].max}
+      burn_down_data << {date: date, estimated_hours_remain: [estimated_hours_remain, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
     burn_down_data
@@ -93,6 +97,19 @@ class Milestone < ActiveRecord::Base
   def update_hour_calculations
     propagate_hours_spent
     propagate_hours_estimated
+  end
+
+  def assignment_status_for(resource)
+    available_hr = hours_available_for(resource).to_i - hours_assigned_to(resource).to_i
+    if available_hr > 0
+      :available
+    elsif available_hr < 0
+      :not_available
+    elsif available_hr < -10
+      :busy
+    else
+      :filled
+    end
   end
 
 end

@@ -24,25 +24,18 @@
                   <table class="table">
                     <thead>
                     <th></th>
-                    <th>Spent</th>
-                    <th>Est.</th>
+                    <th>Asgn.</th>
+                    <th>Avl.</th>
                     </thead>
                     <tbody>
                     <% milestone.resources.each do |resource| %>
-                        <tr>
+                        <tr class="<%= milestone_assignment_status_class(milestone, resource) %>">
                           <td><%= link_to_user_with_avatar resource %></td>
                           <td><%= milestone.hours_assigned_to(resource) %></td>
                           <td><%= milestone.hours_available_for(resource) %></td>
                         </tr>
                     <% end %>
                     </tbody>
-                    <!--<tfoot>-->
-                    <!--<tr>-->
-                    <!--<td></td>-->
-                    <!--<td><%#= milestone.hours_assigned %></td>-->
-                    <!--<td><%#= milestone.hours_available_for(resource) %></td>-->
-                    <!--</tr>-->
-                    <!--</tfoot>-->
                   </table>
               <% end %>
             </div>

@@ -15,4 +15,17 @@ module MilestonesHelper
                                                       :selected => params[:milestone_id]),
                {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => params[:milestone_id]})
   end
+
+  def milestone_assignment_status_class(milestone, resource)
+    case milestone.assignment_status_for(resource)
+      when :available then
+        'success'
+      when :filled
+        'active'
+      when :not_available
+        'warning'
+      when :busy then
+        'danger'
+    end
+  end
 end
