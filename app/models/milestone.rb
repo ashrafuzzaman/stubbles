@@ -55,6 +55,8 @@ class Milestone < ActiveRecord::Base
     burn_down_data << {date: (start_on - 1.day), hours_remain: estimated_hours_remain, estimated_hours_remain: estimated_hours_remain}
     estimated_hours_remain -= estimated_hours_done_each_day
 
+    hours_remain = 0
+
     start_on.upto(end_date) do |date|
       hours_spent = 0
       self.time_entries.spent_on(date).order('created_at DESC').each do |time_entry|
@@ -69,7 +71,7 @@ class Milestone < ActiveRecord::Base
     end
 
     end_date.upto(end_on) do |date|
-      burn_down_data << {date: date, estimated_hours_remain: [estimated_hours_remain, 0].max}
+      burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end
     burn_down_data
@@ -103,10 +105,10 @@ class Milestone < ActiveRecord::Base
     available_hr = hours_available_for(resource).to_i - hours_assigned_to(resource).to_i
     if available_hr > 0
       :available
-    elsif available_hr < 0
-      :not_available
     elsif available_hr < -10
       :busy
+    elsif available_hr < 0
+      :not_available
     else
       :filled
     end

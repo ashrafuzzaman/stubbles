@@ -32,7 +32,7 @@
 
             }
 
-            var myLine = new Chart(document.getElementById("burndown_chart").getContext("2d")).Line(lineChartData);
+            var myLine = new Chart(document.getElementById("burndown_chart").getContext("2d")).Line(lineChartData, {bezierCurve: false});
 
         </script>
     <% end %>
