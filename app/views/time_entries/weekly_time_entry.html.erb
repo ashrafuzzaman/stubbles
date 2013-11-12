@@ -8,7 +8,7 @@
     <%= prev_week_link %>
     <%= next_week_link %>
   </div>
-  <table class="table table-hover table-bordered time_entry">
+  <table id="time_entry_table" class="table table-bordered">
     <thead>
     <tr>
       <th></th>
@@ -34,7 +34,7 @@
               <td class="task-title"><%= task.title %></td>
               <% @week.beginning_of_week.upto(@week.end_of_week) do |day| %>
                   <td>
-                    <%= time_entry_slot_for(task, day) %>
+                    <%= link_to_time_entry_popup(task, day) %>
                   </td>
               <% end %>
             </tr>
@@ -44,4 +44,5 @@
   </table>
 </div>
 
+<%= render :partial => 'time_entries/time_entry_popup_template', :locals => {project: @project} %>
 <%= javascript_include_tag "time_entry" %>

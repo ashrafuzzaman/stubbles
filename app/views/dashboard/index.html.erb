@@ -35,30 +35,6 @@
   </div>
 </div>
 
-<script id="time_entry_popup_template" type="html/template">
-  <form data-remote="true" accept-charset="UTF-8" action="<%= update_time_entry_path(@project) %>"
-        class="form-inline" method="post">
-    <input name="utf8" type="hidden" value="✓">
-    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-    <input name="date" type="hidden" value="{{date}}">
-    <input name="project_id" type="hidden" value="{{project_id}}">
-    <input name="task_id" type="hidden" value="{{task_id}}">
-
-    <div class="input-group">
-      <input name="hours_spent" type="text" value="{{hours_spent}}" class="form-control">
-      <span class="input-group-addon">Hours</span>
-    </div>
-    <br>
-
-    <div class="input-group">
-      <input name="percent_completed" type="text" value="{{percent_completed}}" class="form-control">
-      <span class="input-group-addon">%</span>
-    </div>
-    <br>
-    <br>
-    <input class="btn btn-primary" name="commit" type="submit" value="Submit"/>
-    <a close-pophover href="javascript:void(0)" class="btn btn-danger">Cancel</a>
-  </form>
-</script>
+<%= render :partial => 'time_entries/time_entry_popup_template', :locals => {project: @project} %>
 
 <%= javascript_include_tag "dashboard" %>

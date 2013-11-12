@@ -10,17 +10,20 @@ module TimeEntryHelper
     end
   end
 
-  def link_to_time_entry_popup(task)
-    link_to('', 'javascript:void(0)', :class => 'glyphicon glyphicon-calendar',
-            :'popup-form' => true,
-            :'popup-template' => 'time_entry_popup_template',
-            :"popup-title" => 'Enter time for today',
-            :'date' => Date.current,
-            :'project_id' => task.story.project_id,
-            :'task_id' => task.id,
-            :'hours_spent' => task.total_hours_spent_on(Date.current),
-            :'percent_completed' => task.percent_completed
-    ) if task.permitted_to_enter_time_by?(current_user)
+  def link_to_time_entry_popup(task, date=Date.current)
+    if task.permitted_to_enter_time_by?(current_user)
+      time_entry = task.time_entry_for(current_user, date)
+      link_to('', 'javascript:void(0)', :class => 'glyphicon glyphicon-calendar',
+              :'popup-form' => true,
+              :'popup-template' => 'time_entry_popup_template',
+              :"popup-title" => 'Enter time for today',
+              :'date' => date,
+              :'project_id' => task.story.project_id,
+              :'task_id' => task.id,
+              :'hours_spent' => time_entry.try(:hours_spent),
+              :'percent_completed' => time_entry.try(:percent_completed)
+      )
+    end
   end
 
   def next_week_link
