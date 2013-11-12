@@ -4,9 +4,7 @@ class TimeEntriesController < ApplicationController
 
   def weekly_time_entry
     @week = Week.new params[:week]
-    @user = params[:user_id].present? ? User.find(params[:user_id]) : current_user
-    @stories = @project.stories.yet_to_be_accepted.assigned_to_task_for(@user)
-    @users = @project.collaborators
+    @stories = @project.stories.yet_to_be_accepted.assigned_to_task_for(current_user)
   end
 
   def update_time_entry
@@ -17,7 +15,11 @@ class TimeEntriesController < ApplicationController
   private
 
   def load_project
-    @project = current_user.projects.find(params[:project_id])
+    @project ||= current_user.projects.find(params[:project_id])
   end
 
+  def fetch_milestone(project)
+    milestone = Milestone.find params[:milestone_id] rescue nil
+    milestone || (params.has_key?(:milestone_id) ? nil : project.current_sprint)
+  end
 end

@@ -8,7 +8,8 @@ class Task < ActiveRecord::Base
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :time_entries, :as => :trackable
 
-  scope :assigned_to, lambda { |user| where(:assigned_to_id => user.id) }
+  scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
+  scope :in_progress, lambda { where(status: 'started') }
 
   after_save :update_story_status, :propagate_values_to_story
   after_destroy :update_story_status, :propagate_values_to_story

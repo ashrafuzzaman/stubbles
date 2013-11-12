@@ -1,7 +1,4 @@
 <h2>Time entry for <%= @project.name %></h2>
-<div>
-  <%= time_entry_filter(@project) %>
-</div>
 
 <div>
   <div>
@@ -27,21 +24,24 @@
     </thead>
     <tbody>
     <% @stories.each do |story| %>
-        <tr>
-          <th><%= story.title %></th>
-          <% 7.times do %>
-              <th></th>
-          <% end %>
-        </tr>
-        <% story.tasks.assigned_to(@user).each do |task| %>
+        <% tasks = story.tasks.assigned_to(current_user).in_progress %>
+        <% if tasks.count > 0 %>
             <tr>
-              <td class="task-title"><%= task.title %></td>
-              <% @week.beginning_of_week.upto(@week.end_of_week) do |day| %>
-                  <td time-entry-block-for-task-<%= task.id %>="<%= day.to_s %>">
-                    <%= link_to_time_entry_popup(task, day, true) %>
-                  </td>
+              <th><%= story.title %></th>
+              <% 7.times do %>
+                  <th></th>
               <% end %>
             </tr>
+            <% tasks.each do |task| %>
+                <tr>
+                  <td class="task-title"><%= task.title %></td>
+                  <% @week.beginning_of_week.upto(@week.end_of_week) do |day| %>
+                      <td time-entry-block-for-task-<%= task.id %>="<%= day.to_s %>">
+                        <%= link_to_time_entry_popup(task, day, true) %>
+                      </td>
+                  <% end %>
+                </tr>
+            <% end %>
         <% end %>
     <% end %>
     </tbody>

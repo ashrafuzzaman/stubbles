@@ -42,8 +42,4 @@ module TimeEntryHelper
             :class => "btn btn-primary pull-left"
   end
 
-  def time_entry_filter(project)
-    user_filter('user_id', [:week]) if current_user.admin_for?(project)
-  end
-
 end
