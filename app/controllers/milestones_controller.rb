@@ -89,6 +89,7 @@ class MilestonesController < ApplicationController
   end
 
   def move_stories
+    @from_milestone = Milestone.find(params[:from_milestone_id]) rescue nil
     @stories = @project.move_stories_to_milestone(params[:milestone_id], params[:story_ids])
     respond_to do |format|
       format.js

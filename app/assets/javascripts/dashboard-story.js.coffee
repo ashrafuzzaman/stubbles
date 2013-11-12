@@ -21,10 +21,10 @@ class DashboardStoryMove
     $('input[story-move-chk]:checked').each ->
       storyIds.push($(this).val());
 
-    console.log(milestoneId, storyIds);
+    fromMilestoneId = $("#milestone_id").val()
     $.ajax "/projects/#{Dashboard.PROJECT_ID}/milestones/move_stories",
       type: "PUT"
-      data: { milestone_id: milestoneId, story_ids: storyIds }
+      data: { milestone_id: milestoneId, from_milestone_id: fromMilestoneId, story_ids: storyIds }
       dataType: 'script'
       success: ->
         $("select#move_milestone_id").val($("select#move_milestone_id").data('selected'));

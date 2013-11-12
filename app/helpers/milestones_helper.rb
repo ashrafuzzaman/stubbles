@@ -11,9 +11,10 @@ module MilestonesHelper
   end
 
   def move_milestone_list(project)
+    milestone_id = @milestone.try(:id) || params[:milestone_id]
     select_tag(:move_milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
-                                                      :selected => params[:milestone_id]),
-               {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => params[:milestone_id]})
+                                                      :selected => milestone_id),
+               {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => milestone_id})
   end
 
   def milestone_assignment_status_class(milestone, resource)

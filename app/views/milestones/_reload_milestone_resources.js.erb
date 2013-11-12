@@ -1,0 +1,4 @@
+$('#dashboard_resources').html('<%= escape_javascript(render :partial => 'milestones/dashboard', :locals => { milestone: milestone }) %>');
+<% if milestone %>
+<%= render partial: 'milestones/reload_burndown', :locals => { milestone: milestone } %>
+<% end %>
