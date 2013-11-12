@@ -34,11 +34,15 @@ module ApplicationHelper
     image_tag(user.gravatar_url(size), :size => "#{size}x#{size}", :alt => "Avatar")
   end
 
-  def progress_bar_for(model)
+  def progress_bar_with_percent(percent)
     content_tag(:div, class: 'progress') do
       content_tag(:div, '', class: 'progress-bar', role: 'progressbar',
-                         :'aria-valuenow' => "60", :'aria-valuemin' => "0",
-                         :'aria-valuemax' => "100", style: "width: #{model.percent_completed}%;")
+                  :'aria-valuenow' => "60", :'aria-valuemin' => "0",
+                  :'aria-valuemax' => "100", style: "width: #{percent}%;")
     end
+  end
+
+  def progress_bar_for(model)
+    progress_bar_with_percent(model.percent_completed)
   end
 end
