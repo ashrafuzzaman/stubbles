@@ -7,6 +7,10 @@ class BrowsingTest < ActionDispatch::PerformanceTest
   #                          :output => 'tmp/performance', :formats => [:flat] }
 
   def test_homepage
-    get '/'
+    milestone = FactoryGirl.create(:milestone)
+    story = FactoryGirl.create(:story, milestone: milestone, number_of_tasks: 5)
+    ap story.tasks
+
+    get "/projects/#{milestone.id}/dashboard"
   end
 end

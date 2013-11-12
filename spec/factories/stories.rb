@@ -5,5 +5,13 @@ FactoryGirl.define do
     project
     association :assigned_to, factory: :user
     start_at { Time.zone.now }
+
+    ignore do
+      number_of_tasks 0
+    end
+
+    after(:build) do |story, evaluator|
+      story.tasks = FactoryGirl.build_list(:task, evaluator.number_of_tasks)
+    end
   end
 end
