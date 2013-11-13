@@ -60,5 +60,13 @@
   <%= yield %>
 </div>
 
+<script type="text/javascript">
+    <% if current_user %>
+    TaskPermission.apply(<%= current_user.try(:id) %>);
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        TaskPermission.apply(<%= current_user.try(:id) %>);
+    });
+    <% end %>
+</script>
 </body>
 </html>

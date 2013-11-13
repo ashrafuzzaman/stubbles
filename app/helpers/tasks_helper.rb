@@ -1,6 +1,6 @@
 module TasksHelper
   def action_links_for_task(task)
-    content_tag :div, class: 'task-actions' do
+    content_tag :div, class: 'status-button' do
       if task.current_state.events.size > 0
         form_tag(update_status_story_task_path(task.story, task),
                  :method => :put, :remote => true) do
@@ -18,15 +18,15 @@ module TasksHelper
 
   def task_edit_link(task)
     link_to('', edit_story_task_path(task.story, task),
-            :remote => true, :class => 'glyphicon glyphicon-edit',
-            :'data-disable-with' => "Loading...") if task.permitted_to_edit_by?(current_user)
+            :remote => true, :class => 'glyphicon glyphicon-edit edit',
+            :'data-disable-with' => "Loading...")
   end
 
   def task_delete_link(task)
     link_to('', story_task_path(task.story, task),
-            :remote => true, :class => 'glyphicon glyphicon-trash',
+            :remote => true, :class => 'glyphicon glyphicon-trash delete',
             :confirm => 'Are you sure?', :method => :delete,
-            :'data-disable-with' => "Loading...") if task.permitted_to_delete_by?(current_user)
+            :'data-disable-with' => "Loading...")
   end
 
   def hours_estimated_tag(form, task)

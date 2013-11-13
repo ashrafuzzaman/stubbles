@@ -16,18 +16,16 @@ module TimeEntryHelper
       concat content_tag :span, time_entry.try(:hours_spent) || 0, class: 'hours_spent'
       concat progress_bar_with_percent(time_entry.try(:percent_completed).to_i)
     end
-    if task.permitted_to_enter_time_by?(current_user)
-      link_to('', 'javascript:void(0)', :class => 'glyphicon glyphicon-calendar',
-              :'popup-form' => true,
-              :'popup-template' => 'time_entry_popup_template',
-              :"popup-title" => 'Enter time for today',
-              :'date' => date,
-              :'project_id' => task.story.project_id,
-              :'task_id' => task.id,
-              :'hours_spent' => time_entry.try(:hours_spent),
-              :'percent_completed' => time_entry.try(:percent_completed)
-      )
-    end
+    link_to('', 'javascript:void(0)', :class => 'glyphicon glyphicon-calendar time-entry',
+            :'popup-form' => true,
+            :'popup-template' => 'time_entry_popup_template',
+            :"popup-title" => 'Enter time for today',
+            :'date' => date,
+            :'project_id' => task.story.project_id,
+            :'task_id' => task.id,
+            :'hours_spent' => time_entry.try(:hours_spent),
+            :'percent_completed' => time_entry.try(:percent_completed)
+    )
   end
 
   def next_week_link

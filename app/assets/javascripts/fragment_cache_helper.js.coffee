@@ -15,7 +15,12 @@ class @Menu
       if path_regex[0].test path
         @markActive(path_regex[1])
 
+class @TaskPermission
+  @apply: (current_user_id) =>
+    task_action_sel = "div[task-owner-id][task-owner-id!='#{current_user_id}'] .task-actions"
+    $("#{task_action_sel} .time-entry, #{task_action_sel} .status-button, #{task_action_sel} .delete").remove()
+
 $ ->
   Menu.init()
-#  $(document).ajaxComplete((event, xhr, settings) ->
-#  )
+  $(document).ajaxComplete((event, xhr, settings) ->
+  )

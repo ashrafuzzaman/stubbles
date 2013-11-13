@@ -1,34 +1,32 @@
-<% cache [:form, story] do %>
-    <%= story_form_widget(story) do |f, sw| %>
-        <%= sw.header do %>
-            <div class="input-group input-group">
-              <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-              <%= f.text_field :title, class: 'form-control', :required => true, :size => '50', placeholder: "Task title" %>
-            </div>
+<%= story_form_widget(story) do |f, sw| %>
+    <%= sw.header do %>
+        <div class="input-group input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+          <%= f.text_field :title, class: 'form-control', :required => true, :size => '50', placeholder: "Task title" %>
+        </div>
 
-        <% end %>
-        <%= sw.content(collapse: false) do %>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-5">
-                  <%= select_users(f, story) %>
-                </div>
-                <div class="col-md-3">
-                  <%= select_story_type(f) %>
-                </div>
-              </div>
-
-              <br/>
-              <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
-              <br>
-              <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
-              <%= f.hidden_field :milestone_id %>
-              <br/>
+    <% end %>
+    <%= sw.content(collapse: false) do %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-5">
+              <%= select_users(f, story) %>
             </div>
-        <% end %>
-        <%= sw.footer do %>
-            <%= f.submit :'data-disable-with' => "Saving...", :class => 'btn btn-primary' %>
-            <%= ajax_cancel_link(story, '.story') %>
-        <% end %>
+            <div class="col-md-3">
+              <%= select_story_type(f) %>
+            </div>
+          </div>
+
+          <br/>
+          <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
+          <br>
+          <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
+          <%= f.hidden_field :milestone_id %>
+          <br/>
+        </div>
+    <% end %>
+    <%= sw.footer do %>
+        <%= f.submit :'data-disable-with' => "Saving...", :class => 'btn btn-primary' %>
+        <%= ajax_cancel_link(story, '.story') %>
     <% end %>
 <% end %>
