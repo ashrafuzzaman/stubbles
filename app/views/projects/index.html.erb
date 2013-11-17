@@ -17,7 +17,7 @@
         <tr>
           <td><%= link_to project.name, dashboard_path_for(project, current_user) %></td>
           <td><%= raw project.description %></td>
-          <td><%= l project.started_on, :format => :long %></td>
+          <td><%= l(project.started_on, :format => :long) if project.started_on %></td>
 
           <td>
             <%= link_to('Members', project_project_memberships_path(project),
