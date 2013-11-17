@@ -11,6 +11,7 @@ class Project < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User', :readonly => :true
 
   validates :creator_id, presence: true
+  validates :name, presence: true
 
   after_create :add_creator_as_project_admin
 
