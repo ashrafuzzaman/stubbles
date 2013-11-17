@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109083846) do
+ActiveRecord::Schema.define(:version => 20131113135642) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "done_by_id"
+    t.string   "name"
+    t.datetime "created_at"
+  end
+
+  add_index "activities", ["done_by_id"], :name => "index_activities_on_done_by_id"
 
   create_table "comments", :force => true do |t|
     t.text     "text"
@@ -175,5 +183,25 @@ ActiveRecord::Schema.define(:version => 20131109083846) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "version_changes", :force => true do |t|
+    t.integer "version_id"
+    t.string  "field",      :null => false
+    t.string  "was"
+    t.string  "now"
+  end
+
+  add_index "version_changes", ["version_id"], :name => "index_version_changes_on_version_id"
+
+  create_table "versions", :force => true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.string   "event",          :null => false
+    t.integer  "done_by_id"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["trackable_type", "trackable_id"], :name => "index_versions_on_trackable_type_and_trackable_id"
 
 end

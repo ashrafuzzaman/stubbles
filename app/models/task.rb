@@ -1,4 +1,7 @@
 class Task < ActiveRecord::Base
+  include AuditTrail
+  track# :title, :hours_estimated, :assigned_to_id
+
   attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
 
   include TaskPermission
