@@ -15,6 +15,9 @@
                   <%= story_time_estimations(story) %>
                   <%= story_edit_link(story) %>
                   <%= story_delete_link(story) %>
+                  <a class="accordion-toggle" data-toggle="collapse" href="#story-<%= story.id %>-history">
+                    <span class="glyphicon glyphicon-header"></span>
+                  </a>
                 </div>
             <% end %>
         <% end %>
@@ -34,13 +37,8 @@
               <%= render_comments_for(story) %>
             </div>
 
-            <div>
-              <% task_ids = story.task_ids
-                 changes = VersionChange.for(field: :assigned_to_id, type: Task, id: task_ids) %>
-
-              <% changes.each do |change| %>
-                  <%= change.field %> || <%= change.was %> || <%= change.now %> <br>
-              <% end %>
+            <div id="story-<%= story.id %>-history" class="collapse row">
+              <%= render :partial => 'stories/partials/history', :locals => {:story => story} %>
             </div>
         <% end %>
     <% end %>

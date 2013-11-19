@@ -8,6 +8,9 @@
           <%= link_to_time_entry_popup(task) %>
           <%= task_edit_link(task) %>
           <%= task_delete_link(task) %>
+          <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">
+            <span class="glyphicon glyphicon-header"></span>
+          </a>
         </div>
       </div>
       <div class="task_container row">
@@ -19,6 +22,9 @@
                      :locals => {:estimated => task.hours_estimated,
                                  :spent => task.hours_spent} %>
         </div>
+      </div>
+      <div id="task-<%= task.id %>-history" class="row collapse">
+        <%= render :partial => 'tasks/partials/history', :locals => {:task => task} %>
       </div>
     </div>
 <% end %>
