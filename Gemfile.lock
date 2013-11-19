@@ -1,3 +1,10 @@
+PATH
+  remote: /home/jitu/projects/auditlog
+  specs:
+    auditlog (0.0.1)
+      rails (~> 3.2)
+      request_store
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -174,6 +181,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    request_store (1.0.5)
     rolify (3.2.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -235,6 +243,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 2.2.2)
+  auditlog!
   awesome_print
   better_errors
   binding_of_caller

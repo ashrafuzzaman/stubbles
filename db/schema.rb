@@ -145,8 +145,10 @@ ActiveRecord::Schema.define(:version => 20131113135642) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "percent_completed"
+    t.integer  "project_id"
   end
 
+  add_index "tasks", ["project_id"], :name => "index_tasks_on_project_id"
   add_index "tasks", ["story_id"], :name => "index_tasks_on_story_id"
 
   create_table "time_entries", :force => true do |t|
@@ -197,11 +199,14 @@ ActiveRecord::Schema.define(:version => 20131113135642) do
     t.integer  "trackable_id"
     t.string   "trackable_type"
     t.string   "event",          :null => false
+    t.integer  "activity_id"
     t.integer  "done_by_id"
-    t.text     "object"
+    t.integer  "project_id"
     t.datetime "created_at"
   end
 
+  add_index "versions", ["activity_id"], :name => "index_versions_on_activity_id"
+  add_index "versions", ["project_id"], :name => "index_versions_on_project_id"
   add_index "versions", ["trackable_type", "trackable_id"], :name => "index_versions_on_trackable_type_and_trackable_id"
 
 end

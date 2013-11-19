@@ -33,6 +33,15 @@
             <div>
               <%= render_comments_for(story) %>
             </div>
+
+            <div>
+              <% task_ids = story.task_ids
+                 changes = VersionChange.for(field: :assigned_to_id, type: Task, id: task_ids) %>
+
+              <% changes.each do |change| %>
+                  <%= change.field %> || <%= change.was %> || <%= change.now %> <br>
+              <% end %>
+            </div>
         <% end %>
     <% end %>
 <% end %>

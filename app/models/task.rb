@@ -1,12 +1,14 @@
-class Task < ActiveRecord::Base
-  include AuditTrail
-  track# :title, :hours_estimated, :assigned_to_id
+require 'auditlog/model_tracker'
 
+class Task < ActiveRecord::Base
+  include Auditlog::ModelTracker
+  track only: [:title, :hours_estimated, :assigned_to_id], meta: [:project_id]
   attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
 
   include TaskPermission
   include Workflow
 
+  belongs_to :project, inverse_of: :tasks
   belongs_to :story, :touch => true, inverse_of: :tasks
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :time_entries, :as => :trackable
@@ -14,6 +16,7 @@ class Task < ActiveRecord::Base
   scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
   scope :in_progress, lambda { where(status: 'started') }
 
+  before_create :set_project_id
   after_save :update_story_status, :propagate_values_to_story
   after_destroy :update_story_status, :propagate_values_to_story
 
@@ -90,6 +93,10 @@ class Task < ActiveRecord::Base
     propagate_hours_spent
     propagate_hours_estimated
     propagate_percent_completed
+  end
+
+  def set_project_id
+    self.project_id = self.story.project_id
   end
 
 end

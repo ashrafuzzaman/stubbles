@@ -82,3 +82,4 @@ end
 gem "cache_digests"
 gem 'unicorn'
 gem 'less-rails-bootstrap'
+gem 'auditlog', :path => '/home/jitu/projects/auditlog'
