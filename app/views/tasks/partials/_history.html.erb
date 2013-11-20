@@ -1,14 +1,29 @@
-<% changes = VersionChange.for(field: :assigned_to_id, type: Task, id: task.id, events: [:update]).all %>
+<% changes = VersionChange.for(field: [:assigned_to_id, :hours_estimated], type: Task, id: task.id, events: [:update]).order('created_at ASC').all %>
 <% if changes.count > 0 %>
     <ul>
       <% changes.each do |change| %>
-          <li>
-            <% if change.field == 'assigned_to_id' %>
-                <%= link_to_user_with_avatar(change.version.done_by_id, size: 15) %> Assigned
-                from <%= link_to_user_with_avatar(change.was, size: 15) %>
-                to <%= link_to_user_with_avatar(change.now, size: 15) %>
-            <% end %>
-          </li>
+          <% cache [:view, change] do %>
+              <li>
+                <%= render :partial => "histories/done_by_badge", locals: {change: change} %>
+                <% if change.field == 'assigned_to_id' %>
+                    Assigned
+                    <% if change.was %>
+                        from <%= link_to_user_with_avatar(change.was, size: 15) %>
+                    <% end %>
+                    to <%= link_to_user_with_avatar(change.now, size: 15) %>
+                <% elsif change.field == 'hours_estimated' %>
+                    <% if change.was.blank? %>
+                        Estimated <%= change.was %>
+                    <% elsif change.was.present? and change.now.present? %>
+                        Changed estimation from <%= change.was %> to  <%= change.now %>
+                    <% end %>
+                <% end %>
+              </li>
+          <% end %>
       <% end %>
+    </ul>
+<% else %>
+    <ul>
+      <li>Nothing in the past</li>
     </ul>
 <% end %>

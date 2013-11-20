@@ -1,14 +1,21 @@
-<% changes = VersionChange.for(field: :assigned_to_id, type: Story, id: story.id, events: [:update]).all %>
+<% changes = VersionChange.for(field: :assigned_to_id, type: Story, id: story.id, events: [:update]).order('created_at ASC').all %>
 <% if changes.count > 0 %>
     <ul>
       <% changes.each do |change| %>
           <li>
+            <%= render :partial => "histories/done_by_badge", locals: {change: change} %>
             <% if change.field == 'assigned_to_id' %>
-                <%= link_to_user_with_avatar(change.version.done_by_id, size: 15) %> Assigned
-                from <%= link_to_user_with_avatar(change.was, size: 15) %>
+                Assigned
+                <% if change.was %>
+                    from <%= link_to_user_with_avatar(change.was, size: 15) %>
+                <% end %>
                 to <%= link_to_user_with_avatar(change.now, size: 15) %>
             <% end %>
           </li>
       <% end %>
+    </ul>
+<% else %>
+    <ul>
+      <li>Nothing in the past</li>
     </ul>
 <% end %>

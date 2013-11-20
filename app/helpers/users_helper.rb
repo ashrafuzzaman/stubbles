@@ -14,7 +14,7 @@ module UsersHelper
     if user
       link_to path, class: 'user_with_avatar', target: '_blank' do
         concat image_tag user.gravatar_url(image_size), width: image_size, height: image_size, class: 'img-circle'
-        concat content_tag :span, user.name
+        concat content_tag :span, (user.short_name || user.name)
       end
     else
       'n/a'

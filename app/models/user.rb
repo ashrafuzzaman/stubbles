@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :short_name
   validates :name, :presence => true
   validates :email, :uniqueness => true
+  validates :short_name, :uniqueness => true
 
   has_many :stories #not meaningful as user has many stories through proects
   has_many :memberships, :class_name => 'ProjectMembership'
