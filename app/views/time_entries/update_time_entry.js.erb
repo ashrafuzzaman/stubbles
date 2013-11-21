@@ -10,4 +10,4 @@ elem.find('.progress-bar').attr('style', "width: <%= @time_entry.percent_complet
 <% end %>
 //PopOverForm.initializePopoverFor(elem);
 <%= render :partial => "stories/partials/reload_story", locals: {story: @time_entry.trackable.story, collapse: false} %>
-<%= render :partial => 'milestones/reload_burndown', :locals => { milestone: @time_entry.trackable.story.milestone } %>
+<%= render :partial => 'milestones/reload_milestone_resources', :locals => { milestone: @time_entry.trackable.story.milestone } %>
