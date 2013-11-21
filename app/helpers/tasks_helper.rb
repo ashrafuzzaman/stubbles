@@ -2,10 +2,13 @@ module TasksHelper
   def action_links_for_task(task)
     content_tag :div, class: 'status-button' do
       if task.current_state.events.size > 0
+        field_id = "task-#{task.id}-event-action"
         form_tag(update_status_story_task_path(task.story, task),
                  :method => :put, :remote => true) do
+          concat(hidden_field_tag :event, '', id: field_id)
           task.current_state.events.keys.each do |event|
-            concat(submit_tag(event, :name => 'event', :value => event.to_s.camelize,
+            concat(submit_tag(event, :value => event.to_s.humanize,
+                              onclick: "$('##{field_id}').val('#{event.to_s}');",
                               :class => "task-#{event} btn btn-xs",
                               :'data-disable-with' => 'wait'))
           end

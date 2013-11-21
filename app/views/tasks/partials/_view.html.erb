@@ -5,7 +5,7 @@
 
         <div class="col-md-4 text-right task-actions">
           <%= action_links_for_task(task) %>
-          <%= link_to_time_entry_popup(task) %>
+          <%= link_to_time_entry_popup(task) if task.in_progress? %>
           <%= task_edit_link(task) %>
           <%= task_delete_link(task) %>
           <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">

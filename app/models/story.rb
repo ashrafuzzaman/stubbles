@@ -90,7 +90,7 @@ class Story < ActiveRecord::Base
   end
 
   def any_task_started?
-    tasks.each { |task| return true if task.started? }
+    tasks.each { |task| return true if task.in_progress? }
     false
   end
 

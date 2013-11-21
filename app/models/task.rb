@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
   has_many :time_entries, :as => :trackable
 
   scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
-  scope :in_progress, lambda { where(status: 'started') }
+  scope :in_progress, lambda { where(status: 'in_progress') }
 
   before_create :set_project_id
   after_save :update_story_status, :propagate_values_to_story
@@ -23,25 +23,25 @@ class Task < ActiveRecord::Base
   workflow_column :status
   workflow do
     state :open do
-      event :start, :transitions_to => :started
+      event :start, :transitions_to => :in_progress
     end
-    state :started do
-      event :pause, :transitions_to => :paused
+    state :in_progress do
       event :finish, :transitions_to => :finished
-    end
-    state :paused do
-      event :start, :transitions_to => :started
     end
     state :finished do
       event :qa_approve, :transitions_to => :qa_approved
+      event :reopen, :transitions_to => :open
     end
     state :qa_approved do
       event :deploy, :transitions_to => :deployed
     end
     state :deployed do
       event :close, :transitions_to => :closed
+      event :reopen, :transitions_to => :open
     end
-    state :closed
+    state :closed do
+      event :reopen, :transitions_to => :open
+    end
 
     on_transition do |from, to, triggering_event, *event_args|
       self.touch

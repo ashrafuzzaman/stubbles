@@ -1,13 +1,10 @@
 var elem = $('[time-entry-block-for-task-<%= params[:task_id] %>="<%= params[:date] %>"]');
-//elem.effect("highlight", {}, 2000);
-//PopOverForm.hideAllPopupHover();
 Message.successMessage("Time updated");
-
 //Done for the popover form to be updated
 elem.find('.hours_spent').html(<%= @time_entry.hours_spent %>);
 <% if params[:percent_completed] %>
 elem.find('.progress-bar').attr('style', "width: <%= @time_entry.percent_completed %>%");
 <% end %>
-//PopOverForm.initializePopover();
+
 <%= render :partial => "stories/partials/reload_story", locals: {story: @time_entry.trackable.story, collapse: false} %>
 <%= render :partial => 'milestones/reload_milestone_resources', :locals => { milestone: @time_entry.trackable.story.milestone } %>
