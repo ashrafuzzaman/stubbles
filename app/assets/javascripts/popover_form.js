@@ -1,14 +1,9 @@
 var popover_form_selector = '[popup-form]';
 var PopOverForm = {
-    destroyAndReload: function () {
-        PopOverForm.destroyAllPopupHover();
-        PopOverForm.initializePopover();
-    },
-
     destroyAllPopupHover: function () {
-        $(popover_form_selector).popover('hide'); //for now hide all
-//        $(popover_form_selector).popover('destroy'); //for now hide all
-//        PopOverForm.initializePopover();
+        $('[popup-form][data-content]').popover('destroy'); //for now hide all
+        $('[popup-form]').removeAttr('data-content');
+        $('.popover').remove();
     },
 
     initializePopoverFor: function ($this) {
@@ -19,19 +14,12 @@ var PopOverForm = {
         $this.attr('data-content', contentHtml.html());
         $this.popover({trigger: 'manual',
             html: true,
-            content: contentHtml.html(),
             placement: function (pop, dom_el) {
                 var width = window.innerWidth;
                 var left_pos = $(dom_el).offset().left;
                 if (left_pos / width > .5) return 'left';
                 return 'right';
             }
-        });
-    },
-
-    initializePopover: function () {
-        $(popover_form_selector).each(function () {
-            PopOverForm.initializePopoverFor($(this));
         });
     },
 
@@ -51,7 +39,11 @@ var PopOverForm = {
 
 $(document).ready(function () {
     $(document).on('click', popover_form_selector, function () {
-        PopOverForm.initializePopoverFor($(this));
+        var content = $(this).attr('data-content');
+        console.log($(this));
+        if (typeof content == 'undefined' || content == '') {
+            PopOverForm.initializePopoverFor($(this));
+        }
         $(this).popover('toggle');
         $("input[auto-focus]").focus();
     });
