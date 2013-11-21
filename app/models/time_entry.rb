@@ -8,6 +8,7 @@ class TimeEntry < ActiveRecord::Base
   scope :spent_on, lambda { |date| where(:spent_on => date) }
   scope :before_date, lambda { |date| where("spent_on < ?", date) }
   scope :by, lambda { |user| where(:user_id => user) }
+  default_scope order('spent_on ASC')
 
   validates :hours_spent, :numericality => true
 
