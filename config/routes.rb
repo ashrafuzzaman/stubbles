@@ -58,6 +58,9 @@ Stubbles::Application.routes.draw do
   put 'projects/:project_id/stories/:id/complete_at' => 'story_calendar#update_complete_at'
   get 'projects/:project_id/calendar/story_feed' => 'story_calendar#story_feed'
 
+  get 'projects/:project_id/milestone_calendar' => 'milestone_calendar#index', as: :milestone_calendar
+  get 'projects/:project_id/milestone_calendar/feed' => 'milestone_calendar#feed'
+
   get 'projects/:project_id/weekly_time_entry' => 'time_entries#weekly_time_entry', :as => 'weekly_time_entry'
   post 'projects/:project_id/update_time_entry' => 'time_entries#update_time_entry', :as => 'update_time_entry'
 end

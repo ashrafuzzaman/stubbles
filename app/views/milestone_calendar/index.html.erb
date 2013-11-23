@@ -1,0 +1,22 @@
+<div id='calendar'></div>
+
+<%= javascript_include_tag "calendar" %>
+
+<script type='text/javascript'>
+    var projectId = '<%= @project.id %>';
+
+    $(document).ready(function () {
+        $('#calendar').html('').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title'
+            },
+            editable: false,
+            events: "/projects/" + projectId + "/milestone_calendar/feed.json",
+            loading: function (bool) {
+                if (bool) startLoading();
+                else stopLoading();
+            }
+        });
+    });
+</script>

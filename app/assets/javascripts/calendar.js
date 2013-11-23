@@ -5,11 +5,10 @@ function loadCalendar(projectId, user_id) {
 		$('#calendar').html('').fullCalendar({
 		header: {
 			left: 'prev,next today',
-			center: 'title',
-			right: 'month'
+			center: 'title'
 		},
-		theme: true,
-		editable: true,
+//		theme: true,
+		editable: false,
 		events: "/projects/" + projectId + "/calendar/story_feed.json?user_id=" + user_id,
 		eventDrop: function(event,dayDelta,minuteDelta,revertFunc) {
 			var path = "/projects/" + projectId + "/stories/" + event.id + "/start_at";

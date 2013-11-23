@@ -5,7 +5,7 @@
           <%= link_to_nav 'Dashboard', project_dashboard_path(@project.id) %>
           <%= link_to_nav 'Milestones', project_milestones_path(@project.id) %>
           <%= link_to_nav 'Time entry', weekly_time_entry_path(@project.id) %>
-          <%#= link_to_nav 'Planner', story_calendar_path(@project.id) %>
+          <%= link_to_nav 'Planner', milestone_calendar_path(@project.id) %>
       <% end %>
     </ul>
 
