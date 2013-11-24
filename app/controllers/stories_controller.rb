@@ -34,11 +34,9 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.update_attributes(params[:story])
         format.js
-        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
         format.json { head :no_content }
       else
         format.js
-        format.html { render action: "edit" }
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
