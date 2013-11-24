@@ -24,10 +24,11 @@
           <%= f.hidden_field :milestone_id %>
 
           <div id="story-<%= story.id %>-attachments" class="attachments">
-            <%= f.fields_for :attachments do |atch| %>
+            <%= f.fields_for :attachments do |attachment| %>
                 <div class="row">
-                  <div class="col-md-8"><%= atch.file_field :file %></div>
-                  <div class="col-md-2"><%= atch.link_to_remove "Remove", class: 'btn btn-danger' %></div>
+                  <div class="col-md-1"><%= image_tag attachment.object.file.thumb %></div>
+                  <div class="col-md-3"><%= attachment.file_field :file %></div>
+                  <div class="col-md-2"><%= attachment.link_to_remove "Remove", class: 'btn btn-danger' %></div>
                 </div>
             <% end %>
           </div>

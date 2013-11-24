@@ -35,7 +35,9 @@
             <hr/>
             <div class="attachments">
               <% story.attachments.each do |attachment| %>
-                <%= image_tag attachment.file.thumb %>
+                  <%= link_to(attachment.file.url, target: '_blank') do
+                    image_tag(attachment.file.thumb)
+                  end if attachment.file %>
               <% end %>
             </div>
             <hr/>
