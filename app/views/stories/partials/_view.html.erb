@@ -33,6 +33,12 @@
                          :locals => {:story => story, :tasks => story.tasks} %>
             </div>
             <hr/>
+            <div class="attachments">
+              <% story.attachments.each do |attachment| %>
+                <%= image_tag attachment.file.thumb %>
+              <% end %>
+            </div>
+            <hr/>
             <div>
               <%= render_comments_for(story) %>
             </div>

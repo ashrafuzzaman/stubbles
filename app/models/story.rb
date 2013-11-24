@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
   track only: [:title, :assigned_to_id], meta: [:project_id]
 
   attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list,
-                  :story_type, :priority, :milestone_id
+                  :story_type, :priority, :milestone_id, :attachments_attributes
 
   include StoryPermission
   include Workflow
@@ -19,6 +19,8 @@ class Story < ActiveRecord::Base
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   has_many :tasks, inverse_of: :story, order: 'created_at ASC'
   has_many :comments, :as => :commentable
+  has_many :attachments, :as => :attachable
+  accepts_nested_attributes_for :attachments, allow_destroy: true
 
   default_scope :order => 'priority'
   scope :backlog, where(milestone_id: nil)

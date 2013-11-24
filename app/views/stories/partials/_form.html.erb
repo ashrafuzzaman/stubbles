@@ -22,6 +22,21 @@
           <br>
           <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
           <%= f.hidden_field :milestone_id %>
+
+          <div id="story-<%= story.id %>-attachments" class="attachments">
+            <%= f.fields_for :attachments do |atch| %>
+                <div class="row">
+                  <div class="col-md-8"><%= atch.file_field :file %></div>
+                  <div class="col-md-2"><%= atch.link_to_remove "Remove", class: 'btn btn-danger' %></div>
+                </div>
+            <% end %>
+          </div>
+          <div>
+            <%= f.link_to_add "Add an attachment", :attachments, :data => {:target => "#story-#{story.id}-attachments"}, class: 'btn btn-primary' %>
+            <br/>
+            <br/>
+          </div>
+
           <br/>
         </div>
     <% end %>

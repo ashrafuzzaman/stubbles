@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120011430) do
+ActiveRecord::Schema.define(:version => 20131123133339) do
 
   create_table "activities", :force => true do |t|
     t.integer  "done_by_id"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(:version => 20131120011430) do
   end
 
   add_index "activities", ["done_by_id"], :name => "index_activities_on_done_by_id"
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "file",            :null => false
+    t.integer  "uploaded_by_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "attachments", ["attachable_type", "attachable_id"], :name => "index_attachments_on_attachable_type_and_attachable_id"
 
   create_table "comments", :force => true do |t|
     t.text     "text"

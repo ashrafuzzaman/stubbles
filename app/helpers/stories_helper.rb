@@ -79,7 +79,7 @@ module StoriesHelper
                    else
                      'default'
                  end
-    form_for([story.project, story], :remote => true, role: 'form', html: {id: container_id_of(story)}) do |f|
+    nested_form_for([story.project, story], :remote => true, role: 'form', multipart: true, html: {id: container_id_of(story)}) do |f|
       content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do
         capture(f, StoryWidget.new(story, self), &block)
       end

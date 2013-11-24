@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   respond_to :js, :json, :html, :xml
   before_filter :load_project, :authenticate_user!
-  
+
   def index
     @stories = @project.stories
     respond_with(@stories)
@@ -30,10 +30,17 @@ class StoriesController < ApplicationController
 
   def update
     @story = @project.stories.find(params[:id])
-    if @story.update_attributes(params[:story])
-      flash[:notice] = "Story updated"
-    else
-      flash[:error] = @story.errors
+
+    respond_to do |format|
+      if @story.update_attributes(params[:story])
+        format.js
+        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.js
+        format.html { render action: "edit" }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -43,8 +50,8 @@ class StoriesController < ApplicationController
   end
 
   def update_scope_and_priority
-    scope               = params[:scope]
-    story_id            = params[:story_id].to_i
+    scope = params[:scope]
+    story_id = params[:story_id].to_i
     shift_from_story_id = params[:shift_from_story_id].to_i
     Story.update_scope_and_priority(@project, scope, story_id, shift_from_story_id)
   end
@@ -54,7 +61,7 @@ class StoriesController < ApplicationController
     @story.destroy
     flash[:notice] = "Story deleted"
   end
-  
+
   private
 
   def load_project

@@ -6,6 +6,7 @@ gem 'rails', '3.2.13'
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'dropzonejs-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -84,3 +85,7 @@ gem 'unicorn'
 gem 'less-rails-bootstrap'
 gem 'auditlog'
 #gem 'auditlog', :path => '/home/jitu/projects/auditlog'
+
+gem "rmagick"
+gem "carrierwave"
+gem 'remotipart', '~> 1.2'
