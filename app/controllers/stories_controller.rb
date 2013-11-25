@@ -60,6 +60,20 @@ class StoriesController < ApplicationController
     flash[:notice] = "Story deleted"
   end
 
+  def upload_attachments
+    @story = @project.stories.find(params[:id])
+
+    respond_to do |format|
+      if @story.attachments.create(file: params[:file])
+        format.js
+        format.json { head :no_content }
+      else
+        format.js
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def load_project

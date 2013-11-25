@@ -41,6 +41,15 @@
               <% end %>
             </div>
             <hr/>
+            <div class="files">
+              <%= form_for([:upload_attachments, story.project, story], :remote => true, role: 'form', html: {class: 'dropzone'}) do |f| %>
+                  <div class="fallback">
+                    <input name="file" type="file" multiple/>
+                    <%= f.file_field :image %>
+                  </div>
+              <% end %>
+            </div>
+            <hr/>
             <div>
               <%= render_comments_for(story) %>
             </div>

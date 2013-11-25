@@ -19,6 +19,7 @@ Stubbles::Application.routes.draw do
     resources :stories do #, :only => [:index, :show]
       member do
         put 'update_status'
+        put 'upload_attachments'
       end
       collection do
         post 'update_scope_and_priority'
