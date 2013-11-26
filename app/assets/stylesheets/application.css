@@ -12,6 +12,5 @@
  *= require jquery.pnotify.default
  *= require dashboard
  *= require fullcalendar
- *= require dropzone/dropzone
  *= require_self
 */

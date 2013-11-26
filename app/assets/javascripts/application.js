@@ -12,7 +12,6 @@
 //= require popover_form
 //= require Chart
 //= require fragment_cache_helper
-//= require dropzone
 //= require jquery.remotipart
 
 $(function () {

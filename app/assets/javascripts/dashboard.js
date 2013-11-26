@@ -53,8 +53,3 @@ function did_order_changed_for() {
 function update_chached_order_for(sortableCol) {
     sortableCol.data("order", sortableCol.sortable('toArray'));
 }
-
-//$(".story_files").each(function(){
-//    var myDropzone = $(this).dropzone({ url: $(this).attr("url"), paramName: 'story[image]' });
-//    myDropzone.data("dropzone").on("sending", function(file, xhr) { $.rails.CSRFProtection(xhr); });
-//});

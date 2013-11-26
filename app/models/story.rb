@@ -20,7 +20,7 @@ class Story < ActiveRecord::Base
   has_many :tasks, inverse_of: :story, order: 'created_at ASC'
   has_many :comments, :as => :commentable
   has_many :attachments, :as => :attachable
-  accepts_nested_attributes_for :attachments, allow_destroy: true
+  accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: proc { |attributes| attributes['file'].blank? }
 
   default_scope :order => 'priority'
   scope :backlog, where(milestone_id: nil)

@@ -27,7 +27,9 @@
             <%= f.fields_for :attachments do |attachment| %>
                 <div class="row">
                   <div class="col-md-1"><%= image_tag attachment.object.file.thumb %></div>
-                  <div class="col-md-3"><%= attachment.file_field :file %></div>
+                  <% if attachment.object.new_record? %>
+                      <div class="col-md-3"><%= attachment.file_field :file %></div>
+                  <% end %>
                   <div class="col-md-2"><%= attachment.link_to_remove "Remove", class: 'btn btn-danger' %></div>
                 </div>
             <% end %>

@@ -31,14 +31,18 @@ class StoriesController < ApplicationController
   def update
     @story = @project.stories.find(params[:id])
 
+    ap params[:story]
     respond_to do |format|
-      if @story.update_attributes(params[:story])
-        format.js
-        format.json { head :no_content }
-      else
-        format.js
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+      @story.update_attributes(params[:story])
+      ap @story.valid?
+      format.js
+      #if @story.update_attributes(params[:story])
+      #  format.js
+      #  #format.json { head :no_content }
+      #else
+      #  format.js
+      #  #format.json { render json: @story.errors, status: :unprocessable_entity }
+      #end
     end
   end
 
