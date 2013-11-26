@@ -68,12 +68,10 @@ class StoriesController < ApplicationController
     @story = @project.stories.find(params[:id])
 
     respond_to do |format|
-      if @story.attachments.create(file: params[:file])
+      if @story.attachments.create(file: params[:story][:file])
         format.js
-        format.json { head :no_content }
       else
         format.js
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end

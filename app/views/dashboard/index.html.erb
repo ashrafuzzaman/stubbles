@@ -36,5 +36,11 @@
 </div>
 
 <%= render :partial => 'time_entries/time_entry_popup_template', :locals => {project: @project} %>
-
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    <div class="progress">
+      <div class="bar" style="width: 0%"></div>
+    </div>
+  </div>
+</script>
 <%= javascript_include_tag "dashboard" %>
