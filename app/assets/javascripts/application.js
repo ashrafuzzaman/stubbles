@@ -12,9 +12,7 @@
 //= require popover_form
 //= require Chart
 //= require fragment_cache_helper
-//= require jquery-fileupload/basic
-//= require jquery-fileupload/vendor/tmpl
-//= require attachment
+//= require jquery.remotipart
 
 $(function () {
     addSubmitalbeElemntInForm();
