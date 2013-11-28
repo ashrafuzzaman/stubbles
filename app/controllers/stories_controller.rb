@@ -33,16 +33,15 @@ class StoriesController < ApplicationController
 
     ap params[:story]
     respond_to do |format|
-      @story.update_attributes(params[:story])
-      ap @story.valid?
-      format.js
-      #if @story.update_attributes(params[:story])
-      #  format.js
-      #  #format.json { head :no_content }
-      #else
-      #  format.js
-      #  #format.json { render json: @story.errors, status: :unprocessable_entity }
-      #end
+      if @story.update_attributes(params[:story])
+        flash[:notice] = "Story updated"
+        format.js
+        format.json { head :no_content }
+      else
+        flash[:error] = @story.errors
+        format.js
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
     end
   end
 
