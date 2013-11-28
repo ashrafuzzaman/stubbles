@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
     if @story.save
       flash[:notice] = "Story created"
     else
-      flash[:error] = @story.errors
+      flash[:error] = @story.errors.full_messages
     end
   end
 
@@ -38,9 +38,9 @@ class StoriesController < ApplicationController
         format.js
         format.json { head :no_content }
       else
-        flash[:error] = @story.errors
+        flash[:error] = @story.errors.full_messages
         format.js
-        format.json { render json: @story.errors, status: :unprocessable_entity }
+        format.json { render json: @story.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
