@@ -88,4 +88,4 @@ gem 'auditlog'
 
 gem "rmagick"
 gem "carrierwave"
-gem 'remotipart', '~> 1.2'
+gem 'remotipart', '1.0.5'
