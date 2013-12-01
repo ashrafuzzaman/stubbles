@@ -89,3 +89,4 @@ gem 'auditlog'
 gem "rmagick"
 gem "carrierwave"
 gem 'remotipart', '1.0.5'
+gem "fog"

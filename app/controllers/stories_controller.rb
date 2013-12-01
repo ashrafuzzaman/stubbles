@@ -31,7 +31,6 @@ class StoriesController < ApplicationController
   def update
     @story = @project.stories.find(params[:id])
 
-    ap params[:story]
     respond_to do |format|
       if @story.update_attributes(params[:story])
         flash[:notice] = "Story updated"
