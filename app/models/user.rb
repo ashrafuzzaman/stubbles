@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
   has_many :memberships, :class_name => 'ProjectMembership'
   has_many :projects, :through => :memberships, :source => :project
 
+  def self.current=(user)
+    RequestStore.store[:current_user] = user
+  end
+
+  def self.current
+    RequestStore.store[:current_user]
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
