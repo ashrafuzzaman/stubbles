@@ -6,12 +6,16 @@
 <br/>
 
 <table id='users' class="table">
+  <thead>
   <tr>
     <th>Name</th>
     <th>email</th>
     <th>role</th>
     <th></th>
   </tr>
+  </thead>
 
+  <tbody>
   <%= render :partial => 'row', :collection => @project_memberships, :as => :membership %>
+  </tbody>
 </table>
