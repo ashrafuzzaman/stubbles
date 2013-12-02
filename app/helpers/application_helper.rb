@@ -12,9 +12,13 @@ module ApplicationHelper
   end
 
   def deactivate_link(model, activate_path, deactivate_path)
-    text = model.active? ? 'Deactivate' : 'Activate'
-    path = model.active? ? deactivate_path : activate_path
-    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true
+    if model.active?
+      text, path, klass = 'Deactivate', deactivate_path, 'danger'
+    else
+      text, path, klass = 'Activate', activate_path, 'success'
+    end
+
+    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true, class: "btn btn-#{klass}"
   end
 
   def render_error_message

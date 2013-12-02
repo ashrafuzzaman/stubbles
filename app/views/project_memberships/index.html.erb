@@ -1,8 +1,9 @@
 <% content_for :title do %>
-	<h2><%= @project.name %></h2>
+    <h2><%= @project.name %></h2>
 <% end %>
 
 <%= render 'form' %>
+<br/>
 
 <table id='users' class="table">
   <tr>
@@ -12,5 +13,5 @@
     <th></th>
   </tr>
 
-	<%= render :partial => 'row', :collection => @project_memberships, :as => :membership %>
+  <%= render :partial => 'row', :collection => @project_memberships, :as => :membership %>
 </table>

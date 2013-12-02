@@ -2,6 +2,16 @@
 <html>
 <head>
   <title>Stubbles</title>
+  <% if Rails.env.production? %>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <% else %>
+      <%= javascript_include_tag "jquery" %>
+      <%= javascript_include_tag "jquery-ui" %>
+      <%= javascript_include_tag "bootstrap" %>
+  <% end %>
+
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -67,6 +77,8 @@
         TaskPermission.apply(<%= current_user.try(:id) %>);
     });
     <% end %>
+
+    <%= render :partial => "shared/notification", formats: [:js] %>
 </script>
 </body>
 </html>

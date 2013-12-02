@@ -6,6 +6,8 @@ class Milestone < ActiveRecord::Base
   scope :current_sprints, -> { sprints.where('start_on <= :date AND end_on >= :date', date: Date.current).order('end_on ASC') }
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }
   scope :without, ->(id) { where('milestones.id != ?', id) }
+  scope :order_by_recent, order("end_on DESC")
+  default_scope order_by_recent
 
   belongs_to :project, inverse_of: :milestones
   has_many :stories, inverse_of: :milestone
@@ -70,7 +72,7 @@ class Milestone < ActiveRecord::Base
       estimated_hours_remain -= estimated_hours_done_each_day
     end
 
-    end_date.upto(end_on) do |date|
+    (end_date + 1.day).upto(end_on) do |date|
       burn_down_data << {date: date, hours_remain: hours_remain, estimated_hours_remain: [estimated_hours_remain, 0].max}
       estimated_hours_remain -= estimated_hours_done_each_day
     end

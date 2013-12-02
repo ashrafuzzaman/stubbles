@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="col-md-1">
-    <%= link_to 'New story', new_project_story_path(@project, milestone_id: params[:milestone_id]),
+    <%= link_to 'New story', new_project_story_path(@project, milestone_id: @milestone.try(:id)),
                 :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
   </div>
   <div class="col-md-3">

@@ -3,6 +3,7 @@ class ProjectMembershipsController < ApplicationController
   before_filter :load_project
   before_filter :validate_access
   before_filter :find_user_to_add_as_member, :only => :create
+
   def index
     @project_memberships = @project.memberships
     @project_membership = ProjectMembership.new

@@ -1,9 +1,6 @@
-//= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require notification
 //= require ajax_loader
-//= require bootstrap
 //= require bootstrap-wysihtml5/b3
 //= require bootstrap-tagsinput
 //= require datepicker

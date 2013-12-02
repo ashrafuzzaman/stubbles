@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :short_name
   validates :name, :presence => true
   validates :email, :uniqueness => true
-  validates :short_name, :uniqueness => true
+  #validates :short_name, :uniqueness => true
 
   has_many :stories #not meaningful as user has many stories through proects
   has_many :memberships, :class_name => 'ProjectMembership'
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   def gravatar_url(size = 50)
     email_hash = Digest::MD5.hexdigest(self.email.downcase)
-    image_src = "http://www.gravatar.com/avatar/#{email_hash}?s=#{size}"
+    "http://www.gravatar.com/avatar/#{email_hash}?s=#{size}"
   end
 
 end
