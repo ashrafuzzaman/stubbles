@@ -69,7 +69,7 @@ describe Task do
     end
   end
 
-  describe '#burn_down_chart_data', focus: true do
+  describe '#burn_down_chart_data' do
     context 'switching from sprints' do
       before do
         @milestone = FactoryGirl.create(:milestone, start_on: Date.current, end_on: 1.week.from_now.to_date)
@@ -86,7 +86,7 @@ describe Task do
       end
 
       it 'generates burn down chart' do
-        ap @milestone.burn_down_chart_data
+        @milestone.burn_down_chart_data
       end
     end
   end
