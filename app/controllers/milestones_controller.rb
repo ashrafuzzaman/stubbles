@@ -98,9 +98,16 @@ class MilestonesController < ApplicationController
 
   def burn_down
     milestone = Milestone.find(params[:id]) rescue nil
+    chart = milestone.try(:burn_down_chart)
+    send_data(chart.try(:to_blob), :filename => "burn_down.png", :type => 'image/png', :disposition=> 'inline')
+  end
 
-    chart = milestone.burn_down_chart
-    send_data(chart.to_blob, :filename => "burn_down.png", :type => 'image/png', :disposition=> 'inline')
+  def send_report
+    @milestone = Milestone.find(params[:id]) rescue nil
+    flash[:notice] = "Report send"
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

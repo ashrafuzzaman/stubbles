@@ -15,6 +15,11 @@
   <div class="col-md-3">
     <%= link_to 'Move story', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
     <%= link_to 'Cancel move', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true" %>
+    <% if @milestone %>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#milestone_report">
+          Send report
+        </button>
+    <% end %>
   </div>
 </div>
 <br/>
@@ -42,5 +47,10 @@
       <div class="bar" style="width: 0%"></div>
     </div>
   </div>
+
+
 </script>
+
+<%= render :partial => 'milestones/send_email_report_modal', :locals => {milestone: @milestone} %>
+
 <%= javascript_include_tag "dashboard" %>

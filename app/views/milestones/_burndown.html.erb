@@ -6,5 +6,7 @@
           <canvas id="burndown_chart" height="300" width="900"></canvas>
           <%= raw milestone.burn_down_chart.render_chart("burndown_chart") %>
       <% end %>
+
+      <!--<img src="<%= burn_down_project_milestone_path(milestone.project, milestone) %>" alt=""/>-->
   <% end %>
 </div>

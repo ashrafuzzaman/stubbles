@@ -8,6 +8,7 @@ Stubbles::Application.routes.draw do
       member do
         get 'clone'
         get 'burn_down'
+        post 'send_report'
       end
       collection do
         put 'move_stories'

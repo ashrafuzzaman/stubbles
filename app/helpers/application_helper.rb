@@ -21,7 +21,7 @@ module ApplicationHelper
     return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true, class: "btn btn-#{klass}"
   end
 
-  def render_error_message
+  def render_js_message
     render :partial => 'shared/notification'
   end
 
@@ -30,7 +30,7 @@ module ApplicationHelper
       yield
       concat raw "Message.successMessage('#{escape_javascript(flash[:notice])}');"
     else
-      concat raw render_error_message
+      concat raw render_js_message
     end
   end
 
