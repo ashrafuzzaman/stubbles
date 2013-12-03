@@ -1,3 +1,5 @@
+require 'charter/line_chart'
+
 class Milestone < ActiveRecord::Base
   attr_accessible :delivered_on, :description, :duration, :end_on, :start_on, :title, :milestone_type,
                   :parent_milestone_id, :milestone_resources_attributes
@@ -80,6 +82,14 @@ class Milestone < ActiveRecord::Base
       estimated_hours_remain -= estimated_hours_done_each_day
     end
     burn_down_data
+  end
+
+  def burn_down_chart
+    chart = Charter::LineChart.new
+    chart.data = self.burn_down_chart_data
+    chart.columns = {hours_remain: 'Hours remaining', estimated_hours_remain: 'Estimated hours remaining'}
+    chart.label_column = :day
+    chart
   end
 
   def update_hour_calculations!
