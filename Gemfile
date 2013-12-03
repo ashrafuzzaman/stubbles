@@ -85,6 +85,7 @@ gem 'unicorn'
 gem 'less-rails-bootstrap'
 gem 'auditlog'
 #gem 'auditlog', :path => '/home/jitu/projects/auditlog'
+gem 'charter', :path => 'charter'
 
 gem "rmagick"
 gem "carrierwave"

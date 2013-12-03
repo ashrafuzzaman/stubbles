@@ -1,7 +1,4 @@
 Stubbles::Application.routes.draw do
-  resources :propagate_completion_data_in_story_and_mile_stones
-
-
   root :to => 'projects#redirect_to_recent_project'
 
   devise_for :users
@@ -10,6 +7,7 @@ Stubbles::Application.routes.draw do
     resources :milestones do
       member do
         get 'clone'
+        get 'burn_down'
       end
       collection do
         put 'move_stories'

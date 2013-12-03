@@ -1,3 +1,5 @@
+require 'charter/line_chart'
+
 class MilestonesController < ApplicationController
   before_filter :load_project
   before_filter :load_form_dependencies, only: [:new, :edit, :create, :update, :clone]
@@ -94,6 +96,16 @@ class MilestonesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def burn_down
+    milestone = Milestone.find(params[:id]) rescue nil
+
+    chart = Charter::LineChart.new
+    chart.data = milestone.burn_down_chart_data
+    chart.columns = {hours_remain: 'Hours remaining', estimated_hours_remain: 'Estimated hours remaining'}
+    chart.label_column = :day
+    send_data(chart.to_blob, :filename => "burn_down.png", :type => 'image/png', :disposition=> 'inline')
   end
 
   private
