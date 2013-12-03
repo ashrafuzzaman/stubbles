@@ -19,7 +19,7 @@ module Charter
     ]
 
 
-    def render_chart(html_dom_id)
+    def render(html_dom_id)
       datasets = []
 
       columns.each_with_index do |column, i|

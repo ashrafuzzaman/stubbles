@@ -25,14 +25,5 @@ module Charter
       g.labels = labels
       g.to_blob
     end
-
-    def render_chart(html_dom_id)
-      api_name = Charter.config.web_api.to_s
-      load "charter/#{api_name}_line_chart.rb"
-      js_type = api_name.camelize
-      chart = "Charter::#{js_type}LineChart".constantize.new()
-      chart.data, chart.columns, chart.label_column = self.data, self.columns, self.label_column
-      chart.render_chart(html_dom_id)
-    end
   end
 end
