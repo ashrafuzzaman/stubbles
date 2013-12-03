@@ -37,7 +37,7 @@ describe Task do
         milestone = story.milestone.reload
         expect(milestone.hours_spent).to eq 6
         expect(milestone.hours_estimated).to eq 30
-        expect(milestone.percent_completed).to eq 67
+        expect(milestone.percent_completed).to eq 66
       end
     end
   end

@@ -79,28 +79,11 @@ class Milestone < ActiveRecord::Base
     burn_down_data
   end
 
-  def propagate_hours_spent
-    self.update_column(:hours_spent, self.stories.sum(:hours_spent))
-    self.touch
-  end
-
-  def propagate_hours_estimated
-    self.update_column(:hours_estimated, self.stories.sum(:hours_estimated))
-    propagate_percent_completed
-  end
-
-  def propagate_percent_completed
-    weighted_percent_completed = self.stories(true).inject(0) do |sum, story|
-      sum + (story.percent_completed.to_f * story.hours_estimated.to_f)
-    end
-    percent_completed = weighted_percent_completed / [self.hours_estimated.to_f, 1].max
-    self.update_column(:percent_completed, percent_completed)
-    self.touch
-  end
-
-  def update_hour_calculations
-    propagate_hours_spent
-    propagate_hours_estimated
+  def update_hour_calculations!
+    self.hours_spent = self.stories.sum(:hours_spent)
+    self.hours_estimated = self.stories.sum(:hours_estimated)
+    self.percent_completed = self.recalculate_percent_completed
+    self.save!
   end
 
   def assignment_status_for(resource)
@@ -116,4 +99,10 @@ class Milestone < ActiveRecord::Base
     end
   end
 
+  def recalculate_percent_completed
+    weighted_percent_completed = self.stories(true).inject(0) do |sum, story|
+      sum + (story.percent_completed.to_f * story.hours_estimated.to_f)
+    end
+    weighted_percent_completed / [self.hours_estimated.to_f, 1].max
+  end
 end

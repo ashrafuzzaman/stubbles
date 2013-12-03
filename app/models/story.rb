@@ -32,7 +32,8 @@ class Story < ActiveRecord::Base
   scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
   before_create :auto_generate_priority, :assign_default_scope
-  after_save :update_milestone
+  after_save :propagate_hour_calculations_to_milestone
+  after_destroy :propagate_hour_calculations_to_milestone
 
   workflow_column :status
   workflow do
@@ -123,29 +124,11 @@ class Story < ActiveRecord::Base
 
   ######################### Priority ##########################
 
-  def propagate_hours_spent
-    self.update_column(:hours_spent, self.tasks.sum(:hours_spent))
-    self.touch
-
-    milestone.propagate_hours_spent if milestone
-  end
-
-  def propagate_hours_estimated
-    self.update_column(:hours_estimated, self.tasks.sum(:hours_estimated))
-    propagate_percent_completed(false) #change of hours_estimated means that the percent should be recalculated
-
-    milestone.propagate_hours_estimated if milestone
-  end
-
-  def propagate_percent_completed(propagate_to_milestone = true)
+  def recalculate_percent_completed
     weighted_percent_completed = self.tasks(true).inject(0) do |sum, task|
       sum + (task.percent_completed.to_f * task.hours_estimated.to_f)
     end
-
-    percent_completed = weighted_percent_completed / [self.hours_estimated.to_f, 1].max
-    self.update_column(:percent_completed, percent_completed)
-    self.touch
-    milestone.propagate_percent_completed if milestone and propagate_to_milestone
+    weighted_percent_completed / [self.hours_estimated.to_f, 1].max
   end
 
   private
@@ -161,10 +144,18 @@ class Story < ActiveRecord::Base
     self.scope = Scope::BACKLOG
   end
 
-  def update_milestone
+  def propagate_hour_calculations_to_milestone
+    if milestone
+      milestone.hours_spent = milestone.stories.sum(:hours_spent) if self.hours_spent_changed? or self.milestone_id_changed?
+      milestone.hours_estimated = milestone.stories.sum(:hours_estimated) if self.hours_estimated_changed? or self.milestone_id_changed?
+      if hours_estimated_changed? or percent_completed_changed? or self.milestone_id_changed?
+        milestone.percent_completed = milestone.recalculate_percent_completed
+      end
+      milestone.save! if milestone.changed?
+    end
+
     if self.milestone_id_changed?
-      self.milestone.update_hour_calculations if self.milestone
-      Milestone.find(self.milestone_id_was).update_hour_calculations if self.milestone_id_was.to_i > 0
+      Milestone.find(self.milestone_id_was).update_hour_calculations! if self.milestone_id_was.to_i > 0
     end
   end
 

@@ -17,8 +17,8 @@ class Task < ActiveRecord::Base
   scope :in_progress, lambda { where(status: 'in_progress') }
 
   before_create :set_project_id
-  after_save :update_story_status, :propagate_values_to_story
-  after_destroy :update_story_status, :propagate_values_to_story
+  after_save :update_story_status, :propagate_hours_info_to_story
+  after_destroy :update_story_status, :propagate_hours_info_to_story
 
   workflow_column :status
   workflow do
@@ -69,30 +69,19 @@ class Task < ActiveRecord::Base
     time_entry
   end
 
-  def propagate_hours_spent
-    story.propagate_hours_spent if self.hours_spent_changed?
-  end
-
-  def propagate_hours_estimated
-    story.propagate_hours_estimated if self.hours_estimated_changed?
-  end
-
-  def propagate_percent_completed
-    # fire if only the percent_completed changed
-    story.propagate_percent_completed if self.percent_completed_changed? and !self.hours_estimated_changed?
-  end
-
   private
-
   #not yet implemented
   def update_story_status
     story.update_status
   end
 
-  def propagate_values_to_story
-    propagate_hours_spent
-    propagate_hours_estimated
-    propagate_percent_completed
+  def propagate_hours_info_to_story
+    story.hours_spent = story.tasks.sum(:hours_spent) if self.hours_spent_changed?
+    story.hours_estimated = story.tasks.sum(:hours_estimated) if self.hours_estimated_changed?
+    if hours_estimated_changed? or percent_completed_changed?
+      story.percent_completed = story.recalculate_percent_completed
+    end
+    story.save! if story.changed?
   end
 
   def set_project_id

@@ -22,7 +22,7 @@ describe TimeEntry do
 
         @story = @story.reload
         expect(@story.hours_spent).to eq 20
-        expect(@story.percent_completed).to eq 67
+        expect(@story.percent_completed).to eq 66
       end
     end
   end
