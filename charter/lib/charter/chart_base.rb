@@ -16,7 +16,7 @@ module Charter
     end
 
     def render_chart(html_dom_id, options = {})
-      api_name = options[:web_api] || Charter.config.web_api.to_s
+      api_name = options[:web_api_name] || Charter.config.web_api_name.to_s
       load "charter/#{api_name}_line_chart.rb"
       js_type = api_name.camelize
       class_name = self.class.name.split("::")[1]

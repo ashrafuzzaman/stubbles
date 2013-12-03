@@ -7,7 +7,6 @@
 //= require jquery_nested_form
 //= require template
 //= require popover_form
-//= require Chart
 //= require fragment_cache_helper
 //= require jquery.remotipart
 

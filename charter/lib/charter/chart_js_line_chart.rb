@@ -3,24 +3,9 @@ require 'gruff'
 
 module Charter
   class ChartJsLineChart < ChartBase
-    COLORS = [
-        {
-            fill_color: "rgba(220,220,220,0.5)",
-            stroke_color: "rgba(220,220,220,1)",
-            point_color: "rgba(220,220,220,1)",
-            point_stroke_color: "#fff"
-        },
-        {
-            fill_color: "rgba(151,187,205,0.5)",
-            stroke_color: "rgba(151,187,205,1)",
-            point_color: "rgba(151,187,205,1)",
-            point_stroke_color: "#fff"
-        }
-    ]
-
-
     def render(html_dom_id)
       datasets = []
+      colors = Charter.config.chart[:chart_js][:colors]
 
       columns.each_with_index do |column, i|
         if column.kind_of?(Array)
@@ -28,7 +13,7 @@ module Charter
         else
           key, text = column, column.to_s.humanize
         end
-        color = COLORS[i%2]
+        color = colors[i%colors.size]
         datasets << {
             fillColor: color[:fill_color],
             strokeColor: color[:stroke_color],
@@ -38,6 +23,7 @@ module Charter
       end
 
       <<-HTML
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
         <script type="application/javascript">
           var lineChartData = {
               labels: #{data_for_column(label_column).to_json},
