@@ -32,20 +32,24 @@
               <%= render :partial => 'tasks/partials/tasks',
                          :locals => {:story => story, :tasks => story.tasks} %>
             </div>
-            <hr/>
-            <div class="attachments">
-              <% story.attachments.each do |attachment| %>
-                  <%= link_to(attachment.file.url, target: '_blank') do
-                    image_tag(attachment.file.thumb)
-                  end if attachment.file %>
-              <% end %>
-            </div>
+            <% if story.attachments.count > 0 %>
+                <hr/>
+                <div class="attachments">
+                  <% story.attachments.each do |attachment| %>
+                      <%= link_to(attachment.file.url, target: '_blank') do
+                        image_tag(attachment.file.thumb)
+                      end if attachment.file %>
+                  <% end %>
+                </div>
+            <% end %>
             <hr/>
             <div>
               <%= render_comments_for(story) %>
             </div>
 
             <div id="story-<%= story.id %>-history" class="collapse row">
+              <h4 style="margin-left: 20px;">History</h4>
+              <hr/>
               <%= render :partial => 'stories/partials/history', :locals => {:story => story} %>
             </div>
         <% end %>

@@ -23,7 +23,7 @@
                                  :spent => task.hours_spent} %>
         </div>
       </div>
-      <div id="task-<%= task.id %>-history" class="row collapse">
+      <div id="task-<%= task.id %>-history" class="row collapse task-history">
         <%= render :partial => 'tasks/partials/history', :locals => {:task => task} %>
       </div>
     </div>
