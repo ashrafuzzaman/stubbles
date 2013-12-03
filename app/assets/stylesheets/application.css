@@ -3,14 +3,10 @@
  *= require layout
  *= require bootstrap-wysihtml5/b3
  *= require bootstrap-tagsinput
- *= require button
  *= require story
- *= require task
- *= require comments
  *= require bootstrap-datepicker
  *= require time-entry
  *= require jquery.pnotify.default
  *= require dashboard
- *= require fullcalendar
  *= require_self
 */
