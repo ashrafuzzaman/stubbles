@@ -25,6 +25,10 @@ module Charter
       chart.render(html_dom_id)
     end
 
+    def self.evaluate_js
+      "eval($('script.chart_script').text());"
+    end
+
     protected
     def data_for_column(column_name)
       data.map { |row| row[column_name] }

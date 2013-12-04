@@ -22,9 +22,9 @@ module Charter
             data: data_for_column(key)}
       end
 
-      <<-HTML
+      html = <<-HTML
         <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
-        <script type="application/javascript">
+        <script type="application/javascript" class="chart_script">
           var lineChartData = {
               labels: #{data_for_column(label_column).to_json},
               datasets: #{datasets.to_json}
@@ -32,6 +32,7 @@ module Charter
           var myLine = new Chart(document.getElementById("#{html_dom_id}").getContext("2d")).Line(lineChartData, {bezierCurve: false});
         </script>
       HTML
+      html.html_safe
     end
   end
 end
