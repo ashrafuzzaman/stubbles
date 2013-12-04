@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
   before_filter :load_project
   before_filter :load_form_dependencies, only: [:new, :edit, :create, :update, :clone]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:burn_down]
 
   def index
     @milestones = @project.milestones
@@ -97,13 +97,14 @@ class MilestonesController < ApplicationController
   end
 
   def burn_down
-    milestone = Milestone.find(params[:id]) rescue nil
+    milestone = @project.milestones.find(params[:id]) rescue nil
     chart = milestone.try(:burn_down_chart)
     send_data(chart.try(:to_blob), :filename => "burn_down.png", :type => 'image/png', :disposition=> 'inline')
   end
 
   def send_report
-    @milestone = Milestone.find(params[:id]) rescue nil
+    @milestone = @project.milestones.find(params[:id])
+    ReportMailer.sprint_report(params[:email], @milestone).deliver
     flash[:notice] = "Report send"
     respond_to do |format|
       format.js

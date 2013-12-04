@@ -34,4 +34,7 @@ Stubbles::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = { host: 'localhost:4000' }
+  config.action_mailer.delivery_method = :letter_opener
 end

@@ -1,0 +1,61 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+  <tr>
+    <td valign="top" class="bodyContent" mc:edit="body_content00">
+      <h1><%= @milestone.try(:title) %></h1>
+      <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+          <td>Start on</td>
+          <td><%= @milestone.start_on %></td>
+        </tr>
+        <tr>
+          <td>End on</td>
+          <td><%= @milestone.end_on %></td>
+        </tr>
+        <tr>
+          <td>Deliver on</td>
+          <td><%= @milestone.delivered_on %></td>
+        </tr>
+        <tr>
+          <td>Duration</td>
+          <td><%= @milestone.duration %> days</td>
+        </tr>
+        <tr>
+          <td>Progress</td>
+          <td><progress value="<%= @milestone.percent_completed %>" max="100"></progress></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td class="bodyContent" style="padding-top:0; padding-bottom:0;">
+      <h2>Burndown chart</h2>
+      <img src="<%= burn_down_project_milestone_url(@milestone.project, @milestone) %>" alt=""/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" class="bodyContent" mc:edit="body_content01">
+      <h1>Stories</h1>
+      <table border="1" cellpadding="10" cellspacing="0" class="toggle">
+        <thead>
+        <tr>
+          <th align="left">Title</th>
+          <th align="left">Assigned to</th>
+          <th align="left">Completed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @milestone.stories.each do |story| %>
+            <tr>
+              <td align="left"><%= story.title %></td>
+              <td align="left" valign="middle">
+                <%= image_tag story.assigned_to.gravatar_url(25), width: 25, height: 25 %> &nbsp; <%= story.assigned_to.try(:name) %>
+              </td>
+              <td align="left"><%= story.percent_completed %>%</td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
+
