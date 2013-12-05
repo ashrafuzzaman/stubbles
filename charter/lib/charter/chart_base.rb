@@ -1,3 +1,5 @@
+require 'charter/gruff_themes'
+
 module Charter
   class ChartBase
     attr_accessor :title, :data, :columns, :label_column
