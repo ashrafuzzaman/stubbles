@@ -48,7 +48,7 @@
             <tr>
               <td align="left"><%= story.title %></td>
               <td align="left" valign="middle">
-                <%= image_tag story.assigned_to.gravatar_url(25), width: 25, height: 25 %> &nbsp; <%= story.assigned_to.try(:name) %>
+                <%= image_tag story.assigned_to.gravatar_url(25), width: 25, height: 25, alt: '' %> &nbsp; <%= story.assigned_to.try(:name) %>
               </td>
               <td align="left"><%= story.percent_completed %>%</td>
             </tr>

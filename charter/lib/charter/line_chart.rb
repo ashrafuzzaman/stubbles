@@ -4,9 +4,7 @@ require 'gruff'
 module Charter
   class LineChart < ChartBase
     def to_blob
-      g = Gruff::Line.new
-      g.theme = Charter::Themes::GOOGLE_CHART
-      g.title = self.title
+      g = prepare_gruff
 
       columns.each do |column|
         if column.kind_of?(Array)
