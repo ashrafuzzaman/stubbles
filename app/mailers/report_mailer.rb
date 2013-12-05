@@ -4,6 +4,7 @@ class ReportMailer < ActionMailer::Base
 
   def sprint_report(email, milestone)
     @milestone = milestone
+    attachments.inline['burndown.png'] = @milestone.burn_down_chart.to_blob
     mail(to: email, subject: "Sprint report on #{I18n.l(Date.current)}")
   end
 end
