@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :name, :creator, :description, :started_on, :sprint_length
+  attr_accessible :name, :creator, :description, :started_on, :sprint_length, :default_report_emails
 
   include ProjectPermission
   HOURS_PER_DAY = 8

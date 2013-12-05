@@ -10,7 +10,8 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <%= text_field :email, nil, class: 'form-control', placeholder: "Enter email", required: 'required' %>
+                  <%= text_field_tag :email, milestone.project.default_report_emails,
+                                 class: 'form-control', placeholder: "Enter email", required: 'required' %>
                 </div>
               </div>
               <div class="modal-footer">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123133339) do
+ActiveRecord::Schema.define(:version => 20131205050922) do
 
   create_table "activities", :force => true do |t|
     t.integer  "done_by_id"
@@ -89,11 +89,12 @@ ActiveRecord::Schema.define(:version => 20131123133339) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.float    "sprint_length", :default => 2.0
+    t.float    "sprint_length",         :default => 2.0
     t.date     "started_on"
     t.integer  "creator_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "default_report_emails"
   end
 
   create_table "sessions", :force => true do |t|

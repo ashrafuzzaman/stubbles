@@ -2,6 +2,7 @@
     <%= f.input :name %>
     <%= f.input :description, :input_html => { :rows => 5 }, input_html: {class: 'richtext'} %>
     <%= f.input :started_on, as: :string, input_html: {class: 'datepicker'} %>
+    <%= f.input :default_report_emails %>
 
     <div>
       <%= f.button :submit %>
