@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.1'
+ruby '2.0.0'
 gem 'rails', '3.2.13'
 
 group :assets do
