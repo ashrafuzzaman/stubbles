@@ -19,7 +19,7 @@
 
           <br/>
           <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
-          <br>
+          <br/><br/>
           <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
           <%= f.hidden_field :milestone_id %>
 
@@ -37,12 +37,9 @@
             <% end %>
           </div>
           <div>
+            <br/>
             <%= f.link_to_add "Add an attachment", :attachments, :data => {:target => "#story-#{story.id}-attachments"}, class: 'btn btn-primary' %>
-            <br/>
-            <br/>
           </div>
-
-          <br/>
         </div>
     <% end %>
     <%= sw.footer do %>
