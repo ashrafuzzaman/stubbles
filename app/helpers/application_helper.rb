@@ -7,7 +7,7 @@ module ApplicationHelper
     if (!model.new_record?)
       link_to "cancel", {:action => "show"}, :remote => true, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
     else
-      link_to "cancel", '#', :'data-cancel' => removeElement, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
+      link_to "cancel", 'javascript:void(0)', :'data-cancel' => removeElement, :'data-disable-with' => "canceling...", :class => "btn btn-default #{options[:class]}"
     end
   end
 

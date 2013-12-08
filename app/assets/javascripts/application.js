@@ -9,6 +9,7 @@
 //= require popover_form
 //= require fragment_cache_helper
 //= require jquery.remotipart
+//= require render_on_event
 
 $(function () {
     addSubmitalbeElemntInForm();
