@@ -2,7 +2,7 @@ require 'auditlog/model_tracker'
 
 class Task < ActiveRecord::Base
   include Auditlog::ModelTracker
-  track only: [:title, :hours_estimated, :assigned_to_id], meta: [:project_id]
+  track only: [:title, :status, :hours_estimated, :assigned_to_id], meta: [:project_id]
   attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
 
   include TaskPermission
