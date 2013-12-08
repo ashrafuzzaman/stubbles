@@ -11,9 +11,7 @@
 
     <ul class="nav navbar-nav pull-right">
       <% if user_signed_in? %>
-          <li>
-            <%= link_to_user current_user %>
-          </li>
+          <li logged-in-user></li>
           <li>
             <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
           </li>

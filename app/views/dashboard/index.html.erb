@@ -47,10 +47,8 @@
       <div class="bar" style="width: 0%"></div>
     </div>
   </div>
-
-
 </script>
 
-<%= render :partial => 'milestones/send_email_report_modal', :locals => {milestone: @milestone} %>
+<%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
 
 <%= javascript_include_tag "dashboard" %>

@@ -78,6 +78,7 @@
     $(document).ajaxComplete(function (event, xhr, settings) {
         TaskPermission.apply(<%= current_user.try(:id) %>);
     });
+    $("*[logged-in-user]").html('<%= link_to_user current_user %>');
     <% end %>
 
     <%= render :partial => "shared/notification", formats: [:js] %>

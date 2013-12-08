@@ -1,8 +1,8 @@
-require 'charter/chart_base'
+require 'charter/line_chart'
 require 'gruff'
 
 module Charter
-  class ChartJsLineChart < ChartBase
+  class ChartJsLineChart < LineChart
     def render(html_dom_id)
       datasets = []
       colors = Charter.config.chart[:chart_js][:colors]

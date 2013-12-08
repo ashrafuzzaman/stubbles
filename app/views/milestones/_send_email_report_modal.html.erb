@@ -3,14 +3,14 @@
     <div class="modal fade" id="milestone_report" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <%= form_tag send_report_project_milestone_path(milestone.project, milestone), remote: true, method: 'POST', html: {role: 'form'} do %>
+          <%= form_tag send_report_project_milestone_path(project, milestone), remote: true, method: 'POST', html: {role: 'form'} do %>
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Email sprint report</h4>
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <%= text_field_tag :email, milestone.project.default_report_emails,
+                  <%= text_field_tag :email, project.default_report_emails,
                                  class: 'form-control', placeholder: "Enter email", required: 'required' %>
                 </div>
               </div>
