@@ -40,23 +40,7 @@
   </div>
 </div>
 
-<%= render :partial => 'time_entries/time_entry_popup_template', :locals => {project: @project} %>
-<script id="template-upload" type="text/x-tmpl">
-  <div class="upload">
-    <div class="progress">
-      <div class="bar" style="width: 0%"></div>
-    </div>
-  </div>
-
-</script>
-
-<script id="new-task-template" type="text/x-tmpl">
-  <% story = @project.stories.build
-     task = story.tasks.build %>
-  <%= form_for(task, url: '/stories/{{storyId}}/tasks', method: :post, :remote => true, role: "form", class: 'task') do |f| %>
-      <%= render :partial => 'tasks/partials/fields', locals: {f: f, task: task, story: story} %>
-  <% end %>
-</script>
+<%= render :partial => "dashboard/templates" %>
 
 <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
 

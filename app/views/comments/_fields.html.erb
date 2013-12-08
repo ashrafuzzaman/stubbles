@@ -1,0 +1,9 @@
+<div>
+  <%= f.text_area :text, :class => 'richtext', size: '100x10' %>
+</div>
+<br/>
+
+<div>
+  <%= f.submit :disable_with => "Wait...", :class => 'btn btn-primary btn-xs' %>
+  <%= ajax_cancel_link(comment, :li, class: 'btn-xs') %>
+</div>

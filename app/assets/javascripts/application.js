@@ -19,6 +19,10 @@ $(function () {
     $("body").ajaxStop(function () {
         initializeDom();
     });
+
+    $(document).on('template-rendered', function (e, dom) {
+        initializeDom()
+    });
 });
 
 function initializeDom() {

@@ -11,5 +11,7 @@
 		<% end %>
 		</ol>
 		<%= new_comments_for(resource) %>
+        <%#= link_to('New Comment', 'javascript:void(0)', :class => 'btn btn-primary btn-xs', :'data-story-id' => resource.id,
+                    :'render-template' => 'new-comment-template', :'append-after' => "##{container_id_of_comments_for(resource)}") %>
 	<% end %>
 <% end %>
