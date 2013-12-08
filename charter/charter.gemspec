@@ -7,11 +7,11 @@ require "charter/version"
 Gem::Specification.new do |s|
   s.name        = "charter"
   s.version     = Charter::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
+  s.authors     = ["A.K.M. Ashrafuzzaman"]
+  s.email       = ["ashrafuzzaman.g2@gmail.com"]
   s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Charter."
-  s.description = "TODO: Description of Charter."
+  s.summary     = "A gem to build and render chart on web and as image."
+  s.description = "A gem to build chart to show on web as well as get an image out of it."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
