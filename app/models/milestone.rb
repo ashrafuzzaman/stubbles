@@ -22,6 +22,18 @@ class Milestone < ActiveRecord::Base
   SPRINT_TYPE = 'Sprint'
   TYPES = [RELEASE_TYPE, SPRINT_TYPE]
 
+  ########### Caching for the model ###########
+  after_commit :flush_cache
+
+  def self.cached_find(id)
+    Rails.cache.fetch([name, id]) { find(id) }
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, id])
+  end
+  ########### Caching for the model ###########
+
   def sprint?
     self.milestone_type == 'Sprint'
   end

@@ -73,6 +73,8 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
+  gem 'ruby-prof'
+  gem 'test-unit'
 end
 
 group :production do

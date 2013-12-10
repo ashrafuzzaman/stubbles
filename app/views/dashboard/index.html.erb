@@ -1,29 +1,5 @@
 <%= javascript_include_tag "dashboard" %>
-
-<div id="dashboard-actions" class="row">
-  <div class="col-md-4"><%= user_filter('involved_with') %></div>
-  <div class="col-md-3">
-    <div hide-on-story-move="true">
-      <%= milestone_filter(@project, @milestone) %>
-    </div>
-    <div show-on-story-move="true" hidden>
-      <%= move_milestone_list(@project) %>
-    </div>
-  </div>
-  <div class="col-md-1">
-    <%= link_to('New Story', 'javascript:void(0)', :class => 'btn btn-primary',
-                :'render-template' => 'new-story-template', :'prepend-after' => ".story_column") %>
-  </div>
-  <div class="col-md-3">
-    <%= link_to 'Move story', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
-    <%= link_to 'Cancel move', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true", style: 'display: none;' %>
-    <% if @milestone %>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#milestone_report">
-          Send report
-        </button>
-    <% end %>
-  </div>
-</div>
+<%= render 'actions' %>
 <br/>
 
 <div class="row">
@@ -42,6 +18,7 @@
   </div>
 </div>
 
-<%= render :partial => "dashboard/templates", locals: {project: @project, milestone: @milestone} %>
-
-<%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
+<% cache [@project, @milestone] do %>
+    <%= render :partial => "dashboard/templates", locals: {project: @project, milestone: @milestone} %>
+    <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
+<% end %>

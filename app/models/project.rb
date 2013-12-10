@@ -16,6 +16,18 @@ class Project < ActiveRecord::Base
 
   after_create :add_creator_as_project_admin
 
+  ########### Caching for the model ###########
+  after_commit :flush_cache
+
+  def self.cached_find(id)
+    Rails.cache.fetch([name, id]) { find(id) }
+  end
+
+  def flush_cache
+    Rails.cache.delete([self.class.name, id])
+  end
+  ########### Caching for the model ###########
+
   def collaborators
     self.users.where("(project_memberships.role = ? OR project_memberships.role = ?) 
                         AND project_memberships.active = ?", Role::ADMIN, Role::MEMBER, true)
