@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-ruby '1.9.3'
-gem 'rails', '3.2.13'
+ruby '2.0.0'
+gem 'rails', '~> 4.0.2'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails', '~> 4.0.1'
+  gem 'coffee-rails', '~> 4.0.1'
   #gem "jquery-fileupload-rails"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -32,13 +32,13 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'cancan'
-gem 'devise', '~> 2.2.3'
+gem 'devise', '~> 3.2.2'
 gem 'figaro'
 gem 'pg'
 gem 'rolify'
 gem 'sendgrid'
 gem 'workflow'
-gem 'acts-as-taggable-on', '~> 2.2.2'
+gem 'acts-as-taggable-on', '~> 2.4.1'
 gem "bootstrap-wysihtml5-rails", "~> 0.3.1.23"
 gem 'simple_form'
 gem 'awesome_print'
@@ -85,7 +85,8 @@ end
 gem "cache_digests"
 gem 'unicorn'
 gem 'less-rails-bootstrap'
-gem 'auditlog'
+gem 'auditlog', '0.0.2'
+gem 'auditlog', '0.0.2'
 #gem 'auditlog', :path => '/home/jitu/projects/auditlog'
 gem 'charter', :path => 'charter'
 
@@ -95,3 +96,4 @@ gem 'remotipart', '1.0.5'
 gem "fog"
 gem 'unicorn'
 gem 'newrelic_rpm'
+gem 'protected_attributes'

@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
 
   private
   def filtered_stories
-    @project = Project.cached_find(params[:project_id])
+    @project = Project.find(params[:project_id])
     @milestone = fetch_milestone(@project)
     stories = @milestone.try(:stories) || @project.stories.backlog
     stories = stories.involved_with(params[:involved_with]) if params[:involved_with].to_i > 0
