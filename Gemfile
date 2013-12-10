@@ -94,7 +94,8 @@ gem 'charter', :path => 'charter'
 gem "rmagick"
 gem "carrierwave"
 gem 'remotipart', '1.0.5'
-gem "fog"
+gem 'unf'
+gem 'fog'
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'protected_attributes'
