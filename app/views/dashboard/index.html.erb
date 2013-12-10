@@ -9,8 +9,8 @@
     </div>
   </div>
   <div class="col-md-1">
-    <%= link_to 'New story', new_project_story_path(@project, milestone_id: @milestone.try(:id)),
-                :remote => true, :class => 'btn btn-primary', :'data-disable-with' => "Loading..." %>
+    <%= link_to('New Story', 'javascript:void(0)', :class => 'btn btn-primary',
+                :'render-template' => 'new-story-template', :'prepend-after' => ".story_column") %>
   </div>
   <div class="col-md-3">
     <%= link_to 'Move story', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>

@@ -4,7 +4,6 @@
           <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
           <%= f.text_field :title, class: 'form-control', :required => true, :size => '50', placeholder: "Task title" %>
         </div>
-
     <% end %>
     <%= sw.content(collapse: false) do %>
         <div class="form-group">
@@ -44,6 +43,6 @@
     <% end %>
     <%= sw.footer do %>
         <%= f.submit :'data-disable-with' => "Saving...", :class => 'btn btn-primary' %>
-        <%= ajax_cancel_link(story, '.story') %>
+        <%= ajax_cancel_link(story, 'form') %>
     <% end %>
 <% end %>

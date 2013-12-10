@@ -7,9 +7,13 @@ class @RenderTemplateOnEvent
       return
 
     html = Template.render($("##{templateName}").html(), elem.data())
-    rootElement = elem.attr('append-after')
+    rootElement = elem.attr('append-after') || elem.attr('prepend-after')
     htmlDom = $(html)
-    $(rootElement).append(htmlDom)
+    if elem.attr('append-after')
+      $(rootElement).append(htmlDom)
+    else
+      $(rootElement).prepend(htmlDom)
+
     $(rootElement).trigger("template-rendered")
     $(document).trigger("template-rendered", [rootElement])
     htmlDom.hide().slideDown()

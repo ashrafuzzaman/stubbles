@@ -5,6 +5,7 @@
       <div class="bar" style="width: 0%"></div>
     </div>
   </div>
+
 </script>
 
 <script id="new-task-template" type="text/x-tmpl">
@@ -19,16 +20,12 @@
   <% comment = story.comments.build %>
     <li class="new-comment">
       <%= form_for(comment, url: '/stories/{{storyId}}/comments', :remote => true) do |f| %>
-          <%= render :partial => 'comments/fields', locals: {comment: comment, f: f} %>
-      <% end %>
-    </li>
-</script>
-
-<script id="new-story-template" type="text/x-tmpl">
-  <% comment = story.comments.build %>
-    <li class="new-comment">
-      <%= form_for(comment, url: '/stories/{{storyId}}/comments', :remote => true) do |f| %>
       <%= render :partial => 'comments/fields', locals: {comment: comment, f: f} %>
   <% end %>
     </li>
+
+</script>
+
+<script id="new-story-template" type="text/x-tmpl">
+  <%= render :partial => 'stories/partials/form', :locals => {:story => story} %>
 </script>

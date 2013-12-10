@@ -44,8 +44,7 @@ function addSubmitalbeElemntInForm() {
 }
 
 function attachCancelSupport() {
-    $('body').on('click', 'a[data-cancel]',
-        function () {
+    $('body').on('click', 'a[data-cancel]', function () {
             var elementToClose = $(this).attr("data-cancel");
             $(this).closest(elementToClose).slideUp('fast', function () {
                 $(this).remove();
