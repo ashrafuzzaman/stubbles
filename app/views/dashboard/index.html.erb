@@ -1,4 +1,6 @@
-<div class="row">
+<%= javascript_include_tag "dashboard" %>
+
+<div id="dashboard-actions" class="row">
   <div class="col-md-4"><%= user_filter('involved_with') %></div>
   <div class="col-md-3">
     <div hide-on-story-move="true">
@@ -14,7 +16,7 @@
   </div>
   <div class="col-md-3">
     <%= link_to 'Move story', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-move' => "true" %>
-    <%= link_to 'Cancel move', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true" %>
+    <%= link_to 'Cancel move', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-move' => "true", style: 'display: none;' %>
     <% if @milestone %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#milestone_report">
           Send report
@@ -40,8 +42,6 @@
   </div>
 </div>
 
-<%= render :partial => "dashboard/templates" %>
+<%= render :partial => "dashboard/templates", locals: {project: @project, milestone: @milestone} %>
 
 <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
-
-<%= javascript_include_tag "dashboard" %>
