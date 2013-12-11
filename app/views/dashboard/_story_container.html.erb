@@ -1,3 +1,6 @@
+<%= render :partial => 'dashboard/actions', locals: {project: @project, milestone: @milestone} %>
+<br/>
+
 <div class="row">
   <%= render :partial => 'milestones/burndown', :locals => {:milestone => @milestone} %>
 </div>
