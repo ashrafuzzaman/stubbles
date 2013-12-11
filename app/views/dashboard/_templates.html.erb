@@ -1,4 +1,4 @@
-<% story = project.stories.build(milestone_id: milestone.try(:id))
+<% story = project.stories.build
    task = story.tasks.build %>
 
 <%= render :partial => 'time_entries/time_entry_popup_template', :locals => {project: project} %>
@@ -27,5 +27,6 @@
 </script>
 
 <script id="new-story-template" type="text/x-tmpl">
+  <% story.milestone_id =  "{{milestoneId}}" %>
   <%= render :partial => 'stories/partials/form', :locals => {:story => story} %>
 </script>

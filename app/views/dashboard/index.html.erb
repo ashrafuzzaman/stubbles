@@ -1,24 +1,15 @@
 <%= javascript_include_tag "dashboard" %>
-<%= render 'actions' %>
+<%= render :partial => 'dashboard/actions', locals: {project: @project, milestone: @milestone} %>
 <br/>
 
-<div class="row">
-  <%= render :partial => 'milestones/burndown', :locals => {:milestone => @milestone} %>
+<div id="dashboard-story-container">
+  <%= render 'story_container' %>
 </div>
 
-<div class="row">
-  <div class="col-md-9">
-    <%= render :partial => 'dashboard/story_column', :locals => {:title => @milestone.try(:title) || 'Backlog',
-                                                                 :stories => @stories} %>
-  </div>
-  <div class="col-md-3" id="dashboard_resources">
-    <% if @milestone %>
-        <%= render :partial => 'milestones/dashboard', :locals => {milestone: @milestone} %>
-    <% end %>
-  </div>
-</div>
+<% cache @project do %>
+    <%= render :partial => "dashboard/templates", locals: {project: @project} %>
+<% end %>
 
-<% cache [@project, @milestone] do %>
-    <%= render :partial => "dashboard/templates", locals: {project: @project, milestone: @milestone} %>
+<% cache @milestone do %>
     <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
 <% end %>
