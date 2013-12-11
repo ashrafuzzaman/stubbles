@@ -15,10 +15,6 @@
     <%= render :partial => "dashboard/templates", locals: {project: @project} %>
 <% end %>
 
-<% cache @milestone do %>
-    <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
-<% end %>
-
 <script type="text/javascript">
     $('input#story-search').typeahead({
         name: 'stories',

@@ -16,3 +16,7 @@
     <% end %>
   </div>
 </div>
+
+<% cache @milestone do %>
+    <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
+<% end %>
