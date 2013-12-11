@@ -9,3 +9,7 @@ $ ->
     dom = $($(this).attr('show-loading-image'))
     dom.html('')
   )
+
+  $(document).on('ajax:complete', (xhr, status) ->
+    $('.loading-placeholder').html('')
+  )

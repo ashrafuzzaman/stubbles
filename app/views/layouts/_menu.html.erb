@@ -8,7 +8,7 @@
           <%= link_to_nav 'Calendar', milestone_calendar_path(@project.id) %>
       <% end %>
       <%= yield :menu_item %>
-      <li><div id="loading-placeholder"></div></li>
+      <li><div id="loading-placeholder" class="loading-placeholder"></div></li>
     </ul>
 
     <ul class="nav navbar-nav pull-right">
