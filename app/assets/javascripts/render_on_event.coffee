@@ -15,8 +15,8 @@ class @RenderTemplateOnEvent
       $(rootElement).prepend(htmlDom)
 
     $(rootElement).trigger("template-rendered")
-    $(document).trigger("template-rendered", [rootElement])
     htmlDom.hide().slideDown()
+    $(document).trigger("template-rendered", [rootElement])
 
 $(document).ready(->
   $(document).on('click', '[render-template]', ->

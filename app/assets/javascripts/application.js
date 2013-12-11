@@ -29,7 +29,10 @@ function initializeDom() {
     addRichText();
     addUIButton();
     //binding tags
-    $('input[data-role="tagsinput"]').tagsinput();
+    $('input[data-role="tagsinput"]').each(function () {
+        $(this).tagsinput();
+        $(this).removeAttr('data-role');
+    });
 }
 
 function addUIButton() {
