@@ -4,7 +4,7 @@
             <div class="col-md-7">
               <%= check_box_tag 'moved-story-id', story.id, false, :'show-on-story-move' => true, :'story-move-chk' => true, hidden: 'true' %>
               <%= sw.collapse_link do %>
-                  <%= story.title %>
+                  <span class="badge"><%= story.id %></span> <%= story.title %>
               <% end %>
             </div>
             <div class="col-md-2">

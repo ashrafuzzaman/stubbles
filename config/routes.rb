@@ -22,6 +22,7 @@ Stubbles::Application.routes.draw do
       end
       collection do
         post 'update_scope_and_priority'
+        get 'search'
       end
     end
     resources :project_memberships do

@@ -9,5 +9,6 @@
  *= require jquery.pnotify.default
  *= require dashboard
  *= require loading_animation
+ *= require typeahead.js-bootstrap
  *= require_self
 */

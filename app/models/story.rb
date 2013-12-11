@@ -17,14 +17,16 @@ class Story < ActiveRecord::Base
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
-  has_many :tasks, inverse_of: :story, order: 'created_at ASC'
+  has_many :tasks, inverse_of: :story
   has_many :comments, :as => :commentable
   has_many :attachments, :as => :attachable
   accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: proc { |attributes| attributes['file'].blank? }
 
-  default_scope :order => 'priority'
-  scope :backlog, where(milestone_id: nil)
-  scope :yet_to_be_accepted, where(['stories.status != ?', 'accepted'])
+  scope :order_by_priority, -> { order 'priority ASC' }
+  default_scope { order_by_priority }
+
+  scope :backlog, -> {where(milestone_id: nil)}
+  scope :yet_to_be_accepted, -> {where(['stories.status != ?', 'accepted'])}
   scope :assigned_to, lambda { |user| where(:assigned_to_id => user.id) }
   scope :assigned_to_task_for, lambda { |user| includes('tasks').where("tasks.assigned_to_id" => user.id) }
   scope :involved_with, lambda { |user_id| includes('tasks').where(["tasks.assigned_to_id = ? " +
@@ -52,6 +54,10 @@ class Story < ActiveRecord::Base
       event :reopen, :transitions_to => :started
     end
     state :accepted
+  end
+
+  def self.search(q)
+    where("stories.title ILIKE ? OR stories.id = ?", "%#{q}%", q.to_i)
   end
 
   #TODO: add validation so that no user can be added that is not in the following list

@@ -8,7 +8,7 @@ class ProjectMembership < ActiveRecord::Base
   validate :ensure_one_membership_in_projects
 
   scope :of, lambda { |user| where(:user_id => user) }
-  scope :active, where(:active => true)
+  scope :active, -> { where(:active => true) }
 
   def activate
   	update_attribute(:active, true)

@@ -15,6 +15,8 @@ class Task < ActiveRecord::Base
 
   scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
   scope :in_progress, lambda { where(status: 'in_progress') }
+  scope :order_by_recent, -> { order 'created_at ASC' }
+  default_scope { order_by_recent }
 
   before_create :set_project_id
   after_save :update_story_status, :propagate_hours_info_to_story

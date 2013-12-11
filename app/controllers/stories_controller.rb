@@ -7,6 +7,12 @@ class StoriesController < ApplicationController
     respond_with(@stories)
   end
 
+  def search
+    @stories = @project.stories
+    @stories = @stories.search(params[:q]) if params[:q]
+    render json: @stories.as_json(:only => [ :id, :title, :milestone_id ])
+  end
+
   def show
     @story = @project.stories.find(params[:id])
   end

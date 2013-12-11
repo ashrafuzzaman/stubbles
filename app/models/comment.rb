@@ -1,11 +1,12 @@
 class Comment < ActiveRecord::Base
   attr_accessible :text
 
-	include CommentPermission
+  include CommentPermission
 
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
 
   validates :text, :presence => true
-  default_scope :order => 'created_at'
+  scope :order_by_recent, -> { order 'created_at ASC' }
+  default_scope { order_by_recent }
 end

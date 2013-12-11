@@ -1,5 +1,12 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
 <%= javascript_include_tag "dashboard" %>
+
+<%= content_for :menu_item do %>
+    <form class="navbar-form navbar-left">
+      <input id="story-search" type="search" class="form-control" placeholder="Search" autocomplete="off">
+    </form>
+<% end %>
+
 <%= render :partial => 'dashboard/actions', locals: {project: @project, milestone: @milestone} %>
 <br/>
 
@@ -14,3 +21,23 @@
 <% cache @milestone do %>
     <%= render :partial => 'milestones/send_email_report_modal', :locals => {project: @project, milestone: @milestone} %>
 <% end %>
+
+<script type="text/javascript">
+    $('input#story-search').typeahead({
+        name: 'stories',
+        remote: '<%= search_project_stories_path(@project) %>?q=%QUERY',
+        template: "{{title}}",
+        engine: Hogan
+    });
+
+    $('input#story-search').on('typeahead:selected', function (e, story) {
+        console.log(story);
+        var url = '/projects/<%= @project.id %>/dashboard?milestone_id=' + story.milestone_id + "#story-" + story.id;
+        window.location.assign(url);
+    });
+
+    var urlHash = parseCurrentURL();
+    if(urlHash.hash) {
+        $("#" + urlHash.hash).find(".panel-collapse").removeClass("collapse").addClass("in");
+    }
+</script>

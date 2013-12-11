@@ -9,7 +9,7 @@ class Milestone < ActiveRecord::Base
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }
   scope :without, ->(id) { where('milestones.id != ?', id) }
   scope :order_by_recent, order("end_on DESC")
-  default_scope order_by_recent
+  default_scope { order_by_recent }
 
   belongs_to :project, inverse_of: :milestones
   has_many :stories, inverse_of: :milestone
