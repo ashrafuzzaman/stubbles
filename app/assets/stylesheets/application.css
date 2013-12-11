@@ -8,5 +8,6 @@
  *= require time-entry
  *= require jquery.pnotify.default
  *= require dashboard
+ *= require loading_animation
  *= require_self
 */

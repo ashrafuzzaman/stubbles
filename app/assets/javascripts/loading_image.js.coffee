@@ -1,4 +1,4 @@
-LOADING_IMAGE_HTML = '<img src="/assets/ajax-loader.gif" alt="Loading ..." class="loading-image">'
+LOADING_IMAGE_HTML = '<div class="ball"></div><div class="ball1"></div>'
 $ ->
   $(document).on('ajax:beforeSend', '[show-loading-image]', (event, xhr, status) ->
     dom = $($(this).attr('show-loading-image'))
