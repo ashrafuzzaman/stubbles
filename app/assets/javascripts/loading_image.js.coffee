@@ -10,6 +10,6 @@ $ ->
     dom.html('')
   )
 
-  $(document).on('ajax:complete', (xhr, status) ->
+  $(document).on('ajaxSuccess', (xhr, status) ->
     $('.loading-placeholder').html('')
   )
