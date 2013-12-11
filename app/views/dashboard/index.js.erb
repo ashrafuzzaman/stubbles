@@ -1,3 +1,5 @@
 $('#dashboard-story-container').html('<%= escape_javascript(render :partial => 'dashboard/story_container') %>');
 <%= raw Charter::ChartBase.evaluate_js %>
-window.history.pushState({}, "Stubbles", "<%= url_for(params) %>");
+<% p = params.clone
+   p.delete :utf8 %>
+window.history.pushState({}, "Stubbles", "<%= raw url_for(p) %>");

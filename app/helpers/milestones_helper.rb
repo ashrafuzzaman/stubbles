@@ -1,6 +1,6 @@
 module MilestonesHelper
   def milestone_filter(project, milestone)
-    form_tag("", :method => :get, remote: true) do |f|
+    form_tag("", :method => :get, remote: true, :'show-loading-image' => '#action-loading') do |f|
       concat select_tag(:milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
                                                           :selected => milestone.try(:id)),
                         {:class => 'submittable form-control', :prompt => 'Backlog'})

@@ -23,7 +23,6 @@ module Charter
       end
 
       html = <<-HTML
-        <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
         <script type="application/javascript" class="chart_script">
           var lineChartData = {
               labels: #{data_for_column(label_column).to_json},

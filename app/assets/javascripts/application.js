@@ -10,6 +10,7 @@
 //= require fragment_cache_helper
 //= require jquery.remotipart
 //= require render_on_event
+//= require loading_image
 
 $(function () {
     addSubmitalbeElemntInForm();
