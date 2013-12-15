@@ -17,6 +17,7 @@
           </div>
 
           <br/>
+
           <%= f.text_area :description, class: 'form-control', size: '80x10', :class => 'richtext' %>
           <br/><br/>
           <%= f.text_field :tag_list, data: {role: "tagsinput"} %>
@@ -35,10 +36,7 @@
                 </div>
             <% end %>
           </div>
-          <div>
-            <br/>
-            <%= f.link_to_add "Add an attachment", :attachments, :data => {:target => "#story-#{story.id}-attachments"}, class: 'btn btn-primary' %>
-          </div>
+          <%= f.link_to_add "Add an attachment", :attachments, :data => {:target => "#story-#{story.id}-attachments"}, class: 'btn btn-primary add-attachment' %>
         </div>
     <% end %>
     <%= sw.footer do %>
