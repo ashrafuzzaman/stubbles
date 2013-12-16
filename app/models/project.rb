@@ -26,11 +26,18 @@ class Project < ActiveRecord::Base
   def flush_cache
     Rails.cache.delete([self.class.name, id])
   end
+
   ########### Caching for the model ###########
 
   def collaborators
     self.users.where("(project_memberships.role = ? OR project_memberships.role = ?) 
                         AND project_memberships.active = ?", Role::ADMIN, Role::MEMBER, true)
+  end
+
+  def cached_collaborators
+    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators']) do
+      collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a
+    end
   end
 
   def membership_of(user)
