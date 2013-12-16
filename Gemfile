@@ -81,6 +81,8 @@ group :production do
   gem 'memcachier'
   gem 'dalli', '~>1.0.5'
   gem 'rails_12factor'
+  gem 'foreman'
+  gem 'puma'
 end
 
 gem "cache_digests"
