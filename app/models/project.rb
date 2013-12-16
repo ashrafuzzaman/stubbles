@@ -35,9 +35,7 @@ class Project < ActiveRecord::Base
   end
 
   def cached_collaborators
-    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators']) do
-      collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a
-    end
+    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators'], collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a)
   end
 
   def membership_of(user)
