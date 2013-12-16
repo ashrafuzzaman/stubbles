@@ -7,7 +7,7 @@ Stubbles::Application.configure do
   config.cache_classes = false
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
@@ -25,8 +25,19 @@ Stubbles::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.action_mailer.default_url_options = { host: 'localhost:4000' }
+  config.action_mailer.default_url_options = {host: 'localhost:4000'}
   config.action_mailer.delivery_method = :letter_opener
 
   config.eager_load = false
+
+  config.after_initialize do
+    Bullet.enable = true
+    #Bullet.alert = true
+    #Bullet.bullet_logger = true
+    #Bullet.console = true
+    #Bullet.growl = true
+    Bullet.rails_logger = true
+    #Bullet.airbrake = true
+    #Bullet.add_footer = true
+  end
 end

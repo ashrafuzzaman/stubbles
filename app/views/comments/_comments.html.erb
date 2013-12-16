@@ -6,7 +6,7 @@
 	<% comments_content do %>
 		<hr/>
 		<ol id="<%= container_id_of_comments_for(resource) %>">
-		<% resource.comments.each do |comment| %>
+		<% resource.comments.includes([:user, :commentable]).each do |comment| %>
 			<%= render :partial => 'comments/view', :locals => {:comment => comment} %>
 		<% end %>
 		</ol>

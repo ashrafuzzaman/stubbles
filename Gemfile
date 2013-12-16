@@ -60,13 +60,14 @@ group :development do
   gem 'rb-fsevent', :require => false
   gem 'rb-inotify', :require => false
   gem 'letter_opener' #to test email in development env. Usually stored in tmp/letter_opener
+  gem 'rack-mini-profiler'
+  gem 'ruby-growl'
+  gem 'bullet'
 end
 
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'rack-mini-profiler'
-  gem 'bullet'
 end
 
 group :test do

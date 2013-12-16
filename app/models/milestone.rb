@@ -76,7 +76,7 @@ class Milestone < ActiveRecord::Base
 
     start_on.upto(end_date) do |date|
       hours_spent = 0
-      self.time_entries.spent_on(date).order('created_at DESC').each do |time_entry|
+      self.time_entries.spent_on(date).includes(:trackable).order('created_at DESC').each do |time_entry|
         hours_est = time_entry.trackable.hours_estimated
         hours_spent += (hours_est * time_entry.percent_completed_on_date.to_f)/100
       end
