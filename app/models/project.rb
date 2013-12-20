@@ -27,15 +27,22 @@ class Project < ActiveRecord::Base
     Rails.cache.delete([self.class.name, id])
   end
 
+  #fetch is not working for some reason
+  def cached_collaborators
+    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators'], collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a)
+  end
+
+  #fetch is not working for some reason
+  def cached_milestones
+    Rails.cache.fetch([self, 'milestones']) do
+      self.milestones.select('milestones.id, milestones.title, milestones.project_id').to_a
+    end
+  end
   ########### Caching for the model ###########
 
   def collaborators
-    self.users.where("(project_memberships.role = ? OR project_memberships.role = ?) 
+    self.users.where("(project_memberships.role = ? OR project_memberships.role = ?)
                         AND project_memberships.active = ?", Role::ADMIN, Role::MEMBER, true)
-  end
-
-  def cached_collaborators
-    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators'], collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a)
   end
 
   def membership_of(user)

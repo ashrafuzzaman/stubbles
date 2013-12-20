@@ -50,10 +50,6 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def total_hours_spent
-    time_entries.sum('hours_spent')
-  end
-
   def time_entry_for(user, date)
     time_entries.spent_on(date).by(user).first
   end

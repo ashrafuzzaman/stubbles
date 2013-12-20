@@ -11,7 +11,7 @@ class Milestone < ActiveRecord::Base
   scope :order_by_recent, order("end_on DESC")
   default_scope { order_by_recent }
 
-  belongs_to :project, inverse_of: :milestones
+  belongs_to :project, inverse_of: :milestones, touch: true
   has_many :stories, inverse_of: :milestone
   has_many :milestone_resources
   has_many :time_entries

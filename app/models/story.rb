@@ -65,14 +65,6 @@ class Story < ActiveRecord::Base
     project.collaborators
   end
 
-  def total_hours_estimated
-    tasks.sum(:hours_estimated)
-  end
-
-  def total_hours_spent
-    tasks.sum(:hours_spent)
-  end
-
   def assigned?
     !self.assigned_to.nil?
   end

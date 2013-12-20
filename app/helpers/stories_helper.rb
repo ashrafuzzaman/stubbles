@@ -52,8 +52,8 @@ module StoriesHelper
 
   def story_time_estimations(story)
     render :partial => 'shared/estimated_and_spent_hours',
-           :locals => {:estimated => story.total_hours_estimated,
-                       :spent => story.total_hours_spent}
+           :locals => {:estimated => story.hours_estimated,
+                       :spent => story.hours_spent}
   end
 
   def story_widget(story, &block)

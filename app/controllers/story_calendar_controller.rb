@@ -14,7 +14,7 @@ class StoryCalendarController < ApplicationController
         :title => story.title,
         :start => story.start_at || Date.today,
         :end => story.complete_at || 
-                (Date.today + (story.total_hours_estimated / Project::HOURS_PER_DAY) ) }
+                (Date.today + (story.hours_estimated / Project::HOURS_PER_DAY) ) }
     }
   end
 

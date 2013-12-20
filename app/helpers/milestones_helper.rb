@@ -1,7 +1,7 @@
 module MilestonesHelper
   def milestone_filter(project, milestone)
     form_tag("", :method => :get, remote: true, :'show-loading-image' => '#loading-placeholder') do |f|
-      concat select_tag(:milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
+      concat select_tag(:milestone_id, options_for_select(project.cached_milestones.collect { |m| [m.title, m.id] },
                                                           :selected => milestone.try(:id)),
                         {:class => 'submittable form-control', :prompt => 'Backlog'})
       [:involved_with].each do |param|
@@ -12,7 +12,7 @@ module MilestonesHelper
 
   def move_milestone_list(project)
     milestone_id = @milestone.try(:id) || params[:milestone_id]
-    select_tag(:move_milestone_id, options_for_select(project.milestones.collect { |m| [m.title, m.id] },
+    select_tag(:move_milestone_id, options_for_select(project.cached_milestones.collect { |m| [m.title, m.id] },
                                                       :selected => milestone_id),
                {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => milestone_id})
   end
