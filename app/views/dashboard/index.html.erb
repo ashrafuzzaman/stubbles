@@ -18,12 +18,11 @@
     $('input#story-search').typeahead({
         name: 'stories',
         remote: '<%= search_project_stories_path(@project) %>?q=%QUERY',
-        template: "{{title}}",
+        template: "<b><span class='badge'>{{id}}</span>  {{title}}</b><br/><img src='{{assigned_to.gravatar_url}}' alt=''/><i>{{assigned_to.short_name}}</i>",
         engine: Hogan
     });
 
     $('input#story-search').on('typeahead:selected', function (e, story) {
-        console.log(story);
         var url = '/projects/<%= @project.id %>/dashboard?milestone_id=' + story.milestone_id + "#story-" + story.id;
         window.location.assign(url);
     });

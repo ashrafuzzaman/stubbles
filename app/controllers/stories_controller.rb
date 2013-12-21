@@ -8,9 +8,12 @@ class StoriesController < ApplicationController
   end
 
   def search
-    @stories = @project.stories
+    @stories = @project.stories.includes(:milestone)
     @stories = @stories.search(params[:q]) if params[:q]
-    render json: @stories.as_json(:only => [ :id, :title, :milestone_id ])
+    render json: @stories.as_json(only: [:id, :title, :milestone_id],
+                                  include: {assigned_to: {only: [:id], methods: [:short_name, :gravatar_url]},
+                                            milestone: {only: [:title]}
+                                  })
   end
 
   def show
