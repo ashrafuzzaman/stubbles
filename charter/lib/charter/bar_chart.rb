@@ -2,9 +2,9 @@ require 'charter/chart_base'
 require 'gruff'
 
 module Charter
-  class LineChart < ChartBase
+  class BarChart < ChartBase
     def to_blob
-      g = prepare_gruff(:line)
+      g = prepare_gruff(:bar)
 
       columns.each do |column|
         if column.kind_of?(Array)

@@ -20,11 +20,15 @@ module Charter
     def render_chart(html_dom_id, options = {})
       api_name = options[:web_api_name] || Charter.config.web_api_name.to_s
       class_name = self.class.name.split("::")[1]
-      load "charter/#{api_name}_#{class_name.underscore}.rb"
-      js_type = api_name.camelize
-      chart = "Charter::#{js_type}#{class_name}".constantize.new
+      load "charter/web_chart/#{api_name}/#{class_name.underscore}.rb"
+      chart = "Charter::WebChart::#{api_name.camelize}::#{class_name}".constantize.new
       chart.data, chart.columns, chart.label_column = self.data, self.columns, self.label_column
-      chart.render(html_dom_id)
+      html = <<-HTML
+      <script type="application/javascript" class="chart_script">
+        #{chart.render(html_dom_id)}
+      </script>
+      HTML
+      html.html_safe
     end
 
     def self.evaluate_js
@@ -32,8 +36,11 @@ module Charter
     end
 
     protected
-    def prepare_gruff
-      g = Gruff::Line.new
+    def prepare_gruff(type)
+      chart_type = type.to_s.classify
+      chart_type = "Gruff::#{chart_type}".constantize
+
+      g = chart_type.new
       g.theme = Charter::Themes::GOOGLE_CHART
       g.title = self.title
       g
