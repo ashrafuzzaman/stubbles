@@ -1,10 +1,9 @@
-require 'charter/line_chart'
-require 'gruff'
+require 'charter/bar_chart'
 
 module Charter
   module WebChart
     module ChartJs
-      class LineChart < Charter::LineChart
+      class BarChart < Charter::BarChart
         def render(html_dom_id)
           datasets = []
           colors = Charter.config.chart[:chart_js][:colors]
@@ -29,7 +28,7 @@ module Charter
                 labels: #{data_for_column(label_column).to_json},
                 datasets: #{datasets.to_json}
             }
-            var myLine = new Chart(document.getElementById("#{html_dom_id}").getContext("2d")).Line(lineChartData, {bezierCurve: false});
+            var myLine = new Chart(document.getElementById("#{html_dom_id}").getContext("2d")).Bar(lineChartData, {bezierCurve: false});
           JS
           js.html_safe
         end

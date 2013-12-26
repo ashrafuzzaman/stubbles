@@ -1,5 +1,4 @@
 require 'charter/line_chart'
-require 'gruff'
 
 module Charter
   module WebChart
