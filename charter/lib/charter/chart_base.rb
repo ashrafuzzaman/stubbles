@@ -49,5 +49,21 @@ module Charter
     def data_for_column(column_name)
       data.map { |row| row[column_name] }
     end
+
+    def column_names
+      @column_names ||= begin
+        columns.collect do |column|
+          column.kind_of?(Array) ? column[1] : column.to_s.humanize
+        end
+      end
+    end
+
+    def column_keys
+      @column_keys ||= begin
+        columns.collect do |column|
+          column.kind_of?(Array) ? column[0] : column
+        end
+      end
+    end
   end
 end

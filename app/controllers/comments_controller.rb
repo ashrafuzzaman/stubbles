@@ -73,5 +73,4 @@ class CommentsController < ApplicationController
 	  end
 	  nil
 	end
-
 end

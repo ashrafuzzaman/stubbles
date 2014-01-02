@@ -1,4 +1,4 @@
-require 'charter/bar_chart'
+require 'charter/line_chart'
 
 class Milestone < ActiveRecord::Base
   attr_accessible :delivered_on, :description, :duration, :end_on, :start_on, :title, :milestone_type,
@@ -97,7 +97,7 @@ class Milestone < ActiveRecord::Base
   end
 
   def burn_down_chart
-    chart = Charter::BarChart.new
+    chart = Charter::LineChart.new
     chart.data = self.burn_down_chart_data
     chart.columns = {hours_remain: 'Hours remaining', estimated_hours_remain: 'Estimated hours remaining'}
     chart.label_column = :day

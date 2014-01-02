@@ -24,5 +24,14 @@ module Charter
                                             point_stroke_color: "#fff"
                                         }]}
     }
+    config.web_background_color = '#FFFFFF'
+    config.web_colors = ['#3366CC', # blue
+                         '#DC3912', # red
+                         '#FF9900', # yellow
+                         '#109618', # green
+                         '#990099', # dk purple
+                         '#0099C6', # sky
+                         '#DD4477' # grey
+    ]
   end
 end
