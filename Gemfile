@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.0'
 gem 'rails', '~> 4.0.2'
 
 group :assets do
@@ -90,7 +90,6 @@ gem "cache_digests"
 gem 'unicorn'
 gem 'less-rails-bootstrap'
 gem 'auditlog', '0.0.2'
-gem 'auditlog', '0.0.2'
 #gem 'auditlog', :path => '/home/jitu/projects/auditlog'
 gem 'charter', :path => 'charter'
 
@@ -99,7 +98,6 @@ gem "carrierwave"
 gem 'remotipart', '1.0.5'
 gem 'unf'
 gem 'fog'
-gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'protected_attributes'
 gem 'turbolinks'
