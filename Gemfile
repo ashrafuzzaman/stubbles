@@ -32,7 +32,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'cancan'
-gem 'devise', '~> 3.2.2'
+gem 'devise'
 gem 'figaro'
 gem 'pg'
 gem 'rolify'

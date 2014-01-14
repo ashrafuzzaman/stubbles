@@ -1,7 +1,7 @@
 <div id="burndown_chart_wrapper">
+  <canvas id="burndown_chart" width="800px;" height="300px;"></canvas>
   <% if milestone %>
       <% cache [:burndown_chart, milestone] do %>
-          <div id="burndown_chart"></div>
           <%= raw milestone.burn_down_chart.render_chart("burndown_chart") %>
       <% end %>
   <% end %>
