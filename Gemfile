@@ -100,3 +100,4 @@ gem 'unf'
 gem 'fog'
 gem 'protected_attributes'
 gem 'turbolinks'
+gem "recaptcha", "~> 0.3.6"

@@ -7,5 +7,8 @@
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
+    <%= recaptcha_tags %>
+    <br/>
+
     <%= f.button :submit, value: 'Sign up' %>
 <% end %>
