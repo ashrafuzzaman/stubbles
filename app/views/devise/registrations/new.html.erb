@@ -7,7 +7,7 @@
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
-    <%= recaptcha_tags %>
+    <%= recaptcha_tags if Rails.env.production? %>
     <br/>
 
     <%= f.button :submit, value: 'Sign up' %>
