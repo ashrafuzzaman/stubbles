@@ -29,7 +29,9 @@ class Project < ActiveRecord::Base
 
   #fetch is not working for some reason
   def cached_collaborators
-    Rails.cache.read([self, 'collaborators']) || Rails.cache.write([self, 'collaborators'], collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a)
+    Rails.cache.fetch([self, 'collaborators']) do
+      self.collaborators.select(['users.id', 'users.first_name', 'users.last_name']).to_a
+    end
   end
 
   #fetch is not working for some reason

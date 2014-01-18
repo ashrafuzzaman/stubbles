@@ -98,6 +98,5 @@ gem "carrierwave"
 gem 'remotipart', '1.0.5'
 gem 'unf'
 gem 'fog'
-gem 'newrelic_rpm'
 gem 'protected_attributes'
 gem 'turbolinks'

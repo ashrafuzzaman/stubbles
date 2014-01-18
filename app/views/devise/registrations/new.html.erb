@@ -1,13 +1,11 @@
 <h2>Sign up</h2>
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+    <%= render :partial => "layouts/notification/errors", locals: { model: resource } %>
 
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
-    <%= f.submit "Sign up" %>
+    <%= f.button :submit, value: 'Sign up' %>
 <% end %>
-
-<%= render "links" %>

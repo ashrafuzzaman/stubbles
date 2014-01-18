@@ -1,0 +1,8 @@
+<% messages = model.errors.full_messages.uniq.map { |msg| content_tag(:li, msg) }.join %>
+
+<% if resource.errors.size > 0 %>
+    <div class="alert alert-danger fade in">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <%= raw messages %>
+    </div>
+<% end %>
