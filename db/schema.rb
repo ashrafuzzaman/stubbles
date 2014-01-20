@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205050922) do
+ActiveRecord::Schema.define(version: 20140120100504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -224,5 +224,16 @@ ActiveRecord::Schema.define(version: 20131205050922) do
   add_index "versions", ["activity_id"], name: "index_versions_on_activity_id", using: :btree
   add_index "versions", ["project_id"], name: "index_versions_on_project_id", using: :btree
   add_index "versions", ["trackable_type", "trackable_id"], name: "index_versions_on_trackable_type_and_trackable_id", using: :btree
+
+  create_table "workflow_statuses", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "workflow_for"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workflow_statuses", ["project_id"], name: "index_workflow_statuses_on_project_id", using: :btree
 
 end

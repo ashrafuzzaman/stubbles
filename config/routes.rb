@@ -49,6 +49,10 @@ Stubbles::Application.routes.draw do
     resources :comments
   end
 
+  resources :projects, only: [] do
+    resources :workflow_statuses
+  end
+
   get 'users/:id' => 'users#show', :as => 'user'
   get 'user/search' => 'users#search_new', :as => 'new_user_search'
   post 'user/search' => 'users#search', :as => 'user_search'

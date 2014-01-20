@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @workflow_status.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workflow_status.description %>
+</p>
+
+<p>
+  <strong>Statusable:</strong>
+  <%= @workflow_status.statusable %>
+</p>
+
+<%= link_to 'Edit', edit_workflow_status_path(@workflow_status) %> |
+<%= link_to 'Back', workflow_statuses_path %>

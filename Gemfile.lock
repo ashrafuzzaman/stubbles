@@ -55,9 +55,6 @@ GEM
     bullet (4.7.1)
       activesupport
       uniform_notifier (>= 1.4.0)
-    cache_digests (0.3.1)
-      actionpack (>= 3.2)
-      thread_safe
     cancan (1.6.10)
     capybara (2.2.0)
       mime-types (>= 1.16)
@@ -137,8 +134,14 @@ GEM
     guard-rspec (4.2.0)
       guard (>= 2.1.1)
       rspec (>= 2.14, < 4.0)
+    has_scope (0.6.0.rc)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     hike (1.2.3)
     i18n (0.6.9)
+    inherited_resources (1.4.1)
+      has_scope (~> 0.6.0.rc)
+      responders (~> 1.0.0.rc)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -225,6 +228,8 @@ GEM
     ref (1.0.5)
     remotipart (1.0.5)
     request_store (1.0.5)
+    responders (1.0.0)
+      railties (>= 3.2, < 5)
     rmagick (2.13.2)
     rolify (3.2.0)
     rspec (2.14.1)
@@ -280,8 +285,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.0.0)
-      coffee-rails
     tzinfo (0.3.38)
     uglifier (2.3.2)
       execjs (>= 0.3.0)
@@ -313,7 +316,6 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-wysihtml5-rails (~> 0.3.1.23)
   bullet
-  cache_digests
   cancan
   capybara
   carrierwave
@@ -331,6 +333,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  inherited_resources
   jquery-rails
   less-rails-bootstrap
   letter_opener
@@ -358,7 +361,6 @@ DEPENDENCIES
   simple_form
   test-unit
   therubyracer
-  turbolinks
   uglifier (>= 1.0.3)
   unf
   unicorn

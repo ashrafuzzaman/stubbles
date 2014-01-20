@@ -6,7 +6,7 @@ gem 'rails', '~> 4.0.2'
 group :assets do
   gem 'sass-rails', '~> 4.0.1'
   gem 'coffee-rails', '~> 4.0.1'
-  #gem "jquery-fileupload-rails"
+  #gem 'jquery-fileupload-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -39,7 +39,7 @@ gem 'rolify'
 gem 'sendgrid'
 gem 'workflow'
 gem 'acts-as-taggable-on', '~> 2.4.1'
-gem "bootstrap-wysihtml5-rails", "~> 0.3.1.23"
+gem 'bootstrap-wysihtml5-rails', '~> 0.3.1.23'
 gem 'simple_form'
 gem 'awesome_print'
 gem 'nested_form'
@@ -86,18 +86,17 @@ group :production do
   gem 'puma'
 end
 
-gem "cache_digests"
 gem 'unicorn'
 gem 'less-rails-bootstrap'
 gem 'auditlog', '0.0.2'
 #gem 'auditlog', :path => '/home/jitu/projects/auditlog'
 gem 'charter', :path => 'charter'
 
-gem "rmagick"
-gem "carrierwave"
+gem 'rmagick'
+gem 'carrierwave'
 gem 'remotipart', '1.0.5'
 gem 'unf'
 gem 'fog'
 gem 'protected_attributes'
-gem 'turbolinks'
-gem "recaptcha", "~> 0.3.6"
+gem 'recaptcha', '~> 0.3.6'
+gem 'inherited_resources'

@@ -1,0 +1,31 @@
+<h1>Listing workflow statuses</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Workflow for</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workflow_statuses.each do |workflow_status| %>
+      <tr>
+        <td><%= workflow_status.title %></td>
+        <td><%= workflow_status.description %></td>
+        <td><%= workflow_status.workflow_for %></td>
+        <td><%= link_to 'Show', workflow_status %></td>
+        <td><%= link_to 'Edit', edit_workflow_status_path(workflow_status) %></td>
+        <td><%= link_to 'Destroy', workflow_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Workflow status', new_project_workflow_status_path(@project), class: 'btn btn-default' %>
