@@ -11,9 +11,9 @@
 </p>
 
 <p>
-  <strong>Statusable:</strong>
-  <%= @workflow_status.statusable %>
+  <strong>Workflow for:</strong>
+  <%= @workflow_status.workflow_for %>
 </p>
 
-<%= link_to 'Edit', edit_workflow_status_path(@workflow_status) %> |
-<%= link_to 'Back', workflow_statuses_path %>
+<%= link_to 'Edit', edit_project_workflow_status_path(@project, @workflow_status), class: 'btn btn-default btn-primary' %>
+<%= link_to 'Back', project_workflow_statuses_path(@project), class: 'btn btn-default' %>
