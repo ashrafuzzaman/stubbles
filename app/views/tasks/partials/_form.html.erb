@@ -1,4 +1,4 @@
 <% story = task.story %>
-<%= form_for([story, task], :remote => true, role: "form", html: {id: container_id_of(task)}, class: 'task') do |f| %>
+<%= form_for([story, task.becomes(Task)], :remote => true, role: "form", html: {id: container_id_of(task)}, class: 'task') do |f| %>
     <%= render :partial => 'tasks/partials/fields', locals: {f: f, task: task, story: story} %>
 <% end %>
