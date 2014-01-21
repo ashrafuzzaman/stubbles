@@ -1,15 +1,15 @@
 class StoryType
-  STORY = 'story'
-  BUG = 'bug'
-  ROUTINE = 'routine'
-  TEST_CASE = 'test_case'
+  FEATURE = 'Feature'
+  BUG = 'Bug'
+  ROUTINE = 'Routine'
+  TEST_CASE = 'TestCase'
 
   def self.all
-    [STORY, BUG, ROUTINE, TEST_CASE]
+    [FEATURE, BUG, ROUTINE, TEST_CASE]
   end
 
   def self.all_selectable
-    [[STORY.humanize, STORY],
+    [[FEATURE.humanize, FEATURE],
      [BUG.humanize, BUG],
      [ROUTINE.humanize, ROUTINE],
      [TEST_CASE.humanize, TEST_CASE]]

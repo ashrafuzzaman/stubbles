@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120100504) do
+ActiveRecord::Schema.define(version: 20140121004053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,8 +113,7 @@ ActiveRecord::Schema.define(version: 20140120100504) do
   create_table "stories", force: true do |t|
     t.string   "title"
     t.string   "status"
-    t.string   "story_type",        default: "backlog"
-    t.string   "scope",             default: "backlog"
+    t.string   "type"
     t.text     "description"
     t.integer  "project_id"
     t.integer  "assigned_to_id"
@@ -228,6 +227,7 @@ ActiveRecord::Schema.define(version: 20140120100504) do
   create_table "workflow_statuses", force: true do |t|
     t.string   "title"
     t.text     "description"
+    t.boolean  "reserved"
     t.string   "workflow_for"
     t.integer  "project_id"
     t.datetime "created_at"

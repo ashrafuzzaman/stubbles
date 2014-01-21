@@ -1,0 +1,2 @@
+class Routine < Story
+end

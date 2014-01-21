@@ -3,6 +3,7 @@ class CreateWorkflowStatuses < ActiveRecord::Migration
     create_table :workflow_statuses do |t|
       t.string :title
       t.text :description
+      t.boolean :reserved
       t.string :workflow_for, index: true
       t.references :project, index: true
 

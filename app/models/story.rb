@@ -5,14 +5,14 @@ class Story < ActiveRecord::Base
   track only: [:title, :assigned_to_id], meta: [:project_id]
 
   attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list,
-                  :story_type, :priority, :milestone_id, :attachments_attributes
+                  :type, :priority, :milestone_id, :attachments_attributes
 
   include StoryPermission
   include Workflow
   acts_as_taggable
 
   validates :title, :presence => true
-  validates :story_type, :presence => true
+  validates :type, :presence => true
 
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories

@@ -1,0 +1,2 @@
+class TestCase < Story
+end

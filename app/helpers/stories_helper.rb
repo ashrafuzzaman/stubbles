@@ -35,7 +35,7 @@ module StoriesHelper
   end
 
   def select_story_type(form)
-    form.select(:story_type, StoryType.all, {}, class: "form-control")
+    form.select(:type, StoryType.all_selectable, {}, class: "form-control")
   end
 
   def story_edit_link(story)
@@ -57,7 +57,7 @@ module StoriesHelper
   end
 
   def story_widget(story, &block)
-    panel_type = case story.story_type
+    panel_type = case story.type
                    when StoryType::BUG then
                      'danger'
                    when StoryType::ROUTINE then
@@ -71,7 +71,7 @@ module StoriesHelper
   end
 
   def story_form_widget(story, &block)
-    panel_type = case story.story_type
+    panel_type = case story.type
                    when StoryType::BUG then
                      'danger'
                    when StoryType::ROUTINE then
@@ -79,7 +79,7 @@ module StoriesHelper
                    else
                      'default'
                  end
-    nested_form_for([story.project, story], :remote => true, role: 'form', multipart: true, html: {id: container_id_of(story)}) do |f|
+    nested_form_for([story.project, story.becomes(Story)], :remote => true, role: 'form', multipart: true, html: {id: container_id_of(story)}) do |f|
       content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do
         capture(f, StoryWidget.new(story, self), &block)
       end
