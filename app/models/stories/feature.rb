@@ -1,2 +1,0 @@
-class Feature < Story
-end

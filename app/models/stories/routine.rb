@@ -1,2 +1,0 @@
-class Routine < Story
-end

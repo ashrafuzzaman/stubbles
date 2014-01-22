@@ -3,8 +3,8 @@ class CreateStories < ActiveRecord::Migration
     create_table :stories do |t|
       t.string :title
       t.string :status
-      t.string :story_type, :default => Scope::BACKLOG
-      t.string :scope, :default => Scope::BACKLOG
+      t.string :story_type
+      t.string :scope
       t.text :description
       t.references :project
       t.references :assigned_to

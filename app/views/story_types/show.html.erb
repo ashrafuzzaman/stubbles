@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @story_type.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @story_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_project_story_type_path(@project, @story_type), class: 'btn btn-default' %>
+<%= link_to 'Back', project_story_types_path(@project), class: 'btn btn-default' %>

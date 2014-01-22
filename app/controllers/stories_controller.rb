@@ -59,10 +59,9 @@ class StoriesController < ApplicationController
   end
 
   def update_scope_and_priority
-    scope = params[:scope]
     story_id = params[:story_id].to_i
     shift_from_story_id = params[:shift_from_story_id].to_i
-    Story.update_scope_and_priority(@project, scope, story_id, shift_from_story_id)
+    Story.update_scope_and_priority(@project, story_id, shift_from_story_id)
   end
 
   def destroy

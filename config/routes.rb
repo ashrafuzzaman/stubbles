@@ -51,6 +51,7 @@ Stubbles::Application.routes.draw do
 
   resources :projects, only: [] do
     resources :workflow_statuses
+    resources :story_types
   end
 
   get 'users/:id' => 'users#show', :as => 'user'

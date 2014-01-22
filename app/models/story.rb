@@ -4,15 +4,13 @@ class Story < ActiveRecord::Base
   include Auditlog::ModelTracker
   track only: [:title, :assigned_to_id], meta: [:project_id]
 
-  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list,
-                  :type, :priority, :milestone_id, :attachments_attributes
+  attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :priority, :milestone_id, :attachments_attributes
 
   include StoryPermission
   include Workflow
   acts_as_taggable
 
   validates :title, :presence => true
-  validates :type, :presence => true
 
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories
@@ -33,7 +31,7 @@ class Story < ActiveRecord::Base
                                                                         "OR stories.assigned_to_id = ?", user_id, user_id]) }
   scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
-  before_create :auto_generate_priority, :assign_default_scope
+  before_create :auto_generate_priority
   after_save :propagate_hour_calculations_to_milestone
   after_destroy :propagate_hour_calculations_to_milestone
 
@@ -96,24 +94,24 @@ class Story < ActiveRecord::Base
   end
 
   ######################### Priority ##########################
-  def self.update_scope_and_priority(project, scope, story_to_shift_id, shift_from_story_id)
+  def self.update_scope_and_priority(project, story_to_shift_id, shift_from_story_id)
     priority_to_assign = nil
     if (shift_from_story_id == 0) #means that adding as the last element of the scope
-      priority_to_assign = (Story.highest_priority_by_scope(project, scope) || 0) + 1
+      priority_to_assign = (Story.highest_priority_by_scope(project) || 0) + 1
     else
       priority_to_assign = Story.find(shift_from_story_id).priority
     end
     shift_priority_from(project, priority_to_assign)
     story = Story.find(story_to_shift_id)
-    story.update_attributes({:scope => scope, :priority => priority_to_assign})
+    story.update_attributes(:priority => priority_to_assign)
   end
 
-  def self.lowest_priority_by_scope(project, scope)
-    project.stories.where('scope' => scope).minimum('priority')
+  def self.lowest_priority_by_scope(project)
+    project.stories.minimum('priority')
   end
 
-  def self.highest_priority_by_scope(project, scope)
-    project.stories.where('scope' => scope).maximum('priority')
+  def self.highest_priority_by_scope(project)
+    project.stories.maximum('priority')
   end
 
   def self.shift_priority_from(project, priority, shift_by = 1)
@@ -131,15 +129,11 @@ class Story < ActiveRecord::Base
 
   private
   def auto_generate_priority
-    lowest_priority_of_backlog = Story.lowest_priority_by_scope(project, Scope::BACKLOG)
-    highest_priority_of_current = Story.highest_priority_by_scope(project, Scope::CURRENT)
+    lowest_priority_of_backlog = Story.lowest_priority_by_scope(project)
+    highest_priority_of_current = Story.highest_priority_by_scope(project)
     min_priority_in_scope = lowest_priority_of_backlog || (highest_priority_of_current || 0 + 1)
     Story.shift_priority_from(project, min_priority_in_scope)
     self.priority = min_priority_in_scope
-  end
-
-  def assign_default_scope
-    self.scope = Scope::BACKLOG
   end
 
   def propagate_hour_calculations_to_milestone

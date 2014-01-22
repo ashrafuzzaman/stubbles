@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121014200) do
+ActiveRecord::Schema.define(version: 20140122013818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20140121014200) do
   create_table "stories", force: true do |t|
     t.string   "title"
     t.string   "status"
-    t.string   "type"
+    t.string   "story_type"
     t.text     "description"
     t.integer  "project_id"
     t.integer  "assigned_to_id"
@@ -131,6 +131,16 @@ ActiveRecord::Schema.define(version: 20140121014200) do
 
   add_index "stories", ["assigned_to_id"], name: "index_stories_on_assigned_to_id", using: :btree
   add_index "stories", ["project_id"], name: "index_stories_on_project_id", using: :btree
+
+  create_table "story_types", force: true do |t|
+    t.integer  "project_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "story_types", ["project_id"], name: "index_story_types_on_project_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -160,7 +170,6 @@ ActiveRecord::Schema.define(version: 20140121014200) do
     t.datetime "updated_at"
     t.integer  "percent_completed"
     t.integer  "project_id"
-    t.string   "type"
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
@@ -229,10 +238,11 @@ ActiveRecord::Schema.define(version: 20140121014200) do
     t.string   "title"
     t.text     "description"
     t.boolean  "reserved"
-    t.string   "workflow_for"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "workflowable_type"
+    t.integer  "workflowable_id"
   end
 
   add_index "workflow_statuses", ["project_id"], name: "index_workflow_statuses_on_project_id", using: :btree

@@ -17,9 +17,9 @@
         <td><%= workflow_status.title %></td>
         <td><%= workflow_status.workflow_for %></td>
         <td>
-          <%= link_to 'Show', project_workflow_status_path(@project, workflow_status), class: 'btn btn-default btn-primary' %>
-          <%= link_to 'Edit', edit_project_workflow_status_path(@project, workflow_status), class: 'btn btn-default btn-primary' %>
-          <%= link_to 'Destroy', project_workflow_status_path(@project, workflow_status), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-primary' %>
+          <%= link_to 'Show', project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Edit', edit_project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Destroy', project_workflow_status_path(@project, workflow_status), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
       </tr>
   <% end %>

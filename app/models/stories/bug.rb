@@ -1,2 +1,0 @@
-class Bug < Story
-end

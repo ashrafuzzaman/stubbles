@@ -1,0 +1,29 @@
+<h1>Listing story_types</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @story_types.each do |story_type| %>
+      <tr>
+        <td><%= story_type.title %></td>
+        <td><%= story_type.description %></td>
+        <td>
+          <%= link_to 'Show', [@project, story_type], class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Edit', edit_project_story_type_path(@project, story_type), class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Destroy', [@project, story_type], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Story type', new_project_story_type_path(@project), class: 'btn btn-default btn-primary' %>
