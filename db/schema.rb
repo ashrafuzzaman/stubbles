@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122013818) do
+ActiveRecord::Schema.define(version: 20140122121004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,5 +246,18 @@ ActiveRecord::Schema.define(version: 20140122013818) do
   end
 
   add_index "workflow_statuses", ["project_id"], name: "index_workflow_statuses_on_project_id", using: :btree
+
+  create_table "workflow_transitions", force: true do |t|
+    t.integer  "story_type_id"
+    t.string   "event"
+    t.integer  "from_status_id"
+    t.integer  "to_status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workflow_transitions", ["from_status_id"], name: "index_workflow_transitions_on_from_status_id", using: :btree
+  add_index "workflow_transitions", ["story_type_id"], name: "index_workflow_transitions_on_story_type_id", using: :btree
+  add_index "workflow_transitions", ["to_status_id"], name: "index_workflow_transitions_on_to_status_id", using: :btree
 
 end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<dl class="dl-horizontal">
+  <dt>Event:</dt>
+  <dd><%= @workflow_transition.event %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt>From status:</dt>
+  <dd><%= @workflow_transition.from_status %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt>To status:</dt>
+  <dd><%= @workflow_transition.to_status %></dd>
+</dl>
+
+<%= link_to 'Edit', edit_workflow_transition_path(@workflow_transition), class: 'btn btn-default btn-primary' %>
+<%= link_to 'Back', workflow_transitions_path, class: 'btn btn-default' %>

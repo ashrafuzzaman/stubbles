@@ -1,7 +1,7 @@
 Stubbles::Application.routes.draw do
   root :to => 'projects#redirect_to_recent_project'
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: {registrations: 'registrations'}
 
   resources :projects do
     resources :milestones do
@@ -52,6 +52,10 @@ Stubbles::Application.routes.draw do
   resources :projects, only: [] do
     resources :workflow_statuses
     resources :story_types
+  end
+
+  resources :story_types, only: [] do
+    resources :workflow_transitions
   end
 
   get 'users/:id' => 'users#show', :as => 'user'

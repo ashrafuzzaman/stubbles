@@ -6,9 +6,6 @@
 
   <dt>Description:</dt>
   <dd><%= @workflow_status.description %></dd>
-
-  <dt>Workflow for:</dt>
-  <dd><%= @workflow_status.workflow_for %></dd>
 </dl>
 
 <%= link_to 'Edit', edit_project_workflow_status_path(@project, @workflow_status), class: 'btn btn-default btn-primary' %>

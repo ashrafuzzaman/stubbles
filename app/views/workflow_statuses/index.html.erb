@@ -15,7 +15,6 @@
   <% @workflow_statuses.each do |workflow_status| %>
       <tr>
         <td><%= workflow_status.title %></td>
-        <td><%= workflow_status.workflow_for %></td>
         <td>
           <%= link_to 'Show', project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Edit', edit_project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
