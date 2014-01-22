@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 20140122013818) do
   create_table "stories", force: true do |t|
     t.string   "title"
     t.string   "status"
-    t.string   "story_type"
     t.text     "description"
     t.integer  "project_id"
     t.integer  "assigned_to_id"
@@ -127,6 +126,7 @@ ActiveRecord::Schema.define(version: 20140122013818) do
     t.float    "hours_spent"
     t.float    "hours_estimated"
     t.integer  "percent_completed"
+    t.integer  "story_type_id"
   end
 
   add_index "stories", ["assigned_to_id"], name: "index_stories_on_assigned_to_id", using: :btree

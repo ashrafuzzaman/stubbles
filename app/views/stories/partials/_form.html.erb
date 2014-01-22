@@ -12,7 +12,7 @@
               <%= select_users(f, story) %>
             </div>
             <div class="col-md-3">
-              <%= select_story_type(f) %>
+              <%= f.collection_select(:story_type_id, story.project.story_types, :id, :title, {prompt: 'Select'}, class: "form-control") %>
             </div>
           </div>
 

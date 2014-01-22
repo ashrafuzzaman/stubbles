@@ -15,6 +15,7 @@ class Story < ActiveRecord::Base
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
+  belongs_to :story_type
   has_many :tasks, inverse_of: :story
   has_many :comments, :as => :commentable
   has_many :attachments, :as => :attachable
