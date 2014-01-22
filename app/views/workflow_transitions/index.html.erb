@@ -14,8 +14,9 @@
       <tr>
         <td><%= workflow_transition.event %></td>
         <td>
-          <%= workflow_transition.from_status.title %> ->
-          <%= workflow_transition.to_status.title %>
+          <span class="badge"><%= workflow_transition.from_status.try(:title) %></span>
+          <span class="glyphicon glyphicon-arrow-right"></span>
+          <span class="badge"><%= workflow_transition.to_status.try(:title) %></span>
         </td>
         <td>
           <%= link_to 'Show', [@story_type, workflow_transition], class: 'btn-sm btn-default btn-primary' %>

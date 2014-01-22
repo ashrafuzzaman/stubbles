@@ -7,12 +7,12 @@
 
 <dl class="dl-horizontal">
   <dt>From status:</dt>
-  <dd><%= @workflow_transition.from_status.title %></dd>
+  <dd><%= @workflow_transition.from_status.try(:title) %></dd>
 </dl>
 
 <dl class="dl-horizontal">
   <dt>To status:</dt>
-  <dd><%= @workflow_transition.to_status.title %></dd>
+  <dd><%= @workflow_transition.to_status.try(:title) %></dd>
 </dl>
 
 <%= link_to 'Edit', [:edit, @story_type, @workflow_transition], class: 'btn btn-default btn-primary' %>
