@@ -7,13 +7,13 @@
 
 <dl class="dl-horizontal">
   <dt>From status:</dt>
-  <dd><%= @workflow_transition.from_status %></dd>
+  <dd><%= @workflow_transition.from_status.title %></dd>
 </dl>
 
 <dl class="dl-horizontal">
   <dt>To status:</dt>
-  <dd><%= @workflow_transition.to_status %></dd>
+  <dd><%= @workflow_transition.to_status.title %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_workflow_transition_path(@workflow_transition), class: 'btn btn-default btn-primary' %>
-<%= link_to 'Back', workflow_transitions_path, class: 'btn btn-default' %>
+<%= link_to 'Edit', [:edit, @story_type, @workflow_transition], class: 'btn btn-default btn-primary' %>
+<%= link_to 'Back', [@story_type, :workflow_transitions], class: 'btn btn-default' %>

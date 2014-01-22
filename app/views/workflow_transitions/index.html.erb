@@ -1,28 +1,29 @@
-<h1>Listing workflow_transitions</h1>
+<h1>Listing workflow transitions</h1>
 
 <table class="table">
   <thead>
-    <tr>
-      <th>Event</th>
-      <th>From status</th>
-      <th>To status</th>
-      <th></th>
-    </tr>
+  <tr>
+    <th>Event</th>
+    <th></th>
+    <th></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @workflow_transitions.each do |workflow_transition| %>
+  <% @workflow_transitions.each do |workflow_transition| %>
       <tr>
         <td><%= workflow_transition.event %></td>
-        <td><%= workflow_transition.from_status %></td>
-        <td><%= workflow_transition.to_status %></td>
+        <td>
+          <%= workflow_transition.from_status.title %> ->
+          <%= workflow_transition.to_status.title %>
+        </td>
         <td>
           <%= link_to 'Show', [@story_type, workflow_transition], class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Edit', [:edit, @story_type, workflow_transition], class: 'btn-sm btn-default btn-primary' %>
-          <%= link_to 'Destroy', [@story_type, workflow_transition], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-sm btn-default btn-danger' %>
+          <%= link_to 'Destroy', [@story_type, workflow_transition], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
