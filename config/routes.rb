@@ -50,11 +50,11 @@ Stubbles::Application.routes.draw do
   end
 
   resources :projects, only: [] do
-    resources :workflow_statuses
     resources :story_types
   end
 
   resources :story_types, only: [] do
+    resources :workflow_statuses
     resources :workflow_transitions
   end
 

@@ -1,4 +1,4 @@
-<h1>Listing workflow statuses</h1>
+<h1>Workflow statuses for <strong><%= @story_type.title %></strong></h1>
 
 <table class="table">
   <thead>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= workflow_status.title %></td>
         <td>
-          <%= link_to 'Show', project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
-          <%= link_to 'Edit', edit_project_workflow_status_path(@project, workflow_status), class: 'btn-sm btn-default btn-primary' %>
-          <%= link_to 'Destroy', project_workflow_status_path(@project, workflow_status), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
+          <%= link_to 'Show', [@story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Edit', [:edit, @story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Destroy', [@story_type, workflow_status], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
       </tr>
   <% end %>
@@ -27,5 +27,5 @@
 
 <br/>
 
-<%= link_to 'New Workflow status', new_project_workflow_status_path(@project), class: 'btn btn-default' %>
-<%= link_to 'Story types', [@project, :story_types], class: 'btn btn-default' %>
+<%= link_to 'New Workflow status', [:new, @story_type, :workflow_status], class: 'btn btn-default' %>
+<%= link_to 'Workflow transitions', [@story_type, :workflow_transitions], class: 'btn btn-default' %>

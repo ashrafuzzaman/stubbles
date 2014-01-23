@@ -1,4 +1,4 @@
-<%= simple_form_for([@project, @workflow_status]) do |f| %>
+<%= simple_form_for([@story_type, @workflow_status]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -9,6 +9,6 @@
 
   <div class="form-actions">
     <%= f.button :submit %>
-    <%= link_to 'Back', project_workflow_statuses_path(@project), class: 'btn btn-default' %>
+    <%= link_to 'Back', [@story_type, :workflow_statuses], class: 'btn btn-default' %>
   </div>
 <% end %>

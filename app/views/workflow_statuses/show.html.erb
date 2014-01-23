@@ -8,5 +8,5 @@
   <dd><%= @workflow_status.description %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_project_workflow_status_path(@project, @workflow_status), class: 'btn btn-default btn-primary' %>
-<%= link_to 'Back', project_workflow_statuses_path(@project), class: 'btn btn-default' %>
+<%= link_to 'Edit', [:edit, @story_type, @workflow_status], class: 'btn btn-default btn-primary' %>
+<%= link_to 'Back', [@story_type, :workflow_statuses], class: 'btn btn-default' %>
