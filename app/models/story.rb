@@ -11,7 +11,7 @@ class Story < ActiveRecord::Base
   include Workflow
   acts_as_taggable
 
-  validates :title, :presence => true
+  validates :title, :story_type_id, :presence => true
 
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories
