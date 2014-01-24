@@ -7,4 +7,6 @@ class WorkflowTransition < ActiveRecord::Base
   validates :to_status_id, uniqueness: {scope: :from_status_id}
 
   attr_accessible :event, :from_status_id, :to_status_id
+
+  scope :from_status, -> (status) { where(from_status_id: status) }
 end
