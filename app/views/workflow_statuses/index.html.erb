@@ -16,7 +16,6 @@
       <tr>
         <td><%= workflow_status.title %></td>
         <td>
-          <%= link_to 'Show', [@story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Edit', [:edit, @story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Destroy', [@story_type, workflow_status], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
@@ -27,5 +26,5 @@
 
 <br/>
 
-<%= link_to 'New Workflow status', [:new, @story_type, :workflow_status], class: 'btn btn-default' %>
+<%= link_to 'New Workflow status', [:new, @story_type, :workflow_status], class: 'btn btn-default btn-primary' %>
 <%= link_to 'Workflow transitions', [@story_type, :workflow_transitions], class: 'btn btn-default' %>

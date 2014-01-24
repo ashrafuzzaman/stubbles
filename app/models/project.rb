@@ -9,7 +9,6 @@ class Project < ActiveRecord::Base
   has_many :milestones, inverse_of: :project, dependent: :destroy
   has_many :memberships, :class_name => 'ProjectMembership', dependent: :destroy
   has_many :users, :through => :memberships, :source => :user
-  has_many :workflow_statuses, dependent: :destroy
   has_many :story_types, dependent: :destroy
   belongs_to :creator, :class_name => 'User'
 
