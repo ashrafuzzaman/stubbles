@@ -4,9 +4,7 @@
   <thead>
   <tr>
     <th>Title</th>
-    <th>Workflow for</th>
-    <th></th>
-    <th></th>
+    <th>Initial status</th>
     <th></th>
   </tr>
   </thead>
@@ -15,6 +13,7 @@
   <% @workflow_statuses.each do |workflow_status| %>
       <tr>
         <td><%= workflow_status.title %></td>
+        <td><%= raw '<span class="glyphicon glyphicon-ok"></span>' if workflow_status.initial_status %></td>
         <td>
           <%= link_to 'Edit', [:edit, @story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Destroy', [@story_type, workflow_status], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
