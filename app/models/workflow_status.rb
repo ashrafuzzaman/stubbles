@@ -6,6 +6,10 @@ class WorkflowStatus < ActiveRecord::Base
   validate :at_least_one_initial_state
   attr_accessible :title, :description, :workflowable_type, :workflowable_id, :initial_status
 
+  def transitions
+    self.workflowable.workflow_transitions.from_status(self)
+  end
+
   private
   def at_least_one_initial_state
     init_workflow_count = workflowable.workflow_statuses.where(initial_status: true).count

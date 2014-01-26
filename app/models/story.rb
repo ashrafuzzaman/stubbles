@@ -120,7 +120,7 @@ class Story < ActiveRecord::Base
     project.stories.update_all("priority = priority + #{shift_by}", ['priority >= ?', priority])
   end
 
-  ######################### Priority ##########################
+  #======================== Priority ==========================
 
   def recalculate_percent_completed
     weighted_percent_completed = self.tasks(true).inject(0) do |sum, task|
