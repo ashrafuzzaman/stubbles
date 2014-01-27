@@ -14,47 +14,23 @@ class Task < ActiveRecord::Base
   belongs_to :workflow_status
   has_many :time_entries, :as => :trackable
 
+  validates :title, :workflow_status_id, presence: true
+
   scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
   scope :in_progress, lambda { where(status: 'in_progress') }
   scope :order_by_recent, -> { order 'created_at ASC' }
   default_scope { order_by_recent }
 
   before_create :set_project_id
+  before_validation :set_initial_status
   after_save :update_story_status, :propagate_hours_info_to_story
   after_destroy :update_story_status, :propagate_hours_info_to_story
-
-  #workflow_column :status
-  #workflow do
-  #  state :open do
-  #    event :start, :transitions_to => :in_progress
-  #  end
-  #  state :in_progress do
-  #    event :finish, :transitions_to => :finished
-  #  end
-  #  state :finished do
-  #    event :qa_approve, :transitions_to => :qa_approved
-  #    event :reopen, :transitions_to => :open
-  #  end
-  #  state :qa_approved do
-  #    event :deploy, :transitions_to => :deployed
-  #  end
-  #  state :deployed do
-  #    event :close, :transitions_to => :closed
-  #    event :reopen, :transitions_to => :open
-  #  end
-  #  state :closed do
-  #    event :reopen, :transitions_to => :open
-  #  end
-  #
-  #  on_transition do |from, to, triggering_event, *event_args|
-  #    self.touch
-  #  end
-  #end
 
   ######################### Work flow ##########################
   def allowable_workflow_transitions
     #self.story.story_type.workflow_transitions.from_status(self.work)
   end
+
   #======================== Work flow ==========================
 
   def time_entry_for(user, date)
@@ -93,4 +69,7 @@ class Task < ActiveRecord::Base
     self.project_id = self.story.project_id
   end
 
+  def set_initial_status
+    self.workflow_status_id ||= self.story.story_type.initial_workflow_status
+  end
 end

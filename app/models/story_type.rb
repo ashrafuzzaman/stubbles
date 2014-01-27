@@ -6,4 +6,8 @@ class StoryType < ActiveRecord::Base
 
   validates :title, :project_id, presence: true
   attr_accessible :title, :description
+
+  def initial_workflow_status
+    self.workflow_statuses.initials.first || self.workflow_statuses.first
+  end
 end

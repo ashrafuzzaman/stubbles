@@ -6,6 +6,8 @@ class WorkflowStatus < ActiveRecord::Base
   validate :at_least_one_initial_state
   attr_accessible :title, :description, :workflowable_type, :workflowable_id, :initial_status
 
+  scope :initials, -> { where(initial_status: true) }
+
   def transitions
     self.workflowable.workflow_transitions.from_status(self)
   end
