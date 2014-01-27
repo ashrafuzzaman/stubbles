@@ -5,6 +5,7 @@ class StoryType < ActiveRecord::Base
   has_many :workflow_statuses, as: :workflowable
 
   validates :title, :project_id, presence: true
+  validates :title, uniqueness: {scope: :project_id}
   attr_accessible :title, :description
 
   def initial_workflow_status
