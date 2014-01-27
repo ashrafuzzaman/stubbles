@@ -8,7 +8,6 @@ class Story < ActiveRecord::Base
                   :milestone_id, :attachments_attributes, :story_type_id
 
   include StoryPermission
-  include Workflow
   acts_as_taggable
 
   validates :title, :story_type_id, :presence => true
@@ -37,24 +36,24 @@ class Story < ActiveRecord::Base
   after_save :propagate_hour_calculations_to_milestone
   after_destroy :propagate_hour_calculations_to_milestone
 
-  workflow_column :status
-  workflow do
-    state :not_started do
-      event :start, :transitions_to => :started
-    end
-    state :started do
-      event :finish, :transitions_to => :finished
-    end
-    state :finished do
-      event :accept, :transitions_to => :accepted
-      event :reject, :transitions_to => :rejected
-      event :reopen, :transitions_to => :started
-    end
-    state :rejected do
-      event :reopen, :transitions_to => :started
-    end
-    state :accepted
-  end
+  #workflow_column :status
+  #workflow do
+  #  state :not_started do
+  #    event :start, :transitions_to => :started
+  #  end
+  #  state :started do
+  #    event :finish, :transitions_to => :finished
+  #  end
+  #  state :finished do
+  #    event :accept, :transitions_to => :accepted
+  #    event :reject, :transitions_to => :rejected
+  #    event :reopen, :transitions_to => :started
+  #  end
+  #  state :rejected do
+  #    event :reopen, :transitions_to => :started
+  #  end
+  #  state :accepted
+  #end
 
   def self.search(q)
     where("stories.title ILIKE ? OR stories.id = ?", "%#{q}%", q.to_i)
@@ -78,11 +77,11 @@ class Story < ActiveRecord::Base
   end
 
   def update_status
-    unless sealed_for_tasks?
-      start! if not_started? && any_task_started?
-      finish! if started? && all_tasks_finished?
-      reopen! if finished? && any_task_started?
-    end
+    #unless sealed_for_tasks?
+    #  start! if not_started? && any_task_started?
+    #  finish! if started? && all_tasks_finished?
+    #  reopen! if finished? && any_task_started?
+    #end
   end
 
   def all_tasks_finished?

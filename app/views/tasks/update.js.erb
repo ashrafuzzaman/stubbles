@@ -1,4 +1,6 @@
-<% execute_js_if(@task.valid?) do %>
+<% if @task.valid? %>
     <%= render :partial => "stories/partials/reload_story", locals: {story: @task.story, collapse: false} %>
     <%= render :partial => 'milestones/reload_milestone_resources', :locals => { milestone: @task.story.milestone, resources: @task.story.milestone.try(:resources) } %>
 <% end %>
+
+<%= render :partial => 'shared/notification', locals: { model: @task } %>

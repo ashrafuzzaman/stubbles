@@ -1,11 +1,11 @@
 <% cache [:view, task] do %>
-    <div id='<%= container_id_of(task) %>' class="task task-<%= task.status %>" task-owner-id="<%= task.assigned_to_id %>">
+    <div id='<%= container_id_of(task) %>' class="task task-<%#= task.status %>" task-owner-id="<%= task.assigned_to_id %>">
       <div class="task_header row">
         <span class="col-md-8"><%= task.title %></span>
 
         <div class="col-md-4 text-right task-actions">
           <%= action_links_for_task(task) %>
-          <%= link_to_time_entry_popup(task) if task.in_progress? %>
+          <%= link_to_time_entry_popup(task) %>
           <%= task_edit_link(task) %>
           <%= task_delete_link(task) %>
           <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">

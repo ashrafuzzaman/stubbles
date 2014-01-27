@@ -1,3 +1,7 @@
+<% if defined?(model) and model.errors.present? %>
+    Message.errorMessage("<ul><%= raw (model.errors.full_messages.collect { |msg| "<li>#{msg}</li>"}).join('') %></ul>");
+<% end %>
+
 <% if flash[:error].present? %>
     <% if flash[:error].kind_of?(Array) %>
         Message.errorMessage('<ul><%= raw (flash[:error].collect { |msg| "<li>#{msg}</li>"}).join('') %></ul>');
@@ -13,3 +17,4 @@
         Message.successMessage('<%= raw flash[:notice] %>');
     <% end %>
 <% end %>
+

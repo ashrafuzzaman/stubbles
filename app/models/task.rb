@@ -6,7 +6,6 @@ class Task < ActiveRecord::Base
   attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
 
   include TaskPermission
-  include Workflow
 
   belongs_to :project, inverse_of: :tasks
   belongs_to :story, :touch => true, inverse_of: :tasks
@@ -23,13 +22,13 @@ class Task < ActiveRecord::Base
 
   before_create :set_project_id
   before_validation :set_initial_status
-  after_save :update_story_status, :propagate_hours_info_to_story
-  after_destroy :update_story_status, :propagate_hours_info_to_story
+  after_save :propagate_hours_info_to_story
+  after_destroy :propagate_hours_info_to_story
 
   ######################### Work flow ##########################
-  def allowable_workflow_transitions
-    #self.story.story_type.workflow_transitions.from_status(self.work)
-  end
+  #def allowable_workflow_transitions
+  #  self.story.story_type.workflow_transitions.from_status(self.workflow_status_id)
+  #end
 
   #======================== Work flow ==========================
 
@@ -51,11 +50,6 @@ class Task < ActiveRecord::Base
   end
 
   private
-  #not yet implemented
-  def update_story_status
-    story.update_status
-  end
-
   def propagate_hours_info_to_story
     story.hours_spent = story.tasks.sum(:hours_spent) if self.hours_spent_changed?
     story.hours_estimated = story.tasks.sum(:hours_estimated) if self.hours_estimated_changed?
@@ -70,6 +64,6 @@ class Task < ActiveRecord::Base
   end
 
   def set_initial_status
-    self.workflow_status_id ||= self.story.story_type.initial_workflow_status
+    self.workflow_status ||= self.story.story_type.initial_workflow_status
   end
 end
