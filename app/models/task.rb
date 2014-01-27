@@ -26,9 +26,9 @@ class Task < ActiveRecord::Base
   after_destroy :propagate_hours_info_to_story
 
   ######################### Work flow ##########################
-  #def allowable_workflow_transitions
-  #  self.story.story_type.workflow_transitions.from_status(self.workflow_status_id)
-  #end
+  def allowable_workflow_transitions
+    self.story.story_type.workflow_transitions.from_status(self.workflow_status_id)
+  end
 
   #======================== Work flow ==========================
 

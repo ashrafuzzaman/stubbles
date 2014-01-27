@@ -59,7 +59,7 @@ class TasksController < InheritedResources::Base
 
   def update_status
     @task = @story.tasks.find(params[:id])
-    @task.send("#{params[:event].to_s.underscore}!")
+    @task.update_attribute :workflow_status_id, params[:workflow_status_id]
   end
 
   #private
