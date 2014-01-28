@@ -66,7 +66,7 @@ module StoriesHelper
     #                 'default'
     #             end
 
-    panel_type = ''
+    panel_type = story.story_type.try(:default_color) || 'default'
     content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-#{panel_type}" do
       capture(StoryWidget.new(story, self), &block)
     end
@@ -81,7 +81,7 @@ module StoriesHelper
     #               else
     #                 'default'
     #             end
-    panel_type = ''
+    panel_type = story.story_type.try(:default_color) || 'default'
     nested_form_for([story.project, story.becomes(Story)], :remote => true, role: 'form', multipart: true, html: {id: container_id_of(story)}) do |f|
       content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do
         capture(f, StoryWidget.new(story, self), &block)

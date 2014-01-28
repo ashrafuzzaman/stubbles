@@ -5,6 +5,7 @@
       <%= f.input :title %>
       <%= f.input :description, :input_html => {:rows => 5} %>
       <%= f.input :initial_status %>
+      <%= f.input :default_color, collection: ColorTheme::PANELS %>
       <%= f.input :propagate_color_to_if_any %>
       <%= f.input :propagate_color_to_if_all %>
       <%= f.input :allow_to_estimate %>

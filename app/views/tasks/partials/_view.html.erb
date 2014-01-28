@@ -1,19 +1,19 @@
 <% cache [:view, task] do %>
-    <div id='<%= container_id_of(task) %>' class="task task-<%#= task.status %>" task-owner-id="<%= task.assigned_to_id %>">
-      <div class="task_header row">
+    <div id='<%= container_id_of(task) %>' class="task task-panel-<%= task.workflow_status.default_color %>" task-owner-id="<%= task.assigned_to_id %>">
+      <div class="task-header row">
         <span class="col-md-8"><%= task.title %> <span class="badge"><%= task.workflow_status.title %></span> </span>
 
         <div class="col-md-4 text-right task-actions">
           <%= action_links_for_task(task) %>
           <%= link_to_time_entry_popup(task) if task.workflow_status.allow_to_enter_time? %>
           <%= task_edit_link(task) %>
-          <%= task_delete_link(task) if task.workflow_status.deletable? %>
+          <%= task_delete_link(task) if task.workflow_status.allow_to_delete? %>
           <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">
             <span class="glyphicon glyphicon-header"></span>
           </a>
         </div>
       </div>
-      <div class="task_container row">
+      <div class="task-container row">
         <span class="col-md-8"><%= link_to_user_with_avatar(task.assigned_to) %></span>
 
         <div class="col-md-4 text-right">

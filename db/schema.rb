@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140128122037) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "default_color"
   end
 
   add_index "story_types", ["project_id"], name: "index_story_types_on_project_id", using: :btree
@@ -261,6 +262,7 @@ ActiveRecord::Schema.define(version: 20140128122037) do
     t.integer  "to_status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "button_color"
   end
 
   add_index "workflow_transitions", ["from_status_id"], name: "index_workflow_transitions_on_from_status_id", using: :btree

@@ -8,5 +8,8 @@ class AddColorInStates < ActiveRecord::Migration
       t.boolean :allow_to_enter_time
       t.boolean :allow_to_delete
     end
+
+    add_column :workflow_transitions, :button_color, :string
+    add_column :story_types, :default_color, :string
   end
 end
