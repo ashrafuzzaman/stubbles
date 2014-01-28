@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
   validates :creator_id, presence: true
   validates :name, presence: true
 
-  after_create :add_creator_as_project_admin
+  after_create :add_creator_as_project_admin, :create_default_workflow
 
   ########### Caching for the model ###########
   after_commit :flush_cache
@@ -41,6 +41,7 @@ class Project < ActiveRecord::Base
       self.milestones.select('milestones.id, milestones.title, milestones.project_id').to_a
     end
   end
+
   ########### Caching for the model ###########
 
   def collaborators
@@ -70,4 +71,7 @@ class Project < ActiveRecord::Base
     self.memberships.create(:user_id => creator.id, :role => Role::ADMIN)
   end
 
+  def create_default_workflow
+    WorkflowTemplate.new(self).create_workflow!
+  end
 end

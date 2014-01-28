@@ -24,20 +24,30 @@ class WorkflowTemplate
     @template, @project = (template || @@default_template), project
   end
 
-  def create_workflow
-    #states = states_for(story_type)
-    #status_map = {}
-    #states.each { |state| status_map[state] = project.story_types.find_or_create_by(title: state).id }
-    #
-    #template.keys.each do |story_type_title|
-    #  transitions = @template[story_type_title]
-    #  project.story_types.find_or_create_by(title: state).id
-    #
-    #  transitions.each do |event, transition_hash|
-    #    #event transition_hash
-    #
-    #  end
-    #end
+  def create_workflow!
+    @template.keys.each do |story_type_title|
+      create_workflow_for_story_type(story_type_title)
+    end
+  end
+
+  private
+  def create_workflow_for_story_type(story_type_title)
+    story_type = @project.story_types.find_or_create_by(title: story_type_title)
+    states = states_for(story_type_title)
+    status_map = {}
+    states.each_with_index do |state, i|
+      status = story_type.workflow_statuses.find_or_initialize_by(title: state)
+      status.initial_status = i == 0
+      status.save
+      status_map[state] = status.id
+    end
+
+    @template[story_type_title].each do |event, transition_hash|
+      transition = story_type.workflow_transitions.find_or_initialize_by(event: event)
+      transition.from_status_id = status_map[transition_hash.keys.first]
+      transition.to_status_id = status_map[transition_hash.values.first]
+      transition.save
+    end
   end
 
   def states_for(story_type)
