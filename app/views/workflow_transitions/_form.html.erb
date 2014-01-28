@@ -7,6 +7,7 @@
     <%= f.input :event %>
     <%= f.association :from_status, :collection => workflow_statuses, :label_method => :title, :value_method => :id %>
     <%= f.association :to_status, :collection => workflow_statuses, :label_method => :title, :value_method => :id %>
+    <%= f.input :button_color, collection: ColorTheme::PANELS %>
   </div>
 
   <div class="form-actions">

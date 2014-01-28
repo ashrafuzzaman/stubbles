@@ -9,7 +9,7 @@ module TasksHelper
           task.allowable_workflow_transitions.each do |transition|
             concat(submit_tag(transition.event, :value => transition.event,
                               onclick: "$('##{field_id}').val('#{transition.to_status_id}');",
-                              :class => "task-#{transition.event} btn btn-xs",
+                              :class => "task-#{transition.button_color} btn btn-xs",
                               :'data-disable-with' => 'wait'))
           end
         end
