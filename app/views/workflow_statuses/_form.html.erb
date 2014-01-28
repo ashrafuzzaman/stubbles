@@ -1,14 +1,19 @@
 <%= simple_form_for([@story_type, @workflow_status]) do |f| %>
-  <%= f.error_notification %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :description, :input_html => { :rows => 5 } %>
-    <%= f.input :initial_status %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :title %>
+      <%= f.input :description, :input_html => {:rows => 5} %>
+      <%= f.input :initial_status %>
+      <%= f.input :propagate_color_to_if_any %>
+      <%= f.input :propagate_color_to_if_all %>
+      <%= f.input :allow_to_estimate %>
+      <%= f.input :allow_to_enter_time %>
+      <%= f.input :allow_to_delete %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-    <%= link_to 'Back', [@story_type, :workflow_statuses], class: 'btn btn-default' %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+      <%= link_to 'Back', [@story_type, :workflow_statuses], class: 'btn btn-default' %>
+    </div>
 <% end %>

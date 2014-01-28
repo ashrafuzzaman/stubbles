@@ -1,7 +1,7 @@
 <div class="form-group task_header">
   <div class="row">
     <div class="col-md-8"><%= f.text_field :title, :required => true, class: 'form-control' %></div>
-    <div class="col-md-1"><%= hours_estimated_tag(f, task) %></div>
+    <div class="col-md-1"><%= hours_estimated_tag(f, task) if task.workflow_status.allow_to_estimate? %></div>
     <div class="col-md-3"><%= select_users(f, story, false) %></div>
   </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126045853) do
+ActiveRecord::Schema.define(version: 20140128122037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,12 @@ ActiveRecord::Schema.define(version: 20140126045853) do
     t.string   "workflowable_type"
     t.integer  "workflowable_id"
     t.boolean  "initial_status"
+    t.string   "default_color"
+    t.boolean  "propagate_color_to_if_any"
+    t.boolean  "propagate_color_to_if_all"
+    t.boolean  "allow_to_estimate"
+    t.boolean  "allow_to_enter_time"
+    t.boolean  "allow_to_delete"
   end
 
   add_index "workflow_statuses", ["project_id"], name: "index_workflow_statuses_on_project_id", using: :btree
