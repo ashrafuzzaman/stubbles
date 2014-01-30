@@ -58,5 +58,8 @@ module Stubbles
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w(dashboard.js sign_in.css calendar.js)
+
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
   end
 end

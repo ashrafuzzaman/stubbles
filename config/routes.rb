@@ -53,11 +53,6 @@ Stubbles::Application.routes.draw do
     resources :story_types
   end
 
-  resources :story_types, only: [] do
-    resources :workflow_statuses
-    resources :workflow_transitions
-  end
-
   get 'users/:id' => 'users#show', :as => 'user'
   get 'user/search' => 'users#search_new', :as => 'new_user_search'
   post 'user/search' => 'users#search', :as => 'user_search'

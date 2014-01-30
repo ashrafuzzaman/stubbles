@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Charter::VERSION
   s.authors     = ["A.K.M. Ashrafuzzaman"]
   s.email       = ["ashrafuzzaman.g2@gmail.com"]
-  s.homepage    = "TODO"
+  #s.homepage    = "TODO"
   s.summary     = "A gem to build and render chart on web and as image."
   s.description = "A gem to build chart to show on web as well as get an image out of it."
 

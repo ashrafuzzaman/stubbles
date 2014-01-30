@@ -7,6 +7,12 @@ PATH
       rails (>= 3.0.0)
       rmagick
 
+PATH
+  remote: workflow
+  specs:
+    workflow (0.0.1)
+      rails (>= 3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -363,3 +369,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unf
   unicorn
+  workflow!
