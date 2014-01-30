@@ -1,3 +1,3 @@
 class ColorTheme
-  PANELS = ['default', 'green', 'blue', 'yellow', 'red']
+  COLORS = ['default', 'green', 'blue', 'yellow', 'red']
 end

@@ -57,33 +57,14 @@ module StoriesHelper
   end
 
   def story_widget(story, &block)
-    #panel_type = case story.type
-    #               when StoryType::BUG then
-    #                 'danger'
-    #               when StoryType::ROUTINE then
-    #                 'info'
-    #               else
-    #                 'default'
-    #             end
-
-    panel_type = story.story_type.try(:default_color) || 'default'
-    content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-#{panel_type}" do
+    content_tag :div, id: container_id_of(story), class: "story #{story.status} panel panel-#{story.panel_color}" do
       capture(StoryWidget.new(story, self), &block)
     end
   end
 
   def story_form_widget(story, &block)
-    #panel_type = case story.type
-    #               when StoryType::BUG then
-    #                 'danger'
-    #               when StoryType::ROUTINE then
-    #                 'info'
-    #               else
-    #                 'default'
-    #             end
-    panel_type = story.story_type.try(:default_color) || 'default'
     nested_form_for([story.project, story.becomes(Story)], :remote => true, role: 'form', multipart: true, html: {id: container_id_of(story)}) do |f|
-      content_tag :div, class: "story #{story.status} panel panel-#{panel_type}" do
+      content_tag :div, class: "story #{story.status} panel panel-#{story.panel_color}" do
         capture(f, StoryWidget.new(story, self), &block)
       end
     end

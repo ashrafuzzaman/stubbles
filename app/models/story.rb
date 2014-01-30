@@ -101,6 +101,20 @@ class Story < ActiveRecord::Base
     weighted_percent_completed / [self.hours_estimated.to_f, 1].max
   end
 
+  def panel_color
+    return ColorTheme::COLORS.first if new_record?
+    statuses = self.tasks.collect(&:workflow_status).uniq
+    #check any
+    statuses.each do |status|
+      return status.default_color if status.propagate_color_to_if_any?
+    end
+
+    #check all
+    first_status = statuses.first
+    return first_status.default_color if statuses.all? { |status| status.id == first_status.id and status.propagate_color_to_if_all? }
+    self.story_type.default_color
+  end
+
   private
   def auto_generate_priority
     lowest_priority_of_backlog = Story.lowest_priority_by_scope(project)
