@@ -4,7 +4,7 @@ class TimeEntriesController < ApplicationController
 
   def weekly_time_entry
     @week = Week.new params[:week]
-    @stories = @project.stories.yet_to_be_accepted.assigned_to_task_for(current_user)
+    @stories = @project.stories.assigned_to_task_for(current_user)
   end
 
   def update_time_entry

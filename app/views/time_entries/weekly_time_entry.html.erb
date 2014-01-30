@@ -24,7 +24,7 @@
     </thead>
     <tbody>
     <% @stories.each do |story| %>
-        <% tasks = story.tasks.assigned_to(current_user).in_progress %>
+        <% tasks = story.tasks.time_entryable.assigned_to(current_user) %>
         <% if tasks.count > 0 %>
             <tr>
               <th><%= story.title %></th>

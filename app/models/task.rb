@@ -16,7 +16,7 @@ class Task < ActiveRecord::Base
   validates :title, :workflow_status_id, presence: true
 
   scope :assigned_to, lambda { |user| where(assigned_to_id: user.id) }
-  scope :in_progress, lambda { where(status: 'in_progress') }
+  scope :time_entryable, lambda { joins(:workflow_status).where('workflow_statuses.allow_to_enter_time', true) }
   scope :order_by_recent, -> { order 'created_at ASC' }
   default_scope { order_by_recent }
 
