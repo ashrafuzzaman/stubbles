@@ -24,8 +24,8 @@ class Story < ActiveRecord::Base
   scope :order_by_priority, -> { order 'priority ASC' }
   default_scope { order_by_priority }
 
-  scope :backlog, -> {where(milestone_id: nil)}
-  scope :yet_to_be_accepted, -> {where(['stories.status != ?', 'accepted'])}
+  scope :backlog, -> { where(milestone_id: nil) }
+  scope :yet_to_be_accepted, -> { where(['stories.status != ?', 'accepted']) }
   scope :assigned_to, lambda { |user| where(:assigned_to_id => user.id) }
   scope :assigned_to_task_for, lambda { |user| includes('tasks').where("tasks.assigned_to_id" => user.id) }
   scope :involved_with, lambda { |user_id| includes('tasks').where(["tasks.assigned_to_id = ? " +
@@ -33,27 +33,8 @@ class Story < ActiveRecord::Base
   scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
   before_create :auto_generate_priority
-  after_save :propagate_hour_calculations_to_milestone
+  after_save :propagate_hour_calculations_to_milestone, :reinitialize_task_workflow
   after_destroy :propagate_hour_calculations_to_milestone
-
-  #workflow_column :status
-  #workflow do
-  #  state :not_started do
-  #    event :start, :transitions_to => :started
-  #  end
-  #  state :started do
-  #    event :finish, :transitions_to => :finished
-  #  end
-  #  state :finished do
-  #    event :accept, :transitions_to => :accepted
-  #    event :reject, :transitions_to => :rejected
-  #    event :reopen, :transitions_to => :started
-  #  end
-  #  state :rejected do
-  #    event :reopen, :transitions_to => :started
-  #  end
-  #  state :accepted
-  #end
 
   def self.search(q)
     where("stories.title ILIKE ? OR stories.id = ?", "%#{q}%", q.to_i)
@@ -74,14 +55,6 @@ class Story < ActiveRecord::Base
 
   def sealed_for_tasks?
     ['accepted', 'rejected'].include? status
-  end
-
-  def update_status
-    #unless sealed_for_tasks?
-    #  start! if not_started? && any_task_started?
-    #  finish! if started? && all_tasks_finished?
-    #  reopen! if finished? && any_task_started?
-    #end
   end
 
   def all_tasks_finished?
@@ -152,4 +125,9 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def reinitialize_task_workflow
+    return unless self.story_type_id_changed?
+    workflow_status = self.story_type.initial_workflow_status
+    self.tasks.update_all workflow_status_id: workflow_status.try(:id)
+  end
 end
