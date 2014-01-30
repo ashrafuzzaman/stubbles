@@ -5,7 +5,6 @@ class WorkflowTransition < ActiveRecord::Base
 
   validates :event, :from_status_id, :to_status_id, presence: true
   validates :to_status_id, uniqueness: {scope: :from_status_id}
-  validates :event, uniqueness: {scope: :story_type_id}
 
   attr_accessible :event, :from_status_id, :to_status_id, :button_color
 
