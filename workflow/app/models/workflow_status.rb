@@ -5,7 +5,7 @@ class WorkflowStatus < ActiveRecord::Base
   validates :title, presence: true
   validate :at_least_one_initial_state
   attr_accessible :title, :description, :workflowable_type, :workflowable_id, :initial_status,
-                  :default_color, :propagate_color_to_if_any, :propagate_color_to_if_all,
+                  :default_color, :propagate_color_if_any, :propagate_color_if_all,
                   :allow_to_estimate, :allow_to_enter_time, :allow_to_delete
 
   scope :initials, -> { where(initial_status: true) }

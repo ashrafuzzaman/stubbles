@@ -1,29 +1,79 @@
-<h1>Workflow statuses for <strong><%= @story_type.title %></strong></h1>
+<h1><%= @story_type.title %></h1>
+<hr/>
+<h3>Workflow statuses</h3>
+
+<div class="row">
+  <% @workflow_statuses.each do |workflow_status| %>
+      <div class="col-sm-4">
+        <div class="panel panel-<%= workflow_status.default_color %>">
+          <div class="panel-heading">
+            <strong><%= workflow_status.title %></strong>
+          </div>
+          <table class="table">
+            <tr>
+              <td>Initial status</td>
+              <td><%= boolean_icon(workflow_status.initial_status) %></td>
+            </tr>
+            <tr>
+              <td>Propagate color if any</td>
+              <td><%= boolean_icon(workflow_status.propagate_color_if_any) %></td>
+            </tr>
+            <tr>
+              <td>Propagate color if all</td>
+              <td><%= boolean_icon(workflow_status.propagate_color_if_all) %></td>
+            </tr>
+            <tr>
+              <td>Allow to estimate</td>
+              <td><%= boolean_icon(workflow_status.allow_to_estimate) %></td>
+            </tr>
+            <tr>
+              <td>Allow to enter time</td>
+              <td><%= boolean_icon(workflow_status.allow_to_enter_time) %></td>
+            </tr>
+            <tr>
+              <td>Allow to delete</td>
+              <td><%= boolean_icon(workflow_status.allow_to_delete) %></td>
+            </tr>
+          </table>
+          <div class="panel-footer">
+            <%= link_to 'Edit', [:edit, @story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
+            <%= link_to 'Destroy', [@story_type, workflow_status], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<%= link_to 'New Workflow status', [:new, @story_type, :workflow_status], class: 'btn btn-default btn-primary' %>
+
+<br/>
+<h3>Workflow transitions</h3>
 
 <table class="table">
   <thead>
   <tr>
-    <th>Title</th>
-    <th>Initial status</th>
+    <th>Event</th>
+    <th></th>
     <th></th>
   </tr>
   </thead>
 
   <tbody>
-  <% @workflow_statuses.each do |workflow_status| %>
+  <% @workflow_transitions.each do |workflow_transition| %>
       <tr>
-        <td><%= workflow_status.title %></td>
-        <td><%= raw '<span class="glyphicon glyphicon-ok"></span>' if workflow_status.initial_status %></td>
+        <td><%= workflow_transition.event %></td>
         <td>
-          <%= link_to 'Edit', [:edit, @story_type, workflow_status], class: 'btn-sm btn-default btn-primary' %>
-          <%= link_to 'Destroy', [@story_type, workflow_status], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
+          <span class="badge"><%= workflow_transition.from_status.try(:title) %></span>
+          <span class="glyphicon glyphicon-arrow-right"></span>
+          <span class="badge"><%= workflow_transition.to_status.try(:title) %></span>
+        </td>
+        <td>
+          <%= link_to 'Edit', [:edit, @story_type, workflow_transition], class: 'btn-sm btn-default btn-primary' %>
+          <%= link_to 'Destroy', [@story_type, workflow_transition], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
       </tr>
   <% end %>
   </tbody>
 </table>
 
-<br/>
-
-<%= link_to 'New Workflow status', [:new, @story_type, :workflow_status], class: 'btn btn-default btn-primary' %>
-<%= link_to 'Workflow transitions', [@story_type, :workflow_transitions], class: 'btn btn-default' %>
+<%= link_to 'New Workflow transition', new_story_type_workflow_transition_path, class: 'btn btn-default btn-primary' %>

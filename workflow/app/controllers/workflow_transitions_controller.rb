@@ -4,4 +4,22 @@ class WorkflowTransitionsController < InheritedResources::Base
   actions :all, :except => [:show]
 
   respond_to :html, :xml, :json, :js
+
+  def destroy
+    super do |format|
+      format.html { redirect_to [@story_type, :workflow_statuses] }
+    end
+  end
+
+  def update
+    super do |format|
+      format.html { redirect_to [@story_type, :workflow_statuses] }
+    end
+  end
+
+  def create
+    super do |format|
+      format.html { redirect_to [@story_type, :workflow_statuses] }
+    end
+  end
 end

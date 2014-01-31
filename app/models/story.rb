@@ -106,12 +106,12 @@ class Story < ActiveRecord::Base
     statuses = self.tasks.collect(&:workflow_status).uniq
     #check any
     statuses.each do |status|
-      return status.default_color if status.propagate_color_to_if_any?
+      return status.default_color if status.propagate_color_if_any?
     end
 
     #check all
     first_status = statuses.first
-    return first_status.default_color if statuses.all? { |status| status.id == first_status.id and status.propagate_color_to_if_all? }
+    return first_status.default_color if statuses.all? { |status| status.id == first_status.id and status.propagate_color_if_all? }
     self.story_type.default_color
   end
 

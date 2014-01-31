@@ -4,4 +4,9 @@ class WorkflowStatusesController < InheritedResources::Base
   actions :all, :except => [:show]
 
   respond_to :html, :xml, :json, :js
+
+  def index
+    @workflow_transitions = parent.workflow_transitions.includes [:from_status, :to_status]
+    index!
+  end
 end

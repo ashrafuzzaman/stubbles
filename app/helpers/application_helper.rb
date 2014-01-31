@@ -49,4 +49,12 @@ module ApplicationHelper
   def progress_bar_for(model)
     progress_bar_with_percent(model.percent_completed)
   end
+
+  def boolean_icon(val)
+    if val
+      raw '<span class="color-green glyphicon glyphicon-ok"></span>'
+    else
+      raw '<span class="color-red glyphicon glyphicon-remove"></span>'
+    end
+  end
 end

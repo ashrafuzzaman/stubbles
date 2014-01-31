@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128122037) do
+ActiveRecord::Schema.define(version: 20140131045149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,8 +246,8 @@ ActiveRecord::Schema.define(version: 20140128122037) do
     t.integer  "workflowable_id"
     t.boolean  "initial_status"
     t.string   "default_color"
-    t.boolean  "propagate_color_to_if_any"
-    t.boolean  "propagate_color_to_if_all"
+    t.boolean  "propagate_color_if_any"
+    t.boolean  "propagate_color_if_all"
     t.boolean  "allow_to_estimate"
     t.boolean  "allow_to_enter_time"
     t.boolean  "allow_to_delete"
