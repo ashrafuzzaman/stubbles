@@ -1,9 +1,10 @@
 module MilestonesHelper
   def milestone_filter(project, milestone)
+    milestones = project.cached_milestones.collect { |m| [m.title, m.id] }
+    milestones.insert 0, ['Backlog', 0]
     form_tag("", :method => :get, remote: true, :'show-loading-image' => '#loading-placeholder') do |f|
-      concat select_tag(:milestone_id, options_for_select(project.cached_milestones.collect { |m| [m.title, m.id] },
-                                                          :selected => milestone.try(:id)),
-                        {:class => 'submittable form-control', :prompt => 'Backlog'})
+      concat select_tag(:milestone_id, options_for_select(milestones, :selected => (milestone.try(:id) || params[:milestone_id])),
+                        {:class => 'submittable form-control', :prompt => 'All'})
       [:involved_with].each do |param|
         concat hidden_field_tag param, params[param]
       end

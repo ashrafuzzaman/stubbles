@@ -2,7 +2,7 @@
 <br/>
 
 <div class="row">
-  <%= render :partial => 'milestones/burndown', :locals => {:milestone => @milestone} %>
+  <%= render :partial => 'milestones/burndown', :locals => {:milestone => @milestone} if @milestone %>
 </div>
 
 <div class="row">
