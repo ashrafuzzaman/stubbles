@@ -16,7 +16,6 @@
         <td><%= story_type.description %></td>
         <td>
           <%= link_to 'Workflow', [story_type, :workflow_statuses], :class => 'btn-sm btn-default btn-primary' %>
-          <%= link_to 'Transitions', [story_type, :workflow_transitions], class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Edit', edit_project_story_type_path(@project, story_type), class: 'btn-sm btn-default btn-primary' %>
           <%= link_to 'Destroy', [@project, story_type], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-default btn-danger' %>
         </td>
