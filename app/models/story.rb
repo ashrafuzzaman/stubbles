@@ -2,10 +2,10 @@ require 'auditlog/model_tracker'
 
 class Story < ActiveRecord::Base
   include Auditlog::ModelTracker
-  track only: [:title, :assigned_to_id], meta: [:project_id]
+  track only: [:title, :assigned_to_id, :workflow_status_id], meta: [:project_id]
 
   attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :priority,
-                  :milestone_id, :attachments_attributes, :story_type_id
+                  :milestone_id, :attachments_attributes, :story_type_id, :workflow_status_id
 
   include StoryPermission
   acts_as_taggable
@@ -116,7 +116,7 @@ class Story < ActiveRecord::Base
     self.story_type.default_color
   end
 
-  def calculate_current_status
+  def update_current_status
     statuses = self.tasks.collect(&:workflow_status).uniq
     #check any
     statuses.each do |status|
@@ -136,8 +136,9 @@ class Story < ActiveRecord::Base
         status = current
       end
     end
-    status ? status : self.story_type.initial_workflow_status.try(:id)
-    #self.update_attributes! workflow_status_id: status_id
+    status_id = status ? status : self.story_type.initial_workflow_status.try(:id)
+    p WorkflowStatus.find status_id
+    self.update_attributes! workflow_status_id: status_id
   end
 
   private

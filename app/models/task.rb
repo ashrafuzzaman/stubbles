@@ -2,8 +2,8 @@ require 'auditlog/model_tracker'
 
 class Task < ActiveRecord::Base
   include Auditlog::ModelTracker
-  track only: [:title, :status, :hours_estimated, :assigned_to_id], meta: [:project_id]
-  attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed
+  track only: [:title, :status, :hours_estimated, :assigned_to_id, :workflow_status_id], meta: [:project_id]
+  attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed, :workflow_status_id
 
   include TaskPermission
 
@@ -22,8 +22,7 @@ class Task < ActiveRecord::Base
 
   before_create :set_project_id
   before_validation :set_initial_status
-  after_save :propagate_hours_info_to_story
-  before_save :propagate_status_to_story
+  after_save :propagate_hours_info_to_story, :propagate_status_to_story
   after_destroy :propagate_hours_info_to_story
 
   ######################### Work flow ##########################
@@ -69,6 +68,6 @@ class Task < ActiveRecord::Base
   end
 
   def propagate_status_to_story
-    self.story.workflow_status_id = self.story.calculate_current_status if self.workflow_status_id_changed?
+    self.story.update_current_status if self.workflow_status_id_changed?
   end
 end

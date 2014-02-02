@@ -4,6 +4,6 @@ class TasksController < InheritedResources::Base
   respond_to :html, :xml, :json, :js
 
   def update_status
-    resource.update_attribute :workflow_status_id, params[:workflow_status_id]
+    resource.update_attributes workflow_status_id: params[:workflow_status_id]
   end
 end
