@@ -111,7 +111,7 @@ class Story < ActiveRecord::Base
 
     #check all
     first_status = statuses.first
-    return first_status.default_color if statuses.all? { |status| status.id == first_status.id and status.propagate_color_if_all? }
+    return first_status.default_color if first_status and statuses.all? { |status| status.id == first_status.id and status.propagate_color_if_all? }
     self.story_type.default_color
   end
 
