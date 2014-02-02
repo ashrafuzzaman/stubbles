@@ -5,7 +5,7 @@
 <div class="row">
   <% @workflow_statuses.each do |workflow_status| %>
       <div class="col-sm-4">
-        <div class="panel panel-<%= workflow_status.default_color %>">
+        <div class="panel panel-<%= workflow_status.color %>">
           <div class="panel-heading">
             <strong><%= workflow_status.title %></strong>
           </div>

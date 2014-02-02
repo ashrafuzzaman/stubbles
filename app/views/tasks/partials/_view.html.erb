@@ -1,5 +1,5 @@
 <% cache [:view, task] do %>
-    <div id='<%= container_id_of(task) %>' class="task task-panel-<%= task.workflow_status.default_color %>" task-owner-id="<%= task.assigned_to_id %>">
+    <div id='<%= container_id_of(task) %>' class="task task-panel-<%= task.workflow_status.color %>" task-owner-id="<%= task.assigned_to_id %>">
       <div class="task-header row">
         <span class="col-md-8"><%= task.title %> <span class="badge"><%= task.workflow_status.title %></span> </span>
 

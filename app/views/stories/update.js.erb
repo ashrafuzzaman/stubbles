@@ -1,6 +1,6 @@
 <%= remotipart_response({:escape => false}) do %>
     <% execute_js_if(@story.valid?) do %>
         $('#<%= container_id_of(@story) %>').replaceWith('<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @story}) %>');
-        $('#<%= container_id_of(@story) %> .story-header .collapsable').click();
+        $('#<%= container_id_of(@story) %> .story-header .accordion-toggle:first').click();
     <% end %>
 <% end %>

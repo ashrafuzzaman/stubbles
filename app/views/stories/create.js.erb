@@ -1,4 +1,5 @@
 <% execute_js_if(@story.valid?) do %>
 	$('.story_column #new.new_story').replaceWith("<%= escape_javascript(render :partial => 'stories/partials/view', :locals => {:story => @story}) %>");
     DashboardStoryMove.reinitialize();
+    $('#<%= container_id_of(@story) %> .story-header .accordion-toggle:first').click();
 <% end %>

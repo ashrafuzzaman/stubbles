@@ -45,7 +45,9 @@ class WorkflowTemplate
                                  {title: 'Failed', color: 'red', propagate_color_if_any: true}
                              ],
                              transitions: [{event: 'Pass', from: 'Open', to: 'Passed', button_color: 'green'},
-                                           {event: 'Fail', from: 'Open', to: 'Failed', button_color: 'red'}
+                                           {event: 'Fail', from: 'Open', to: 'Failed', button_color: 'red'},
+                                           {event: 'Restart', from: 'Failed', to: 'Open', button_color: 'default'},
+                                           {event: 'Restart', from: 'Passed', to: 'Open', button_color: 'default'}
                              ]}
   }
 
