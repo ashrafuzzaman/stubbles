@@ -23,6 +23,7 @@ class Task < ActiveRecord::Base
   before_create :set_project_id
   before_validation :set_initial_status
   after_save :propagate_hours_info_to_story
+  before_save :propagate_status_to_story
   after_destroy :propagate_hours_info_to_story
 
   ######################### Work flow ##########################
@@ -65,5 +66,9 @@ class Task < ActiveRecord::Base
 
   def set_initial_status
     self.workflow_status ||= self.story.story_type.initial_workflow_status
+  end
+
+  def propagate_status_to_story
+    self.story.workflow_status_id = self.story.calculate_current_status if self.workflow_status_id_changed?
   end
 end

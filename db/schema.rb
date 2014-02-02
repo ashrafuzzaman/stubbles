@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202144438) do
+ActiveRecord::Schema.define(version: 20140202193748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,10 +127,12 @@ ActiveRecord::Schema.define(version: 20140202144438) do
     t.float    "hours_estimated"
     t.integer  "percent_completed"
     t.integer  "story_type_id"
+    t.integer  "workflow_status_id"
   end
 
   add_index "stories", ["assigned_to_id"], name: "index_stories_on_assigned_to_id", using: :btree
   add_index "stories", ["project_id"], name: "index_stories_on_project_id", using: :btree
+  add_index "stories", ["workflow_status_id"], name: "index_stories_on_workflow_status_id", using: :btree
 
   create_table "story_types", force: true do |t|
     t.integer  "project_id"

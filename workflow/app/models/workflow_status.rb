@@ -14,6 +14,26 @@ class WorkflowStatus < ActiveRecord::Base
     self.workflowable.workflow_transitions.from_status(self)
   end
 
+  def prev_chain
+    current_status = self.id
+    statuses = [current_status]
+    transitions = workflowable.workflow_transitions.all
+    transition_map = {}
+    transitions.each do |transition|
+      transition_map[transition.to_status_id] = transition.from_status_id
+    end
+
+    while true do
+      current_status = transition_map[current_status]
+      if current_status and !statuses.include?(current_status)
+        statuses << current_status
+      else
+        break
+      end
+    end
+    statuses.reverse
+  end
+
   private
   def at_least_one_initial_state
     init_workflow_count = workflowable.workflow_statuses.where(initial_status: true).count

@@ -12,6 +12,9 @@
             </div>
             <%= sw.actions do %>
                 <div class="pull-right">
+                  <% if story.workflow_status %>
+                      <class class="badge"><%= story.workflow_status.title %></class>
+                  <% end %>
                   <%= story_time_estimations(story) %>
                   <%= story_edit_link(story) %>
                   <%= story_delete_link(story) %>

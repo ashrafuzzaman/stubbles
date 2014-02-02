@@ -16,6 +16,7 @@ class Story < ActiveRecord::Base
   belongs_to :milestone, :touch => true, inverse_of: :stories
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
   belongs_to :story_type
+  belongs_to :workflow_status
   has_many :tasks, inverse_of: :story
   has_many :comments, :as => :commentable
   has_many :attachments, :as => :attachable
@@ -33,7 +34,7 @@ class Story < ActiveRecord::Base
   scope :attached_to_milestone, lambda { |milestone_id| where(milestone_id: milestone_id.present? ? milestone_id : nil) }
 
   before_create :auto_generate_priority
-  after_save :propagate_hour_calculations_to_milestone, :reinitialize_task_workflow
+  after_save :propagate_hour_calculations_to_milestone
   after_destroy :propagate_hour_calculations_to_milestone
 
   def self.search(q)
@@ -115,6 +116,30 @@ class Story < ActiveRecord::Base
     self.story_type.default_color
   end
 
+  def calculate_current_status
+    statuses = self.tasks.collect(&:workflow_status).uniq
+    #check any
+    statuses.each do |status|
+      return status if status.propagate_color_if_any?
+    end
+
+    #check all
+    status_chains = statuses.uniq.collect(&:prev_chain)
+
+    status = nil
+    catch (:done) do
+      status_chains.first.each_with_index do |chain, i|
+        current = status_chains.first[i]
+        status_chains.each do |c|
+          throw :done if c[i] != current
+        end
+        status = current
+      end
+    end
+    status ? status : self.story_type.initial_workflow_status.try(:id)
+    #self.update_attributes! workflow_status_id: status_id
+  end
+
   private
   def auto_generate_priority
     lowest_priority_of_backlog = Story.lowest_priority_by_scope(project)
@@ -137,11 +162,5 @@ class Story < ActiveRecord::Base
     if self.milestone_id_changed?
       Milestone.find(self.milestone_id_was).update_hour_calculations! if self.milestone_id_was.to_i > 0
     end
-  end
-
-  def reinitialize_task_workflow
-    return unless self.story_type_id_changed?
-    workflow_status = self.story_type.initial_workflow_status
-    self.tasks.update_all workflow_status_id: workflow_status.try(:id)
   end
 end
