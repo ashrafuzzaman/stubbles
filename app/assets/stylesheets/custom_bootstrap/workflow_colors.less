@@ -31,16 +31,30 @@
   }
 }
 
-.task-panel-default .task-header, .btn.task-default {
+.task-panel-default .task-header {
   background-color: @table-bg-active;
 }
 
+.btn.task-default {
+  //set nothing so default color is used
+}
+
 .task-panel-green .task-header, .btn.task-green {
-  color: #ffffff;
+  color: @btn-success-color;
   background-color: @brand-success;
 }
 
 .task-panel-red .task-header, .btn.task-red {
-  color: #ffffff;
+  color: @btn-danger-color;
   background-color: @brand-danger;
+}
+
+.task-panel-blue .task-header, .btn.task-blue {
+  color: @btn-info-color;
+  background-color: @brand-info;
+}
+
+.task-panel-yellow .task-header, .btn.task-yellow {
+  color: @btn-warning-color;
+  background-color: @brand-warning;
 }

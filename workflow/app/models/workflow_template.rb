@@ -70,9 +70,9 @@ class WorkflowTemplate
     status_map = status_map_for(story_type)
 
     @template[story_type_title][:transitions].each do |transition_hash|
-      transition = story_type.workflow_transitions.find_or_initialize_by(event: transition_hash[:event])
-      transition.from_status_id = status_map[transition_hash[:from]]
-      transition.to_status_id = status_map[transition_hash[:to]]
+      transition = story_type.workflow_transitions.find_or_initialize_by(event: transition_hash[:event],
+                                                                         from_status_id: status_map[transition_hash[:from]],
+                                                                         to_status_id: status_map[transition_hash[:to]])
       transition.button_color = transition_hash[:button_color]
       transition.save!
     end
