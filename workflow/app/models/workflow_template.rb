@@ -2,13 +2,13 @@ class WorkflowTemplate
   @@default_template = {'Feature' =>
                             {default_color: 'default',
                              statuses: [
-                                 {title: 'Open', default_color: 'default', allow_to_estimate: true, allow_to_delete: true},
-                                 {title: 'In progress', default_color: 'default', propagate_color_if_any: true, allow_to_enter_time: true},
-                                 {title: 'Done', default_color: 'default'},
-                                 {title: 'Deployed to test', default_color: 'default'},
-                                 {title: 'Qa approved', default_color: 'default'},
-                                 {title: 'Deployed to production', default_color: 'default'},
-                                 {title: 'Closed', default_color: 'default'},
+                                 {title: 'Open', color: 'default', allow_to_estimate: true, allow_to_delete: true},
+                                 {title: 'In progress', color: 'default', propagate_color_if_any: true, allow_to_enter_time: true},
+                                 {title: 'Done', color: 'default'},
+                                 {title: 'Deployed to test', color: 'default'},
+                                 {title: 'Qa approved', color: 'default'},
+                                 {title: 'Deployed to production', color: 'default'},
+                                 {title: 'Closed', color: 'default'},
                              ],
                              transitions: [{event: 'Start', from: 'Open', to: 'In progress', button_color: 'yellow'},
                                            {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green'},
@@ -21,13 +21,13 @@ class WorkflowTemplate
                         'Bug' =>
                             {default_color: 'red',
                              statuses: [
-                                 {title: 'Open', default_color: 'default', allow_to_estimate: true, allow_to_delete: true},
-                                 {title: 'In progress', default_color: 'default', propagate_color_if_any: true, allow_to_enter_time: true},
-                                 {title: 'Done', default_color: 'default'},
-                                 {title: 'Deployed to test', default_color: 'default'},
-                                 {title: 'Qa approved', default_color: 'default'},
-                                 {title: 'Deployed to production', default_color: 'default'},
-                                 {title: 'Closed', default_color: 'default'},
+                                 {title: 'Open', color: 'default', allow_to_estimate: true, allow_to_delete: true},
+                                 {title: 'In progress', color: 'default', propagate_color_if_any: true, allow_to_enter_time: true},
+                                 {title: 'Done', color: 'default'},
+                                 {title: 'Deployed to test', color: 'default'},
+                                 {title: 'Qa approved', color: 'default'},
+                                 {title: 'Deployed to production', color: 'default'},
+                                 {title: 'Closed', color: 'default'},
                              ],
                              transitions: [{event: 'Start', from: 'Open', to: 'In progress', button_color: 'yellow'},
                                            {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green'},
@@ -40,9 +40,9 @@ class WorkflowTemplate
                         'Test case' =>
                             {default_color: 'default',
                              statuses: [
-                                 {title: 'Open', default_color: 'default', allow_to_delete: true},
-                                 {title: 'Passed', default_color: 'green', propagate_color_if_all: true},
-                                 {title: 'Failed', default_color: 'red', propagate_color_if_any: true}
+                                 {title: 'Open', color: 'default', allow_to_delete: true},
+                                 {title: 'Passed', color: 'green', propagate_color_if_all: true},
+                                 {title: 'Failed', color: 'red', propagate_color_if_any: true}
                              ],
                              transitions: [{event: 'Pass', from: 'Open', to: 'Passed', button_color: 'green'},
                                            {event: 'Fail', from: 'Open', to: 'Failed', button_color: 'red'}
@@ -63,7 +63,7 @@ class WorkflowTemplate
   def create_workflow_for_story_type(story_type_title)
     story_type = @project.story_types.find_or_initialize_by(title: story_type_title)
     story_type.default_color = @template[story_type_title][:default_color]
-    story_type.save
+    story_type.save!
 
     status_map = status_map_for(story_type)
 
@@ -71,8 +71,8 @@ class WorkflowTemplate
       transition = story_type.workflow_transitions.find_or_initialize_by(event: transition_hash[:event])
       transition.from_status_id = status_map[transition_hash[:from]]
       transition.to_status_id = status_map[transition_hash[:to]]
-      transition.button_color = status_map[transition_hash[:button_color]]
-      transition.save
+      transition.button_color = transition_hash[:button_color]
+      transition.save!
     end
   end
 
@@ -83,7 +83,7 @@ class WorkflowTemplate
       status = story_type.workflow_statuses.find_or_initialize_by(title: status_attributes[:title])
       status.attributes = status_attributes
       status.initial_status = i == 0
-      status.save
+      status.save!
       status_map[status.title] = status.id
     end
     status_map

@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     workflow (0.0.1)
-      rails (~> 4.0.2)
+      rails (>= 3)
 
 GEM
   remote: https://rubygems.org/
