@@ -27,6 +27,7 @@ class WorkflowStatus < ActiveRecord::Base
       current_status = transition_map[current_status]
       if current_status and !statuses.include?(current_status)
         statuses << current_status
+        break if WorkflowStatus.find(current_status).initial_status?
       else
         break
       end

@@ -137,7 +137,6 @@ class Story < ActiveRecord::Base
       end
     end
     status_id = status ? status : self.story_type.initial_workflow_status.try(:id)
-    p WorkflowStatus.find status_id
     self.update_attributes! workflow_status_id: status_id
   end
 
