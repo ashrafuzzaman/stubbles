@@ -1,9 +1,11 @@
 <% cache [:view, task] do %>
     <div id='<%= container_id_of(task) %>' class="task task-panel-<%= task.workflow_status.color %>" task-owner-id="<%= task.assigned_to_id %>">
       <div class="task-header row">
-        <span class="col-md-8"><%= task.title %> <span class="badge"><%= task.workflow_status.title %></span> </span>
+        <span class="col-md-7"><%= task.title %> <span class="badge"><%= task.workflow_status.title %></span> </span>
 
-        <div class="col-md-4 text-right task-actions">
+        <div class="col-md-5 text-right task-actions">
+          <%= link_to_user_with_avatar(task.assigned_to) %>
+          <%= progress_bar_for(task) %>
           <%= action_links_for_task(task) %>
           <%= link_to_time_entry_popup(task) if task.workflow_status.allow_to_enter_time? %>
           <%= task_edit_link(task) %>
@@ -11,16 +13,6 @@
           <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">
             <span class="glyphicon glyphicon-header"></span>
           </a>
-        </div>
-      </div>
-      <div class="task-container row">
-        <span class="col-md-8"><%= link_to_user_with_avatar(task.assigned_to) %></span>
-
-        <div class="col-md-4 text-right">
-          <%= progress_bar_for(task) %>
-          <%= render :partial => 'shared/estimated_and_spent_hours',
-                     :locals => {:estimated => task.hours_estimated,
-                                 :spent => task.hours_spent} %>
         </div>
       </div>
       <div id="task-<%= task.id %>-history" class="row collapse task-history">
