@@ -9,12 +9,12 @@ class DashboardStoryMove
       @startMoving()
 
   @startMoving: =>
-    $('*[show-on-story-move]').show()
-    $('*[hide-on-story-move]').hide()
+    $('*[show-on-story-select]').show()
+    $('*[hide-on-story-select]').hide()
 
   @cancelMoving: =>
-    $('*[show-on-story-move]').hide()
-    $('*[hide-on-story-move]').show()
+    $('*[show-on-story-select]').hide()
+    $('*[hide-on-story-select]').show()
 
   @move: (milestoneId) =>
     storyIds = []
