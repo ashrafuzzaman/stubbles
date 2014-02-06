@@ -13,8 +13,8 @@ module MilestonesHelper
 
   def move_milestone_list(project)
     milestone_id = @milestone.try(:id) || params[:milestone_id]
-    select_tag(:move_milestone_id, options_for_select(project.cached_milestones.collect { |m| [m.title, m.id] },
-                                                      :selected => milestone_id),
+    select_tag(:action_milestone_id, options_for_select(project.cached_milestones.collect { |m| [m.title, m.id] },
+                                                        :selected => milestone_id),
                {:class => 'form-control', :prompt => 'Assign milestone', :'data-selected' => milestone_id})
   end
 

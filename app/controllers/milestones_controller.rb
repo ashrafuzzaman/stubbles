@@ -96,6 +96,14 @@ class MilestonesController < ApplicationController
     end
   end
 
+  def copy_stories
+    @from_milestone = Milestone.find(params[:from_milestone_id]) rescue nil
+    @stories = @project.copy_stories_to_milestone(params[:milestone_id], params[:story_ids])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def burn_down
     milestone = @project.milestones.find(params[:id]) rescue nil
     chart = milestone.try(:burn_down_chart)

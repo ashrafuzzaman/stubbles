@@ -12,6 +12,7 @@ Stubbles::Application.routes.draw do
       end
       collection do
         put 'move_stories'
+        put 'copy_stories'
       end
     end
 

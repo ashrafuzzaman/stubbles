@@ -61,6 +61,17 @@ class Project < ActiveRecord::Base
     stories
   end
 
+  def copy_stories_to_milestone(milestone_id, story_ids)
+    stories = self.stories.find(story_ids)
+    stories.each do |story|
+      cloned_story = story.clone
+      cloned_story.milestone_id = milestone_id
+      cloned_story.tasks = story.tasks.collect(&:clone)
+      cloned_story.save
+    end
+    stories
+  end
+
   def current_sprint
     self.milestones.current_sprints.first
   end
