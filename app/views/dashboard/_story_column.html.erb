@@ -1,5 +1,9 @@
 <h3><%= title %></h3>
-
+<div show-on-story-select="true">
+  <a href="javascript:void(0)" class="badge" select-all=".story_column .story-header">Select all</a>
+  <a href="javascript:void(0)" class="badge" select-none=".story_column .story-header" style="margin-bottom: 10px;">Select
+    none</a>
+</div>
 <div class="panel-group story_column" sortable-stories="true">
   <% stories.each do |story| %>
       <%= render :partial => 'stories/partials/view', :locals => {:story => story} %>

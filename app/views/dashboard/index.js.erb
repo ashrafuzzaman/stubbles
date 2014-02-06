@@ -4,3 +4,4 @@ $('#dashboard-story-container').html('<%= escape_javascript(render :partial => '
    p.delete :utf8 %>
 window.history.pushState({}, "Stubbles", "<%= raw url_for(p) %>");
 bindStorySorting();
+DashboardStoryAction.cancelMoving();

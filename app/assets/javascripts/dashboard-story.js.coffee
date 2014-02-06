@@ -1,7 +1,7 @@
 class @Dashboard
   @PROJECT_ID = window.location.pathname.split('/')[2]; #expecting the pathname as /projects/1/dashboard
 
-class DashboardStoryMove
+class DashboardStoryAction
   @reinitialize: =>
     if($("#move-story").is(":visible"))
       @cancelMoving()
@@ -9,14 +9,16 @@ class DashboardStoryMove
       @startMoving()
 
   @startMoving: =>
-    $('*[show-on-story-select]').show()
     $('*[hide-on-story-select]').hide()
+    $('*[show-on-story-select]').show()
 
   @cancelMoving: =>
     $('*[show-on-story-select]').hide()
     $('*[hide-on-story-select]').show()
 
-  @move: (milestoneId) =>
+  @move: () =>
+    milestoneId = $("#move_milestone_id").val()
+    console.log(milestoneId);
     storyIds = []
     $('input[story-move-chk]:checked').each ->
       storyIds.push($(this).val());
@@ -32,12 +34,25 @@ class DashboardStoryMove
     @cancelMoving()
 
 $ ->
-  DashboardStoryMove.cancelMoving()
+  DashboardStoryAction.cancelMoving()
   $(document).on "click", "#move-story", ->
-    DashboardStoryMove.startMoving()
+    DashboardStoryAction.startMoving()
   $(document).on "click", "#cancel-move-story", ->
-    DashboardStoryMove.cancelMoving()
-  $("select#move_milestone_id").change ->
-    DashboardStoryMove.move($(this).val())
+    DashboardStoryAction.cancelMoving()
+  $(document).on('click', "#move-story-action", ->
+    DashboardStoryAction.move()
+  )
 
-@DashboardStoryMove = DashboardStoryMove
+  $(document).on('click', "#copy-story-action", ->
+#    DashboardStoryAction.move()
+    alert("Will be available soon")
+  )
+
+  $(document).on('click', '[select-all]', ->
+    $($(this).attr('select-all')).find('input[type="checkbox"]').prop('checked', true)
+  )
+  $(document).on('click', '[select-none]', ->
+    $($(this).attr('select-none')).find('input[type="checkbox"]').prop('checked', false)
+  )
+
+@DashboardStoryAction = DashboardStoryAction

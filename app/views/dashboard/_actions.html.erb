@@ -1,19 +1,26 @@
 <div id="dashboard-actions" class="row">
-  <div class="col-md-4"><%= user_filter('involved_with') %></div>
+  <div class="col-md-3"><%= user_filter('involved_with') %></div>
   <div class="col-md-3">
     <div hide-on-story-select="true">
-    <%= milestone_filter(project, milestone) %>
+      <%= milestone_filter(project, milestone) %>
     </div>
     <div show-on-story-select="true" hidden>
-    <%= move_milestone_list(project) %>
+      <%= move_milestone_list(project) %>
     </div>
   </div>
-  <div class="col-md-1">
-    <%= link_to('New Story', 'javascript:void(0)', :class => 'btn btn-primary', :'data-milestone-id' => milestone.try(:id),
+  <div class="col-md-6">
+    <%= link_to('New Story', 'javascript:void(0)', :class => 'btn btn-success', :'data-milestone-id' => milestone.try(:id),
                 :'render-template' => 'new-story-template', :'prepend-after' => ".story_column") %>
-  </div>
-  <div class="col-md-3">
     <%= link_to 'Select stories', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-select' => "true" %>
+    <div class="btn-group" show-on-story-select="true">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        Action <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a id="move-story-action" href="javascript:void(0)">Move stories</a></li>
+        <li><a id="copy-story-action" href="javascript:void(0)">Copy stories</a></li>
+      </ul>
+    </div>
     <%= link_to 'Cancel selection', 'javascript:void(0)', id: 'cancel-move-story', class: 'btn btn-default', :'show-on-story-select' => "true", style: 'display: none;' %>
     <% if milestone %>
         <button id="send-milestone-report-btn" class="btn btn-primary" data-toggle="modal" data-target="#milestone_report">
