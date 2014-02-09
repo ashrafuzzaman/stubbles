@@ -11,6 +11,7 @@
 //= require jquery.remotipart
 //= require render_on_event
 //= require loading_image
+//= require intro
 
 $(function () {
     addSubmitalbeElemntInForm();

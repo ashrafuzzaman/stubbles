@@ -10,5 +10,6 @@
  *= require dashboard
  *= require loading_animation
  *= require typeahead.js-bootstrap
+ *= require introjs
  *= require_self
 */

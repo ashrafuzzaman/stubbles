@@ -10,7 +10,7 @@
   </div>
   <div class="col-md-6">
     <%= link_to('New Story', 'javascript:void(0)', :class => 'btn btn-success', :'data-milestone-id' => milestone.try(:id),
-                :'render-template' => 'new-story-template', :'prepend-after' => ".story_column") %>
+                :'render-template' => 'new-story-template', :'prepend-after' => ".story_column", id: 'new-story') %>
     <%= link_to 'Select stories', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-select' => "true" %>
     <div class="btn-group" show-on-story-select="true">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
