@@ -7,10 +7,8 @@
                   <span class="badge"><%= story.id %></span> <%= story.title %>
               <% end %>
             </div>
-            <div class="col-md-2">
-              <%= progress_bar_for(story) %>
-            </div>
             <%= sw.actions do %>
+                <%= progress_bar_for(story) %>
                 <div class="pull-right">
                   <% if story.workflow_status %>
                       <class class="badge"><%= story.workflow_status.title %></class>
