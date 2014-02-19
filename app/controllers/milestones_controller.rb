@@ -3,7 +3,8 @@ class MilestonesController < InheritedResources::Base
   respond_to :html, :xml, :json, :js
   actions :all, :except => [:show]
 
-  before_filter :resource, only: [:move_stories, :copy_stories, :send_report, :burn_down, :clone]
+  before_filter :load_project, only: [:move_stories, :copy_stories]
+  before_filter :resource, only: [:send_report, :burn_down, :clone]
   before_filter :load_form_dependencies, only: [:new, :edit, :create, :update, :clone]
   before_filter :authenticate_user!
 
@@ -56,5 +57,9 @@ class MilestonesController < InheritedResources::Base
   def load_form_dependencies
     @long_milestones = @project.milestones.long
     @available_resources = @project.collaborators
+  end
+
+  def load_project
+    @project = Project.find(params[:project_id])
   end
 end
