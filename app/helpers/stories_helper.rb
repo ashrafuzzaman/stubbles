@@ -57,7 +57,7 @@ module StoriesHelper
   end
 
   def story_widget(story, &block)
-    allow_to_estimate = (story.story_type.initial_workflow_status.try(:allow_to_estimate?) == true)
+    allow_to_estimate = story.story_type.initial_workflow_status.try(:allow_to_estimate?) rescue true
     content_tag :div, id: container_id_of(story),
                 class: "story #{story.status} panel panel-#{story.panel_color}", allow_to_estimate: allow_to_estimate do
       capture(StoryWidget.new(story, self), &block)
