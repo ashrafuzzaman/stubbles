@@ -12,6 +12,7 @@
 //= require render_on_event
 //= require loading_image
 //= require intro
+//= require task
 
 $(function () {
     addSubmitalbeElemntInForm();

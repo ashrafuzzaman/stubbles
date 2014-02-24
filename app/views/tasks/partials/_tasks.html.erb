@@ -5,4 +5,5 @@
 </div>
 <br>
 <%= link_to('New Task', 'javascript:void(0)', :class => 'btn btn-primary btn-xs', :'data-story-id' => story.id,
-            :'render-template' => 'new-task-template', :'append-after' => "##{container_id_of_tasks_for(story)} .tasks") unless story.sealed_for_tasks? %>
+            :'render-template' => 'new-task-template', :'append-after' => "##{container_id_of_tasks_for(story)} .tasks",
+    after_append_call: 'Task.new') unless story.sealed_for_tasks? %>
