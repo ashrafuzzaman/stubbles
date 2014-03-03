@@ -24,7 +24,6 @@ class MilestonesController < InheritedResources::Base
     @milestone.end_on       = Date.current + (@milestone_to_clone.end_on - @milestone_to_clone.start_on).to_i.days
     @milestone.delivered_on = @milestone.end_on
     @milestone.start_on     = Date.current
-    ap @milestone
     render :new
   end
 

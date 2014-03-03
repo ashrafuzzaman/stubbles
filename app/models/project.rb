@@ -67,7 +67,6 @@ class Project < ActiveRecord::Base
       cloned_story = story.dup
       cloned_story.milestone_id = milestone_id
       cloned_story.tasks = story.tasks.collect(&:dup)
-      ap cloned_story
       cloned_story.save
     end
     stories
