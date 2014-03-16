@@ -4,7 +4,7 @@ class WorkflowTemplate
                              statuses: [
                                  {title: 'Open', color: 'default', allow_to_estimate: true, allow_to_delete: true},
                                  {title: 'In progress', color: 'default', propagate_color_if_any: true, allow_to_enter_time: true},
-                                 {title: 'Done', color: 'default'},
+                                 {title: 'Done', color: 'green'},
                                  {title: 'Deployed to test', color: 'default'},
                                  {title: 'Qa approved', color: 'default'},
                                  {title: 'Deployed to production', color: 'default'},

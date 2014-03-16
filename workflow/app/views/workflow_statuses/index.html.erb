@@ -61,7 +61,11 @@
   <tbody>
   <% @workflow_transitions.each do |workflow_transition| %>
       <tr>
-        <td><%= workflow_transition.event %></td>
+        <td>
+          <%= button_tag(workflow_transition.event, :value => workflow_transition.event,
+                         :class => "task-#{workflow_transition.button_color} btn btn-xs",
+                         :'data-disable-with' => 'wait') %>
+        </td>
         <td>
           <span class="badge"><%= workflow_transition.from_status.try(:title) %></span>
           <span class="glyphicon glyphicon-arrow-right"></span>
