@@ -54,11 +54,12 @@ class MilestonesController < InheritedResources::Base
   private
 
   def load_form_dependencies
+    load_project
     @long_milestones = @project.milestones.long
     @available_resources = @project.collaborators
   end
 
   def load_project
-    @project = Project.find(params[:project_id])
+    @project ||= Project.find(params[:project_id])
   end
 end
