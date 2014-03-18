@@ -21,17 +21,21 @@
         </tr>
         <tr>
           <td>Progress</td>
-          <td><progress value="<%= @milestone.percent_completed %>" max="100"></progress></td>
+          <td>
+            <progress value="<%= @milestone.percent_completed %>" max="100"></progress>
+          </td>
         </tr>
       </table>
     </td>
   </tr>
-  <tr>
-    <td class="bodyContent" style="padding-top:0; padding-bottom:0;">
-      <h2>Burndown chart</h2>
-      <%= image_tag attachments['burndown.png'].url -%>
-    </td>
-  </tr>
+  <% if @milestone.generate_burn_down? %>
+      <tr>
+        <td class="bodyContent" style="padding-top:0; padding-bottom:0;">
+          <h2>Burndown chart</h2>
+          <%= image_tag attachments['burndown.png'].url -%>
+        </td>
+      </tr>
+  <% end %>
   <tr>
     <td valign="top" class="bodyContent" mc:edit="body_content01">
       <h1>Stories</h1>

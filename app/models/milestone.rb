@@ -2,7 +2,7 @@ require 'charter/line_chart'
 
 class Milestone < ActiveRecord::Base
   attr_accessible :delivered_on, :description, :duration, :end_on, :start_on, :title, :milestone_type,
-                  :parent_milestone_id, :milestone_resources_attributes
+                  :parent_milestone_id, :milestone_resources_attributes, :generate_burn_down
 
   scope :sprints, -> { where(milestone_type: 'Sprint') }
   scope :current_sprints, -> { sprints.where('start_on <= :date AND end_on >= :date', date: Date.current).order('end_on ASC') }
