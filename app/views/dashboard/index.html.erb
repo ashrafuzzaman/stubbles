@@ -32,25 +32,7 @@
         $("#" + urlHash.hash).find(".panel-collapse").removeClass("collapse").addClass("in");
     }
 
-//    function startIntro() {
-//        var intro = introJs();
-//        intro.setOptions({
-//            steps: [
-//                {
-//                    element: document.querySelector('#new-story'),
-//                    intro: "This is a tooltip."
-//                },
-//                {
-//                    element: '#send-milestone-report-btn',
-//                    intro: 'Get it, use it.'
-//                }
-//            ]
-//        });
-//
-//        intro.start();
-//    }
-
     $(document).ready(function () {
-        startIntro();
+        GuideFactory.fetch('dashboard').start();
     });
 </script>
