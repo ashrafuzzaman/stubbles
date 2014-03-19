@@ -58,7 +58,7 @@ module ApplicationHelper
     end
   end
 
-  def link_to_guide(guide_name)
-    link_to '', 'javascript:void(0);', class: 'glyphicon glyphicon-question-sign', :'data-guide-name' => guide_name
+  def link_to_guide(guide_name, options={})
+    link_to '', 'javascript:void(0);', {class: 'glyphicon glyphicon-question-sign', :'data-guide-name' => guide_name}.merge(options)
   end
 end

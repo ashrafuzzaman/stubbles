@@ -27,6 +27,14 @@ class GuideFactory
     guide.addStep('#move-story', "Click Select stories then select milestone to copy or move and then select the action")
     guide
 
+  @dashboardSelectStory: ->
+    guide = new Guide
+    guide.addStep('.story_column', "Select stories first")
+    guide.addStep('select#action_milestone_id', "Select milestone to copy or move")
+    guide.addStep('#story-action-dropdown', "Select action (move or copy)")
+    guide.addStep('#cancel-move-story', "Or you can cancel the move/copy anytime")
+    guide
+
 @GuideFactory = GuideFactory
 
 $ ->

@@ -13,7 +13,7 @@
                 :'render-template' => 'new-story-template', :'prepend-after' => ".story_column", id: 'new-story') %>
     <%= link_to 'Select stories', 'javascript:void(0)', id: 'move-story', class: 'btn btn-primary', :'hide-on-story-select' => "true" %>
     <div class="btn-group" show-on-story-select="true">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="story-action-dropdown">
         Action <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
@@ -27,5 +27,6 @@
           Send report
         </button>
     <% end %>
+    <%= link_to_guide('dashboardSelectStory', :'show-on-story-select' => "true") %>
   </div>
 </div>
