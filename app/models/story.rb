@@ -11,6 +11,7 @@ class Story < ActiveRecord::Base
   acts_as_taggable
 
   validates :title, :story_type_id, :presence => true
+  validates :title, :uniqueness => {:scope => :milestone_id}
 
   belongs_to :project, :touch => true, inverse_of: :stories
   belongs_to :milestone, :touch => true, inverse_of: :stories

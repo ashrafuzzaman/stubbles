@@ -63,17 +63,23 @@ class Project < ActiveRecord::Base
 
   def copy_stories_to_milestone(milestone_id, story_ids)
     stories = self.stories.find(story_ids)
+    cloned_stories = []
     stories.each do |story|
       cloned_story = story.dup
       cloned_story.milestone_id = milestone_id
       cloned_story.tasks = story.tasks.collect(&:dup)
 
       cloned_story.workflow_status = nil
-      cloned_story.tasks.each { |t| t.workflow_status = nil }
+      cloned_story.tasks.each do |task|
+        task.workflow_status = nil
+        task.hours_spent = 0
+        task.percent_completed = 0
+      end
 
       cloned_story.save
+      cloned_stories << cloned_story
     end
-    stories
+    cloned_stories
   end
 
   def current_sprint
