@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318101513) do
+ActiveRecord::Schema.define(version: 20140319002346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140318101513) do
     t.float    "hours_estimated"
     t.integer  "percent_completed"
     t.boolean  "generate_burn_down"
+    t.boolean  "archived",            default: false
   end
 
   add_index "milestones", ["parent_milestone_id"], name: "index_milestones_on_parent_milestone_id", using: :btree

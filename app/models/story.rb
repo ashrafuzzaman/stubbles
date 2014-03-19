@@ -38,7 +38,9 @@ class Story < ActiveRecord::Base
   after_destroy :propagate_hour_calculations_to_milestone
 
   def self.search(q)
-    where("stories.title ILIKE ? OR stories.id = ?", "%#{q}%", q.to_i)
+    joins('LEFT join milestones on(milestones.id = stories.milestone_id)').
+        where('milestones.archived IS NULL OR milestones.archived = ?', false).
+        where("stories.title ILIKE ? OR stories.id = ?", "%#{q}%", q.to_i)
   end
 
   #TODO: add validation so that no user can be added that is not in the following list

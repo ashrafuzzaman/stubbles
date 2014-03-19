@@ -44,7 +44,7 @@
         <tr>
           <th align="left">Title</th>
           <th align="left">Assigned to</th>
-          <th align="left">Completed</th>
+          <th align="left">Status</th>
           <th align="left">Completed</th>
         </tr>
         </thead>
@@ -55,8 +55,8 @@
               <td align="left" valign="middle">
                 <%= image_tag story.assigned_to.gravatar_url(25), width: 25, height: 25, alt: '' %> &nbsp; <%= story.assigned_to.try(:name) %>
               </td>
-              <td align="left"><%= story.workflow_status.try(:title) %>%</td>
-              <td align="left"><%= story.percent_completed %>%</td>
+              <td align="left"><%= story.workflow_status.try(:title) %></td>
+              <td align="left"><progress value="<%= story.percent_completed %>" max="100"></progress></td>
             </tr>
         <% end %>
         </tbody>
