@@ -29,24 +29,24 @@
 <body>
 
 <% if current_user %>
-    <% cache [:project_nav, @project] do %>
-        <div class="navbar navbar-default">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="javascript:void(0)"><%= @project ? @project.name : 'Stubbles' %></a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <%= render :partial => 'layouts/menu' %>
-            </div>
-            <!--/.nav-collapse -->
-          </div>
+    <%# cache [:project_nav, @project] do %>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:void(0)"><%= @project ? @project.name : 'Stubbles' %></a>
         </div>
-    <% end %>
+        <div class="navbar-collapse collapse">
+          <%= render :partial => 'layouts/menu' %>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+    <%# end %>
 <% else %>
     <% cache :un_logged_in_user_nav do %>
         <div class="navbar navbar-default">
