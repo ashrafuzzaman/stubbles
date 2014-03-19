@@ -10,28 +10,26 @@
     <th>Duration</th>
     <th>milestone_type</th>
     <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
-<% @milestones.each do |milestone| %>
-  <tr>
-    <td><%= milestone.title %></td>
-    <td><%= milestone.description %></td>
-    <td><%= milestone.start_on %></td>
-    <td><%= milestone.end_on %></td>
-    <td><%= milestone.delivered_on %></td>
-    <td><%= milestone.duration %></td>
-    <td><%= milestone.milestone_type %></td>
-    <td><%= link_to 'Show', project_milestone_path(@project, milestone) %></td>
-    <td><%= link_to 'Edit', edit_project_milestone_path(@project, milestone) %></td>
-    <td><%= link_to 'Clone', clone_project_milestone_path(@project, milestone) %></td>
-    <td><%= link_to 'Destroy', project_milestone_path(@project, milestone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @milestones.each do |milestone| %>
+      <tr>
+        <td><%= milestone.title %></td>
+        <td><%= milestone.description %></td>
+        <td><%= milestone.start_on %></td>
+        <td><%= milestone.end_on %></td>
+        <td><%= milestone.delivered_on %></td>
+        <td><%= milestone.duration %></td>
+        <td><%= milestone.milestone_type %></td>
+        <td>
+          <%= link_to 'Edit', edit_project_milestone_path(@project, milestone), class: 'btn-sm btn-default' %>
+          <%= link_to 'Clone', clone_project_milestone_path(@project, milestone), class: 'btn-sm btn-default' %>
+          <%= link_to 'Destroy', project_milestone_path(@project, milestone), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn-sm btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Milestone', new_project_milestone_path(@project), class: 'btn btn-primary' %>

@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   #fetch is not working for some reason
   def cached_milestones
     Rails.cache.fetch([self, 'milestones']) do
-      self.milestones.select('milestones.id, milestones.title, milestones.project_id').to_a
+      self.milestones.active.select('milestones.id, milestones.title, milestones.project_id').to_a
     end
   end
 
