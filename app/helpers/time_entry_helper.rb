@@ -1,12 +1,14 @@
 module TimeEntryHelper
   def time_entry_slot_for(task, date)
-    time_spent = task.total_hours_spent_on(date)
-    if task.assigned_to == current_user
-      content_tag(:span, time_spent, :class => 'time_entry editable',
-                  :'data-task-id' => task.id,
-                  :'data-date' => date, :'data-project-id' => task.story.project_id)
-    else
-      time_spent
+    unless task.story.milestone.try(:archived?)
+      time_spent = task.total_hours_spent_on(date)
+      if task.assigned_to == current_user
+        content_tag(:span, time_spent, :class => 'time_entry editable',
+                    :'data-task-id' => task.id,
+                    :'data-date' => date, :'data-project-id' => task.story.project_id)
+      else
+        time_spent
+      end
     end
   end
 

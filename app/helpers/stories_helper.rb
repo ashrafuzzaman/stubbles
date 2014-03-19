@@ -39,15 +39,19 @@ module StoriesHelper
   end
 
   def story_edit_link(story)
-    link_to('', edit_project_story_path(story.project, story),
-            :remote => true, :class => 'glyphicon glyphicon-edit',
-            :'data-disable-with' => "Loading...") if story.permitted_to_edit_by?(current_user)
+    unless story.milestone.try(:archived?)
+      link_to('', edit_project_story_path(story.project, story),
+              :remote => true, :class => 'glyphicon glyphicon-edit',
+              :'data-disable-with' => "Loading...") if story.permitted_to_edit_by?(current_user)
+    end
   end
 
   def story_delete_link(story)
-    link_to('', project_story_path(story.project, story),
-            :remote => true, :class => 'glyphicon glyphicon-trash', :method => :delete,
-            :confirm => 'Are you sure?', :'data-disable-with' => "Loading...") if story.permitted_to_delete_by?(current_user)
+    unless story.milestone.try(:archived?)
+      link_to('', project_story_path(story.project, story),
+              :remote => true, :class => 'glyphicon glyphicon-trash', :method => :delete,
+              :confirm => 'Are you sure?', :'data-disable-with' => "Loading...") if story.permitted_to_delete_by?(current_user)
+    end
   end
 
   def story_time_estimations(story)
