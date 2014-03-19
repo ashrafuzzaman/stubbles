@@ -10,11 +10,11 @@
     <%= render :partial => 'dashboard/story_column', :locals => {:title => @milestone.try(:title) || 'Backlog',
                                                                  :stories => @stories} %>
   </div>
-  <div class="col-md-3" id="dashboard_resources">
-    <% if @milestone %>
+  <% if @milestone %>
+      <div class="col-md-3" id="dashboard_resources">
         <%= render :partial => 'milestones/dashboard', :locals => {milestone: @milestone} %>
-    <% end %>
-  </div>
+      </div>
+  <% end %>
 </div>
 
 <% cache @milestone do %>

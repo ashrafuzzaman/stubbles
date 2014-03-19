@@ -4,9 +4,9 @@
     <form class="navbar-form navbar-left">
       <input id="story-search" type="search" class="form-control" placeholder="Search" autocomplete="off">
     </form>
-<% end %>
 
-<!--<a href="javascript:void(0);" data-guide-name="dashboard">Guide me</a>-->
+    <li><%= link_to_guide('dashboard') %></li>
+<% end %>
 
 <div id="dashboard-story-container">
   <%= render 'story_container' %>

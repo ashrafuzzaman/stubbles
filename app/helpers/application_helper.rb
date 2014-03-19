@@ -57,4 +57,8 @@ module ApplicationHelper
       raw '<span class="color-red glyphicon glyphicon-remove"></span>'
     end
   end
+
+  def link_to_guide(guide_name)
+    link_to '', 'javascript:void(0);', class: 'glyphicon glyphicon-question-sign', :'data-guide-name' => guide_name
+  end
 end
