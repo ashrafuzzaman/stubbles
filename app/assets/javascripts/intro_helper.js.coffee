@@ -14,8 +14,8 @@ class Guide
 @Guide = Guide
 
 class GuideFactory
-  @fetch: (guide_name) ->
-    eval "GuideFactory.#{guide_name}()"
+  @fetch: (guideName) ->
+    eval "GuideFactory.#{guideName}()"
 
   @dashboard: ->
     guide = new Guide
@@ -23,3 +23,10 @@ class GuideFactory
     guide
 
 @GuideFactory = GuideFactory
+
+$ ->
+  $(document).on('click', 'a[data-guide-name]', (event) ->
+    event.stopPropagation()
+    guideName = $(this).data('guide-name')
+    GuideFactory.fetch(guideName).start() if guideName
+  )
