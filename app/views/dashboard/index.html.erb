@@ -18,7 +18,7 @@
     $('input#story-search').typeahead({
         name: 'stories',
         remote: '<%= search_project_stories_path(@project) %>?q=%QUERY',
-        template: "<b><span class='badge'>{{id}}</span>  {{title}}</b><br/><img src='{{assigned_to.gravatar_url}}' alt=''/><i>{{assigned_to.short_name}}</i>",
+        template: "<b><span class='badge'>{{id}}</span><span style='padding: 0px 5px 0px 5px;'>{{title}}</span></b><span class='pull-right'><img width='20px' height='20px' src='{{assigned_to.gravatar_url}}' alt=''/><i style='padding-left: 5px;'>{{assigned_to.short_name}}</i></span>",
         engine: Hogan
     });
 
