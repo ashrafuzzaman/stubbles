@@ -7,7 +7,7 @@ class WorkflowStatus < ActiveRecord::Base
   attr_accessible :title, :description, :workflowable_type, :workflowable_id, :initial_status,
                   :color, :propagate_color_if_any, :propagate_color_if_all,
                   :allow_to_estimate, :allow_to_enter_time, :allow_to_delete
-  before_save :update_estimable_in_story_type
+  after_save :update_estimable_in_story_type
 
   scope :initials, -> { where(initial_status: true) }
 
@@ -48,6 +48,7 @@ class WorkflowStatus < ActiveRecord::Base
   def update_estimable_in_story_type
     if self.allow_to_estimate_changed?
       workflowable.estimable = workflowable.workflow_statuses.any? { |status| status.allow_to_estimate? }
+      workflowable.save!
     end
   end
 end

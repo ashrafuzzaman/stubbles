@@ -9,4 +9,10 @@ class WorkflowStatusesController < InheritedResources::Base
     @workflow_transitions = parent.workflow_transitions.includes [:from_status, :to_status]
     index!
   end
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to [@story_type, WorkflowStatus] }
+    end
+  end
 end
