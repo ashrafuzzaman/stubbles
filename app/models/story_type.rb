@@ -11,4 +11,12 @@ class StoryType < ActiveRecord::Base
   def initial_workflow_status
     self.workflow_statuses.initials.first || self.workflow_statuses.first
   end
+
+  def estimable?
+    @estimable ||= self.workflow_statuses.any? { |status| status.allow_to_estimate? }
+  end
+
+  def allow_to_enter_time?
+    @allow_to_enter_time ||= self.workflow_statuses.any? { |status| status.allow_to_enter_time? }
+  end
 end
