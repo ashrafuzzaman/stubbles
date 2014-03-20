@@ -68,13 +68,7 @@ class Project < ActiveRecord::Base
       cloned_story = story.dup
       cloned_story.milestone_id = milestone_id
       cloned_story.tasks = story.tasks.collect(&:dup)
-
-      cloned_story.workflow_status = nil
-      cloned_story.tasks.each do |task|
-        task.workflow_status = nil
-        task.hours_spent = 0
-        task.percent_completed = 0
-      end
+      cloned_story.reset_status
 
       cloned_story.save
       cloned_stories << cloned_story

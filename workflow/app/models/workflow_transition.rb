@@ -9,4 +9,6 @@ class WorkflowTransition < ActiveRecord::Base
   attr_accessible :event, :from_status_id, :to_status_id, :button_color
 
   scope :from_status, -> (status) { where(from_status_id: status) }
+
+  #SUPPORTED_EVENTS = [:progress_done, :restart_progress]
 end

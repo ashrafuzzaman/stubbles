@@ -36,6 +36,7 @@ class Story < ActiveRecord::Base
 
   before_create :auto_generate_priority
   after_save :propagate_hour_calculations_to_milestone
+  before_save :reset_status_when_story_type_changed
   after_destroy :propagate_hour_calculations_to_milestone
 
   def self.search(q)
@@ -69,6 +70,17 @@ class Story < ActiveRecord::Base
   def any_task_started?
     tasks.each { |task| return true if task.in_progress? }
     false
+  end
+
+  def reset_status
+    self.tasks.each do |task|
+      task.workflow_status = nil
+      task.set_initial_status
+
+      task.hours_spent = 0
+      task.percent_completed = 0
+    end
+    self.workflow_status_id = detect_current_status
   end
 
   ######################### Priority ##########################
@@ -119,7 +131,7 @@ class Story < ActiveRecord::Base
     self.story_type.default_color
   end
 
-  def update_current_status
+  def detect_current_status
     statuses = self.tasks.collect(&:workflow_status).uniq
     #check any
     statuses.each do |status|
@@ -139,8 +151,11 @@ class Story < ActiveRecord::Base
         status = current
       end
     end
-    status_id = status ? status : self.story_type.initial_workflow_status.try(:id)
-    self.update_attributes! workflow_status_id: status_id
+    status ? status : self.story_type.initial_workflow_status.try(:id)
+  end
+
+  def update_current_status
+    self.update_attributes! workflow_status_id: detect_current_status
   end
 
   private
@@ -165,5 +180,9 @@ class Story < ActiveRecord::Base
     if self.milestone_id_changed?
       Milestone.find(self.milestone_id_was).update_hour_calculations! if self.milestone_id_was.to_i > 0
     end
+  end
+
+  def reset_status_when_story_type_changed
+    reset_status if story_type_id_changed?
   end
 end

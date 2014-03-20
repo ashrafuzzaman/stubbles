@@ -13,7 +13,6 @@
                   <% if story.workflow_status %>
                       <class class="badge"><%= story.workflow_status.title %></class>
                   <% end %>
-                  <%= story_time_estimations(story) %>
                   <%= story_edit_link(story) %>
                   <%= story_delete_link(story) %>
                   <a class="accordion-toggle" data-toggle="collapse" href="#story-<%= story.id %>-history">
@@ -25,6 +24,9 @@
         <%= sw.content do %>
             <span class="pull-left"><%= link_to_user_with_avatar(story.assigned_to) %></span>
             <div class="pull-right"><%= tags_for(story.tag_list) %></div>
+            <% if story.story_type.estimable? %>
+                <div class="pull-right"><%= story_time_estimations(story) %></div>
+            <% end %>
             <div class="clearfix"></div>
             <hr/>
             <p class="description"><%= raw story.description %></p>

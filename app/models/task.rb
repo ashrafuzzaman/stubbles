@@ -49,6 +49,10 @@ class Task < ActiveRecord::Base
     time_entry
   end
 
+  def set_initial_status
+    self.workflow_status ||= self.story.story_type.initial_workflow_status
+  end
+
   private
   def propagate_hours_info_to_story
     story.hours_spent = story.tasks.sum(:hours_spent) if self.hours_spent_changed?
@@ -61,10 +65,6 @@ class Task < ActiveRecord::Base
 
   def set_project_id
     self.project_id = self.story.project_id
-  end
-
-  def set_initial_status
-    self.workflow_status ||= self.story.story_type.initial_workflow_status
   end
 
   def propagate_status_to_story
