@@ -6,7 +6,7 @@ class Milestone < ActiveRecord::Base
 
   scope :sprints, -> { where(milestone_type: 'Sprint') }
   scope :active, -> { where(archived: false) }
-  scope :current_sprints, -> { sprints.where('start_on <= :date AND end_on >= :date', date: Date.current).order('end_on ASC') }
+  scope :current_sprints, -> { sprints.active.where('start_on <= :date AND end_on >= :date', date: Date.current).order('end_on ASC') }
   scope :long, -> { where('milestone_type <> ?', 'Sprint') }
   scope :without, ->(id) { where('milestones.id != ?', id) }
   scope :order_by_recent, order("end_on DESC")
