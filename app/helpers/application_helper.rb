@@ -61,4 +61,9 @@ module ApplicationHelper
   def link_to_guide(guide_name, options={})
     link_to '', 'javascript:void(0);', {class: 'glyphicon glyphicon-question-sign', :'data-guide-name' => guide_name}.merge(options)
   end
+
+  def current_theme
+    current_user.theme || User::THEMES.first
+    #User::THEMES.last
+  end
 end

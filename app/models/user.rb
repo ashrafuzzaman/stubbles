@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  THEMES = ['dark_theme', 'light_theme']
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :short_name
+  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :remember_me, :short_name, :theme
   validates :first_name, :last_name, :presence => true
   validates :email, :uniqueness => true
   #validates :short_name, :uniqueness => true

@@ -7,6 +7,7 @@
     <%= f.input :last_name %>
     <%= f.input :email %>
     <%= f.input :short_name %>
+    <%= f.input :theme, collection: User::THEMES.collect { |theme| [theme.humanize, theme] } %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
     <%= f.input :current_password %>
