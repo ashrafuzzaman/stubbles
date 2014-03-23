@@ -63,7 +63,6 @@ module ApplicationHelper
   end
 
   def current_theme
-    current_user.theme || User::THEMES.first
-    #User::THEMES.last
+    current_user.try(:theme) || User::THEMES.first
   end
 end
