@@ -2,7 +2,8 @@ require 'digest/md5'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:google_oauth2]
 
   THEMES = ['dark_theme', 'light_theme']
 
@@ -29,12 +30,12 @@ class User < ActiveRecord::Base
   end
 
   def last_accessed_project
-  	projects.order("last_accessed_at DESC").try(:first)
+    projects.order("last_accessed_at DESC").try(:first)
   end
 
   def admin_for?(project)
-  	membership = project.membership_of(self)
-  	membership && membership.active && membership.is_admin?
+    membership = project.membership_of(self)
+    membership && membership.active && membership.is_admin?
   end
 
   def gravatar_url(size = 50)
@@ -42,4 +43,16 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{email_hash}?s=#{size}"
   end
 
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
+
+    unless user
+      user = User.create(name: data["name"],
+                         email: data["email"],
+                         password: Devise.friendly_token[0, 20]
+      )
+    end
+    user
+  end
 end

@@ -1,7 +1,6 @@
 Stubbles::Application.routes.draw do
   root :to => 'projects#redirect_to_recent_project'
-
-  devise_for :users, controllers: {registrations: 'registrations'}
+  devise_for :users, controllers: {registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks'}
 
   resources :projects do
     resources :milestones do

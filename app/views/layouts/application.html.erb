@@ -48,7 +48,7 @@
     </div>
     <%# end %>
 <% else %>
-    <% cache :un_logged_in_user_nav do %>
+    <%# cache :un_logged_in_user_nav do %>
         <div class="navbar navbar-default">
           <div class="container">
             <div class="navbar-header">
@@ -63,12 +63,13 @@
               <ul class="nav navbar-nav pull-right">
                 <li><%= link_to "Sign up", new_user_registration_path %></li>
                 <li><%= link_to "sign in", new_user_session_path %></li>
+                <li><%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
               </ul>
             </div>
             <!--/.nav-collapse -->
           </div>
         </div>
-    <% end %>
+    <%# end %>
 <% end %>
 
 <div class="container main-container">
