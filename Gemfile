@@ -32,9 +32,12 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'cancan'
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
+
 gem 'figaro'
 gem 'pg'
 gem 'rolify'
