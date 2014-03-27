@@ -375,7 +375,6 @@ DEPENDENCIES
   letter_opener
   memcachier
   nested_form
-  omniauth
   omniauth-google-oauth2
   omniauth-twitter
   pg
