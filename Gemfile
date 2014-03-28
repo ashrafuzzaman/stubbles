@@ -34,7 +34,6 @@ gem 'jquery-rails'
 gem 'cancan'
 
 gem 'devise'
-gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 
