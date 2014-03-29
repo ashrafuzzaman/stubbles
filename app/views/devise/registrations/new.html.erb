@@ -5,10 +5,6 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :email %>
-    <% if response.password_required? %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-    <% end %>
     <%= recaptcha_tags if Rails.env.production? %>
     <br/>
 

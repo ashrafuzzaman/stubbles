@@ -35,7 +35,6 @@ gem 'cancan'
 
 gem 'devise'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-twitter'
 
 gem 'figaro'
 gem 'pg'
