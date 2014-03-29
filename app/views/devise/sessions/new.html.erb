@@ -2,20 +2,16 @@
     <%= stylesheet_link_tag "sign_in" %>
 <% end %>
 
-<%#= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
-<%#= f.email_field :email, class: 'form-control', placeholder: "Email address", autofocus: true %>
-<%#= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+    <%= f.email_field :email, class: 'form-control', placeholder: "Email address", autofocus: true %>
+    <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
 
-<%# if devise_mapping.rememberable? -%>
-<!--<label class="checkbox">-->
-<%#= f.check_box :remember_me %> <%#= f.label :remember_me %>
-<!--</label>-->
-<%# end -%>
+    <% if devise_mapping.rememberable? -%>
+        <label class="checkbox">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </label>
+    <% end -%>
 
-<!--<div><%#= f.submit "Sign in", class: 'btn btn-lg btn-primary btn-block' %></div>-->
-<%#= render "links" %>
-<%# end %>
-
-<div class="form-signin">
-  <%= link_to "Sign up with google account", user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-lg btn-primary btn-block' %>
-</div>
+    <div><%= f.submit "Sign in", class: 'btn btn-lg btn-primary btn-block' %></div>
+    <%= render "links" %>
+<% end %>

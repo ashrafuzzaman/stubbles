@@ -5,8 +5,11 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
     <%= recaptcha_tags if Rails.env.production? %>
     <br/>
 
-    <%= f.button :submit, value: 'Sign up' %>
+    <%= f.button :submit, value: 'Sign up', class: 'btn btn-primary' %>
+    <%= link_to "Sign up with google account", user_omniauth_authorize_path(:google_oauth2), class: 'btn btn-primary' %>
 <% end %>

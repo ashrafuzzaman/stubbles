@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   def password_required?
     #super && provider.blank?
-    false
+    self.encrypted_password.present?
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)

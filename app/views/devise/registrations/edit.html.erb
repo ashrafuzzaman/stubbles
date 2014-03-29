@@ -8,5 +8,10 @@
     <%= f.input :email %>
     <%= f.input :short_name %>
     <%= f.input :theme, collection: User::THEMES.collect { |theme| [theme.humanize, theme] } %>
-    <%= f.submit "update" %>
+    <% if resource.password_required? %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <%= f.input :current_password %>
+    <% end %>
+    <%= f.submit "update", class: 'btn btn-primary' %>
 <% end %>
