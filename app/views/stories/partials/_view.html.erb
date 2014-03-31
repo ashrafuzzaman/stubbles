@@ -8,8 +8,8 @@
               <% end %>
             </div>
             <%= sw.actions do %>
-                <%= progress_bar_for(story) %>
                 <div class="pull-right">
+                  <%= progress_bar_for(story) %>
                   <% if story.workflow_status %>
                       <class class="badge"><%= story.workflow_status.title %></class>
                   <% end %>

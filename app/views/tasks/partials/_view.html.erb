@@ -4,15 +4,17 @@
         <span class="col-md-7"><%= task.title %> <span class="badge"><%= task.workflow_status.title %></span> </span>
 
         <div class="col-md-5 text-right task-actions">
-          <%= link_to_user_with_avatar(task.assigned_to) %>
-          <%= progress_bar_for(task) %>
-          <%= action_links_for_task(task) %>
-          <%= link_to_time_entry_popup(task) if task.workflow_status.allow_to_enter_time? %>
-          <%= task_edit_link(task) %>
-          <%= task_delete_link(task) if task.workflow_status.allow_to_delete? %>
-          <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">
-            <span class="glyphicon glyphicon-header"></span>
-          </a>
+          <div class="pull-right">
+            <%= link_to_user_with_avatar(task.assigned_to) %>
+            <%= progress_bar_for(task) %>
+            <%= action_links_for_task(task) %>
+            <%= link_to_time_entry_popup(task) if task.workflow_status.allow_to_enter_time? %>
+            <%= task_edit_link(task) %>
+            <%= task_delete_link(task) if task.workflow_status.allow_to_delete? %>
+            <a class="accordion-toggle" data-toggle="collapse" href="#task-<%= task.id %>-history">
+              <span class="glyphicon glyphicon-header"></span>
+            </a>
+          </div>
         </div>
       </div>
       <div id="task-<%= task.id %>-history" class="row collapse task-history">
