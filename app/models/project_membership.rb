@@ -1,7 +1,7 @@
 class ProjectMembership < ActiveRecord::Base
   attr_accessible :user_id, :role
 
-  belongs_to :project
+  belongs_to :project, touch: true
   belongs_to :user
 
   validates :role, :inclusion => { :in => Role::all, :message => "%{value} is not a valid role" }
