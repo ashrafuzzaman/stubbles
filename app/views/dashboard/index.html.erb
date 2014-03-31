@@ -12,9 +12,9 @@
   <%= render 'story_container' %>
 </div>
 
-<% cache @project do %>
+<%# cache @project do %>
     <%= render :partial => "dashboard/templates", locals: {project: @project} %>
-<% end %>
+<%# end %>
 
 <script type="text/javascript">
     $('input#story-search').typeahead({
