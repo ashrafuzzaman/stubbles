@@ -140,6 +140,7 @@ class Story < ActiveRecord::Base
 
     #check all
     status_chains = statuses.uniq.collect(&:prev_chain)
+    return nil if status_chains.empty?
 
     status = nil
     catch (:done) do
