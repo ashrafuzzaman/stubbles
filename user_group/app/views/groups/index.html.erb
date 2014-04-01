@@ -1,14 +1,11 @@
 <h1>Listing groups</h1>
 
-<table>
+<table class="table">
   <thead>
   <tr>
     <th>Title</th>
     <th>Description</th>
-    <th>Project</th>
     <th>Total members</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
   </thead>
@@ -18,11 +15,11 @@
       <tr>
         <td><%= group.title %></td>
         <td><%= group.description %></td>
-        <td><%= group.project_id %></td>
         <td><%= group.total_members %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td>
+          <%= link_to 'Edit', [:edit, @project, group] %>
+          <%= link_to 'Destroy', [@project, group], method: :delete, data: {confirm: 'Are you sure?'} %>
+        </td>
       </tr>
   <% end %>
   </tbody>
@@ -30,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Group', [:new, @project, :group] %>
+<%= link_to 'New Group', [:new, @project, :group], class: 'btn btn-primary' %>

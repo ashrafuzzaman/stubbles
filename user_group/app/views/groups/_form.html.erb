@@ -1,33 +1,8 @@
-<%= form_for(@group) do |f| %>
-  <% if @group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-
-      <ul>
-      <% @group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for([@project, @group]) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description, :input_html => { :rows => 5 } %>
+    <div>
+      <%= f.button :submit %>
+      <%= link_to 'Back', project_groups_path(@project), class: 'btn btn-default' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
-  </div>
-  <div class="field">
-    <%= f.label :total_members %><br>
-    <%= f.number_field :total_members %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
