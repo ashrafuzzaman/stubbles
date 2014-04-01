@@ -59,7 +59,14 @@ module Stubbles
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w(dashboard.js sign_in.css calendar.js custom_bootstrap/dark_theme.css custom_bootstrap/light_theme.css)
 
-    config.generators.stylesheets = false
-    config.generators.javascripts = false
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :erb
+      g.test_framework :rspec
+      g.integration_tool :rspec
+      g.fixture_replacement :factory_girl
+      g.stylesheets = false
+      g.javascripts = false
+    end
   end
 end
