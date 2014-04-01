@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323082147) do
+ActiveRecord::Schema.define(version: 20140401102459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,27 @@ ActiveRecord::Schema.define(version: 20140323082147) do
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "group_memberships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "user_group_id"
+    t.boolean  "active",        default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_memberships", ["user_id", "user_group_id"], name: "index_group_memberships_on_user_id_and_user_group_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.integer  "total_members"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["project_id"], name: "index_groups_on_project_id", using: :btree
 
   create_table "milestone_resources", force: true do |t|
     t.integer  "milestone_id"

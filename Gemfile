@@ -104,3 +104,4 @@ gem 'recaptcha', '~> 0.3.6'
 gem 'inherited_resources'
 
 gem 'workflow', path: 'workflow'
+gem 'user_group', path: 'user_group'

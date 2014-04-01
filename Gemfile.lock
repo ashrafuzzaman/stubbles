@@ -8,6 +8,13 @@ PATH
       rmagick
 
 PATH
+  remote: user_group
+  specs:
+    user_group (0.0.1)
+      inherited_resources
+      rails (~> 4.0.2)
+
+PATH
   remote: workflow
   specs:
     workflow (0.0.1)
@@ -394,4 +401,5 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unf
   unicorn
+  user_group!
   workflow!
