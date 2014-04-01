@@ -7,16 +7,19 @@ require "user_group/version"
 Gem::Specification.new do |s|
   s.name        = "user_group"
   s.version     = UserGroup::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of UserGroup."
-  s.description = "TODO: Description of UserGroup."
+  s.authors     = ["A.K.M. Ashrafuzzaman"]
+  s.email       = ["ashrafuzzaman.g2@gmail.com"]
+  s.homepage    = ""
+  s.summary     = "Manage User Group and roles"
+  s.description = "Manage User Group and roles"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.2"
+  s.add_dependency "inherited_resources"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "factory_girl_rails"
 end
