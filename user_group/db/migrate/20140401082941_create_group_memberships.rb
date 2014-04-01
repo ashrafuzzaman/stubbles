@@ -7,5 +7,7 @@ class CreateGroupMemberships < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :group_memberships, [:user_id, :user_group_id]
   end
 end
