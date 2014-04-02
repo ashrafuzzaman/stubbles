@@ -3,9 +3,6 @@
       <label class="sr-only" for="exampleInputEmail2">Email address</label>
       <%= text_field_tag :email, '', :required => true, placeholder: 'Email', class: 'form-control' %>
     </div>
-    <div class="form-group">
-      <label class="sr-only" for="exampleInputPassword2">Role</label>
-      <%= f.select :role, Role::all, {}, class: 'form-control' %>
-    </div>
     <%= f.submit 'Add user', :'data-disable-with' => 'Adding...', :class => 'btn btn-default' %>
+    <%= link_to 'Manage groups', [@project, Group], class: 'btn btn-primary' %>
 <% end %>

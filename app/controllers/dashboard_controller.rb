@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     @project = Project.cached_find(params[:project_id])
     @milestone = fetch_milestone(@project)
     stories = @milestone.try(:stories) || (params[:milestone_id] == '0' ? @project.stories.backlog : @project.stories)
-    stories = stories.involved_with(params[:involved_with]) if params[:involved_with].to_i > 0
+    stories = stories.includes(:story_type).involved_with(params[:involved_with]) if params[:involved_with].to_i > 0
     stories
   end
 
