@@ -1,10 +1,16 @@
+<% project = membership.project
+   user = membership.user
+   group_ids = user.groups.for_project(project).collect(&:id) %>
+
 <tr id='<%= container_id_of(membership) %>'>
-  <td><%= membership.user.name %></td>
-  <td><%= membership.user.email %></td>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
   <td>
-    <%= form_tag(update_role_project_project_membership_path(membership.project, membership),
-                 :method => :put, :remote => true) do |f| %>
-        <%= select_tag('role', options_for_select(Role::all, :selected => membership.role), {:class => 'submittable form-control'}) %>
+    <%= form_tag([:assign, project, Group], :method => :post, :remote => true) do |f| %>
+        <% project.groups.each do |group| %>
+            <%= hidden_field_tag(:user_id, user.id) %>
+            <%= check_box_tag('group_ids[]', group.id, group_ids.include?(group.id), {:class => 'submittable form-control'}) %>
+        <% end %>
     <% end %>
   </td>
   <td>

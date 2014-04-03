@@ -17,8 +17,9 @@ class User < ActiveRecord::Base
   has_many :memberships, :class_name => 'ProjectMembership'
   has_many :projects, :through => :memberships, :source => :project
 
-  has_many :group_memberships
-  has_many :groups, :through => :group_memberships
+  #has_many :group_memberships
+  #has_many :groups, :through => :group_memberships, :source => :group
+  has_and_belongs_to_many :groups
 
   def self.current=(user)
     RequestStore.store[:current_user] = user

@@ -4,8 +4,7 @@ class GroupsController < InheritedResources::Base
   custom_actions :collection => :assign
 
   def assign
-    assign! do
-      @proect.cancel!
-    end
+    Group.assign!(Project.find(params[:project_id]), User.find(params[:user_id]), params[:group_ids])
+    flash[:notice] = "Operation completed"
   end
 end
