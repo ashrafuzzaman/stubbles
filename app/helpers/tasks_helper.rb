@@ -6,10 +6,10 @@ module TasksHelper
           field_id = "task-#{task.id}-event-action"
           form_tag(update_status_story_task_path(task.story, task),
                    :method => :put, :remote => true) do
-            concat(hidden_field_tag :workflow_status_id, '', id: field_id)
+            concat(hidden_field_tag :workflow_transition_id, '', id: field_id)
             task.allowable_workflow_transitions.each do |transition|
               concat(submit_tag(transition.event, :value => transition.event,
-                                onclick: "$('##{field_id}').val('#{transition.to_status_id}');",
+                                onclick: "$('##{field_id}').val('#{transition.id}');",
                                 :class => "task-#{transition.button_color} btn btn-xs",
                                 :'data-disable-with' => 'wait'))
             end

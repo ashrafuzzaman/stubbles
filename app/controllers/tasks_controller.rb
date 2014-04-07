@@ -9,6 +9,7 @@ class TasksController < InheritedResources::Base
   end
 
   def update_status
-    resource.update_attributes workflow_status_id: params[:workflow_status_id]
+    workflow_transition = WorkflowTransition.find params[:workflow_transition_id]
+    workflow_transition.apply resource
   end
 end

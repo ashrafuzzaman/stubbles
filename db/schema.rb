@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401102459) do
+ActiveRecord::Schema.define(version: 20140407103549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20140401102459) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "button_color"
+    t.text     "actions"
   end
 
   add_index "workflow_transitions", ["from_status_id"], name: "index_workflow_transitions_on_from_status_id", using: :btree
