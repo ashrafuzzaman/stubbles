@@ -18,5 +18,6 @@ class WorkflowTransition < ActiveRecord::Base
     actions.each do |action|
       resource.send(action.to_sym) if resource.respond_to?(action.to_sym)
     end
+    resource.reload #update task if any thing changes for actions
   end
 end
