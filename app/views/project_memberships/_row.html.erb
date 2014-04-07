@@ -6,10 +6,15 @@
   <td><%= user.name %></td>
   <td><%= user.email %></td>
   <td>
-    <%= form_tag([:assign, project, Group], :method => :post, :remote => true) do |f| %>
+    <%= form_tag([:assign, project, Group], :method => :post, :remote => true, class: "form-inline", role: "form") do |f| %>
         <% project.groups.each do |group| %>
             <%= hidden_field_tag(:user_id, user.id) %>
-            <%= check_box_tag('group_ids[]', group.id, group_ids.include?(group.id), {:class => 'submittable form-control'}) %>
+            <div class="checkbox">
+              <label>
+                <%= check_box_tag('group_ids[]', group.id, group_ids.include?(group.id), {:class => 'submittable form-control'}) %>
+                <%= group.title %>
+              </label>
+            </div>
         <% end %>
     <% end %>
   </td>

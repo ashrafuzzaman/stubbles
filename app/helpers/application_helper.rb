@@ -18,7 +18,7 @@ module ApplicationHelper
       text, path, klass = 'Activate', activate_path, 'success'
     end
 
-    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true, class: "btn btn-#{klass}"
+    return link_to text, path, :confirm => 'Are you sure?', :method => :put, :remote => true, class: "btn-sm btn-#{klass}"
   end
 
   def render_js_message
