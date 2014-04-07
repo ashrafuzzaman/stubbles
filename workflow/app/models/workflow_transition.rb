@@ -15,9 +15,7 @@ class WorkflowTransition < ActiveRecord::Base
 
   def apply(resource)
     resource.update_attributes(workflow_status_id: self.to_status_id) if resource.workflow_status_id == self.from_status_id
-    ap actions
     actions.each do |action|
-      ap resource.respond_to?(action.to_sym)
       resource.send(action.to_sym) if resource.respond_to?(action.to_sym)
     end
   end

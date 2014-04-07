@@ -35,7 +35,7 @@ class Task < ActiveRecord::Base
   #======================== Work flow ==========================
 
   def time_entry_for(user, date)
-    time_entries.spent_on(date).by(user).first
+    self.time_entries.spent_on(date).by(user).first_or_initialize
   end
 
   def total_hours_spent_on(date)
@@ -43,7 +43,7 @@ class Task < ActiveRecord::Base
   end
 
   def enter_time(user, date, hours_spent, percent_completed)
-    time_entry = self.time_entries.spent_on(date).by(user).first_or_initialize
+    time_entry = time_entry_for(user, date)
     time_entry.hours_spent = hours_spent
     time_entry.percent_completed = percent_completed
     time_entry.milestone_id = self.story.milestone_id

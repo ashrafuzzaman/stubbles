@@ -13,14 +13,10 @@ class TimeEntry < ActiveRecord::Base
 
   validates :hours_spent, :numericality => true
 
-  after_save :cache_time_spent_in_trackable, :update_trackable_percent_completed
+  after_save :update_trackable
   before_save :set_percent_completed_on_date
 
   private
-  def cache_time_spent_in_trackable
-    trackable.update_attribute :hours_spent, trackable.time_entries.sum('hours_spent') if hours_spent_changed?
-  end
-
   def set_percent_completed_on_date
     if self.percent_completed_changed?
       last_time_entry = trackable.time_entries.before_date(spent_on).by(user).order('spent_on DESC').first
@@ -28,9 +24,9 @@ class TimeEntry < ActiveRecord::Base
     end
   end
 
-  def update_trackable_percent_completed
-    if self.percent_completed_changed?
-      trackable.update_attribute :percent_completed, trackable.time_entries(true).last.try(:percent_completed)
-    end
+  def update_trackable
+    trackable.hours_spent = trackable.time_entries.sum('hours_spent') if hours_spent_changed?
+    trackable.percent_completed = trackable.time_entries(true).last.try(:percent_completed) if self.percent_completed_changed?
+    trackable.save! if trackable.changed?
   end
 end
