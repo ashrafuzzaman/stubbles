@@ -13,7 +13,8 @@ module TaskActions
     time_entry.percent_completed = percent_completed
     time_entry.hours_spent ||= 0
     time_entry.save!
-    ap time_entry
+    #ap time_entry
     ap self.reload
+    ap self.story.reload
   end
 end

@@ -24,8 +24,8 @@ class Task < ActiveRecord::Base
 
   before_create :set_project_id
   before_validation :set_initial_status
-  after_save :propagate_hours_info_to_story, :propagate_status_to_story, :fire_task_actions
-  after_destroy :propagate_hours_info_to_story
+  after_save :propagate_to_story
+  after_destroy :propagate_to_story
 
   ######################### Work flow ##########################
   def allowable_workflow_transitions
@@ -56,24 +56,26 @@ class Task < ActiveRecord::Base
   end
 
   private
-  def propagate_hours_info_to_story
+  def set_hours_info_to_story
     story.hours_spent = story.tasks.sum(:hours_spent) if self.hours_spent_changed?
     story.hours_estimated = story.tasks.sum(:hours_estimated) if self.hours_estimated_changed?
     if hours_estimated_changed? or percent_completed_changed?
       story.percent_completed = story.recalculate_percent_completed
     end
-    story.save! if story.changed?
   end
 
   def set_project_id
     self.project_id = self.story.project_id
   end
 
-  def propagate_status_to_story
-    self.story.update_current_status if self.workflow_status_id_changed?
+  def set_status_to_story
+    story.set_current_status if self.workflow_status_id_changed?
   end
 
-  def fire_task_actions
+  def propagate_to_story
+    set_hours_info_to_story
+    set_status_to_story
 
+    story.save! if story.changed?
   end
 end

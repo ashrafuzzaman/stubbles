@@ -155,8 +155,8 @@ class Story < ActiveRecord::Base
     status ? status : self.story_type.initial_workflow_status.try(:id)
   end
 
-  def update_current_status
-    self.update_attributes! workflow_status_id: detect_current_status
+  def set_current_status
+    self.workflow_status_id = detect_current_status
   end
 
   private
