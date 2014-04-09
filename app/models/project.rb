@@ -46,8 +46,7 @@ class Project < ActiveRecord::Base
   ########### Caching for the model ###########
 
   def collaborators
-    self.users.where("(project_memberships.role = ? OR project_memberships.role = ?)
-                        AND project_memberships.active = ?", Role::ADMIN, Role::MEMBER, true)
+    self.users.where("project_memberships.active = ?", true)
   end
 
   def membership_of(user)
@@ -84,7 +83,7 @@ class Project < ActiveRecord::Base
   private
 
   def add_creator_as_project_admin
-    self.memberships.create(:user_id => creator.id, :role => Role::ADMIN)
+    self.memberships.create(:user_id => creator.id)
   end
 
   def create_default_workflow

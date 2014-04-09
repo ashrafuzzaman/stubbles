@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   def admin_for?(project)
     membership = project.membership_of(self)
-    membership && membership.active && membership.is_admin?
+    membership && membership.active
   end
 
   def gravatar_url(size = 50)

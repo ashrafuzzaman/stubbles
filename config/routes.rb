@@ -27,7 +27,6 @@ Stubbles::Application.routes.draw do
     end
     resources :project_memberships do
       member do
-        put 'update_role'
         put 'activate'
         put 'deactivate'
       end

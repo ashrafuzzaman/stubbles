@@ -1,10 +1,9 @@
 class ProjectMembership < ActiveRecord::Base
-  attr_accessible :user_id, :role
+  attr_accessible :user_id
 
   belongs_to :project, touch: true
   belongs_to :user
 
-  validates :role, :inclusion => { :in => Role::all, :message => "%{value} is not a valid role" }
   validate :ensure_one_membership_in_projects
 
   scope :of, lambda { |user| where(:user_id => user) }
@@ -16,12 +15,6 @@ class ProjectMembership < ActiveRecord::Base
 
   def deactivate
   	update_attribute(:active, false)
-  end
-
-  Role::all.each do |role_name|
-  	define_method "is_#{role_name}?" do
-    	self.role == role_name
- 		end
   end
 
   private

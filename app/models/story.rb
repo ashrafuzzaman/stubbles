@@ -111,12 +111,14 @@ class Story < ActiveRecord::Base
   #======================== Priority ==========================
 
   def recalculate_percent_completed
-    weighted_percent_completed = self.tasks(true).inject(0) do |sum, task|
-      est = task.hours_estimated.to_f
-      est = 1 if est == 0
-      sum + (task.percent_completed.to_f * est)
+    if self.story_type.estimable?
+      weighted_percent_completed = self.tasks(true).inject(0) do |sum, task|
+        sum + (task.percent_completed.to_f * task.hours_estimated.to_f)
+      end
+      weighted_percent_completed / [self.hours_estimated.to_f, 1].max
+    else
+      self.tasks(true).sum(:percent_completed) / self.tasks.count
     end
-    weighted_percent_completed / [self.hours_estimated.to_f, 1].max
   end
 
   def panel_color

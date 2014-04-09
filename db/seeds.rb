@@ -5,7 +5,7 @@ jhalak = User.create!(:email => 'jhalak@tasawr.com', :first_name => 'Jhalak', la
 stubbles = Project.create!(:name => 'Stubbles', :creator => jitu, :description => 'Sample description', :started_on => 1.days.ago)
 Project.create!(:name => 'Newton freshair', :creator => jhalak, :description => 'Sample description', :started_on => 1.week.ago)
 
-stubbles.memberships.create!(:user_id => jhalak.id, :role => Role::MEMBER)
+stubbles.memberships.create!(:user_id => jhalak.id)
 
 sprint = stubbles.milestones.create!(title: 'Sprint #1', start_on: Date.current,
                                     end_on: 1.week.from_now.to_date, delivered_on: 1.week.from_now.to_date,

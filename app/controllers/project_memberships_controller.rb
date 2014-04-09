@@ -16,7 +16,7 @@ class ProjectMembershipsController < ApplicationController
 
   def create
     @project = current_user.projects.find(params[:project_id])
-    @project_membership = @project.memberships.new({:user_id => @user.try(:id)}.merge(params[:project_membership]))
+    @project_membership = @project.memberships.new(:user_id => @user.try(:id))
 
     respond_to do |format|
       if @project_membership.save
@@ -37,23 +37,6 @@ class ProjectMembershipsController < ApplicationController
       format.html { redirect_to project_project_memberships_url(@project) }
       format.json { head :ok }
       format.js
-    end
-  end
-
-  def update_role
-    @project = current_user.projects.find(params[:project_id])
-    @project_membership = @project.memberships.find(params[:id])
-
-    respond_to do |format|
-      if @project_membership.update_attribute(:role, params[:role])
-        format.html { redirect_to project_project_memberships_url(@project), :notice => 'Role updated.' }
-        format.json { render :json => @project_membership, :status => :created, :location => @project }
-        format.js
-      else
-        format.html { render :action => "index" }
-        format.json { render :json => @project_membership.errors, :status => :unprocessable_entity }
-        format.js
-      end
     end
   end
 
@@ -81,6 +64,7 @@ class ProjectMembershipsController < ApplicationController
       end
     end
   end
+
   private
 
   def load_project
