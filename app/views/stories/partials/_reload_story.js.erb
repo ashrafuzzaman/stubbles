@@ -4,3 +4,7 @@ $('#<%= container_id_of(story) %> .panel-collapse').removeClass('in').addClass('
 <% else %>
 $('#<%= container_id_of(story) %> .panel-collapse').removeClass('collapse').addClass('in');
 <% end %>
+
+<% if story.milestone %>
+$('#dashboard_resources').html('<%= escape_javascript(render :partial => 'milestones/dashboard', :locals => { milestone: story.milestone }) %>');
+<% end %>

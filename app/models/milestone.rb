@@ -33,6 +33,7 @@ class Milestone < ActiveRecord::Base
   def flush_cache
     Rails.cache.delete([self.class.name, id])
   end
+
   ########### Caching for the model ###########
 
   def sprint?
@@ -126,9 +127,12 @@ class Milestone < ActiveRecord::Base
   end
 
   def recalculate_percent_completed
+    hours = 0
     weighted_percent_completed = self.stories(true).inject(0) do |sum, story|
-      sum + (story.percent_completed.to_f * story.hours_estimated.to_f)
+      estimated = story.story_type.estimable? ? story.hours_estimated.to_f : story.tasks.count
+      hours += estimated
+      sum + (story.percent_completed.to_f * estimated)
     end
-    weighted_percent_completed / [self.hours_estimated.to_f, 1].max
+    weighted_percent_completed / [hours, 1].max
   end
 end
