@@ -8,6 +8,10 @@ class WorkflowStatus < ActiveRecord::Base
                   :color, :propagate_color_if_any, :propagate_color_if_all,
                   :allow_to_estimate, :allow_to_enter_time, :allow_to_delete
 
+  before_validation do
+    self.color ||= ColorTheme.default
+  end
+
   scope :initials, -> { where(initial_status: true) }
 
   def transitions

@@ -13,6 +13,10 @@ class WorkflowTransition < ActiveRecord::Base
 
   SUPPORTED_ACTIONS = [:progress_done, :restart_progress]
 
+  before_validation do
+    self.button_color ||= ColorTheme.default
+  end
+
   def apply(resource)
     resource.update_attributes(workflow_status_id: self.to_status_id) if resource.workflow_status_id == self.from_status_id
     actions.each do |action|

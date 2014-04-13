@@ -11,10 +11,10 @@ class WorkflowTemplate
                                  {title: 'Closed', color: 'default'},
                              ],
                              transitions: [{event: 'Start', from: 'Open', to: 'In progress', button_color: 'yellow'},
-                                           {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green'},
+                                           {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green', actions: ['progress_done']},
                                            {event: 'Deploy to test', from: 'Done', to: 'Deployed to test', button_color: 'default'},
                                            {event: 'Ready to deploy', from: 'Deployed to test', to: 'Qa approved', button_color: 'green'},
-                                           {event: 'Reject', from: 'Deployed to test', to: 'Open', button_color: 'red'},
+                                           {event: 'Reject', from: 'Deployed to test', to: 'Open', button_color: 'red', actions: ['restart_progress']},
                                            {event: 'Deploy to production', from: 'Qa approved', to: 'Deployed to production', button_color: 'default'},
                                            {event: 'Close', from: 'Deployed to production', to: 'Closed', button_color: 'default'}
                              ]},
@@ -30,10 +30,10 @@ class WorkflowTemplate
                                  {title: 'Closed', color: 'default'},
                              ],
                              transitions: [{event: 'Start', from: 'Open', to: 'In progress', button_color: 'yellow'},
-                                           {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green'},
+                                           {event: 'Done', from: 'In progress', to: 'Done', button_color: 'green', actions: ['progress_done']},
                                            {event: 'Deploy to test', from: 'Done', to: 'Deployed to test', button_color: 'default'},
                                            {event: 'Ready to deploy', from: 'Deployed to test', to: 'Qa approved', button_color: 'green'},
-                                           {event: 'Reject', from: 'Deployed to test', to: 'Open', button_color: 'red'},
+                                           {event: 'Reject', from: 'Deployed to test', to: 'Open', button_color: 'red', actions: ['restart_progress']},
                                            {event: 'Deploy to production', from: 'Qa approved', to: 'Deployed to production', button_color: 'default'},
                                            {event: 'Close', from: 'Deployed to production', to: 'Closed', button_color: 'default'}
                              ]},
@@ -44,10 +44,10 @@ class WorkflowTemplate
                                  {title: 'Passed', color: 'green', propagate_color_if_all: true},
                                  {title: 'Failed', color: 'red', propagate_color_if_any: true}
                              ],
-                             transitions: [{event: 'Pass', from: 'Open', to: 'Passed', button_color: 'green'},
-                                           {event: 'Fail', from: 'Open', to: 'Failed', button_color: 'red'},
-                                           {event: 'Restart', from: 'Failed', to: 'Open', button_color: 'default'},
-                                           {event: 'Restart', from: 'Passed', to: 'Open', button_color: 'default'}
+                             transitions: [{event: 'Pass', from: 'Open', to: 'Passed', button_color: 'green', actions: ['progress_done']},
+                                           {event: 'Fail', from: 'Open', to: 'Failed', button_color: 'red', actions: ['restart_progress']},
+                                           {event: 'Restart', from: 'Failed', to: 'Open', button_color: 'default', actions: ['restart_progress']},
+                                           {event: 'Restart', from: 'Passed', to: 'Open', button_color: 'default', actions: ['restart_progress']}
                              ]}
   }
 
@@ -70,11 +70,13 @@ class WorkflowTemplate
     status_map = status_map_for(story_type)
 
     @template[story_type_title][:transitions].each do |transition_hash|
-      transition = story_type.workflow_transitions.find_or_initialize_by(event: transition_hash[:event],
-                                                                         from_status_id: status_map[transition_hash[:from]],
-                                                                         to_status_id: status_map[transition_hash[:to]])
-      transition.button_color = transition_hash[:button_color]
-      transition.save!
+      #ap transition_hash
+      from_status_id = status_map[transition_hash.delete(:from)]
+      to_status_id = status_map[transition_hash.delete(:to)]
+      attrs =transition_hash.merge(from_status_id: from_status_id,
+                              to_status_id: to_status_id)
+      #ap attrs
+      story_type.workflow_transitions.create(attrs)
     end
   end
 

@@ -54,6 +54,7 @@
   <tr>
     <th>Event</th>
     <th></th>
+    <th>Action</th>
     <th></th>
   </tr>
   </thead>
@@ -70,6 +71,13 @@
           <span class="badge"><%= workflow_transition.from_status.try(:title) %></span>
           <span class="glyphicon glyphicon-arrow-right"></span>
           <span class="badge"><%= workflow_transition.to_status.try(:title) %></span>
+        </td>
+        <td>
+          <ul class="list-unstyled">
+          <% workflow_transition.actions.each do |action| %>
+            <li><%= action.humanize %></li>
+          <% end %>
+          </ul>
         </td>
         <td>
           <%= link_to 'Edit', [:edit, @story_type, workflow_transition], class: 'btn-sm btn-default btn-primary' %>
