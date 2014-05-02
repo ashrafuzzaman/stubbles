@@ -65,4 +65,8 @@ module ApplicationHelper
   def current_theme
     current_user.try(:theme) || User::THEMES.first
   end
+
+  def richtext_content(content)
+    content_tag(:div, (raw content), class: 'richtext-content')
+  end
 end

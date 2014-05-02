@@ -8,6 +8,6 @@
     <%= render :partial => 'shared/date', :locals => {:date => comment.created_at} %>
   </div>
   <p class="comment-text">
-    <%= raw comment.text %>
+    <%= richtext_content comment.text %>
   </p>
 </li>
