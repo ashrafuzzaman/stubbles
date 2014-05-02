@@ -1,0 +1,9 @@
+en:
+  auditlog:
+    models:
+      nothing_in_the_past: Nothing in the past
+      task:
+        assigned_to_id:
+          set: Assigned to %{now}
+          unset: Un assigned from %{was}
+          changed: Assigned from %{was} to %{now}

@@ -1,4 +1,11 @@
 PATH
+  remote: /home/jitu/projects/auditlog
+  specs:
+    auditlog (0.0.2)
+      rails (>= 3)
+      request_store
+
+PATH
   remote: charter
   specs:
     charter (0.0.1)
@@ -52,9 +59,6 @@ GEM
     addressable (2.3.5)
     arel (4.0.1)
     atomic (1.1.16)
-    auditlog (0.0.2)
-      rails (>= 3)
-      request_store
     awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
@@ -346,7 +350,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 2.4.1)
-  auditlog (= 0.0.2)
+  auditlog!
   awesome_print
   better_errors
   binding_of_caller

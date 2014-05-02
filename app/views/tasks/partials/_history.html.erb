@@ -1,4 +1,5 @@
-<% changes = VersionChange.for(field: [:assigned_to_id, :hours_estimated, :status], type: Task, id: task.id, events: [:update]).order('created_at ASC').all %>
+<% changes = task.version_changes(field: [:assigned_to_id], events: [:update]) %>
+<%# changes = task.version_changes(field: [:assigned_to_id, :hours_estimated, :workflow_status_id], events: [:update]) %>
 <% if changes.count > 0 %>
     <ul>
       <% changes.each do |change| %>
@@ -17,8 +18,8 @@
                     <% elsif change.was.present? and change.now.present? %>
                         Changed estimation from <%= change.was %> to  <%= change.now %>
                     <% end %>
-                <% elsif change.field == 'status' %>
-                    <%= change.now.to_s.humanize %> from <%= change.was.to_s.humanize %>
+                <% elsif change.field == 'workflow_status_id' %>
+                    <%= WorkflowStatus.find(change.was).title rescue '' %> from <%= WorkflowStatus.find(change.now).title rescue '' %>
                 <% end %>
               </li>
           <% end %>

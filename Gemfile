@@ -90,8 +90,8 @@ end
 
 gem 'unicorn'
 gem 'less-rails-bootstrap'
-gem 'auditlog', '0.0.2'
-#gem 'auditlog', :path => '/home/jitu/projects/auditlog'
+#gem 'auditlog', '0.0.2'
+gem 'auditlog', :path => '/home/jitu/projects/auditlog'
 gem 'charter', :path => 'charter'
 
 gem 'rmagick'
