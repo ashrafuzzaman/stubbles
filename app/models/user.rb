@@ -1,5 +1,8 @@
+require 'auditlog/model_tracker'
 require 'digest/md5'
+
 class User < ActiveRecord::Base
+  include Auditlog::ModelTracker
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
@@ -17,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :memberships, :class_name => 'ProjectMembership'
   has_many :projects, :through => :memberships, :source => :project
   has_and_belongs_to_many :groups
+  set_name_field :name
 
   def self.current=(user)
     RequestStore.store[:current_user] = user

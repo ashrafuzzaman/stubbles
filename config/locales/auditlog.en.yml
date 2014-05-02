@@ -7,3 +7,6 @@ en:
           set: Assigned to %{now}
           unset: Un assigned from %{was}
           changed: Assigned from %{was} to %{now}
+        workflow_status_id:
+          set: Set status to %{now}
+          changed: Status changed from %{was} to %{now}
