@@ -76,6 +76,10 @@
   <%= yield %>
 </div>
 
+<div class="modal-footer">
+  Copyright belongs to A.K.M. Ashrafuzzaman
+</div>
+
 <script type="text/javascript">
     <% if current_user %>
     TaskPermission.apply(<%= current_user.try(:id) %>);
