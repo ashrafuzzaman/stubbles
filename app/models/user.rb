@@ -15,12 +15,13 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :presence => true
   validates :email, :uniqueness => true
   #validates :short_name, :uniqueness => true
+  track only: [:first_name, :last_name, :short_name], meta: [:project_id]
+  auditlog_name_as :name
 
   has_many :stories #not meaningful as user has many stories through proects
   has_many :memberships, :class_name => 'ProjectMembership'
   has_many :projects, :through => :memberships, :source => :project
   has_and_belongs_to_many :groups
-  set_name_field :name
 
   def self.current=(user)
     RequestStore.store[:current_user] = user

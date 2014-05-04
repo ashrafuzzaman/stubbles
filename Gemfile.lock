@@ -3,7 +3,7 @@ PATH
   specs:
     auditlog (0.0.2)
       rails (>= 3)
-      request_store
+      request_store (>= 1.0.5)
 
 PATH
   remote: charter

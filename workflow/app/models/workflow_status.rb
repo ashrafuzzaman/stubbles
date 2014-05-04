@@ -4,8 +4,7 @@ class WorkflowStatus < ActiveRecord::Base
   include Auditlog::ModelTracker
   belongs_to :project
   belongs_to :workflowable, polymorphic: true
-
-  set_name_field :title
+  auditlog_name_as :title
 
   validates :title, :color, presence: true
   validate :at_least_one_initial_state
