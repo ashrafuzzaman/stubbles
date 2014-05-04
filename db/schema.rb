@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409045812) do
+ActiveRecord::Schema.define(version: 20140503113601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 20140409045812) do
   end
 
   add_index "attachments", ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
+
+  create_table "auditlog_change_notifications", force: true do |t|
+    t.integer "model_id"
+    t.string  "model_type"
+    t.integer "version_id", null: false
+  end
 
   create_table "comments", force: true do |t|
     t.text     "text"
