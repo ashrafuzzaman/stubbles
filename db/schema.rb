@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140503113601) do
   create_table "auditlog_change_notifications", force: true do |t|
     t.integer "model_id"
     t.string  "model_type"
-    t.integer "version_id", null: false
+    t.integer "version_change_id", null: false
   end
 
   create_table "comments", force: true do |t|
