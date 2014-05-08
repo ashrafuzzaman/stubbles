@@ -1,7 +1,4 @@
-require 'auditlog/model_tracker'
-
 class Story < ActiveRecord::Base
-  include Auditlog::ModelTracker
   track only: [:title, :assigned_to_id, :workflow_status_id], meta: [:project_id]
 
   attr_accessible :title, :assigned_to, :scope, :assigned_to_id, :description, :tag_list, :priority,
