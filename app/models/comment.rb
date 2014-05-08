@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
 
   include CommentPermission
   include Auditlog::ModelTracker
-  #track only: [:text], meta: [:project_id], notify: {commentable: [:text]}
+  track only: [:text], notify: {commentable: [:text]}
 
   belongs_to :user
   belongs_to :commentable, :polymorphic => true

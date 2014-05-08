@@ -1,17 +1,13 @@
-<% changes = VersionChange.for(field: :assigned_to_id, type: Story, id: story.id, events: [:update]).order('created_at ASC').all %>
+<% changes = story.version_changes(field: [:title, :assigned_to_id, :workflow_status_id]) %>
 <% if changes.count > 0 %>
     <ul>
       <% changes.each do |change| %>
-          <li>
-            <%= render :partial => "histories/done_by_badge", locals: {change: change} %>
-            <% if change.field == 'assigned_to_id' %>
-                Assigned
-                <% if change.was %>
-                    from <%= link_to_user_with_avatar(change.was, size: 15) %>
-                <% end %>
-                to <%= link_to_user_with_avatar(change.now, size: 15) %>
-            <% end %>
-          </li>
+          <% cache [:view, change] do %>
+              <li>
+                <%= render :partial => "histories/done_by_badge", locals: {change: change} %>
+                <%= change.readable_message %>
+              </li>
+          <% end %>
       <% end %>
     </ul>
 <% else %>
