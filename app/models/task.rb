@@ -1,8 +1,6 @@
-require 'auditlog/model_tracker'
 require 'concerns/task_actions'
 
 class Task < ActiveRecord::Base
-  include Auditlog::ModelTracker
   include TaskActions
   track only: [:title, :status, :hours_estimated, :assigned_to_id, :workflow_status_id], meta: [:project_id]
   attr_accessible :title, :hours_estimated, :assigned_to_id, :percent_completed, :workflow_status_id

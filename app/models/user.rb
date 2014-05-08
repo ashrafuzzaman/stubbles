@@ -1,8 +1,6 @@
-require 'auditlog/model_tracker'
 require 'digest/md5'
 
 class User < ActiveRecord::Base
-  include Auditlog::ModelTracker
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable,
